@@ -14,7 +14,7 @@ interface ProductPageProps{
 
 export default function ProductPage({ product }: ProductPageProps) {
   const router = useRouter();
-  const { id, product_name } = router.query;
+  const { id, product_name, product_image, product_description } = router.query;
 
   return <ProductInfo product={product} />;
 }

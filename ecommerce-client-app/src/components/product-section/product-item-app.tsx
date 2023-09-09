@@ -3,7 +3,7 @@ import React from 'react';
 interface ProductItem {
   product_name: string;
   product_image: string;
-  product_price: string;
+  product_price: number;
 }
 
 interface ProductItemCardProps {
