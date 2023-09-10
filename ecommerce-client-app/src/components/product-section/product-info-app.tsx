@@ -45,14 +45,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         } md:flex-row`}
       >
         {isMobile && (
-          <img src={productImageSrc} className="w-fit rounded mt-6" />
+          <img src={productImageSrc} className="w-[20rem] rounded mt-6" />
         )}
         {!isMobile && (
           <div className="w-full md:w-1/2">
-            <img src={productImageSrc} className="w-fit rounded mb-4 md:mb-0" />
+            <img src={productImageSrc} className="relative w-full rounded  z-1  md:mb-0" />
           </div>
         )}
-        <div className={`w-full p-6 ${isMobile ? 'mt-4' : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10'}`}>
+        <div className={`w-full p-6 top-0 left-0 ${isMobile ? 'mt-4' : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10 md:z-2000 '}`}>
           <p className="text-2xl font-bold mt-4">{`$${product_price}`}</p>
           <h1 className="text-3xl font-semibold">{product_name}</h1>
           <p className="text-gray-600">Product ID: {id}</p>

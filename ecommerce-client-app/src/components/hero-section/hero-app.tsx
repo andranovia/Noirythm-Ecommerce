@@ -1,11 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef} from 'react';
 import { motion, Variants } from 'framer-motion';
 import { useAnimation } from 'framer-motion';
 import CircleType from 'circletype';
 
 function HeroApp() {
+
   const controlsAnimate = useAnimation();
+
   const circleTypeRef = useRef<HTMLDivElement>(null);
+
+
+ 
 
   useEffect(() => {
     const circleType = new CircleType(document.getElementById('textCircular'));
@@ -101,71 +106,55 @@ function HeroApp() {
     ));
   };
 
-  const animatedTextWhiteOne = 'ATE';
-  const animatedTextWhiteTwo = 'STYLE';
-  const animatedTextBlackOne = 'ELEV';
-  const animatedTextBlackTwo = 'YOUR';
+  const animatedTextRightTwo = 'YOUR STYLE';
 
-  const titleOne = createAnimatedText(animatedTextWhiteOne, letterVariants);
-  const titleTwo = createAnimatedText(animatedTextWhiteTwo, letterTwoVariants);
-  const titleThree = createAnimatedText(
-    animatedTextBlackOne,
+  const animatedTextLeftOne = 'ELEVA TE';
+
+  const titleRightTwo = createAnimatedText(
+    animatedTextRightTwo,
     letterTwoVariants
   );
-  const titleFour = createAnimatedText(animatedTextBlackTwo, letterTwoVariants);
+  const titleLeftOne = createAnimatedText(
+    animatedTextLeftOne,
+    letterTwoVariants
+  );
 
   return (
     <div className="relative flex justify-center items-center h-[70vh] font-poppins overflow-hidden bg-[url('/home-backgrund.jpg')] bg-cover bg-no-repeat z-2 sm:h-screen">
       <motion.div
-        className="relative top-0 left-0 w-full h-full z-1 "
+        className="relative top-0 left-0 z-1  "
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
       />
       <motion.div
-        className="w-screen text-5xl font-bold flex flex-col items-start justify-center relative bottom-[15%] left-30 sm:text-9xl sm:right-[10%] sm:w-screen "
+        className="absolute text-6xl font-bold top-15 left-[14rem] mr-[19rem] sm:text-[15rem]  sm:top-[32rem] sm:left-[6%] w-full  "
         initial="hidden"
       >
         <motion.div
-          className="heroTitle text-white  "
+          className="heroTitleTwo text-white "
           variants={containerVariants}
           initial="hidden"
           animate={controlsAnimate}
         >
-          {titleOne}
-        </motion.div>
-        <motion.div
-          className="heroTitleTwo text-white mt-[2rem]"
-          variants={containerVariants}
-          initial="hidden"
-          animate={controlsAnimate}
-        >
-          {titleTwo}
+          {titleRightTwo}
         </motion.div>
       </motion.div>
       <motion.div
         className="absolute top-0 left-0 w-[12rem] h-full z-1 bg-white sm:w-[30rem]"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
+        animate={{ opacity: 0.8}} 
       >
         <motion.div
-          className="relative font-bold flex flex-col items-end justify-center ml-[4rem] top-[20%] sm:text-9xl sm:mr-5"
+          className="relative font-bold flex flex-col items-end justify-center ml-[4rem] top-[5%]  sm:ml-[30%]"
           initial="hidden"
         >
           <motion.div
-            className="heroTitleThree text-5xl sm:text-9xl   "
+            className="heroTitleFourth mt-[2rem] text-6xl ml-[1rem] sm:text-[9rem]  "
             variants={containerVariants}
             initial="hidden"
             animate={controlsAnimate}
           >
-            {titleThree}
-          </motion.div>
-          <motion.div
-            className="heroTitleFourth mt-[2rem] text-6xl ml-[1rem] sm:text-9xl  "
-            variants={containerVariants}
-            initial="hidden"
-            animate={controlsAnimate}
-          >
-            {titleFour}
+            {titleLeftOne}
           </motion.div>
         </motion.div>
       </motion.div>
@@ -182,7 +171,7 @@ function HeroApp() {
             ease: 'easeInOut',
             duration: 1,
           }}
-          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center mt-[20rem] mr-[37rem] sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
+          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center mb-20 mr-[37rem] sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
         >
           <div className="circular-text" ref={circleTypeRef} id="textCircular">
             <motion.span
