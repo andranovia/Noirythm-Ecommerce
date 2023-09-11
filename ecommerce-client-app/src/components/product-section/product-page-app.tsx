@@ -1,9 +1,10 @@
 'use client';
 
 import React from 'react';
-import ProductCardComponent from './product-card-app';
+import ClothProductComponent from '../cloth-product-section/cloth-product-app';
 import CountdownTimer from './product-offsalecountdown-app';
 const ProductPage: React.FC = () => {
+  const maxItemsToShow = 4;
   return (
     <div className="min-h-screen">
       <div className="container max-w-8xl mx-auto sm:max-w-7xl ">
@@ -20,7 +21,7 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-[6rem] p-4 absolute">
-            <ProductCardComponent />
+            <ClothProductComponent maxItems={maxItemsToShow}/>
           </div>
         </div>
       </div>

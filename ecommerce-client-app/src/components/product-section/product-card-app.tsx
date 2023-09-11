@@ -1,32 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axiosInstance from '@/utils/api';
-import ProductItemCard from './product-item-app';
+// ProductCardComponent.tsx
+import React from 'react';
 import Link from 'next/link';
+import ProductItemCard from './product-item-app';
 
 interface ProductItem {
   product_name: string;
   product_image: string;
-  product_price: number; 
+  product_price: number;
   product_description: string;
   id: number;
 }
 
+interface ProductCardProps {
+  ProductItems: ProductItem[];
+}
 
-const ProductCardComponent: React.FC = () => {
-  const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
+const ProductCardComponent: React.FC<ProductCardProps> = ({ ProductItems }) => {
 
-  useEffect(() => {
-    const fetchProductItems = async () => {
-      try {
-        const response = await axiosInstance.get('/api/products');
-        setProductItems(response.data);
-      } catch (error) {
-        console.error('Error fetching clothing items:', error);
-      }
-    };
-
-    fetchProductItems();
-  }, []);
 
   return (
     <div className="flex justify-center">

@@ -64,12 +64,13 @@ const Navbar: React.FC = () => {
                   </button>
                 )}
               </div>
-              <div className="flex-shrink-0 flex items-center px-4">
+              <div className="flex-shrink-0 flex items-center px-4 py-4">
                 <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-on-dark.svg"
+                  className="h-10 w-auto"
+                  src="/img/logo-brand.png"
                   alt="Workflow"
                 />
+                <h2 className='font-bold text-2xl text-white px-4'>Noirythm</h2>
               </div>
               <div className="h-full overflow-y-auto">
                 <nav className="px-2 ">
@@ -246,7 +247,9 @@ const Navbar: React.FC = () => {
                 </svg>
               </button>
 
-              <div className="flex-shrink-0"></div>
+              <div className="flex-shrink-0">
+                
+              </div>
             </div>
           </div>
         </div>

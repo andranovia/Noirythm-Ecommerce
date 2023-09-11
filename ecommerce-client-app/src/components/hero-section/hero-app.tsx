@@ -127,7 +127,7 @@ function HeroApp() {
         animate={{ opacity: 0.8 }}
       />
       <motion.div
-        className="absolute text-6xl font-bold top-15 left-[14rem] mr-[19rem] sm:text-[15rem]  sm:top-[32rem] sm:left-[6%] w-full  "
+        className="absolute text-6xl mr-20 font-bold bottom-20  sm:top-15 left-[14rem] sm:mr-[19rem] sm:text-[15rem]  sm:top-[32rem] sm:left-[6%] sm:w-full  "
         initial="hidden"
       >
         <motion.div
@@ -149,7 +149,7 @@ function HeroApp() {
           initial="hidden"
         >
           <motion.div
-            className="heroTitleFourth mt-[2rem] text-6xl ml-[1rem] sm:text-[9rem]  "
+            className="heroTitleFourth mt-[8rem] sm:mt-[2rem] text-6xl ml-[1rem] sm:text-[9rem]  "
             variants={containerVariants}
             initial="hidden"
             animate={controlsAnimate}
@@ -171,7 +171,7 @@ function HeroApp() {
             ease: 'easeInOut',
             duration: 1,
           }}
-          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center mb-20 mr-[37rem] sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
+          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center bottom-10 mr-[12rem] sm:mb-20 sm:mr-[37rem] sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
         >
           <div className="circular-text" ref={circleTypeRef} id="textCircular">
             <motion.span
