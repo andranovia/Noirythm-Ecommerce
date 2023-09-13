@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
 import ProductCardComponent from '../product-section/product-card-app';
 
+
+
 interface ProductItem {
   product_name: string;
   product_image: string;
@@ -11,29 +13,34 @@ interface ProductItem {
 }
 
 interface ClothProductProps {
-  maxItems?: number; 
+  maxItems?: number;
 }
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const ClothProductComponent: React.FC<ClothProductProps> = ({ maxItems }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     const fetchProductItems = async () => {
       try {
+        setLoading(true);
         const response = await axiosInstance.get('/api/products');
         setProductItems(response.data);
       } catch (error) {
         console.error('Error fetching clothing items:', error);
+      } finally {
+        await sleep(1000);
+        setLoading(false);
+       
       }
     };
 
     fetchProductItems();
   }, []);
 
-
   const displayedItems = maxItems === Infinity ? ProductItems : ProductItems.slice(0, maxItems);
 
-  return <ProductCardComponent ProductItems={displayedItems} />;
+  return <ProductCardComponent ProductItems={displayedItems} loading={loading} />;
 };
 
 export default ClothProductComponent;

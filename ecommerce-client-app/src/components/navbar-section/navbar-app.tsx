@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
             leaveFrom="translate-x-0"
             leaveTo="-translate-x-full"
           >
-            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
+            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
               <div className="absolute top-0 right-0 -mr-14 p-1">
                 {isSidebarOpen && (
                   <button
@@ -70,12 +70,12 @@ const Navbar: React.FC = () => {
                   src="/img/logo-brand.png"
                   alt="Workflow"
                 />
-                <h2 className='font-bold text-2xl text-white px-4'>Noirythm</h2>
+                <h2 className='font-bold text-2xl text-black px-4'>Noirythm</h2>
               </div>
               <div className="h-full overflow-y-auto">
                 <nav className="px-2 ">
                   <a
-                    href="#"
+                    href="/"
                     className="group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-900 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
                   >
                     <svg
@@ -132,7 +132,7 @@ const Navbar: React.FC = () => {
                     About Us
                   </a>
                   <a
-                    href="#"
+                    href="/contact"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
                     <svg

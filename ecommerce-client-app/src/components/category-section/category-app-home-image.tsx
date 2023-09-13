@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 interface Category {
   title: string;
   description: string;
-  image: string;
+  image: JSX.Element;
 }
 
 interface CategoryItemProps {
@@ -30,11 +30,14 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
   return (
     <div className="bg-gray-200 shadow-md rounded-lg p-4 flex h-15 w-[10rem] sm:h-[6rem] sm:w-[15rem]">
       <div className="pr-4 sm:flex sm:flex-col sm:justify-center">
-        <img
-          src={category.image}
-          alt="Image"
-          className="rounded-lg w-12 h-12 sm:w-20"
-        />
+      {category.image && (
+          <div className="custom-image">
+            {React.cloneElement(category.image, {
+              size: 48,
+              color: '#2d180d', 
+            })}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-col justify-center">
