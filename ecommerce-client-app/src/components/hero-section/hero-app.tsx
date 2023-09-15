@@ -107,7 +107,6 @@ function HeroApp() {
   };
 
   const animatedTextRightTwo = 'YOUR STYLE';
-
   const animatedTextLeftOne = 'ELEVA TE';
 
   const titleRightTwo = createAnimatedText(
@@ -127,7 +126,7 @@ function HeroApp() {
         animate={{ opacity: 0.8 }}
       />
       <motion.div
-        className="absolute text-6xl mr-20 font-bold bottom-20  sm:top-15 left-[14rem] sm:mr-[19rem] sm:text-[15rem]  sm:top-[32rem] sm:left-[6%] sm:w-full  "
+        className="absolute text-6xl mr-20 font-bold bottom-20  sm:top-15 left-[14rem] sm:mr-[19rem] sm:text-[12rem]  sm:top-[34rem] sm:left-[10%] sm:w-full  "
         initial="hidden"
       >
         <motion.div
