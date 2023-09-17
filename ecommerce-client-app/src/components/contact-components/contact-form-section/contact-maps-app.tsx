@@ -1,7 +1,7 @@
 import React from 'react';
 import DynamicMap from './contact-Dynamic';
 
-const ContactMap = () => {
+const ContactMapComponent = () => {
   return (
     <div className="w-screen h-screen my-36">
       <div className="flex justify-center">
@@ -28,4 +28,4 @@ const ContactMap = () => {
   );
 };
 
-export default ContactMap;
+export default ContactMapComponent;

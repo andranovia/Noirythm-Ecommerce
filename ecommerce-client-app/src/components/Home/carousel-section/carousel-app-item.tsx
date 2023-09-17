@@ -6,11 +6,11 @@ interface Slide {
   url: string;
 }
 
-interface CarouselSlidesProps {
+interface CarouselSlidesAppProps {
   slides: Slide[];
 }
 
-const CarouselSlides: React.FC<CarouselSlidesProps> = ({ slides }) => {
+const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const prevSlide = () => {
@@ -57,4 +57,4 @@ const CarouselSlides: React.FC<CarouselSlidesProps> = ({ slides }) => {
   );
 };
 
-export default CarouselSlides;
+export default CarouselItemComponent;

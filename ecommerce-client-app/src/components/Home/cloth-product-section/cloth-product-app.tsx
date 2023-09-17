@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import ProductCardComponent from '../product-section/product-card-app';
+import ProductCardComponent from '../../Product/product-section/product-card-app';
+
 
 
 
@@ -15,7 +16,7 @@ interface ProductItem {
 interface ClothProductProps {
   maxItems?: number;
 }
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const ClothProductComponent: React.FC<ClothProductProps> = ({ maxItems }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);

@@ -1,15 +1,15 @@
-import Navbar from '@/components/navbar-section/navbar-app';
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const ContactHeroApp = () => {
+const ContactHeroComponent = () => {
   const texts = [
     'Complain your Product?',
     'Want collaborating with us?',
     'Promotion your product to us?',
   ];
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [previousTextIndex, setPreviousTextIndex] = useState(null);
+  const [previousTextIndex, setPreviousTextIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,11 +25,11 @@ const ContactHeroApp = () => {
     damping: 10,
     stiffness: 100,
   };
-  const animationDuration = 2;
+  const animationDuration = 4;
 
   return (
     <div className="w-screen bg-white overflow-hidden">
-      <Navbar />
+ 
       <div className="h-[30rem] w-screen flex sm:justify-start sm:mx-40 ">
         <div className="relative flex flex-col items-center top-20 ml-10 sm:items-start">
           <div className="text-amber-700">
@@ -49,7 +49,7 @@ const ContactHeroApp = () => {
                   transition={{
                     ...springAnimation,
                     duration: animationDuration,
-                    ease: 'easeInOut',
+                    ease: 'easeOut',
                   }}
                 >
                   <p className="font-semibold text-2xl">
@@ -65,7 +65,7 @@ const ContactHeroApp = () => {
                 transition={{
                   ...springAnimation,
                   duration: animationDuration,
-                  ease: 'easeInOut',
+                  ease: 'easeOut',
                 }}
               >
                 <p className="font-semibold text-2xl">
@@ -80,4 +80,4 @@ const ContactHeroApp = () => {
   );
 };
 
-export default ContactHeroApp;
+export default ContactHeroComponent;

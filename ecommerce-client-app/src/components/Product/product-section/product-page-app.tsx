@@ -1,18 +1,23 @@
 'use client';
 
 import React from 'react';
-import ClothProductComponent from '../cloth-product-section/cloth-product-app';
+
 import CountdownTimer from './product-offsalecountdown-app';
+import dynamic from 'next/dynamic';
 
+const ClothProductComponent = dynamic(
+  () => import('../../Home/cloth-product-section/cloth-product-app'),
+  {
+    ssr: false,
+  }
+);
 
-
-const ProductPage: React.FC = () => {
+const ProductPageComponent: React.FC = () => {
   const maxItemsToShow = 4;
   return (
     <div className="min-h-screen">
       <div className="container max-w-8xl mx-auto sm:max-w-7xl ">
         <div className="bg-white  mb-4 relative">
-    
           <h1 className="text-2xl font-semibold my-4 ml-7 absolute z-20">
             New Offer!
           </h1>
@@ -25,14 +30,12 @@ const ProductPage: React.FC = () => {
             </div>
           </div>
           <div className="mt-[6rem] p-4 absolute">
-            <ClothProductComponent maxItems={maxItemsToShow}/>
+            <ClothProductComponent maxItems={maxItemsToShow} />
           </div>
-   
         </div>
-        
       </div>
     </div>
   );
 };
 
-export default ProductPage;
+export default ProductPageComponent;

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Transition from './navbar-transition/transition';
 
-const Navbar: React.FC = () => {
+const NavbarComponent: React.FC = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
                     Product
                   </a>
                   <a
-                    href="#"
+                    href="/about-Us/AboutPage"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
                     <svg
@@ -258,4 +258,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default NavbarComponent;

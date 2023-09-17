@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Navbar from '../navbar-section/navbar-app';
+import Navbar from '../../navbar-section/navbar-app';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 
@@ -8,7 +8,7 @@ interface ProductInfoProps {
   product: [];
 }
 
-export default function ProductInfo({ product }: ProductInfoProps) {
+export default function ProductInfoComponent({ product }: ProductInfoProps) {
   const router = useRouter();
   const {
     id,

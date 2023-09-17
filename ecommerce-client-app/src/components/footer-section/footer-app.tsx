@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const FooterPage: React.FC = () => {
+const FooterComponent: React.FC = () => {
   return (
     <footer className="bg-orange-800 text-white py-12">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 ml-4 max-w-[30vh] sm:max-w-[200vh] relative sm:left-10 ">
@@ -69,4 +69,4 @@ const FooterPage: React.FC = () => {
   );
 };
 
-export default FooterPage;
+export default FooterComponent;

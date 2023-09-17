@@ -12,7 +12,7 @@ interface ProductItemCardProps {
   loading: boolean;
 }
 
-const ProductItemCard: React.FC<ProductItemCardProps> = ({ item, loading}) => {
+const ProductItemCardComponent: React.FC<ProductItemCardProps> = ({ item, loading}) => {
   return (
     <div className="rounded-lg flex flex-col items-start lg:w-full shadow-md bg-white">
       <div className=" flex-shrink-0 h-[20vh] w-[20vh] lg:w-[40vh] lg:h-[40vh] ">
@@ -46,4 +46,4 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({ item, loading}) => {
   );
 };
 
-export default ProductItemCard;
+export default ProductItemCardComponent;

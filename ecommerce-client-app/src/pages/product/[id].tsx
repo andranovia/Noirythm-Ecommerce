@@ -1,7 +1,7 @@
 
 import { useRouter } from 'next/router';
 
-import ProductInfo from '@/components/product-section/product-info-app';
+import ProductInfo from '@/components/Product/product-section/product-info-app';
 
 
 interface ProductPageProps{

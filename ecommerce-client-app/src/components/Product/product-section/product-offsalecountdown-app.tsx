@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
-function CountdownTimer() {
+function CountdownTimerComponent() {
   const [countdown, setCountdown] = useState('');
-
-  // Set the target date for your countdown (replace with your desired date and time)
   const targetDate = new Date("2023-12-31T23:59:59").getTime();
 
   useEffect(() => {
@@ -41,4 +39,4 @@ function CountdownTimer() {
   );
 }
 
-export default CountdownTimer;
+export default CountdownTimerComponent;

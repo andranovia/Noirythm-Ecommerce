@@ -1,15 +1,10 @@
 import React from 'react';
-import ContactCardItem from './contact-cardItem-app';
-import { RiSecurePaymentLine } from 'react-icons/ri';
-import { TbTruckDelivery } from 'react-icons/tb';
-import { MdManageAccounts } from 'react-icons/md';
-import { RiRefund2Line } from 'react-icons/ri';
-import { CiDiscount1 } from 'react-icons/ci';
-import { MdWindow } from 'react-icons/md';
+import ContactCardItemComponent from './contact-cardItem-app';
+
 
 interface ContactCardCategory {
   id?: string;
-  image: JSX.Element;
+  image: string;
   title: string;
   description: string;
   label: string;
@@ -19,40 +14,40 @@ interface ContactCardProps {
   contactcategories: ContactCardCategory[];
 }
 
-const ContactCard: React.FC<ContactCardProps> = () => {
+const ContactCardComponent: React.FC<ContactCardProps> = () => {
   const contactcategories = [
     {
-      image: <RiSecurePaymentLine />,
+      image: 'https://img.icons8.com/cotton/100/pay.png',
       title: 'Payments protection',
       description: 'Where you can find all the things',
       label: 'Payment Services',
     },
     {
-      image: <TbTruckDelivery />,
+      image: 'https://img.icons8.com/ios/50/delivery--v1.png',
       title: 'Delivery problem',
       description: 'Where you can find all the things',
       label: 'Delivery problem',
     },
     {
-      image: <MdManageAccounts />,
+      image: 'https://img.icons8.com/pastel-glyph/64/user-settings.png',
       title: 'Manage your accounts',
       description: 'Where you can find all the things',
       label: 'Manage accounts',
     },
     {
-      image: <RiRefund2Line />,
+      image: 'https://img.icons8.com/ios/50/refund.png',
       title: 'Manage your accounts',
       description: 'Where you can find all the things',
       label: 'Refund payment',
     },
     {
-      image: <CiDiscount1 />,
+      image: 'https://img.icons8.com/ios/50/discount--v1.png',
       title: 'Payments protection',
       description: 'Where you can find all the things',
       label: 'Product discount',
     },
     {
-        image: <MdWindow/>,
+        image: 'https://img.icons8.com/ios/50/connection-status-off.png',
         title: 'Payments protection',
         description: 'Where you can find all the things',
         label: 'More..',
@@ -69,7 +64,7 @@ const ContactCard: React.FC<ContactCardProps> = () => {
       <div className="flex justify-center mt-10">
         <div className='grid gap-[4vh] grid-cols-2 sm:grid-cols-3 sm:gap-[4rem] ">'>
           {contactcategories.map((category, index) => (
-            <ContactCardItem key={index} category={category} />
+            <ContactCardItemComponent key={index} category={category} />
           ))}
         </div>
       </div>
@@ -77,4 +72,4 @@ const ContactCard: React.FC<ContactCardProps> = () => {
   );
 };
 
-export default ContactCard;
+export default ContactCardComponent;
