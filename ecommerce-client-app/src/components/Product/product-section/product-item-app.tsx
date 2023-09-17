@@ -1,6 +1,6 @@
 import React from 'react';
 import { ColorRing } from 'react-loader-spinner';
-
+import Image from 'next/image';
 interface ProductItem {
   product_name: string;
   product_image: string;
@@ -27,9 +27,10 @@ const ProductItemCardComponent: React.FC<ProductItemCardProps> = ({ item, loadin
             colors={['#8b8b8b', '#fafafa', '#c7b1b1', '#8c7070', '#856b6b' ]} 
           />
         ) : (
-          <img
+          <Image
             src={item.product_image}
             alt={item.product_name}
+            width={260} height={260}
             className="w-full h-full object-cover flex rounded-lg "
           />
         )}

@@ -1,10 +1,11 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import ClothProductComponent from '@/components/Home/cloth-product-section/cloth-product-app';
-import NavbarComponent from '@/components/navbar-section/navbar-app';
+import dynamic from 'next/dynamic';
+const ClothProductComponent = dynamic(() => import('@/components/Home/cloth-product-section/cloth-product-app'));
+const NavbarComponent = dynamic(() => import('@/components/navbar-section/navbar-app'));
+
 
 const CategoryPage: React.FC = () => {
-  const router = useRouter();
+
 
   return (
     <div className="min-h-screen min-w-screen flex items-center justify-center sm:w-screen">

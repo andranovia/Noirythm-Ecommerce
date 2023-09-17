@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
+
 import CircleType from 'circletype';
 
-function HeroApp() {
-  const controlsAnimate = useAnimation();
-
+function HomeHeroComponent() {
   const circleTypeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -95,4 +93,4 @@ function HeroApp() {
   );
 }
 
-export default HeroApp;
+export default HomeHeroComponent;

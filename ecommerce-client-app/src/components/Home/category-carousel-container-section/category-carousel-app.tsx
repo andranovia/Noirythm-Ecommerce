@@ -1,6 +1,8 @@
 import React from 'react';
-import CategoryCardComponent from '../category-section/category-app-home';
-import CarouselComponent from '../carousel-section/carousel-app-image';
+import dynamic from 'next/dynamic';
+const CategoryCardComponent = dynamic(() => import('../category-section/category-app-home'));
+const CarouselComponent= dynamic(() => import('../carousel-section/carousel-app-image'));
+
 
 export default function ContainerCarouselCategComponent() {
   const categories = [

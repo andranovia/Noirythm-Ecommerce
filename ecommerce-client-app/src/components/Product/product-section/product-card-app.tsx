@@ -1,7 +1,9 @@
 // ProductCardComponent.tsx
 import React from 'react';
 import Link from 'next/link';
-import ProductItemCard from './product-item-app';
+import dynamic from 'next/dynamic';
+
+const ProductItemCardComponent = dynamic(() => import('./product-item-app'))
 
 interface ProductItem {
   product_name: string;
@@ -38,7 +40,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
               }}
               key={item.id}
             >
-              <ProductItemCard key={index} item={item} loading={loading} />
+              <ProductItemCardComponent key={index} item={item} loading={loading} />
             </Link>
           ))}
       

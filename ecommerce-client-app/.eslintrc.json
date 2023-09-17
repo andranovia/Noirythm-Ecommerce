@@ -1,8 +1,6 @@
 {
   "extends": [
-    "next/babel",
-    "next",
-    "next/core-web-vitals",
+    "next/babel","next/core-web-vitals",
     "eslint:recommended"
   ],
   "globals": {

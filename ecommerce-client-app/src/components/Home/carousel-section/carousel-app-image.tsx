@@ -3,9 +3,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const CarouselItemComponent = dynamic(() => import('./carousel-app-item'), {
-  ssr: false, 
-});
+const CarouselItemComponent = dynamic(() => import('./carousel-app-item'));
 
 
 const CarouselComponent = () => {

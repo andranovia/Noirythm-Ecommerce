@@ -1,7 +1,9 @@
 
-import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+const ProductInfo = dynamic(() => import('@/components/Product/product-section/product-info-app'), {
+  ssr: false, 
+});
 
-import ProductInfo from '@/components/Product/product-section/product-info-app';
 
 
 interface ProductPageProps{
@@ -13,8 +15,6 @@ interface ProductPageProps{
 
 
 export default function ProductPage({ product }: ProductPageProps) {
-  const router = useRouter();
-  const { id, product_name, product_image, product_description } = router.query;
 
   return <ProductInfo product={product} />;
 }

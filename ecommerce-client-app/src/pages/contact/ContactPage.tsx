@@ -1,19 +1,20 @@
-import ContactCardComponent from '@/components/contact-components/contact-card-section/contact-card-app';
-import ContactMapComponent from '@/components/contact-components/contact-form-section/contact-maps-app';
-import ContactHeroComponent from '@/components/contact-components/contact-hero-section/contact-hero-app';
-import FooterComponent from '@/components/footer-section/footer-app';
-import NavbarComponent from '@/components/navbar-section/navbar-app';
+const ContactCardComponentSection= dynamic(() => import('@/components/contact-components/contact-card-section//contact-card-section'));
+const ContactMapComponent = dynamic(() => import('@/components/contact-components/contact-form-section/contact-maps-app'));
+const ContactHeroComponent = dynamic(() => import('@/components/contact-components/contact-hero-section/contact-hero-app'));
+const FooterComponent = dynamic(() => import('@/components/footer-section/footer-app'));
+const NavbarComponent = dynamic(() => import('@/components/navbar-section/navbar-app'));
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 const ContactPage = () => {
   return (
-    <div className="w-screen h-screen bg-white overflow-x-hidden">
+    <>
       <NavbarComponent />
       <ContactHeroComponent />
-      <ContactCardComponent />
+      <ContactCardComponentSection />
       <ContactMapComponent />
       <FooterComponent />
-    </div>
+    </>
   );
 };
 

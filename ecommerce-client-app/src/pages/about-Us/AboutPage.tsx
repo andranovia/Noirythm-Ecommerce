@@ -1,15 +1,16 @@
-import AboutHeroComponent from '@/components/aboutUs-components/aboutUs-hero/aboutUs-hero-app';
-import NavbarComponent from '@/components/navbar-section/navbar-app';
+const AboutHeroComponent = dynamic(() => import('@/components/aboutUs-components/aboutUs-hero/aboutUs-hero-app'));
+const NavbarComponent = dynamic(() => import('@/components/navbar-section/navbar-app'));
+import dynamic from 'next/dynamic';
 import React from 'react';
 
 const AboutPage = () => {
   return (
-    <div>
+    <>
       <NavbarComponent />
       <div>
         <AboutHeroComponent/>
       </div>
-    </div>
+    </>
   );
 };
 export default AboutPage;

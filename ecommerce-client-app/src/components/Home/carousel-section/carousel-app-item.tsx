@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 import { RxDotFilled } from 'react-icons/rx';
 
@@ -13,17 +13,13 @@ interface CarouselSlidesAppProps {
 const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
+  }, [slides.length]);
 
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+  }, [slides.length]);
 
   const gotoSlide = (slideIndex: number) => {
     setCurrentIndex(slideIndex);
@@ -32,7 +28,9 @@ const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => 
   return (
     <div className="max-w-[1200px] h-[320px] w-full m-auto py-16 px-4 relative group sm:w-[700px]">
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+        style={{ backgroundImage: `url(${slides[currentIndex].url})`,
+      backgroundSize: 'cover' }}
+
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
       ></div>
 
@@ -43,11 +41,11 @@ const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => 
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
       <div className="flex top-4 justify-center py-2">
-        {slides.map((slide, slideIndex) => (
+        {slides.map((_, slideIndex) => (
           <div
             key={slideIndex}
             onClick={() => gotoSlide(slideIndex)}
-            className="text-2xl cursor-pointer"
+            className={`text-2xl cursor-pointer ${currentIndex === slideIndex ? 'text-black' : 'text-gray-300'}`}
           >
             <RxDotFilled />
           </div>

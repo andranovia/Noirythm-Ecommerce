@@ -3,9 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
-const CategoryItem = dynamic(() => import('./category-app-home-image'), {
-  ssr: false,
-});
+const CategoryItem = dynamic(() => import('./category-app-home-image'));
 
 interface Category {
   id?: string;

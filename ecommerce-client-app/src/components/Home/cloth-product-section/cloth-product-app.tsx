@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import ProductCardComponent from '../../Product/product-section/product-card-app';
-
+import dynamic from 'next/dynamic';
+const ProductCardComponent = dynamic(() => import('../../Product/product-section/product-card-app'));
 
 
 

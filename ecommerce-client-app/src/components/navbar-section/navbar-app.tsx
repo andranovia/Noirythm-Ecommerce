@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import Transition from './navbar-transition/transition';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const NavbarComponent: React.FC = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navbarStyles: React.CSSProperties = {
@@ -65,16 +66,16 @@ const NavbarComponent: React.FC = () => {
                 )}
               </div>
               <div className="flex-shrink-0 flex items-center px-4 py-4">
-                <img
+                <Image
                   className="h-10 w-auto"
                   src="/img/logo-brand.png"
                   alt="Workflow"
                 />
-                <h2 className='font-bold text-2xl text-black px-4'>Noirythm</h2>
+                <h2 className="font-bold text-2xl text-black px-4">Noirythm</h2>
               </div>
               <div className="h-full overflow-y-auto">
                 <nav className="px-2 ">
-                  <a
+                  <Link
                     href="/"
                     className="group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-900 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
                   >
@@ -92,8 +93,8 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Home
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
@@ -111,8 +112,8 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Product
-                  </a>
-                  <a
+                    </Link>
+                  <Link
                     href="/about-Us/AboutPage"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
@@ -130,8 +131,8 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     About Us
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="/contact/ContactPage"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
@@ -149,8 +150,8 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Contact
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
                   >
@@ -168,7 +169,7 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Reports
-                  </a>
+                  </Link>
                 </nav>
               </div>
             </div>
@@ -247,9 +248,7 @@ const NavbarComponent: React.FC = () => {
                 </svg>
               </button>
 
-              <div className="flex-shrink-0">
-                
-              </div>
+              <div className="flex-shrink-0"></div>
             </div>
           </div>
         </div>

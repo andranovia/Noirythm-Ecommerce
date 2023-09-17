@@ -6,10 +6,7 @@ import CountdownTimer from './product-offsalecountdown-app';
 import dynamic from 'next/dynamic';
 
 const ClothProductComponent = dynamic(
-  () => import('../../Home/cloth-product-section/cloth-product-app'),
-  {
-    ssr: false,
-  }
+  () => import('../../Home/cloth-product-section/cloth-product-app')
 );
 
 const ProductPageComponent: React.FC = () => {
