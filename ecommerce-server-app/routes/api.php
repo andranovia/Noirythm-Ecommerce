@@ -5,7 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
+Route::prefix('products')->group(function () {
+    Route::get('cloth', [ProductController::class, 'clothIndex']);
+    Route::get('cloth/{id}', [ProductController::class, 'clothShow']);
 
-Route::get('products', [ProductController::class, 'index']);
-Route::get('/products/{id}', [ProductController::class, 'show']); 
+    Route::get('trouser', [ProductController::class, 'trouserIndex']);
+    Route::get('trouser/{id}', [ProductController::class, 'trouserShow']);
 
+    Route::get('shoes', [ProductController::class, 'shoesIndex']);
+    Route::get('shoes/{id}', [ProductController::class, 'shoesShow']);
+});

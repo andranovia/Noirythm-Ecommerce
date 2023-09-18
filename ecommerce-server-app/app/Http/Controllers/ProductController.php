@@ -1,29 +1,64 @@
 <?php
 
 
+// ProductController.php
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\ClothProduct;
+use App\Models\TrouserProduct;
+use App\Models\ShoesProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-
-    public function index()
+    public function clothIndex()
     {
-        $products = Product::all();
+        $products = ClothProduct::all();
         return response()->json($products);
     }
 
-
-    public function show($id)
+    public function trouserIndex()
     {
-        $product = Product::find($id);
+        $products = TrouserProduct::all();
+        return response()->json($products);
+    }
+
+    public function shoesIndex()
+    {
+        $products = ShoesProduct::all();
+        return response()->json($products);
+    }
+
+    public function clothShow($id)
+    {
+        $product = ClothProduct::find($id);
 
         if (!$product) {
-            return response()->json(['message' => 'Product not found'], 404);
+            return response()->json(['message' => 'Cloth product not found'], 404);
         }
 
-        return view('layouts.app', ['product' => $product]);
+        return response()->json($product);
+    }
+
+    public function trouserShow($id)
+    {
+        $product = TrouserProduct::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Trouser product not found'], 404);
+        }
+
+        return response()->json($product);
+    }
+
+    public function shoesShow($id)
+    {
+        $product = ShoesProduct::find($id);
+
+        if (!$product) {
+            return response()->json(['message' => 'Shoes product not found'], 404);
+        }
+
+        return response()->json($product);
     }
 }

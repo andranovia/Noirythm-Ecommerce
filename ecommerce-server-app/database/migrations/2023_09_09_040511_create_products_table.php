@@ -11,7 +11,23 @@ class CreateProductsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('clothProducts', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_name'); 
+            $table->text('product_description');
+            $table->decimal('product_price', 8, 2);
+            $table->string('product_image');
+            $table->timestamps();
+        });
+         Schema::create('trouserProducts', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_name'); 
+            $table->text('product_description');
+            $table->decimal('product_price', 8, 2);
+            $table->string('product_image');
+            $table->timestamps();
+        });
+        Schema::create('shoesProducts', function (Blueprint $table) {
             $table->id();
             $table->string('product_name'); 
             $table->text('product_description');
@@ -26,6 +42,7 @@ class CreateProductsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('clothProducts');
+        Schema::dropIfExists('trouserProducts');
     }
 }
