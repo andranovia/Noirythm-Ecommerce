@@ -1,5 +1,8 @@
 import React from 'react';
-import ContactCardItemComponent from './contact-cardItem-app';
+import dynamic from 'next/dynamic';
+
+const ContactCardItemComponent = dynamic(() => import('./contact-cardItem-app'));
+
 
 
 interface ContactCardCategory {

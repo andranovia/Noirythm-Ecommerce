@@ -19,9 +19,9 @@ export default function ContainerCarouselCategComponent() {
       description: 'Let the world knows',
     },
     {
-      id: 'jackets',
-      image: 'https://img.icons8.com/sf-regular/48/jacket.png',
-      title: 'Jackets',
+      id: 'trouser',
+      image: 'https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png',
+      title: 'Trouser',
       description: 'Warm down your cold',
     },
     {
@@ -32,10 +32,10 @@ export default function ContainerCarouselCategComponent() {
     },
   ];
   return (
-    <div className="sm:flex sm:justify-center mb-10">
-      <div className="sm:grid sm:grid-cols-2 sm:w-[full] ">
+    <div className="sm:flex sm:justify-center mb-10 shadow-md rounded-md sm:w-[80rem]  sm:mx-auto overflow-hidden">
+      <div className="sm:grid sm:grid-cols-2 ">
         <CarouselComponent/>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center sm:ml-20">
           <CategoryCardComponent categories={categories} />
         </div>
       </div>

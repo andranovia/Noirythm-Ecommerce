@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import Transition from './navbar-transition/transition';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const NavbarComponent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+  const router = useRouter();
   const navbarStyles: React.CSSProperties = {
     position: 'fixed',
     top: 0,
@@ -70,6 +71,8 @@ const NavbarComponent: React.FC = () => {
                   className="h-10 w-auto"
                   src="/img/logo-brand.png"
                   alt="Workflow"
+                  width={120}
+                  height={120}
                 />
                 <h2 className="font-bold text-2xl text-black px-4">Noirythm</h2>
               </div>
@@ -77,7 +80,11 @@ const NavbarComponent: React.FC = () => {
                 <nav className="px-2 ">
                   <Link
                     href="/"
-                    className="group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-white bg-gray-900 focus:outline-none focus:bg-gray-700 transition ease-in-out duration-150"
+                    className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
+                      router.pathname === '/'
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    }`}
                   >
                     <svg
                       className="mr-4 h-6 w-6 text-gray-300 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
@@ -95,9 +102,12 @@ const NavbarComponent: React.FC = () => {
                     Home
                   </Link>
                   <Link
-                    href="#"
-                    className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-                  >
+                     href="/Product"
+                     className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
+                       router.pathname === '/Product'
+                         ? 'bg-gray-900 text-white'
+                         : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                     }`}>
                     <svg
                       className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                       stroke="currentColor"
@@ -112,11 +122,15 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Product
-                    </Link>
+                  </Link>
                   <Link
                     href="/about-Us/AboutPage"
-                    className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-                  >
+                
+                    className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
+                      router.pathname === '/about-Us/AboutPage'
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    }`}>
                     <svg
                       className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                       stroke="currentColor"
@@ -134,8 +148,11 @@ const NavbarComponent: React.FC = () => {
                   </Link>
                   <Link
                     href="/contact/ContactPage"
-                    className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-                  >
+                    className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
+                      router.pathname === '/contact/ContactPage'
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    }`}>
                     <svg
                       className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
                       stroke="currentColor"
@@ -150,25 +167,6 @@ const NavbarComponent: React.FC = () => {
                       />
                     </svg>
                     Contact
-                  </Link>
-                  <Link
-                    href="#"
-                    className="mt-1 group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700 transition ease-in-out duration-150"
-                  >
-                    <svg
-                      className="mr-4 h-6 w-6 text-gray-400 group-hover:text-gray-300 group-focus:text-gray-300 transition ease-in-out duration-150"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-                      />
-                    </svg>
-                    Reports
                   </Link>
                 </nav>
               </div>

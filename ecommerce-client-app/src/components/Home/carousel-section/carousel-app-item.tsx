@@ -10,15 +10,21 @@ interface CarouselSlidesAppProps {
   slides: Slide[];
 }
 
-const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
+const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({
+  slides,
+}) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? slides.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? slides.length - 1 : prevIndex - 1
+    );
   }, [slides.length]);
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex === slides.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) =>
+      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
+    );
   }, [slides.length]);
 
   const gotoSlide = (slideIndex: number) => {
@@ -26,11 +32,12 @@ const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => 
   };
 
   return (
-    <div className="max-w-[1200px] h-[320px] w-full m-auto py-16 px-4 relative group sm:w-[700px]">
+    <div className="max-w-[1200px] h-[320px] w-full m-auto py-16 px-4 relative group sm:w-[700px] overflow-hidden">
       <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})`,
-      backgroundSize: 'cover' }}
-
+        style={{
+          backgroundImage: `url(${slides[currentIndex].url})`,
+          backgroundSize: 'cover',
+        }}
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
       ></div>
 
@@ -45,7 +52,9 @@ const CarouselItemComponent: React.FC<CarouselSlidesAppProps> = ({ slides }) => 
           <div
             key={slideIndex}
             onClick={() => gotoSlide(slideIndex)}
-            className={`text-2xl cursor-pointer ${currentIndex === slideIndex ? 'text-black' : 'text-gray-300'}`}
+            className={`text-2xl cursor-pointer ${
+              currentIndex === slideIndex ? 'text-black' : 'text-gray-300'
+            }`}
           >
             <RxDotFilled />
           </div>

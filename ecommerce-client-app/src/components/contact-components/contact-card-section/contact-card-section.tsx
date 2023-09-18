@@ -1,5 +1,8 @@
 import React from 'react';
-import ContactCardMapComponent from './contact-card-map';
+import dynamic from 'next/dynamic';
+
+const ContactCardMapComponent = dynamic(() => import('./contact-card-map'));
+
 
 const ContactCardComponentSection = () => {
   const contactcategories = [

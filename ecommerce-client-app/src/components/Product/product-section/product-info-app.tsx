@@ -46,11 +46,11 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
         } md:flex-row`}
       >
         {isMobile && (
-          <Image src={productImageSrc} width={120} height={120} alt='' className="w-[20rem] rounded mt-6" />
+          <Image src={productImageSrc} width={220} height={220} alt='' className="w-[20rem] rounded mt-6" />
         )}
         {!isMobile && (
           <div className="w-full md:w-1/2">
-            <Image src={productImageSrc} width={120} height={120} alt='' className="relative w-full rounded  z-1  md:mb-0" />
+            <Image src={productImageSrc} width={420} height={420} alt='' className="relative w-full h-[50rem] object-cover z-1  md:mb-0" />
           </div>
         )}
         <div className={`w-full p-6 top-0 left-0 ${isMobile ? 'mt-4' : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10 md:z-2000 '}`}>

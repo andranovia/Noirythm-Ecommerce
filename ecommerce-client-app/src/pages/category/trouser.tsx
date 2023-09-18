@@ -1,10 +1,10 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-const ClothProductComponent = dynamic(() => import('@/components/Product/cloth-product-section/cloth-product-app'));
+const TrouserProductComponent = dynamic(() => import('@/components/Product/trouser-product-section/trouser-product-app'));
 const NavbarComponent = dynamic(() => import('@/components/navbar-section/navbar-app'));
 
 
-const CategoryClothPage: React.FC = () => {
+const CategoryTrouserPage: React.FC = () => {
 
 
   return (
@@ -15,10 +15,10 @@ const CategoryClothPage: React.FC = () => {
         <p className="text-lg">
           Selected Category: <span className="text-blue-500">Clothing</span>
         </p>
-       <ClothProductComponent/>
+       <TrouserProductComponent/>
       </div>
     </div>
   );
 };
 
-export default CategoryClothPage;
+export default CategoryTrouserPage;

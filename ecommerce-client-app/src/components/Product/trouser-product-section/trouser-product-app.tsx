@@ -13,22 +13,22 @@ interface ProductItem {
   id: number;
 }
 
-interface ClothProductProps {
+interface trouserProductProps {
   maxItems?: number;
 }
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const ClothProductComponent: React.FC<ClothProductProps> = ({ maxItems }) => {
+const TrouserProductComponent: React.FC<trouserProductProps> = ({ maxItems }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true); 
   useEffect(() => {
     const fetchProductItems = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get('/api/products');
+        const response = await axiosInstance.get('/api/products/trouser');
         setProductItems(response.data);
       } catch (error) {
-        console.error('Error fetching clothing items:', error);
+        console.error('Error fetching trousering items:', error);
       } finally {
         await sleep(1000);
         setLoading(false);
@@ -44,4 +44,4 @@ const ClothProductComponent: React.FC<ClothProductProps> = ({ maxItems }) => {
   return <ProductCardComponent ProductItems={displayedItems} loading={loading} />;
 };
 
-export default ClothProductComponent;
+export default TrouserProductComponent;
