@@ -1,15 +1,32 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Navbar from '../../navbar-section/navbar-app';
+import NavbarComponent from '@/components/navbar-section/navbar-app';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
+import { useCart } from '@/components/context/cartContext';
 
 interface ProductInfoProps {
-  product: [];
+  product: {
+    id: string;
+    product_name: string;
+    product_image: string;
+    product_price: number;
+    product_description: string;
+  };
+  query: Record<string, string>;
+}
+interface Product {
+  id: string;
+  name: string;
+  price: number;
 }
 
+
+
+
 export default function ProductInfoComponent({ product }: ProductInfoProps) {
+  const { dispatch } = useCart();
   const router = useRouter();
   const {
     id,
@@ -36,9 +53,26 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
     };
   }, []);
 
+
+const handleAddToCart = () => {
+  const { id, product_name, product_price } = router.query;
+
+
+  const itemToAdd: Product = {
+    id: id as string,
+    name: product_name as string,
+    price: parseFloat(product_price as string), 
+  };
+
+  dispatch({ type: 'ADD_TO_CART', payload: itemToAdd });
+  
+  console.log(router.query)
+};
+
+  
   return (
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
-      <Navbar />
+      <NavbarComponent />
       <pre>{JSON.stringify(product, null, 2)}</pre>
       <div
         className={`flex flex-col ${
@@ -46,14 +80,32 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
         } md:flex-row`}
       >
         {isMobile && (
-          <Image src={productImageSrc} width={220} height={220} alt='' className="w-[20rem] rounded mt-6" />
+          <Image
+            src={productImageSrc}
+            width={220}
+            height={220}
+            alt=""
+            className="w-[20rem] rounded mt-6"
+          />
         )}
         {!isMobile && (
           <div className="w-full md:w-1/2">
-            <Image src={productImageSrc} width={420} height={420} alt='' className="relative w-full h-[50rem] object-cover z-1  md:mb-0" />
+            <Image
+              src={productImageSrc}
+              width={420}
+              height={420}
+              alt=""
+              className="relative w-full h-[50rem] object-cover z-1  md:mb-0"
+            />
           </div>
         )}
-        <div className={`w-full p-6 top-0 left-0 ${isMobile ? 'mt-4' : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10 md:z-2000 '}`}>
+        <div
+          className={`w-full p-6 top-0 left-0 ${
+            isMobile
+              ? 'mt-4'
+              : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10 md:z-2000 '
+          }`}
+        >
           <p className="text-2xl font-bold mt-4">{`$${product_price}`}</p>
           <h1 className="text-3xl font-semibold">{product_name}</h1>
           <p className="text-gray-600">Product ID: {id}</p>
@@ -99,7 +151,7 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
             <div className="flex justify-center items-center mr-5">
               <BsChatLeftText className="w-7 h-7" />
             </div>
-            <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4">
+            <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4" onClick={handleAddToCart}>
               Add to <MdAddShoppingCart />
             </button>
             <button className="bg-orange-900 text-white px-9 py-2 rounded hover:bg-orange-800">
