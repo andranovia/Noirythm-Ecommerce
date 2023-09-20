@@ -14,16 +14,14 @@ interface ProductInfoProps {
     product_price: number;
     product_description: string;
   };
-  query: Record<string, string>;
+  query?: Record<string, string>;
 }
 interface Product {
   id: string;
   name: string;
   price: number;
+  image: string;
 }
-
-
-
 
 export default function ProductInfoComponent({ product }: ProductInfoProps) {
   const { dispatch } = useCart();
@@ -53,23 +51,21 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
     };
   }, []);
 
+  const handleAddToCart = () => {
+    const { id, product_name, product_price, product_image } = router.query;
 
-const handleAddToCart = () => {
-  const { id, product_name, product_price } = router.query;
+    const itemToAdd: Product = {
+      id: id as string,
+      name: product_name as string,
+      image: product_image as string,
+      price: parseFloat(product_price as string),
+    };
 
+    dispatch({ type: 'ADD_TO_CART', payload: itemToAdd });
 
-  const itemToAdd: Product = {
-    id: id as string,
-    name: product_name as string,
-    price: parseFloat(product_price as string), 
+    console.log(router.query);
   };
 
-  dispatch({ type: 'ADD_TO_CART', payload: itemToAdd });
-  
-  console.log(router.query)
-};
-
-  
   return (
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
       <NavbarComponent />
@@ -128,7 +124,8 @@ const handleAddToCart = () => {
               <div className="flex justify-center items-center mr-5">
                 <BsChatLeftText className="w-7 h-7" />
               </div>
-              <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4">
+              <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4" 
+               onClick={handleAddToCart}>
                 Add to <MdAddShoppingCart />
               </button>
               <button className="bg-orange-900 text-white px-9 py-2 rounded hover:bg-orange-800">
@@ -151,7 +148,10 @@ const handleAddToCart = () => {
             <div className="flex justify-center items-center mr-5">
               <BsChatLeftText className="w-7 h-7" />
             </div>
-            <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4" onClick={handleAddToCart}>
+            <button
+              className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4"
+              onClick={handleAddToCart}
+            >
               Add to <MdAddShoppingCart />
             </button>
             <button className="bg-orange-900 text-white px-9 py-2 rounded hover:bg-orange-800">

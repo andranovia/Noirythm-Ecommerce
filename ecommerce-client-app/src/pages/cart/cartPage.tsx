@@ -1,24 +1,40 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-const Cart = dynamic(() => import('./cartComponent'));
+import Cart from '../../components/cart/cart-app';
 const NavbarComponent = dynamic(
   () => import('@/components/navbar-section/navbar-app')
 );
+import { useCart } from '@/components/context/cartContext';
 
 const CartPage = () => {
+  const { state } = useCart();
   return (
     <div>
       <NavbarComponent />
       <div className="flex justify-start relative top-36">
         <div className="">
           <div className="grid mx-10">
-            <h1 className='text-2xl font-bold mb-15'>Shopping Cart</h1>
-            <div className='my-10 rounded-md mx-auto shadow-md p-10 '>
-            <Cart/>
-            </div>
+            <h1 className="text-2xl font-bold mb-15">Shopping Cart</h1>
+
+            {state.cart.length === 0 ? (
+              <div className="my-10 rounded-md mx-auto shadow-ShadowCard p-10 ">
+                <div>
+                  <p className="font-semibold text-2xl">
+                    Your cart is empty! please add product to your shopping
+                    cart.
+                  </p>
+                  <button className="bg-amber-800 rounded-lg flex h-15 w-fit h- my-8 p-2 flex-col justify-center">
+                    <h2 className="font-semibold text-yellow-100">
+                      Click here to see cool products
+                    </h2>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Cart />
+            )}
           </div>
         </div>
-
       </div>
     </div>
   );

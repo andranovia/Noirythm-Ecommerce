@@ -5,10 +5,17 @@ import Transition from './navbar-transition/transition';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-
+import dynamic from 'next/dynamic';
+const NavbarDropdown = dynamic(() =>  import('./navbar-dropdown-logo'));
 
 const NavbarComponent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleLogoDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   const router = useRouter();
   const navbarStyles: React.CSSProperties = {
     position: 'fixed',
@@ -31,7 +38,10 @@ const NavbarComponent: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative flex overflow-hidden  " style={navbarStyles}>
+    <div
+      className="absolute top-0 left-0 right-0 flex overflow-hidden   "
+      style={navbarStyles}
+    >
       <Transition show={isSidebarOpen} appear={true}>
         <div className="fixed inset-0 flex z-40">
           <Transition
@@ -80,6 +90,7 @@ const NavbarComponent: React.FC = () => {
                   </button>
                 )}
               </div>
+
               <div className="flex-shrink-0 flex items-center px-4 py-4 ">
                 <Image
                   className="h-10 w-auto"
@@ -90,6 +101,7 @@ const NavbarComponent: React.FC = () => {
                 />
                 <h2 className="font-bold text-2xl text-black px-4">Noirythm</h2>
               </div>
+
               <div className="h-full overflow-y-auto">
                 <nav className="px-2 ">
                   <Link
@@ -213,16 +225,30 @@ const NavbarComponent: React.FC = () => {
           )}
 
           {!isMobile && (
-            <div className="flex-shrink-0 flex items-center px-4 py-4 mx-5">
-              <Image
-                className="h-10 w-auto"
-                src="/img/logo-brand.png"
-                alt="Workflow"
-                width={120}
-                height={120}
-              />
-              <h2 className="font-bold text-1xl text-black px-4">Noirythm</h2>
-            </div>
+            <Link href="/">
+              <div
+                className="relative"
+                onMouseEnter={handleLogoDropdownToggle}
+                onMouseLeave={handleLogoDropdownToggle}
+                style={{ zIndex: 2000 }}
+              >
+                <div className="flex-shrink-0 flex items-center px-4 py-4 mx-5">
+                  <Image
+                    className="h-10 w-auto cursor-pointer"
+                    src="/img/logo-brand.png"
+                    alt="Logo"
+                    width={120}
+                    height={120}
+                  />
+                  <h2 className="font-bold text-[1.5rem] text-black px-4">
+                    Noirythm
+                  </h2>
+                </div>
+                {isDropdownOpen && (
+                 <NavbarDropdown/>
+                )}
+              </div>
+            </Link>
           )}
 
           <div className="flex-1 px-4 flex justify-between">
@@ -296,7 +322,7 @@ const NavbarComponent: React.FC = () => {
                 </button>
               </Link>
 
-              <div className="flex-shrink-0"></div>
+          
             </div>
           </div>
         </div>

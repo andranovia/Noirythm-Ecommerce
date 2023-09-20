@@ -6,11 +6,14 @@ const ProductInfoComponent = dynamic(() => import('@/components/Product/product-
 
 
 
-interface ProductPageProps{
-    product : [];
-    query: {
-        id?: string; 
-      };
+interface ProductPageProps {
+  product: {
+    id: string;
+    product_name: string;
+    product_image: string;
+    product_price: number;
+    product_description: string;
+  };
 }
 
 

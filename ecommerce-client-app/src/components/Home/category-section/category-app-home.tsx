@@ -20,7 +20,7 @@ const CategoryItemMemoized = React.memo(CategoryItem);
 
 const CategoryCardComponent: React.FC<CategoryCardProps> = ({ categories }) => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mb-10">
       <div className="grid grid-cols-2 gap-5">
         {categories.map((category, index) => (
           <Link href={`/category/${category.id}`} key={category.id}>

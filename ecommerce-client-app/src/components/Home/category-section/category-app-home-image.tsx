@@ -30,7 +30,7 @@ const CategoryItemComponent: React.FC<CategoryItemProps> = ({ category }) => {
   }, []);
 
   return (
-    <div className="shadow-md rounded-lg p-4 flex h-15 w-[10rem] sm:h-[6rem] sm:w-[15rem] overflow-hidden">
+    <div className="shadow-ShadowCard rounded-lg p-4 flex h-15 w-[10rem] sm:h-[6rem] sm:w-[15rem] overflow-hidden hover:sm:w-[14rem]">
       <div className="pr-4 sm:flex sm:flex-col sm:justify-center">
         <Image src={category.image} alt="" width={48} height={48}  />
       </div>

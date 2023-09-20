@@ -4,6 +4,7 @@ interface Product {
   id: string;
   name: string;
   price: number;
+  image: string;
 }
 
 interface CartState {
@@ -49,7 +50,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   );
 };
 
-// Create a custom hook to access the cart context
+
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
