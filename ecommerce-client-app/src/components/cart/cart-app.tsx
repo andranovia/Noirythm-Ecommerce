@@ -7,7 +7,7 @@ const Cart = () => {
   console.log(cart)
   return (
 
-    <div className='my-20 shadow-ShadowCard px-4 pt-4'>
+    <div className='my-20  px-4 pt-4'>
         {cart.map((item, index) => (
           <CartItemComponent key={index} item={item}/>
         ))}

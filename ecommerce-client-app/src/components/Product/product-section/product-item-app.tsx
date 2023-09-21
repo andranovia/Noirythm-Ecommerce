@@ -1,6 +1,8 @@
 import React from 'react';
 import { ColorRing } from 'react-loader-spinner';
 import Image from 'next/image';
+
+
 interface ProductItem {
   product_name: string;
   product_image: string;

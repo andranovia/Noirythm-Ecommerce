@@ -6,7 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
+
 const NavbarDropdown = dynamic(() =>  import('./navbar-dropdown-logo'));
+const NavbarSearch = dynamic(() => import('./navbar-search'));
 
 const NavbarComponent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -129,9 +131,9 @@ const NavbarComponent: React.FC = () => {
                     Home
                   </Link>
                   <Link
-                    href="/Product"
+                    href="/category/All"
                     className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-                      router.pathname === '/Product'
+                      router.pathname === '/category/All'
                         ? 'bg-gray-900 text-white'
                         : 'text-gray-300 hover:text-white hover:bg-gray-700'
                     }`}
@@ -232,7 +234,7 @@ const NavbarComponent: React.FC = () => {
                 onMouseLeave={handleLogoDropdownToggle}
                 style={{ zIndex: 2000 }}
               >
-                <div className="flex-shrink-0 flex items-center px-4 py-4 mx-5">
+                <div className="flex-shrink-0 flex items-center px-4 py-3 mx-5">
                   <Image
                     className="h-10 w-auto cursor-pointer"
                     src="/img/logo-brand.png"
@@ -258,20 +260,8 @@ const NavbarComponent: React.FC = () => {
                   Search
                 </label>
                 <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                  <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                    <Image
-                      src="https://img.icons8.com/ios/50/search--v1.png"
-                      width={20}
-                      height={20}
-                      alt=""
-                    />
-                  </div>
-                  <input
-                    id="search_field"
-                    className="block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 bg-white sm:text-sm"
-                    placeholder="Search"
-                    type="search"
-                  />
+                  
+                 <NavbarSearch/>
                 </div>
               </div>
             </div>
@@ -311,7 +301,7 @@ const NavbarComponent: React.FC = () => {
               <Link href="/cart/cartPage">
                 <button
                   className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500"
-                  aria-label="Notifications"
+               
                 >
                   <Image
                     src="https://img.icons8.com/ios/50/shopping-cart--v1.png"

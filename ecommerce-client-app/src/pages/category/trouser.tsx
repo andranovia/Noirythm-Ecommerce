@@ -17,7 +17,7 @@ const CategoryTrouserPage: React.FC = () => {
         </p>
        <TrouserProductComponent/>
       </div>
-    </div>
+    </div>  
   );
 };
 
