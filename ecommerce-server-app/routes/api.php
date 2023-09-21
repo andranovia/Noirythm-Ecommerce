@@ -15,3 +15,7 @@ Route::prefix('products')->group(function () {
     Route::get('shoes', [ProductController::class, 'shoesIndex']);
     Route::get('shoes/{id}', [ProductController::class, 'shoesShow']);
 });
+
+Route::get('/search', 'App\Http\Controllers\SearchController@search');
+
+
