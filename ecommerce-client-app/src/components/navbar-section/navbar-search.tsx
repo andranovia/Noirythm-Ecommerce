@@ -1,13 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-import axiosInstance from '@/utils/api'; // Import your Axios instance
+import Link from 'next/link';
+import axiosInstance from '@/utils/api';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const NavbarSearchResultComponent = dynamic(() => import('./navbar-result'))
+interface ProductItem {
+  product_name: string;
+  product_image: string;
+  product_price: number;
+  product_description: string;
+  id: number;
+}
+
 const NavbarSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<(ProductItem | never)[]>([]); 
   const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
-  const inputRef = useRef(null);
-  const maxResultsToShow = 6;
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const maxResultsToShow = 4;
 
   const handleSearch = async () => {
     try {
@@ -38,8 +49,8 @@ const NavbarSearch = () => {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (inputRef.current && !inputRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
         setSearchResultsVisible(false);
       }
     };
@@ -59,15 +70,17 @@ const NavbarSearch = () => {
       setSearchResultsVisible(false);
     }
   }, [searchQuery]);
+
   return (
     <div className="">
-      <div ref={inputRef} className="flex justify-center mx-auto my-3  ">
-        <div className="absolute inset-y-0 left-2 flex items-center pointer-events-none">
+      <div ref={inputRef} className="flex justify-center mx-auto mt-2  ">
+        <div className="absolute inset-y-0 left-2 flex results-center pointer-events-none">
           <Image
             src="https://img.icons8.com/ios/50/search--v1.png"
             width={20}
-            height={20}
+            height={10}
             alt=""
+            className='w-6 h-6 relative top-4'
           />
         </div>
         <input
@@ -80,11 +93,24 @@ const NavbarSearch = () => {
       </div>
 
       {isSearchResultsVisible && (
-        <ul className="fixed">
+        <div className="fixed bg-white w-full h-[32rem] left-0 right-0 sm:w-[50rem] rounded-md sm:left-[18%] sm:h-fit ">
           {searchResults.map((result) => (
-            <li key={result.id}>{result.product_name}</li>
+            <Link
+              href={{
+                pathname: `/product/${result.id}`,
+                query: {
+                  product_name: result.product_name,
+                  product_price: result.product_price,
+                  product_image: result.product_image,
+                  product_description: result.product_description,
+                },
+              }}
+              key={result.id}
+            >
+              <NavbarSearchResultComponent key={result.id} result={result} />
+            </Link>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );
