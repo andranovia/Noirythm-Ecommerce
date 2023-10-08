@@ -7,12 +7,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
-const NavbarDropdown = dynamic(() =>  import('./navbar-dropdown-logo'));
+
+const NavbarDropdown = dynamic(() => import('./navbar-dropdown-logo'));
 const NavbarSearch = dynamic(() => import('./navbar-search'));
 
 const NavbarComponent: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
 
   const handleLogoDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -246,9 +248,7 @@ const NavbarComponent: React.FC = () => {
                     Noirythm
                   </h2>
                 </div>
-                {isDropdownOpen && (
-                 <NavbarDropdown/>
-                )}
+                {isDropdownOpen && <NavbarDropdown />}
               </div>
             </Link>
           )}
@@ -260,8 +260,7 @@ const NavbarComponent: React.FC = () => {
                   Search
                 </label>
                 <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                  
-                 <NavbarSearch/>
+                  <NavbarSearch />
                 </div>
               </div>
             </div>
@@ -297,12 +296,9 @@ const NavbarComponent: React.FC = () => {
                   </svg>
                 )}
               </button>
-
+            
               <Link href="/cart/cartPage">
-                <button
-                  className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500"
-               
-                >
+                <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                   <Image
                     src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
                     width={20}
@@ -311,8 +307,6 @@ const NavbarComponent: React.FC = () => {
                   />
                 </button>
               </Link>
-
-          
             </div>
           </div>
         </div>

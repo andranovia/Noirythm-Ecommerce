@@ -52,7 +52,7 @@ function HomeHeroComponent() {
 
       <div
         className={
-          'overflow-hidden flex items-center justify-center text-center '
+          'overflow-hidden flex items-end justify-center text-center sm:relative sm:-right-[30rem] '
         }
       >
         <motion.div
@@ -62,7 +62,7 @@ function HomeHeroComponent() {
             ease: 'easeInOut',
             duration: 1,
           }}
-          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center bottom-[22rem] mr-40  sm:mb-20 sm:mr-[35rem] sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
+          className="h-[120px] w-[120px] rounded-full bg-white absolute sm:relative flex items-center justify-center bottom-[22rem] mr-40  sm:mb-20  sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
         >
           <div className="circular-text" ref={circleTypeRef} id="textCircular">
             <motion.span

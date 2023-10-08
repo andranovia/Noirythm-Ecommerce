@@ -14,6 +14,9 @@ interface ProductPageProps {
     product_price: number;
     product_description: string;
   };
+  query: {
+    id?: string;
+  };
 }
 
 

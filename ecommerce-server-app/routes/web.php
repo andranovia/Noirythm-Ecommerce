@@ -13,3 +13,4 @@ Route::get('/page2', function () {
 Route::get('/page3', function () {
     return view('pages/page3');
 });
+

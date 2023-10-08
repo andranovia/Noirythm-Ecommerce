@@ -63,6 +63,8 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+            'table' => 'users',
+            'verify' => true, // Make sure this option is set to true
         ],
 
         // 'users' => [
