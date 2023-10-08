@@ -6,10 +6,8 @@ This is an e-commerce web application built using Next.js as the client-side fra
 ## Features
 - Browse and search for products
 - Add products to the cart
-- Select product sizes
-- Leave comments and reviews for products
-- User authentication and registration 
-- Checkout and payment processing 
+- Product detail information
+
 
 ## Tech Stack
 - **Frontend:**
@@ -29,7 +27,7 @@ This is an e-commerce web application built using Next.js as the client-side fra
 4. Start the development servers:
    - Frontend (Next.js): `cd ecommerce-client-app && npm run dev`
    - Backend (Laravel): `cd ecommerce-server-app && php artisan serve`
-   - 
+     
 ## Project Structure (FrontEnd - next-Js)
 - `ecommerce-client-app/`: currently in develop.
 
