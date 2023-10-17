@@ -25,34 +25,29 @@ function HomeHeroComponent() {
   }, []);
 
   const textBottom = 'YOUR STYLE';
-  const textLeft = 'ELE VA TE';
+  const textLeft = 'elevate';
 
   return (
-    <div className="relative flex justify-center items-center h-[40rem] font-poppins overflow-hidden bg-[url('/home-backgrund-hero.webp')] bg-cover bg-no-repeat z-2 sm:h-screen">
+    <div className="relative flex justify-center items-center h-[30rem] font-poppins overflow-hidden bg-[url('/home-backgrund-hero.webp')] bg-cover bg-no-repeat z-2 sm:h-screen">
       <motion.div
-        className="absolute top-0 left-0 w-[4rem] h-full z-1 bg-white sm:w-[30rem]"
+        className="relative  left-0 z-1 flex  items-center justify-center flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
       >
-        <div className="absolute sm:relative  font-bold flex flex-col items-end justify-center ml-[4rem] sm:left-10">
-          <div className="heroTitleFourth mt-[8rem] sm:mt-[4rem] text-6xl ml-[1rem] sm:text-[10rem]">
+        <div className=" relative  font-bold  top-4  sm:right-0 w-full ml-12 sm:ml-40 sm:top-0 ">
+          <div className="  sm:mt-[4rem] text-5xl  sm:text-[8rem]">
             {textLeft}
+          </div>
+
+          <div className="relative text-8xl font-bold top-[1rem] sm:top-15  sm:text-[14rem]   sm:w-full  ">
+            <div className=" text-white ">{textBottom}</div>
           </div>
         </div>
       </motion.div>
-      <motion.div
-        className="relative top-0 left-0 z-1  "
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
-      />
-      <div className="relative sm:absolute text-8xl font-bold top-[5rem] w-[20rem] sm:top-15 left-[2rem] sm:mr-[19rem] sm:text-[12rem]  sm:top-[34rem] sm:left-[10%] sm:w-full  ">
-        <div className="heroTitleTwo text-white ">{textBottom}</div>
-      </div>
-     
 
       <div
         className={
-          'overflow-hidden flex items-end justify-center text-center sm:relative sm:-right-[30rem] '
+          'overflow-hidden flex  justify-center text-center  '
         }
       >
         <motion.div
@@ -62,7 +57,7 @@ function HomeHeroComponent() {
             ease: 'easeInOut',
             duration: 1,
           }}
-          className="h-[120px] w-[120px] rounded-full bg-white absolute sm:relative flex items-center justify-center bottom-[22rem] mr-40  sm:mb-20  sm:w-[200px] sm:h-[200px] sm:bottom-[20%]"
+          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center mr-40 sm:top-32 sm:right-0  sm:w-[200px] sm:h-[200px] "
         >
           <div className="circular-text" ref={circleTypeRef} id="textCircular">
             <motion.span

@@ -5,6 +5,9 @@ import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
 import { useCart } from '@/components/context/cartContext';
+import ProductInfoRating from './product-info-rating-app';
+import ButtonSecondary from '@/components/button/button-secondary-app';
+import ButtonPrimary from '@/components/button/button-primary-app';
 
 interface ProductInfoProps {
   product: {
@@ -119,18 +122,23 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
             <h2 className="font-medium text-2xl">Product description</h2>
             <p className=" text-gray-600 text-1xl ">{product_description}</p>
           </div>
+          <div className="mt-10">
+            <div className="font-medium text-2xl ">
+              <h2 className="text-gray-800">Give rating to {product_name}!</h2>
+            </div>
+            <div className="mr-28 sm:flex justify-start">
+              <ProductInfoRating />
+            </div>
+          </div>
           {!isMobile && (
             <div className="mt-6 flex justify-start items-center bg-white p-5 font-medium ">
               <div className="flex justify-center items-center mr-5">
                 <BsChatLeftText className="w-7 h-7" />
               </div>
-              <button className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4" 
-               onClick={handleAddToCart}>
+              <ButtonSecondary onClick={handleAddToCart}>
                 Add to <MdAddShoppingCart />
-              </button>
-              <button className="bg-orange-900 text-white px-9 py-2 rounded hover:bg-orange-800">
-                Buy Now
-              </button>
+              </ButtonSecondary>
+              <ButtonPrimary>Buy Now</ButtonPrimary>
             </div>
           )}
         </div>
@@ -148,15 +156,10 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
             <div className="flex justify-center items-center mr-5">
               <BsChatLeftText className="w-7 h-7" />
             </div>
-            <button
-              className="bg-white text-amber-950 px-9 py-2 flex justify-center items-center rounded-sm border border-amber-950 hover:border-amber-900 mr-4"
-              onClick={handleAddToCart}
-            >
+            <ButtonSecondary onClick={handleAddToCart}>
               Add to <MdAddShoppingCart />
-            </button>
-            <button className="bg-orange-900 text-white px-9 py-2 rounded hover:bg-orange-800">
-              Buy Now
-            </button>
+            </ButtonSecondary>
+            <ButtonPrimary>Buy Now</ButtonPrimary>
           </div>
         )}
       </div>
