@@ -19,6 +19,7 @@ interface ProductInfoProps {
   };
   query?: Record<string, string>;
 }
+
 interface Product {
   id: string;
   name: string;
@@ -68,6 +69,8 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
 
     console.log(router.query);
   };
+
+ 
 
   return (
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
@@ -127,7 +130,7 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
               <h2 className="text-gray-800">Give rating to {product_name}!</h2>
             </div>
             <div className="mr-28 sm:flex justify-start">
-              <ProductInfoRating />
+              <ProductInfoRating id={id}/>
             </div>
           </div>
           {!isMobile && (

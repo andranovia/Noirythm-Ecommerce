@@ -9,4 +9,5 @@ class ShoesProduct extends Model
 {
     use HasFactory;
     protected $table = 'shoesProducts';
+  
 }

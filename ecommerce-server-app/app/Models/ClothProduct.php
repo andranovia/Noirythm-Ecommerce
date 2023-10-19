@@ -11,6 +11,6 @@ class ClothProduct extends Model
 {
     use HasFactory;
 
-    protected $table = 'clothProducts'; 
+    protected $table = 'clothProducts';
 
 }

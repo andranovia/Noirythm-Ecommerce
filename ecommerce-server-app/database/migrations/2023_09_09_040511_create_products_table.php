@@ -44,5 +44,6 @@ class CreateProductsTable extends Migration
     {
         Schema::dropIfExists('clothProducts');
         Schema::dropIfExists('trouserProducts');
+        Schema::dropIfExists('shoesProducts');
     }
 }
