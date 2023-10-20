@@ -18,6 +18,7 @@ const ProductInfoRatingInput = ({
   id,
 }: ProductInfoRatingInputProps) => {
   const [reviewText, setReviewText] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,11 +38,22 @@ const ProductInfoRatingInput = ({
         console.log('Review has been submitted successfully.');
         setRating(0);
         setReviewText('');
+        setErrorMessage('');
       } else {
         console.log('Review submission was not successful.');
+        setErrorMessage('Review submission was not successful.');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting review', error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('Error submitting review. Please try again later.');
+      }
     }
   };
 
@@ -85,6 +97,11 @@ const ProductInfoRatingInput = ({
               value={reviewText}
               onChange={(e) => setReviewText(e.target.value)}
             />
+            {errorMessage && (
+              <p className="text-red-500 font-semibold relative bottom-8">
+                {errorMessage}
+              </p>
+            )}
           </div>
           <div className="flex justify-center">{children}</div>
         </form>

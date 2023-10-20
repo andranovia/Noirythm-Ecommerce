@@ -32,12 +32,7 @@ export default function ProductInfoRating({ id }: any) {
         <ButtonSecondary onClick={() => handleModalToggle(true)}>
           Give your opinions
         </ButtonSecondary>
-        {commentModal && (
-          <div className="fixed border">
-            <textarea placeholder="Write your comment here..." />
-            <button>Submit Comment</button>
-          </div>
-        )}
+      
 
         {commentModal && (
           <>
