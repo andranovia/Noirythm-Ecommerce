@@ -19,6 +19,7 @@ Route::prefix('products')->group(function () {
     Route::get('shoes/{id}', [ProductController::class, 'shoesShow']);
 
     Route::post('reviews/{id}', [ProductReviewController::class, 'store']);;
+    Route::get('reviews/UserComment/{id}', [ProductReviewController::class, 'showUserComment']);
 });
 
 Route::get('/search', 'App\Http\Controllers\SearchController@search');

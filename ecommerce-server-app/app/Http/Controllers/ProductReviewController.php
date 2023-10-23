@@ -29,4 +29,16 @@ class ProductReviewController extends Controller
             return response()->json(['message' => 'Review submission was not successful'], 500);
         }
     }
+    public function showUserComment($id)
+    {
+    
+        $rating = ProductReview::where('product_id', $id)->avg('rating');
+        $reviewText = ProductReview::where('product_id', $id)->pluck('reviewText')->first();
+
+        return response()->json([
+            'rating' => $rating,
+            'reviewText' => $reviewText,
+        ], 200);
+    }
+
 }

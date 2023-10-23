@@ -3,19 +3,36 @@ import ButtonSecondary from '@/components/button/button-secondary-app';
 import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import ProductInfoRatingInput from './product-info-rating-input-app';
+import axiosInstance from '@/utils/api';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
   const [rating, setRating] = useState(0);
   const [commentModal, setCommentModal] = useState(false);
+  const [reviewText, setReviewText] = useState<string | null>();
+
+  useEffect(() => {
+    axiosInstance
+      .get(`/api/products/reviews/UserComment/${id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setRating(response.data.rating);
+          setReviewText(response.data.reviewText);
+     
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching average rating and reviewText', error);
+      });
+  }, [id]);
+  
+  console.log(id);
+  console.log(reviewText);
+  console.log(rating);
 
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
   };
-  useEffect(() => {});
-
-  console.log(id);
-
   return (
     <>
       <div className=" ">
@@ -32,13 +49,10 @@ export default function ProductInfoRating({ id }: any) {
         <ButtonSecondary onClick={() => handleModalToggle(true)}>
           Give your opinions
         </ButtonSecondary>
-      
 
         {commentModal && (
           <>
             <ProductInfoRatingInput
-              rating={rating}
-              setRating={setRating}
               rateColor={rateColor}
               id={id}
             >

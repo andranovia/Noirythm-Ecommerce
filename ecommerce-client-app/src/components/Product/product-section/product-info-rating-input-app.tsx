@@ -3,20 +3,17 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 
 interface ProductInfoRatingInputProps {
-  rating: number;
-  setRating: (value: number) => void;
   rateColor: string | null;
   children?: React.ReactNode;
   id: any;
 }
 
 const ProductInfoRatingInput = ({
-  rating,
-  setRating,
   rateColor,
   children,
   id,
 }: ProductInfoRatingInputProps) => {
+    const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
