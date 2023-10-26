@@ -18,14 +18,13 @@ export default function ProductInfoRating({ id }: any) {
         if (response.status === 200) {
           setRating(response.data.rating);
           setReviewText(response.data.reviewText);
-     
         }
       })
       .catch((error) => {
         console.error('Error fetching average rating and reviewText', error);
       });
   }, [id]);
-  
+
   console.log(id);
   console.log(reviewText);
   console.log(rating);
@@ -33,11 +32,14 @@ export default function ProductInfoRating({ id }: any) {
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
   };
+
+  const roundedRating = Math.round(rating);
+
   return (
     <>
       <div className=" ">
         <div className="flex justify-start gap-2 mt-4">
-          {[...Array(rating)].map((star, index) => (
+          {[...Array(roundedRating)].map((star, index) => (
             <FaStar key={index} size={20} color="yellow" />
           ))}
         </div>
@@ -52,10 +54,7 @@ export default function ProductInfoRating({ id }: any) {
 
         {commentModal && (
           <>
-            <ProductInfoRatingInput
-              rateColor={rateColor}
-              id={id}
-            >
+            <ProductInfoRatingInput rateColor={rateColor} id={id}>
               <ButtonSecondary onClick={() => handleModalToggle(false)}>
                 Close
               </ButtonSecondary>
