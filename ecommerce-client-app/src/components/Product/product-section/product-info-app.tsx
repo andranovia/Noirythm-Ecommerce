@@ -70,8 +70,6 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
     console.log(router.query);
   };
 
- 
-
   return (
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
       <NavbarComponent />
@@ -99,6 +97,17 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
               alt=""
               className="relative w-full h-[50rem] object-cover z-1  md:mb-0"
             />
+            {!isMobile && (
+              <div className="flex justify-start items-center fixed bottom-10 left-40  bg-white rounded-md p-5 font-medium ">
+                <div className="flex justify-center items-center mr-5">
+                  <BsChatLeftText className="w-7 h-7" />
+                </div>
+                <ButtonSecondary onClick={handleAddToCart}>
+                  Add to <MdAddShoppingCart />
+                </ButtonSecondary>
+                <ButtonPrimary>Buy Now</ButtonPrimary>
+              </div>
+            )}
           </div>
         )}
         <div
@@ -121,7 +130,7 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
             </select>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-4">
             <h2 className="font-medium text-2xl">Product description</h2>
             <p className=" text-gray-600 text-1xl ">{product_description}</p>
           </div>
@@ -130,20 +139,9 @@ export default function ProductInfoComponent({ product }: ProductInfoProps) {
               <h2 className="text-gray-800">Give rating to {product_name}!</h2>
             </div>
             <div className="mr-28 sm:flex justify-start">
-              <ProductInfoRating id={id}/>
+              <ProductInfoRating id={id} />
             </div>
           </div>
-          {!isMobile && (
-            <div className="mt-6 flex justify-start items-center bg-white p-5 font-medium ">
-              <div className="flex justify-center items-center mr-5">
-                <BsChatLeftText className="w-7 h-7" />
-              </div>
-              <ButtonSecondary onClick={handleAddToCart}>
-                Add to <MdAddShoppingCart />
-              </ButtonSecondary>
-              <ButtonPrimary>Buy Now</ButtonPrimary>
-            </div>
-          )}
         </div>
         {isMobile && (
           <div

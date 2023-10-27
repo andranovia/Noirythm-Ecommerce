@@ -12,7 +12,7 @@ class CreateProductsTable extends Migration
     public function up(): void
     {
         Schema::create('clothProducts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('product_name'); 
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);
@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
          Schema::create('trouserProducts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('product_name'); 
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);
@@ -28,7 +28,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
         Schema::create('shoesProducts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('product_name'); 
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);

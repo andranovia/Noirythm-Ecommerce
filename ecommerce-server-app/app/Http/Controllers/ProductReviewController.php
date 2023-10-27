@@ -33,7 +33,7 @@ class ProductReviewController extends Controller
     {
     
         $rating = ProductReview::where('product_id', $id)->avg('rating');
-        $reviewText = ProductReview::where('product_id', $id)->pluck('reviewText')->first();
+        $reviewText = ProductReview::where('product_id', $id)->pluck('reviewText')->toArray();
 
         return response()->json([
             'rating' => $rating,
