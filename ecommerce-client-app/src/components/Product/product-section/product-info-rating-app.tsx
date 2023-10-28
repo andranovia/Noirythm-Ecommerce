@@ -5,6 +5,8 @@ import { FaStar } from 'react-icons/fa';
 import ProductInfoRatingInput from './product-info-rating-input-app';
 import ProductInfoRatingCommentModal from './product-info-rating-commentmodal-app';
 import axiosInstance from '@/utils/api';
+import ProductInfoEditComment from './product-info-editcomment-app';
+import Image from 'next/image';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
@@ -12,6 +14,8 @@ export default function ProductInfoRating({ id }: any) {
   const [commentModal, setCommentModal] = useState(false);
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState(-1); // Track the index of the selected comment.
 
   useEffect(() => {
     axiosInstance
@@ -35,11 +39,16 @@ export default function ProductInfoRating({ id }: any) {
     setCommentModal(open);
   };
 
+  const handleEditComment = (index: number) => {
+    setIsEditing(true);
+    setSelectedCommentIndex(index); 
+  };
+
   const roundedRating = Math.round(rating);
 
   return (
     <>
-      <div className="mb-[18rem]">
+      <div className={reviewText.length > 0 ? `mb-[18rem]` : `mb-[6rem]`}>
         <div className="flex justify-start gap-2 mt-4">
           {[...Array(roundedRating)].map((star, index) => (
             <FaStar key={index} size={20} color="yellow" />
@@ -53,11 +62,24 @@ export default function ProductInfoRating({ id }: any) {
         <div className="bg-gray-300 w-[17rem] h-2 relative ">
           {reviewText.length > 0 ? (
             <>
-              <div className="relative top-10 sm:top-6 sm:grid sm:gap-20 grid-cols-2  ">
+              <div className="relative top-10 sm:top-6 sm:grid sm:gap-20 grid-cols-2">
                 {reviewText.slice(0, 2).map((review, index) => (
-                  <div className="p-4 sm:p-2 rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[15rem] sm:w-40 ">
-                    <p key={index}>{review}</p>
-                  </div>
+                  <>
+                    <div key={index} className="p-4 sm:p-2 flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-40">
+                      <p >{review}</p>
+                      <button onClick={() => handleEditComment(index)} className='font-semibold'>
+                        <Image src={'https://img.icons8.com/ios/50/edit--v1.png'} alt='edit' width={20} height={20}/>
+                      </button>
+                    </div>
+                    {isEditing && selectedCommentIndex === index ? (
+                      <ProductInfoEditComment
+                        id={index}
+                        review={review}
+                 
+                        setIsEditing={setIsEditing}
+                      />
+                    ) : null}
+                  </>
                 ))}
               </div>
               <div className="mt-[4rem]">
@@ -68,42 +90,42 @@ export default function ProductInfoRating({ id }: any) {
             </>
           ) : (
             <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
-              <h1 className="">there is curently no comments</h1>
+              <h1 className="">there is currently no comments</h1>
             </div>
           )}
         </div>
         <div>
-        <div
-          className={
-            reviewText.length > 0
-              ? `relative top-[16rem] sm:top-24 sm:left-40`
-              : `relative top-20 mb-[8rem] `
-          }
-        >
-          <ButtonPrimary onClick={() => handleModalToggle(true)}>
-            Give your opinions
-          </ButtonPrimary>
-        </div>
+          <div
+            className={
+              reviewText.length > 0 
+                ? `relative top-[16rem] sm:top-24 sm:left-40`
+                : `relative top-20  `
+            }
+          >
+            <ButtonPrimary onClick={() => handleModalToggle(true)}>
+              Give your opinions
+            </ButtonPrimary>
+          </div>
 
-        {commentModal && (
-          <>
-            <ProductInfoRatingInput rateColor={rateColor} id={id}>
-              <ButtonSecondary onClick={() => handleModalToggle(false)}>
-                Close
-              </ButtonSecondary>
-              <ButtonPrimary type={'submit'}>Send</ButtonPrimary>
-            </ProductInfoRatingInput>
-          </>
-        )}
+          {commentModal && (
+            <>
+              <ProductInfoRatingInput rateColor={rateColor} id={id}>
+                <ButtonSecondary onClick={() => handleModalToggle(false)}>
+                  Close
+                </ButtonSecondary>
+                <ButtonPrimary type={'submit'}>Send</ButtonPrimary>
+              </ProductInfoRatingInput>
+            </>
+          )}
 
-        {showMore && (
-          <>
-            <ProductInfoRatingCommentModal
-              reviewText={reviewText}
-              setShowMore={setShowMore}
-            />
-          </>
-        )}
+          {showMore && (
+            <>
+              <ProductInfoRatingCommentModal
+                reviewText={reviewText}
+                setShowMore={setShowMore}
+              />
+            </>
+          )}
         </div>
       </div>
     </>
