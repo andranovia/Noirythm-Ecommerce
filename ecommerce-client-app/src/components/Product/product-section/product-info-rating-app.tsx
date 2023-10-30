@@ -15,7 +15,7 @@ export default function ProductInfoRating({ id }: any) {
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedCommentIndex, setSelectedCommentIndex] = useState(-1); // Track the index of the selected comment.
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState(0);
 
   useEffect(() => {
     axiosInstance
@@ -41,7 +41,7 @@ export default function ProductInfoRating({ id }: any) {
 
   const handleEditComment = (index: number) => {
     setIsEditing(true);
-    setSelectedCommentIndex(index); 
+    setSelectedCommentIndex(index);
   };
 
   const roundedRating = Math.round(rating);
@@ -65,17 +65,27 @@ export default function ProductInfoRating({ id }: any) {
               <div className="relative top-10 sm:top-6 sm:grid sm:gap-20 grid-cols-2">
                 {reviewText.slice(0, 2).map((review, index) => (
                   <>
-                    <div key={index} className="p-4 sm:p-2 flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-40">
-                      <p >{review}</p>
-                      <button onClick={() => handleEditComment(index)} className='font-semibold'>
-                        <Image src={'https://img.icons8.com/ios/50/edit--v1.png'} alt='edit' width={20} height={20}/>
+                    <div
+                      key={index}
+                      className="p-4 sm:p-2 flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-40"
+                    >
+                      <p>{review}</p>
+                      <button
+                        onClick={() => handleEditComment(index + 1)}
+                        className="font-semibold"
+                      >
+                        <Image
+                          src={'https://img.icons8.com/ios/50/edit--v1.png'}
+                          alt="edit"
+                          width={20}
+                          height={20}
+                        />
                       </button>
                     </div>
-                    {isEditing && selectedCommentIndex === index ? (
+                    {isEditing && selectedCommentIndex === index + 1 ? (
                       <ProductInfoEditComment
-                        id={index}
+                        id={index + 1}
                         review={review}
-                 
                         setIsEditing={setIsEditing}
                       />
                     ) : null}
@@ -97,7 +107,7 @@ export default function ProductInfoRating({ id }: any) {
         <div>
           <div
             className={
-              reviewText.length > 0 
+              reviewText.length > 0
                 ? `relative top-[16rem] sm:top-24 sm:left-40`
                 : `relative top-20  `
             }
