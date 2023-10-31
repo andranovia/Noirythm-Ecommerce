@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use App\Models\ProductReview;
 
 class ProductReviewController extends Controller
@@ -53,9 +52,12 @@ class ProductReviewController extends Controller
         if (!$productReview) {
             return response()->json(['message' => 'Review not found'], 404);
         }
-    
+        
         $productReview->rating = $validatedData['rating'];
         $productReview->reviewText = $validatedData['reviewText'];
+
+        $productReview->update();
+        
     
         if ($productReview->save()) {
             return response()->json(['message' => 'Review has been updated successfully'], 200);

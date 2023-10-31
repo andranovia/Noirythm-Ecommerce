@@ -20,7 +20,7 @@ Route::prefix('products')->group(function () {
 
     Route::post('reviews/{id}', [ProductReviewController::class, 'store']);;
     Route::get('reviews/UserComment/{id}', [ProductReviewController::class, 'showUserComment']);
-    Route::post('reviews/editComment/{id}', [ProductReviewController::class, 'updateComment']);
+    Route::put('reviews/editComment/{id}', [ProductReviewController::class, 'updateComment']);
 });
 
 Route::get('/search', 'App\Http\Controllers\SearchController@search');
