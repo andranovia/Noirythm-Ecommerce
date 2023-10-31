@@ -6,13 +6,13 @@ import ButtonSecondary from '@/components/button/button-secondary-app';
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   review: string;
-  id: any;
+  commentId: any;
 }
 
 const ProductInfoEditComment = ({
   setIsEditing,
   review,
-  id,
+  commentId,
 }: ProductInfoEditCommentProps) => {
   const [editedReview, setEditedReview] = useState(review);
 
@@ -22,20 +22,19 @@ const ProductInfoEditComment = ({
 
   const handleSaveEdit = async () => {
     try {
-    
-      const response = await axiosInstance.post(`/api/products/reviews/editComment/${id}`, {
+      const response = await axiosInstance.put(`/api/products/reviews/editComment/${commentId}`, {
         rating: 5,
         reviewText: editedReview,
       });
 
-
+  
       console.log(response.data.message);
       setIsEditing(false);
     } catch (error) {
-
       console.error(error);
     }
   };
+  
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">

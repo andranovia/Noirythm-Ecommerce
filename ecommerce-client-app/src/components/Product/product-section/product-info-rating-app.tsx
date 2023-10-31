@@ -15,7 +15,8 @@ export default function ProductInfoRating({ id }: any) {
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedCommentIndex, setSelectedCommentIndex] = useState(0);
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState<number | null>(null);
+  const [commentId, setCommentId] = useState<number[]>([]);
 
   useEffect(() => {
     axiosInstance
@@ -28,6 +29,8 @@ export default function ProductInfoRating({ id }: any) {
           } else {
             setReviewText([response.data.reviewText]);
           }
+          setCommentId(response.data.commentId);
+          console.log(commentId);
         }
       })
       .catch((error) => {
@@ -35,13 +38,26 @@ export default function ProductInfoRating({ id }: any) {
       });
   }, [id]);
 
+  const handleDeleteComments = (commentId: number) => {
+    axiosInstance
+      .delete(`api/products/reviews/DeleteUserComment/${commentId}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('Error deleting rating and reviewText', error);
+      });
+  };
+
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
   };
 
-  const handleEditComment = (index: number) => {
+  const handleEditComment = (commentId: any, index: number) => {
     setIsEditing(true);
+    setCommentId(commentId);
     setSelectedCommentIndex(index);
+    console.log(commentId);
   };
 
   const roundedRating = Math.round(rating);
@@ -69,25 +85,44 @@ export default function ProductInfoRating({ id }: any) {
                       key={index}
                       className="p-4 sm:p-2 flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-40"
                     >
-                      <p>{review}</p>
-                      <button
-                        onClick={() => handleEditComment(index + 1)}
-                        className="font-semibold"
-                      >
-                        <Image
-                          src={'https://img.icons8.com/ios/50/edit--v1.png'}
-                          alt="edit"
-                          width={20}
-                          height={20}
-                        />
-                      </button>
+                      <div className="flex justify-center gap-4">
+                        <p className="max-w-[10rem]">{review}</p>
+                        <button
+                          onClick={() => handleEditComment(commentId, index)}
+                          className="font-semibold"
+                        >
+                          <Image
+                            src={'https://img.icons8.com/ios/50/edit--v1.png'}
+                            alt="edit"
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      </div>
+                      <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => handleDeleteComments(commentId[index])}
+                          className="font-semibold"
+                        >
+                          <Image
+                            src={
+                              'https://img.icons8.com/dotty/80/filled-trash.png'
+                            }
+                            alt="edit"
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      </div>
                     </div>
-                    {isEditing && selectedCommentIndex === index + 1 ? (
+                    
+                    {isEditing && selectedCommentIndex === index ? (
                       <ProductInfoEditComment
-                        id={index + 1}
+                        commentId={commentId[index]}
                         review={review}
                         setIsEditing={setIsEditing}
                       />
+                      
                     ) : null}
                   </>
                 ))}
