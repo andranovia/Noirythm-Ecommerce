@@ -1,5 +1,5 @@
 import Home from './home/home';
-import NavbarComponent from '../components/navbar-section/navbar-app';
+import Navbar from '../components/Navbar/Navbar';
 
 
 
@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <>
   
-        <NavbarComponent />
+        <Navbar/>
         <Home />
 
 

@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-import Cart from '../../components/cart/cart-app';
-const NavbarComponent = dynamic(
-  () => import('@/components/navbar-section/navbar-app')
+import Cart from '../../components/cart/Cart';
+const Navbar = dynamic(
+  () => import('@/components/Navbar/Navbar')
 );
 import { useCart } from '@/components/context/cartContext';
 
@@ -10,7 +10,7 @@ const CartPage = () => {
   const { state } = useCart();
   return (
     <div>
-      <NavbarComponent />
+      <Navbar/>
       <div className="flex justify-start relative top-36">
         <div className="">
           <div className="grid mx-10">

@@ -1,7 +1,6 @@
 
-import { Query } from '@tanstack/react-query';
 import dynamic from 'next/dynamic';
-const ProductInfoComponent = dynamic(() => import('@/components/Product/product-section/product-info-app'), {
+const ProductInfo = dynamic(() => import('@/components/Product/product-section/ProductInfo'), {
   ssr: false, 
 });
 
@@ -25,5 +24,5 @@ export default function ProductPage({ product }: ProductPageProps) {
 
 
 
-  return <ProductInfoComponent product={product} />;
+  return <ProductInfo product={product} />;
 }
