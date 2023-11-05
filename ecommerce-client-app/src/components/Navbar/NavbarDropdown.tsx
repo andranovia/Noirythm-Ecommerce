@@ -56,7 +56,7 @@ export default function NavbarDropdown() {
             Product
           </Link>
           <Link
-            href="/about-Us/AboutPage"
+            href="/about/AboutPage"
             className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
               router.pathname === '/about-Us/AboutPage'
                 ? 'bg-gray-900 text-white'

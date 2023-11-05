@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-
 interface Category {
   title: string;
   description: string;
@@ -30,12 +29,12 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
   }, []);
 
   return (
-    <div className="shadow-ShadowCard rounded-lg p-4 flex h-15 w-[10rem] sm:h-[6rem] sm:w-[15rem] overflow-hidden hover:sm:opacity-75">
-      <div className="pr-4 sm:flex sm:flex-col sm:justify-center">
-        <Image src={category.image} alt="" width={48} height={48}  />
-      </div>
-
-      <div className="flex flex-col justify-center">
+    <div>
+      <div className="shadow-Aesthetic bg-white rounded-full p-4 flex h-15  overflow-hidden hover:sm:opacity-75">
+        <div className="pr-8 sm:flex sm:flex-col sm:justify-center">
+          <Image src={category.image} alt="" width={50} height={60} />
+        </div>
+        <div className="flex flex-col justify-center text-start">
         <h2 className="text-1xl font-semibold mb-2 max-h-40">
           {category.title}
         </h2>
@@ -43,6 +42,8 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
           <p className="text-gray-700">{category.description}</p>
         </div>
       </div>
+      </div>
+ 
     </div>
   );
 };

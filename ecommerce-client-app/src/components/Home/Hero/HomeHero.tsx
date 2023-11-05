@@ -1,90 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-import CircleType from 'circletype';
 
 function HomeHero() {
-  const circleTypeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const circleType = new CircleType(document.getElementById('textCircular'));
-
-    const handleScroll = () => {
-      const offset = window.scrollY * 0.4;
-
-      if (circleType.element) {
-        circleType.element.style.transform = `rotate(${offset}deg)`;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const textBottom = 'YOUR STYLE';
-  const textLeft = 'elevate';
 
   return (
-    <div className="relative flex justify-center items-center h-[30rem] font-poppins overflow-hidden bg-[url('/home-backgrund-hero.webp')] bg-cover bg-no-repeat z-2 sm:h-screen">
+    <div className="relative flex  m-4 sm:m-20 bg-gray-400 rounded-lg justify-center items-center h-fit mt-20 sm:mt-16 font-poppins overflow-hidden  z-2 sm:h-fit">
       <motion.div
-        className="relative  left-0 z-1 flex  items-center justify-center flex-col"
+        className=" z-1 flex text-start mt-10 items-center justify-center flex-col left-0 ml-6 sm:top-0 sm:ml-32   mb-24 absolute"
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.8 }}
       >
-        <div className=" relative  font-bold  top-4  sm:right-0 w-full ml-12 sm:ml-40 sm:top-0 ">
-          <div className="  sm:mt-[4rem] text-5xl  sm:text-[8rem]">
-            {textLeft}
+        <div className=" relative  font-bold  top-10  sm:right-0 w-full">
+          <div className="text-gray-800  text-4xl  sm:text-[8rem] ">
+          Flash Sale
           </div>
 
-          <div className="relative text-8xl font-bold top-[1rem] sm:top-15  sm:text-[14rem]   sm:w-full  ">
-            <div className=" text-white ">{textBottom}</div>
+          <div className="relative text-2xl font-bold top-[1rem] sm:top-28  sm:text-[8rem]   sm:w-full  ">
+            <div className="text-gray-700  ">Up To <span className='text-gray-800 text-4xl sm:text-[8rem]'>70%</span></div>
           </div>
         </div>
-      </motion.div>
-
-      <div
-        className={
-          'overflow-hidden flex  justify-center text-center  '
-        }
-      >
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            ease: 'easeInOut',
-            duration: 1,
-          }}
-          className="h-[120px] w-[120px] rounded-full bg-white absolute flex items-center justify-center mr-40 sm:top-32 sm:right-0  sm:w-[200px] sm:h-[200px] "
-        >
-          <div className="circular-text" ref={circleTypeRef} id="textCircular">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                ease: 'easeInOut',
-                duration: 1,
-                delay: 1.8,
-              }}
-            >
-              &#8226; scrolling down &#8226;
-            </motion.span>
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                ease: 'easeInOut',
-                duration: 1,
-                delay: 1.8,
-              }}
-            >
-              look around
-            </motion.span>
+        <div className="relative text-[10px] mt-16 font-bold top-[1rem] sm:text-2xl sm:right-48 sm:top-[11rem] right-8">
+            <div className="text-gray-600">only in NOIRYTHM</div>
           </div>
-        </motion.div>
-      </div>
+      </motion.div>
+      <div><Image className='sm:w-[40rem] sm:left-[28rem] left-28 relative' src={'/hero-background.webp'} alt='heroImage' height={260} width={260}/></div>
     </div>
   );
 }

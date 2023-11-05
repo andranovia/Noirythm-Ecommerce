@@ -32,13 +32,13 @@ const ContactHero = () => {
  
       <div className="h-[30rem] w-screen flex sm:justify-start sm:mx-40 ">
         <div className="relative flex flex-col items-center top-20 ml-10 sm:items-start">
-          <div className="text-amber-700">
+          <div className="text-gray-700">
             <h1 className="font-bold text-4xl my-10 sm:text-6xl">Welcome Aboard</h1>
             <h2 className="font-semibold text-2xl mx-10">
               Good morning! - Can we help you?{' '}
             </h2>
           </div>
-          <div className=" w-[17rem] h-[15vh] mx-5 my-4 border border-amber-500 p-2 rounded-md flex flex-col justify-center  text-amber-950">
+          <div className=" w-[17rem] h-[15vh] mx-5 my-4 border border-gray-500 p-2 rounded-md flex flex-col justify-center  text-gray-950">
             <div className="relative bottom-7 left-3 ">
               {previousTextIndex !== null && (
                 <motion.div

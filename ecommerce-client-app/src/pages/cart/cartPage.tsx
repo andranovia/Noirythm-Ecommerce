@@ -23,8 +23,8 @@ const CartPage = () => {
                     Your cart is empty! please add product to your shopping
                     cart.
                   </p>
-                  <button className="bg-amber-800 rounded-lg flex h-15 w-fit h- my-8 p-2 flex-col justify-center">
-                    <h2 className="font-semibold text-yellow-100">
+                  <button className="bg-gray-800 rounded-lg flex h-15 w-fit h- my-8 p-2 flex-col justify-center">
+                    <h2 className="font-semibold text-white">
                       Click here to see cool products
                     </h2>
                   </button>

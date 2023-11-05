@@ -22,7 +22,7 @@ const ContactCard: React.FC<ContactCardProps> = ({ contactcategories }) => {
   return (
     <div className="bg-white mb-10 overflow-hidden">
       <div className="flex justify-center pt-10 px-20 ">
-        <h1 className="text-2xl font-bold text-amber-700 sm:text-4xl">
+        <h1 className="text-2xl font-bold text-gray-700 sm:text-4xl">
           Why you need to contact us? -
         </h1>
       </div>

@@ -32,7 +32,7 @@ function CountdownTimer() {
   }, []);
 
   return (
-    <div className="text-center font-semibold text-yellow-100 flex justify-center">
+    <div className="text-center font-semibold text-white flex justify-center">
       {countdown}
       <p className='ml-2'>left!</p>
     </div>

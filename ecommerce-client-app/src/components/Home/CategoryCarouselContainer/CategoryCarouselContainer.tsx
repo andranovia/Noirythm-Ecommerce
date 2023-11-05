@@ -9,7 +9,7 @@ export default function CategoryCarouselContainer() {
       id: 'All',
       image: 'https://img.icons8.com/material-outlined/24/show-all-views.png',
       title: 'See all',
-      description: 'Where you can find all the things',
+      description: 'Find all the things',
     },
     {
       id: 'cloth',
@@ -32,12 +32,13 @@ export default function CategoryCarouselContainer() {
     },
   ];
   return (
-    <div className="sm:flex sm:justify-center rounded-md sm:w-[80rem]  sm:mx-auto overflow-hidden">
+    <div className="sm:flex sm:justify-center bg-white rounded-md sm:w-fit p-4 mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
       <div className="sm:grid sm:grid-cols-2 ">
-        <CarouselData />
-        <div className="flex flex-col justify-center sm:ml-20">
+      <div className="flex flex-col justify-center relative top-4">
           <CategoryCard categories={categories} />
         </div>
+        <CarouselData />
+       
       </div>
     </div>
   );

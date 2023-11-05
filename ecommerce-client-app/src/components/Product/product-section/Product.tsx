@@ -26,11 +26,11 @@ const Product: React.FC = () => {
               <div className="relative right-auto ">
                 <h1 className="text-2xl font-bold ml-7 z-20">Cloth product!</h1>
                 <div className=" rounded-lg p-4 flex  w-[25rem]  items-center justify-start z-0 sm:w-full ">
-                  <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-amber-900  ">
+                  <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-gray-900  ">
                     See more
                   </h1>
 
-                  <div className="bg-amber-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
+                  <div className="bg-gray-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
                     <CountdownTimer />
                   </div>  
                 </div>
@@ -43,13 +43,13 @@ const Product: React.FC = () => {
                   Trouser product!
                 </h1>
                 <div className=" rounded-lg p-4 flex  w-[25rem]  items-center justify-start z-0 sm:w-full ">
-                  <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-amber-900  ">
+                <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-gray-900  ">
                     See more
                   </h1>
 
-                  <div className="bg-amber-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
+                  <div className="bg-gray-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
                     <CountdownTimer />
-                  </div>
+                  </div> 
                 </div>
               </div>
               <TrouserProduct maxItems={maxItemsToShow} />
@@ -60,13 +60,13 @@ const Product: React.FC = () => {
                   Shoes product!
                 </h1>
                 <div className=" rounded-lg p-4 flex  w-[25rem]  items-center justify-start z-0 sm:w-full ">
-                  <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-amber-900  ">
+                <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-gray-900  ">
                     See more
                   </h1>
 
-                  <div className="bg-amber-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
+                  <div className="bg-gray-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
                     <CountdownTimer />
-                  </div>
+                  </div> 
                 </div>
               </div>
               <ShoesProduct maxItems={maxItemsToShow} />
