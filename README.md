@@ -7,6 +7,7 @@ This is an e-commerce web application built using Next.js as the client-side fra
 - Browse and search for products
 - Add products to the cart
 - Product detail information
+- Create, edit, and delete comment also give rating
 
 
 ## Tech Stack
