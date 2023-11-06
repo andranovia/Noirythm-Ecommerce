@@ -1,9 +1,11 @@
 <?php
 
+use illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductReviewController;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -35,5 +37,11 @@ Route::prefix('products')->group(function () {
 });
 
 
-
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 Route::get('/search', 'App\Http\Controllers\SearchController@search');
+
+
+Route::middleware('auth:sanctum')->get('/user', function(Request $request){
+    return $request->user();
+});
