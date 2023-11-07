@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\ClothProduct;
 use App\Models\TrouserProduct;
 use App\Models\ShoesProduct;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {

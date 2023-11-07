@@ -32,6 +32,7 @@
     "react-leaflet": "^4.2.1",
     "react-loader-spinner": "^5.4.5",
     "react-query": "^3.39.3",
+    "react-router-dom": "^6.18.0",
     "react-transition-group": "^4.4.5",
     "swiper": "^10.2.0",
     "swr": "^2.2.4",
