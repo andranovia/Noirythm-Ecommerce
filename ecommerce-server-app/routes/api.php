@@ -37,11 +37,11 @@ Route::prefix('products')->group(function () {
 });
 
 
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
 Route::get('/search', 'App\Http\Controllers\SearchController@search');
 
 
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function(Request $request){
     return $request->user();
 });

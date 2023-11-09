@@ -38,7 +38,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
         <h2 className="text-1xl font-semibold mb-2 max-h-40">
           {category.title}
         </h2>
-        <div className={`${isMobile ? 'hidden' : 'block'}`}>
+        <div className={`${isMobile ? 'hidden' : ''}`}>
           <p className="text-gray-700">{category.description}</p>
         </div>
       </div>
