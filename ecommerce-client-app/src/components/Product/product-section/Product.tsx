@@ -35,7 +35,7 @@ const Product: React.FC = () => {
                   </div>  
                 </div>
               </div>
-              <ClothProduct maxItems={maxItemsToShow} />
+              <ClothProduct maxItems={maxItemsToShow} className={''} desc={true}/>
             </section>
             <section className="mt-10">
               <div className="relative right-auto ">
@@ -52,7 +52,7 @@ const Product: React.FC = () => {
                   </div> 
                 </div>
               </div>
-              <TrouserProduct maxItems={maxItemsToShow} />
+              <TrouserProduct maxItems={maxItemsToShow} desc={true} className={''}/>
             </section>
             <section className="mt-10">
               <div className="relative right-auto ">
@@ -69,7 +69,7 @@ const Product: React.FC = () => {
                   </div> 
                 </div>
               </div>
-              <ShoesProduct maxItems={maxItemsToShow} />
+              <ShoesProduct maxItems={maxItemsToShow} desc={true} className={''}/>
             </section>
           </div>
         </div>

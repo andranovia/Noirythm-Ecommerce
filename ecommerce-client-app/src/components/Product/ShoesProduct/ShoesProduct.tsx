@@ -16,10 +16,12 @@ interface ProductItem {
 
 interface ShoesProductProps {
   maxItems?: number;
+  desc: boolean;
+  className : string | {} | null;
 }
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const ShoesProduct: React.FC<ShoesProductProps> = ({ maxItems }) => {
+const ShoesProduct: React.FC<ShoesProductProps> = ({ maxItems, desc, className }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true); 
   useEffect(() => {
@@ -42,7 +44,7 @@ const ShoesProduct: React.FC<ShoesProductProps> = ({ maxItems }) => {
 
   const displayedItems = maxItems === Infinity ? ProductItems : ProductItems.slice(0, maxItems);
 
-  return <ProductCard ProductItems={displayedItems} loading={loading} />;
+  return <ProductCard ProductItems={displayedItems} loading={loading} desc={desc} className={className}/>;
 };
 
 export default ShoesProduct;

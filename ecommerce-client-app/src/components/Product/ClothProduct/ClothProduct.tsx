@@ -12,14 +12,17 @@ interface ProductItem {
   product_price: number;
   product_description: string;
   id: number;
+
 }
 
 interface ClothProductProps {
   maxItems?: number;
+  className : string | {} | null;
+  desc: boolean;
 }
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const ClothProduct: React.FC<ClothProductProps> = ({ maxItems }) => {
+const ClothProduct: React.FC<ClothProductProps> = ({ maxItems, className, desc }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true); 
   useEffect(() => {
@@ -42,7 +45,8 @@ const ClothProduct: React.FC<ClothProductProps> = ({ maxItems }) => {
 
   const displayedItems = maxItems === Infinity ? ProductItems : ProductItems.slice(0, maxItems);
 
-  return <ProductItemCard ProductItems={displayedItems} loading={loading} />;
+  return (
+  <ProductItemCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
 };
 
 export default ClothProduct;

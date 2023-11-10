@@ -16,11 +16,15 @@ interface ProductItem {
 interface ProductCardProps {
   ProductItems: ProductItem[];
   loading: boolean;
+  className: string | {} | null;
+  desc: boolean;
 }
 
 const ProductCardComponent: React.FC<ProductCardProps> = ({
   ProductItems,
   loading,
+  className,
+  desc,
 }) => {
   return (
  
@@ -40,7 +44,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
               }}
               key={item.id}
             >
-              <ProductItemCard key={index} item={item} loading={loading} />
+              <ProductItemCard key={index} item={item} loading={loading} className={className} desc={desc}/>
             </Link>
           ))}
       

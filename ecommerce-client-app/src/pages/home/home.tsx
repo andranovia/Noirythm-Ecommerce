@@ -1,11 +1,9 @@
 import Footer from '@/components/Footer/Footer';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
-const CategoryCarouselContainer = dynamic(
-  () =>
-    import(
-      '@/components/Home/CategoryCarouselContainer/CategoryCarouselContainer'
-    )
+const CategoryContainer = dynamic(
+  () => import('@/components/Home/Category/CategoryContainer')
 );
 const HomeHero = dynamic(() => import('@/components/Home/Hero/HomeHero'));
 const Product = dynamic(
@@ -13,12 +11,28 @@ const Product = dynamic(
 );
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="bg-gray-100">
         <HomeHero />
 
-        <CategoryCarouselContainer />
+        <CategoryContainer isMobile={isMobile} />
         <Product />
       </div>
       <Footer />
