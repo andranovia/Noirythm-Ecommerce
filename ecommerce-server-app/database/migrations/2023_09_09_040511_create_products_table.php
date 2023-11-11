@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);
             $table->string('product_image');
+            $table->string('promo_text')->nullable(); 
             $table->timestamps();
         });
          Schema::create('trouserProducts', function (Blueprint $table) {
@@ -25,6 +26,7 @@ class CreateProductsTable extends Migration
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);
             $table->string('product_image');
+            $table->string('promo_text')->nullable(); 
             $table->timestamps();
         });
         Schema::create('shoesProducts', function (Blueprint $table) {
@@ -33,6 +35,7 @@ class CreateProductsTable extends Migration
             $table->text('product_description');
             $table->decimal('product_price', 8, 2);
             $table->string('product_image');
+            $table->string('promo_text')->nullable(); 
             $table->timestamps();
         });
     }

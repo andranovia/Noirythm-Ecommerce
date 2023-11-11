@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductPromoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,7 +35,10 @@ Route::prefix('products')->group(function () {
     Route::get('reviews/UserComment/{id}', [ProductReviewController::class, 'showUserComment']);
     
     Route::put('reviews/editComment/{id}', [ProductReviewController::class, 'updateComment']);
-    Route::post('reviews/{id}', [ProductReviewController::class, 'store']);;
+    Route::post('reviews/{id}', [ProductReviewController::class, 'store']);
+
+    Route::get('productPromo', [ProductPromoController::class, 'ProductPromo']);
+
 });
 
 
@@ -45,3 +50,4 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function(Request $request){
     return $request->user();
 });
+

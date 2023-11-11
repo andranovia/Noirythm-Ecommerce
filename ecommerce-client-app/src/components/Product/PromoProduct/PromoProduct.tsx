@@ -16,21 +16,21 @@ interface ProductItem {
 
 }
 
-interface ClothProductProps {
+interface PromoProductProps {
   maxItems?: number;
   className : string | {} | null;
   desc: boolean;
 }
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const ClothProduct: React.FC<ClothProductProps> = ({ maxItems, className, desc }) => {
+const PromoProduct: React.FC<PromoProductProps> = ({ maxItems, className, desc }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true); 
   useEffect(() => {
     const fetchProductItems = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get('/api/products/cloth');
+        const response = await axiosInstance.get('/api/products/productPromo');
         setProductItems(response.data);
       } catch (error) {
         console.error('Error fetching clothing items:', error);
@@ -50,4 +50,4 @@ const ClothProduct: React.FC<ClothProductProps> = ({ maxItems, className, desc }
   <ProductItemCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
 };
 
-export default ClothProduct;
+export default PromoProduct;

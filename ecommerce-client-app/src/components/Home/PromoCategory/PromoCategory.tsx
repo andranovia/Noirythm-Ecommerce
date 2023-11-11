@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
-import PromoProduct from '../PromoProduct/PromoProduct';
+import Link from 'next/link';
+import PromoProductCategory from './PromoProductCategory';
 
 const PromoCategory = ({isMobile}:any) => {
   return (
@@ -16,8 +17,9 @@ const PromoCategory = ({isMobile}:any) => {
         />
         <div className='flex justify-start mx-4 w-full items-center'>
           
-          <PromoProduct isMobile={isMobile}/>
+          <PromoProductCategory isMobile={isMobile}/>
           <div className='relative bottom-3 -left-2 '>
+          <Link href={'/promo/ProductPromo'}>
           <Image
             src={'https://img.icons8.com/metro/26/forward.png'}
             alt=""
@@ -25,6 +27,7 @@ const PromoCategory = ({isMobile}:any) => {
             height={30}
             className='bg-white rounded-full w-8 p-2 hover:w-9 hover:opacity-80 opacity-80 shadow-Aesthetic'
           />
+          </Link>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ interface ProductItem {
   product_price: number;
   product_description: string;
   id: number;
+  promo_text:string;
 }
 
 interface ProductCardProps {
@@ -29,7 +30,7 @@ const ProductCardComponent: React.FC<ProductCardProps> = ({
   return (
  
     <div className="flex justify-center">
-      <div className="grid gap-[3vh] grid-cols-2 md:grid-cols-4 lg:grid-cols-4 ">
+      <div className="grid auto-rows-fr gap-[3vh] grid-cols-2 md:grid-cols-4 lg:grid-cols-4 ">
       
           {ProductItems.map((item, index) => (
             <Link

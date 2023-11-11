@@ -1,7 +1,8 @@
-import ClothProduct from '@/components/Product/ClothProduct/ClothProduct';
+
+import PromoProduct from '@/components/Product/PromoProduct/PromoProduct';
 import React from 'react';
 
-const PopularProduct = ({isMobile}:any) => {
+const PromoProductCategory = ({isMobile}:any) => {
 
 
 
@@ -16,7 +17,7 @@ const PopularProduct = ({isMobile}:any) => {
 
   return (
     <div className="">
-      <ClothProduct
+      <PromoProduct
         maxItems={maxItemsToShow}
         className={'h-[11vh] w-[11vh]  mb-5'}
         desc={false}
@@ -25,4 +26,4 @@ const PopularProduct = ({isMobile}:any) => {
   );
 };
 
-export default PopularProduct;
+export default PromoProductCategory;
