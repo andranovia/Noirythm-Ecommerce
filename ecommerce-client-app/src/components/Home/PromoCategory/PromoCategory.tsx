@@ -6,14 +6,14 @@ import PromoProductCategory from './PromoProductCategory';
 const PromoCategory = ({isMobile}:any) => {
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-bold mb-4">Current Promo</h2>
+      <h2 className="text-2xl font-bold  m-4">Current Promo</h2>
       <div className="flex flex-col gap-6 rounded-lg shadow-Aesthetic">
         <Image
-          src={'/img/slider/slide1.webp'}
+          src={'/img/promo/promo1.webp'}
           alt="Promo"
-          height={320}
-          width={320}
-          className="rounded-md w-full"
+          height={420}
+          width={420}
+          className="rounded-md w-full sm:w-[35rem]"
         />
         <div className='flex justify-start mx-4 w-full items-center'>
           

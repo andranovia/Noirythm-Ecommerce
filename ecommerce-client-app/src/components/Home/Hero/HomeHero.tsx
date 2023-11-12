@@ -9,7 +9,7 @@ const slider = [
     url: '/img/slider/slide2.webp', 
   },
   {
-    url: '/img/slider/slide1.webp',    
+    url: '/img/slider/slide3.webp',    
   },
 
 ];

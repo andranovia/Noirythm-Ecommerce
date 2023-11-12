@@ -5,6 +5,7 @@ interface ProductItem {
   product_name: string;
   product_image: string;
   product_price: number;
+  promo_text: string;
 }
 
 interface NavbarSearchResultComponentProps {
@@ -28,8 +29,8 @@ const NavbarResult: React.FC<
       <div className="text-start ml-3   ">
         <h4 className="text-lg font-light text-black">{result.product_name}</h4>
         <p className="text-base font-bold text-black">{result.product_price}</p>
-        <div className="bg-amber-800 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center">
-          <h2 className="font-semibold text-yellow-100">70% price</h2>
+        <div className={result.promo_text ? `bg-gray-800 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`: ``}>
+          <h2 className="font-semibold text-white">{result.promo_text}</h2>
         </div>
       </div>
     </div>

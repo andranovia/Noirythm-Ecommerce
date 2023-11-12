@@ -11,6 +11,7 @@ interface ProductItem {
   product_price: number;
   product_description: string;
   id: number;
+  promo_text: string;
 }
 
 const NavbarSearch = () => {

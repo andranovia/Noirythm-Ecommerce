@@ -7,7 +7,7 @@ const CategoryContainer = dynamic(
 );
 const HomeHero = dynamic(() => import('@/components/Home/Hero/HomeHero'));
 const Product = dynamic(
-  () => import('@/components/Product/product-section/Product')
+  () => import('@/components/Product/Product')
 );
 
 export default function Home() {

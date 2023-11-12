@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
 import dynamic from 'next/dynamic';
 
-const ProductItemCard = dynamic(() => import('../product-section/ProductCard'));
+const ProductCard = dynamic(() => import('../ProductCard'));
 
 
 
@@ -11,7 +11,7 @@ interface ProductItem {
   product_image: string;
   product_price: number;
   product_description: string;
-  id: number;
+  id: string;
   promo_text: string;
 
 }
@@ -47,7 +47,7 @@ const ClothProduct: React.FC<ClothProductProps> = ({ maxItems, className, desc }
   const displayedItems = maxItems === Infinity ? ProductItems : ProductItems.slice(0, maxItems);
 
   return (
-  <ProductItemCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
+  <ProductCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
 };
 
 export default ClothProduct;
