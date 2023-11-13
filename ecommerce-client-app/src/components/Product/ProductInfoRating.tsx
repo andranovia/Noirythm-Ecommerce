@@ -11,15 +11,15 @@ import Image from 'next/image';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const { ratings, setRating } = useRating();
+  const { ratings, setRating, reviewText, setReviewText } = useRating();
   const [commentModal, setCommentModal] = useState(false);
-  const [reviewText, setReviewText] = useState<string[]>([]);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedCommentIndex, setSelectedCommentIndex] = useState<number | null>(null);
+  const [selectedCommentIndex, setSelectedCommentIndex] = useState<
+    number | null
+  >(null);
   const [commentId, setCommentId] = useState<number[]>([]);
 
-  
   useEffect(() => {
     axiosInstance
       .get(`/api/products/reviews/UserComment/${id}`)
@@ -65,15 +65,27 @@ export default function ProductInfoRating({ id }: any) {
   const productRating = ratings[id] || 0;
   const roundedRating = Math.round(productRating);
 
-
+  const childData = {
+    reviewText,
+    setShowMore,
+    editing: {
+      isEditing,
+      setIsEditing,
+      selectedCommentIndex,
+    },
+    comments: {
+      commentId,
+      handleEditComment,
+    },
+  };
   return (
     <>
       <div className={reviewText.length > 0 ? `mb-[18rem]` : `mb-[6rem]`}>
         <div className="flex justify-start gap-2 mt-4">
-        {isValidArrayLength(roundedRating) &&
-          [...Array(roundedRating)].map((_, index) => (
-            <FaStar key={index} size={20} color="yellow" />
-          ))}
+          {isValidArrayLength(roundedRating) &&
+            [...Array(roundedRating)].map((_, index) => (
+              <FaStar key={index} size={20} color="yellow" />
+            ))}
         </div>
         <div className="my-6">
           <p className="w-fit text-sm font-bold ">
@@ -120,14 +132,13 @@ export default function ProductInfoRating({ id }: any) {
                         </button>
                       </div>
                     </div>
-                    
+
                     {isEditing && selectedCommentIndex === index ? (
                       <ProductInfoEditComment
                         commentId={commentId[index]}
                         review={review}
                         setIsEditing={setIsEditing}
                       />
-                      
                     ) : null}
                   </>
                 ))}
@@ -170,10 +181,7 @@ export default function ProductInfoRating({ id }: any) {
 
           {showMore && (
             <>
-              <ProductInfoRatingCommentModal
-                reviewText={reviewText}
-                setShowMore={setShowMore}
-              />
+              <ProductInfoRatingCommentModal data={childData} />
             </>
           )}
         </div>
