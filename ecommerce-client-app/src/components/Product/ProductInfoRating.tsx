@@ -1,55 +1,26 @@
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useRating } from '../context/ratingContext';
 import ProductInfoRatingInput from './ProductInfoRatingInput';
 import ProductInfoRatingCommentModal from './ProductInfoRatingCommentModal';
-import axiosInstance from '@/utils/api';
 import ProductInfoEditComment from './ProductInfoEditComment';
 import Image from 'next/image';
+import { useProductRating } from '@/hooks/useProductRating';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const { ratings, setRating, reviewText, setReviewText } = useRating();
+  const { ratings, reviewText} = useRating();
   const [commentModal, setCommentModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedCommentIndex, setSelectedCommentIndex] = useState<
     number | null
   >(null);
-  const [commentId, setCommentId] = useState<number[]>([]);
 
-  useEffect(() => {
-    axiosInstance
-      .get(`/api/products/reviews/UserComment/${id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          setRating(id, response.data.rating);
-          if (Array.isArray(response.data.reviewText)) {
-            setReviewText(response.data.reviewText);
-          } else {
-            setReviewText([response.data.reviewText]);
-          }
-          setCommentId(response.data.commentId);
-          console.log(commentId);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching average rating and reviewText', error);
-      });
-  }, [id]);
+  const { commentId, setCommentId, handleDeleteComments } = useProductRating(id);
 
-  const handleDeleteComments = (commentId: number) => {
-    axiosInstance
-      .delete(`api/products/reviews/DeleteUserComment/${commentId}`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error('Error deleting rating and reviewText', error);
-      });
-  };
 
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);

@@ -15,6 +15,7 @@ export const RatingProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [commentId, setCommentId] = useState<number[]>([]);
+  
 
   const setRating = (productId: string, newRating: number) => {
     setRatings((prevRatings) => ({
