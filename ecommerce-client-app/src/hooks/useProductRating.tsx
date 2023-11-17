@@ -3,6 +3,7 @@ import axiosInstance from '@/utils/api';
 import { useRating } from '@/components/context/ratingContext';
 
 export const useProductRating = (id: any) => {
+
   const { setRating, setReviewText } = useRating();
   const [commentId, setCommentId] = useState<number[]>([]);
 
@@ -36,9 +37,51 @@ export const useProductRating = (id: any) => {
         console.error('Error deleting rating and reviewText', error);
       });
   };
+
+  const [userRating, setUserRating] = useState(0);
+  const [reviewUserText, setReviewUserText] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+
+   const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const data = {
+      rating: userRating,
+      reviewText: reviewUserText,
+    };
+
+    try {
+      const response = await axiosInstance.post(
+        `/api/products/reviews/${id}`,
+        data
+      );
+
+      if (response.status === 201) {
+        console.log('Review has been submitted successfully.');
+        setUserRating(0);
+        setReviewUserText('');
+        setErrorMessage('');
+      } else {
+        console.log('Review submission was not successful.');
+        setErrorMessage('Review submission was not successful.');
+      }
+    } catch (error: any) {
+      console.error('Error submitting review', error);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('Error submitting review. Please try again later.');
+      }
+    }
+  };
   
 
 
 
-  return { commentId, setCommentId, handleDeleteComments };
+  return { commentId, setCommentId, handleDeleteComments, submitHandler, errorMessage, reviewUserText, setReviewUserText, userRating, setUserRating };
 };
