@@ -7,7 +7,9 @@ export const getUser = async () => {
     const response = await axiosInstance.get(`/api/user`, {
       withCredentials: true,
     });
+    console.log(response.data)
     return response.data;
+
   } catch (error) {
     console.error('Error fetching user:', error);
     throw error;

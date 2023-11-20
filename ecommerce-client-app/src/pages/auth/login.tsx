@@ -18,15 +18,6 @@ function Login() {
 
 
 
-  useEffect(() => {
-    if (
-      localStorage.getItem('token') != '' &&
-      localStorage.getItem('token') != null
-    ) {
-      router.push('/');
-    }
-    console.log(localStorage.getItem('token'));
-  }, []);
 
 
   const loginAction = (e: React.FormEvent) => {
@@ -39,10 +30,9 @@ function Login() {
     };
     axiosInstance
       .post('/api/login', payload)
-      .then((r) => {
+      .then(({ data }) => {
         setIsSubmitting(false);
-        localStorage.setItem('token', r.data.token);
-        router.push('/');
+        console.log(data)
       })
       .catch((e) => {
         setIsSubmitting(false);

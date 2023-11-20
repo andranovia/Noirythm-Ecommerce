@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { getUser } from '@/components/utils/auth';
 
 
-
-
-
 const Profile = () => {
     const [user, setUser] = useState(null);
 
