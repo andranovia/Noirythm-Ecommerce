@@ -16,10 +16,6 @@ function Login() {
   const [validationErrors, setValidationErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-
-
-
-
   const loginAction = (e: React.FormEvent) => {
     setValidationErrors({});
     e.preventDefault();
@@ -28,11 +24,20 @@ function Login() {
       email: email,
       password: password,
     };
+
     axiosInstance
       .post('/api/login', payload)
       .then(({ data }) => {
         setIsSubmitting(false);
-        console.log(data)
+        const accessToken = data.data.token;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            name: data.data.name,
+            email: data['email'],
+          })
+        );
       })
       .catch((e) => {
         setIsSubmitting(false);
@@ -106,7 +111,10 @@ function Login() {
               Login
             </ButtonPrimary>
             <p className="text-center mt-8">
-              Don't have account? <Link className='text-green-500' href="/register">Register here</Link>
+              Don't have account?{' '}
+              <Link className="text-green-500" href="/register">
+                Register here
+              </Link>
             </p>
           </div>
         </form>

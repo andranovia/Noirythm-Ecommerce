@@ -7,7 +7,7 @@ import ProductInfoRatingInput from './ProductInfoRatingInput';
 import ProductInfoRatingCommentModal from './ProductInfoRatingCommentModal';
 import ProductInfoEditComment from './ProductInfoEditComment';
 import Image from 'next/image';
-import { useProductRating } from '@/hooks/useProductRating';
+import { useProductRating } from '@/components/hooks/useProductRating';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);

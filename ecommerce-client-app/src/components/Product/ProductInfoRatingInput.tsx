@@ -1,4 +1,4 @@
-import { useProductRating } from '@/hooks/useProductRating';
+import { useProductRating } from '@/components/hooks/useProductRating';
 import React from 'react';
 import { FaStar } from 'react-icons/fa';
 
