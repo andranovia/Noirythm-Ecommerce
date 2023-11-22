@@ -38,6 +38,7 @@ function Login() {
             email: data['email'],
           })
         );
+        router.push('/')
       })
       .catch((e) => {
         setIsSubmitting(false);
