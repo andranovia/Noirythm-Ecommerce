@@ -45,6 +45,11 @@ Route::get('/search', 'App\Http\Controllers\SearchController@search');
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout'])->name('logout');
+
+
+
 Route::get('user', function () {
 
     return auth()->user();

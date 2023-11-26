@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
@@ -21,7 +22,7 @@ class AuthController extends Controller
             'confirm_password' => 'required|same:password',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'problem found',
@@ -31,9 +32,9 @@ class AuthController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        
+
         $success['token'] = $user->createToken('auth_token')->plainTextToken;
-        $succes['name'] = $user->name; 
+        $succes['name'] = $user->name;
 
         return response()->json([
             'success' => true,
@@ -62,5 +63,15 @@ class AuthController extends Controller
                 'data' => null,
             ]);
         }
+    }
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->currentAccessToken()->delete();
+        $response = [
+            'success'   => true,
+            'message'   => 'Berhasil Logout'
+        ];
+        return response($response, 200);
     }
 }
