@@ -1,64 +1,38 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import AuthCard from '@/components/Auth/AuthCard';
 import ApplicationLogo from '@/components/logo/AplicationLogo';
 import Link from 'next/link';
 import AuthLabel from '@/components/Auth/AuthLabel';
 import AuthInput from '@/components/Auth/AuthInput';
 import AuthInputError from '@/components/Auth/AuthInputError';
-import axiosInstance from '@/utils/api';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
-
-interface ValidationErrors {
-  name?: string[];
-  email?: string[];
-  password?: string[];
-}
+import { useAuth } from '@/components/hooks/useAuth';
 
 function Register() {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
-    {}
-  );
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const {
+    registerAction,
+    name,
+    setName,
+    validationErrors,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    confirmPassword,
+    setConfirmPassword,
+    isSubmitting,
+  } = useAuth();
 
-  const registerAction = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    let payload = {
-      name: name,
-      email: email,
-      password: password,
-      confirm_password: confirmPassword,
-    };
-    axiosInstance
-      .post('/api/register', payload)
-      .then((r) => {
-        setIsSubmitting(false);
-        localStorage.setItem('token', r.data.token);
-        router.push('/');
-      })
-      .catch((e) => {
-        setIsSubmitting(false);
-        if (e.response.data.errors != undefined) {
-          setValidationErrors(e.response.data.errors);
-        }
-      });
-  };
 
   return (
     <div>
       <AuthCard
         logo={
           <Link href="/">
-            <div className='bg-white  rounded-full px-10 flex justify-center items-center'>
-            <ApplicationLogo className="w-16 h-14 rounded-full p-2  fill-current text-gray-500 " />
-            <h2 className='text-2xl font-bold text-gray-800'>Noirythm</h2>
+            <div className="bg-white  rounded-full px-10 flex justify-center items-center">
+              <ApplicationLogo className="w-16 h-14 rounded-full p-2  fill-current text-gray-500 " />
+              <h2 className="text-2xl font-bold text-gray-800">Noirythm</h2>
             </div>
           </Link>
         }
@@ -149,7 +123,10 @@ function Register() {
               Register Now
             </ButtonPrimary>
             <p className="text-center mt-8">
-              Have already an account ? <Link className='text-green-500' href="/auth/login">Login here</Link>
+              Have already an account ?{' '}
+              <Link className="text-green-500" href="/auth/login">
+                Login here
+              </Link>
             </p>
           </div>
         </form>

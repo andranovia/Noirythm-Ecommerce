@@ -44,22 +44,21 @@ const UserProfile: React.FC = () => {
 
   return (
     <div className="max-w-screen min-h-screen">
-        <Link href={'/'}>
-      <div className="flex justify-start items-center gap-2 my-5 mx-6">
-        <Image
-          src={
-            'https://img.icons8.com/ios-filled/50/4D4D4D/long-arrow-left.png'
-          }
-          alt="user-profile"
-          height={60}
-          width={60}
-          className="w-6 mt-1"
-        />
-        <h1 className=" font-bold text-[1.2rem] text-gray-700">
-          change profile
-        </h1>
-      
-      </div>
+      <Link href={'/'}>
+        <div className="flex justify-start items-center gap-2 my-5 mx-6">
+          <Image
+            src={
+              'https://img.icons8.com/ios-filled/50/4D4D4D/long-arrow-left.png'
+            }
+            alt="user-profile"
+            height={60}
+            width={60}
+            className="w-6 mt-1"
+          />
+          <h1 className=" font-bold text-[1.2rem] text-gray-700">
+            change profile
+          </h1>
+        </div>
       </Link>
       <div className="m-10 mt-16">
         <div className=" mb-10">

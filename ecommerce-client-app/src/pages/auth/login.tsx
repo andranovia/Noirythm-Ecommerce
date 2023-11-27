@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Link from 'next/link';
 import axiosInstance from '@/utils/api';
 import AuthCard from '@/components/Auth/AuthCard';
@@ -8,48 +7,18 @@ import AuthInputError from '@/components/Auth/AuthInputError';
 import AuthLabel from '@/components/Auth/AuthLabel';
 import AuthInput from '@/components/Auth/AuthInput';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
+import { useAuth } from '@/components/hooks/useAuth';
 
 function Login() {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [validationErrors, setValidationErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const loginAction = (e: React.FormEvent) => {
-    setValidationErrors({});
-    e.preventDefault();
-    setIsSubmitting(true);
-    let payload = {
-      email: email,
-      password: password,
-    };
-
-    axiosInstance
-      .post('/api/login', payload)
-      .then(({ data }) => {
-        setIsSubmitting(false);
-        const accessToken = data.data.token;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            name: data.data.name,
-            email: data['email'],
-          })
-        );
-        router.push('/')
-      })
-      .catch((e) => {
-        setIsSubmitting(false);
-        if (e.response.data.errors != undefined) {
-          setValidationErrors(e.response.data.errors);
-        }
-        if (e.response.data.error != undefined) {
-          setValidationErrors(e.response.data.error);
-        }
-      });
-  };
+  const {
+    loginAction,
+    validationErrors,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    isSubmitting,
+  } = useAuth();
 
   return (
     <div>
