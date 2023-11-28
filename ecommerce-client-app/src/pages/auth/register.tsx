@@ -24,7 +24,7 @@ function Register() {
     isSubmitting,
   } = useAuth();
 
-
+console.log(validationErrors.name)
   return (
     <div>
       <AuthCard

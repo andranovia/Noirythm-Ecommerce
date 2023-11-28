@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-
+import { useAuth } from '../hooks/useAuth';
 
 const NavbarDropdown = dynamic(() => import('./NavbarDropdown'));
 const NavbarSearch = dynamic(() => import('./NavbarSearch'));
@@ -14,7 +14,7 @@ const NavbarSearch = dynamic(() => import('./NavbarSearch'));
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const { user } = useAuth();
 
   const handleLogoDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -264,7 +264,7 @@ const Navbar: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="mr-10 flex items-center justify-center md:ml-6  ">
+            <div className=" flex items-center justify-center md:ml-6  ">
               <button
                 className="pl-3 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 flex justify-center sm:mr-10"
                 aria-label="Notifications"
@@ -296,17 +296,30 @@ const Navbar: React.FC = () => {
                   </svg>
                 )}
               </button>
-            
+            </div>
+            <div className="flex justify-center items-center w-fit gap-4 ">
               <Link href="/cart/cartPage">
-                <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
+                <button className="p-1 mb-2 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                   <Image
                     src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
-                    width={20}
+                    width={25}
                     height={20}
                     alt=""
                   />
                 </button>
               </Link>
+              {user && (
+                <Link href="/profile/UserProfile">
+                  <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
+                    <Image
+                      src="https://img.icons8.com/ios/50/user-male-circle--v1.png"
+                      width={25}
+                      height={20}
+                      alt=""
+                    />
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>

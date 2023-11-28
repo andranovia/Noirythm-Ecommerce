@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { getUser } from '@/components/utils/auth';
+import React from 'react';
 import Image from 'next/image';
 import Avatar from '@/components/User/Avatar';
 import AvatarInfoBar from '@/components/User/AvatarInfoBar';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import Link from 'next/link';
-
-interface User {
-  name: string;
-  email: string;
-  username: string;
-  bio: string;
-  id: any;
-}
+import { useAuth } from '@/components/hooks/useAuth';
 
 const UserProfile: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const { logoutAction, user } = useAuth();
+
+
   const maxLength = 10;
 
   const truncatedEmail =
@@ -25,22 +19,7 @@ const UserProfile: React.FC = () => {
         : user.email
       : 'Loading...';
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const accessToken = localStorage.getItem('accessToken');
-        if (accessToken) {
-          const userData: User = await getUser(accessToken);
-          setUser(userData);
-        } else {
-        }
-      } catch (error) {
-        console.error('Error fetching user:', error);
-      }
-    };
-
-    fetchUser();
-  }, []);
+  
 
   return (
     <div className="max-w-screen min-h-screen">
@@ -111,7 +90,7 @@ const UserProfile: React.FC = () => {
                 info={'email'}
               />
             </div>
-            <ButtonPrimary>Log out</ButtonPrimary>
+            <ButtonPrimary onClick={logoutAction}>Log out</ButtonPrimary>
           </div>
         </div>
       </div>

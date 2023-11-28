@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import axiosInstance from '@/utils/api';
 import AuthCard from '@/components/Auth/AuthCard';
 import ApplicationLogo from '@/components/logo/AplicationLogo';
 import AuthInputError from '@/components/Auth/AuthInputError';
@@ -57,6 +56,12 @@ function Login() {
               }}
             />
           </div>
+          {validationErrors.email != undefined && (
+              <AuthInputError
+                messages={validationErrors.email}
+                className="mt-2"
+              />
+            )}
           <div className="mb-3">
             <AuthLabel htmlFor="password" className="form-label">
               Password
@@ -71,6 +76,12 @@ function Login() {
                 setPassword(e.target.value);
               }}
             />
+             {validationErrors.password != undefined && (
+              <AuthInputError
+                messages={validationErrors.password}
+                className="mt-2"
+              />
+            )}
           </div>
           <div className="d-grid gap-2">
             <ButtonPrimary
@@ -82,7 +93,7 @@ function Login() {
             </ButtonPrimary>
             <p className="text-center mt-8">
               Don't have account?{' '}
-              <Link className="text-green-500" href="/register">
+              <Link className="text-green-500" href="/auth/register">
                 Register here
               </Link>
             </p>

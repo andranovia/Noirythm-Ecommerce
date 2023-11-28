@@ -78,15 +78,16 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({
           <h2 className="font-semibold text-white">{item.promo_text}</h2>
         </div>
         <div className="flex justify-start gap-2 mt-4">
-        {isValidArrayLength(roundedRating) &&
-          [...Array(roundedRating)].map((_, index) => (
-            <FaStar key={index} size={20} color="yellow" />
-          ))}
-        </div>
-        <div className="my-6">
-          <p className="w-fit text-sm font-bold ">
-            average rating is {roundedRating} star
-          </p>
+          {isValidArrayLength(roundedRating) && (
+            <>
+              {[...Array(roundedRating)].map((_, index) => (
+                <FaStar key={index} size={15} color="yellow" />
+              ))}
+              {[...Array(5 - roundedRating)].map((_, index) => (
+                <FaStar key={index + roundedRating} size={15} color="grey" />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

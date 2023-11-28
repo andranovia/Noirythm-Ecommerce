@@ -26,7 +26,7 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'problem found',
-                'data' => $validator->errors()
+                'errors' => $validator->errors(),
             ]);
         }
         $input = $request->all();
@@ -45,6 +45,11 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
             $success['token'] = $auth->createToken('auth_token')->plainTextToken;
@@ -60,10 +65,12 @@ class AuthController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Cek email dan password lagi',
-                'data' => null,
+               'errors' => $validator->errors(),
             ]);
         }
     }
+
+    
     public function logout(Request $request)
     {
         $user = $request->user();
