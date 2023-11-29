@@ -37,7 +37,7 @@ function Login() {
             loginAction(e);
           }}
         >
-          {Object.keys(validationErrors).length != 0 && (
+          {Object?.keys(validationErrors).length != 0 && (
             <AuthInputError messages={validationErrors} className="mt-2" />
           )}
 
@@ -57,11 +57,11 @@ function Login() {
             />
           </div>
           {validationErrors.email != undefined && (
-              <AuthInputError
-                messages={validationErrors.email}
-                className="mt-2"
-              />
-            )}
+            <AuthInputError
+              messages={validationErrors.email}
+              className="mt-2"
+            />
+          )}
           <div className="mb-3">
             <AuthLabel htmlFor="password" className="form-label">
               Password
@@ -76,7 +76,7 @@ function Login() {
                 setPassword(e.target.value);
               }}
             />
-             {validationErrors.password != undefined && (
+            {validationErrors.password != undefined && (
               <AuthInputError
                 messages={validationErrors.password}
                 className="mt-2"

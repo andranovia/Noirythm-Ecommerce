@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import { useAuth } from '../hooks/useAuth';
+import ButtonPrimary from '../button/ButtonPrimary';
+import ButtonSecondary from '../button/ButtonSecondary';
 
 const NavbarDropdown = dynamic(() => import('./NavbarDropdown'));
 const NavbarSearch = dynamic(() => import('./NavbarSearch'));
@@ -107,6 +109,57 @@ const Navbar: React.FC = () => {
               </div>
 
               <div className="h-full overflow-y-auto">
+                {user ? (
+                  <>
+                    <div className="m-4 flex justify-between">
+                      <div className="flex justify-center items-center gap-4">
+                        <Image
+                          src="https://img.icons8.com/ios/50/user-male-circle--v1.png"
+                          width={40}
+                          height={40}
+                          alt=""
+                        />
+                        <h1 className="font-bold">{user.name}</h1>
+                      </div>
+                      <Link href={'/profile/UserProfile'}>
+                        <div className="flex justify-start items-center mr-2 ">
+                          <Image
+                            src="https://img.icons8.com/ios/50/settings--v1.png"
+                            width={20}
+                            height={20}
+                            alt=""
+                          />
+                        </div>
+                      </Link>
+                    </div>
+                    <Link href={'/cart/cartPage'}>
+                      <div className="flex flex-col justify-center m-4">
+                        <ButtonSecondary>
+                          <div className="flex justify-center items-center gap-2">
+                            <Image
+                              src="https://img.icons8.com/ios/50/shopping-cart.png"
+                              width={20}
+                              height={20}
+                              alt=""
+                            />
+                            <h2 className="font-semibold ">Your Cart</h2>
+                          </div>
+                        </ButtonSecondary>
+                      </div>
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <div className="mx-4 my-6">
+                      <div className="flex flex-col justify-center gap-4">
+                        <div className="flex justify-center gap-4">
+                          <ButtonPrimary>Login</ButtonPrimary>
+                          <ButtonSecondary>Register</ButtonSecondary>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
                 <nav className="px-2 ">
                   <Link
                     href="/"
@@ -253,7 +306,7 @@ const Navbar: React.FC = () => {
             </Link>
           )}
 
-          <div className="flex-1 px-4 flex justify-between">
+          <div className="flex-1 px-4 flex justify-between items-center">
             <div className="flex-1 flex">
               <div className="w-full flex md:ml-0">
                 <label htmlFor="search_field" className="sr-only ">
@@ -265,10 +318,7 @@ const Navbar: React.FC = () => {
               </div>
             </div>
             <div className=" flex items-center justify-center md:ml-6  ">
-              <button
-                className="pl-3 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 flex justify-center sm:mr-10"
-                aria-label="Notifications"
-              >
+              <button className="pl-3 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 flex justify-center sm:mr-10">
                 {!isMobile && (
                   <h2 className="font-semibold text-1xl text-black ">
                     Categories
@@ -297,7 +347,7 @@ const Navbar: React.FC = () => {
                 )}
               </button>
             </div>
-            <div className="flex justify-center items-center w-fit gap-4 ">
+            <div className="flex justify-start items-center w-fit mr-4 relative -left-4 gap-6 ">
               <Link href="/cart/cartPage">
                 <button className="p-1 mb-2 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                   <Image
@@ -308,7 +358,7 @@ const Navbar: React.FC = () => {
                   />
                 </button>
               </Link>
-              {user && (
+              {user ? (
                 <Link href="/profile/UserProfile">
                   <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                     <Image
@@ -319,6 +369,12 @@ const Navbar: React.FC = () => {
                     />
                   </button>
                 </Link>
+              ) : (
+                <>
+                <ButtonPrimary>
+                  Login
+                </ButtonPrimary>
+                </>
               )}
             </div>
           </div>

@@ -32,7 +32,9 @@ export default function Home() {
     <>
       <div className="bg-gray-100">
         <HomeHero />
-        {user ? null : <UserCheck />}
+        {isMobile && !user && <UserCheck />}
+
+
         <CategoryContainer isMobile={isMobile} />
         <Product />
       </div>
