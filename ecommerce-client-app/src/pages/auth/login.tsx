@@ -37,9 +37,10 @@ function Login() {
             loginAction(e);
           }}
         >
-          {Object?.keys(validationErrors).length != 0 && (
-            <AuthInputError messages={validationErrors} className="mt-2" />
-          )}
+        {validationErrors && Object.keys(validationErrors).length !== 0 && (
+  <AuthInputError messages={validationErrors} className="mt-2" />
+)}
+
 
           <div className="mb-3">
             <AuthLabel htmlFor="email" className="form-label">

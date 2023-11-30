@@ -34,7 +34,6 @@ export default function Home() {
         <HomeHero />
         {isMobile && !user && <UserCheck />}
 
-
         <CategoryContainer isMobile={isMobile} />
         <Product />
       </div>

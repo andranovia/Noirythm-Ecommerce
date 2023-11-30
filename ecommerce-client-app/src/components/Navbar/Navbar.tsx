@@ -371,9 +371,11 @@ const Navbar: React.FC = () => {
                 </Link>
               ) : (
                 <>
+                <Link href={'/auth/login'}>
                 <ButtonPrimary>
                   Login
                 </ButtonPrimary>
+                </Link>
                 </>
               )}
             </div>
