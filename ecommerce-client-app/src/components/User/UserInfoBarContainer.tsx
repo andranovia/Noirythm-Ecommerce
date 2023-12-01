@@ -27,7 +27,7 @@ const UserInfoBarContainer = () => {
         />
       </div>
 
-      <div className="flex justify-start flex-col gap-6 w-[20rem] font-semibold  bg-gray-100 rounded-md p-4">
+      <div className="flex justify-start flex-col gap-6 w-[20rem] font-semibold  bg-gray-100 sm:bg-white rounded-md p-4">
         <AvatarInfoBar user={user} infoType={user?.name} info={'name'} />
         <AvatarInfoBar
           user={user}
@@ -47,7 +47,7 @@ const UserInfoBarContainer = () => {
           className="w-4"
         />
       </div>
-      <div className="flex mb-8 justify-start flex-col gap-6 w-[20rem] font-semibold  bg-gray-100 rounded-md p-4">
+      <div className="flex mb-8 justify-start flex-col gap-6 w-[20rem] font-semibold  bg-gray-100 sm:bg-white rounded-md p-4">
         <AvatarInfoBar user={user} infoType={user?.id} info={'user id'} />
         <AvatarInfoBar user={user} infoType={truncatedEmail} info={'email'} />
       </div>

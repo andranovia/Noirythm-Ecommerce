@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import Avatar from '@/components/User/Avatar';
-import AvatarInfoBar from '@/components/User/AvatarInfoBar';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import Link from 'next/link';
 import { useAuth } from '@/components/hooks/useAuth';
@@ -58,7 +57,7 @@ const UserProfile: React.FC = () => {
               </div>
             </Link>
           </div>
-          <div className="m-10 mt-16  sm:mt-24 sm:mx-32 sm:shadow-Aesthetic sm:p-4 rounded-md flex flex-col justify-between">
+          <div className="m-10 mt-16  sm:mt-24 sm:mx-32 sm:shadow-md sm:p-4 rounded-md flex flex-col justify-between">
             <div className=" mb-10 sm:mb-4 justify-center flex flex-col sm:flex-row sm:justify-start gap-2 items-center sm:w-fit ">
               <div className="sm:w-10 w-20">
                 <Avatar imgSrc="https://img.icons8.com/ios-filled/50/4D4D4D/user-male-circle.png" />
@@ -135,9 +134,9 @@ const UserProfile: React.FC = () => {
                 />
                 <h1 className="font-bold ">{user?.name}</h1>
               </div>
-              <div className="w-full shadow-Aesthetic h-[29rem] flex justify-start py-10  ">
+              <div className="w-full shadow-md h-fit flex justify-start py-10  ">
                 <div className="flex justify-start">
-                  <div className="mx-10 shadow-Aesthetic rounded-l">
+                  <div className="mx-10 shadow-md rounded-l">
                     <Image
                       src={
                         'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'
@@ -149,6 +148,12 @@ const UserProfile: React.FC = () => {
                     />
                     <div className="flex justify-center ml-4 ">
                       <ButtonSecondary>Change Profile Picture</ButtonSecondary>
+                    </div>
+                    <div className='mx-10 my-4 w-[12rem]'>
+                      <p className='text-[0.8rem] font-semibold text-gray-700'>
+                        Besar file: maksimum 10.000.000 bytes (10 Megabytes).
+                        Ekstensi file yang diperbolehkan: .JPG .JPEG .PNG
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col ">
