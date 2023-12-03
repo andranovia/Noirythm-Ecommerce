@@ -11,17 +11,8 @@ import UserInfoBarContainer from '@/components/User/UserInfoBarContainer';
 
 const UserProfile: React.FC = () => {
   const { logoutAction, user } = useAuth();
-
-  const maxLength = 10;
-
-  const truncatedEmail =
-    user && user.email
-      ? user.email.length > maxLength
-        ? `${user.email.substring(0, maxLength)}...`
-        : user.email
-      : 'Loading...';
-
   const [isMobile, setIsMobile] = React.useState(false);
+  
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
   };

@@ -3,7 +3,6 @@ import axiosInstance from '@/utils/api';
 import { useRating } from '@/components/context/ratingContext';
 
 export const useProductRating = (id: any) => {
-
   const { setRating, setReviewText } = useRating();
   const [commentId, setCommentId] = useState<number[]>([]);
 
@@ -19,7 +18,6 @@ export const useProductRating = (id: any) => {
             setReviewText([response.data.reviewText]);
           }
           setCommentId(response.data.commentId);
-          console.log(commentId);
         }
       })
       .catch((error) => {
@@ -42,8 +40,7 @@ export const useProductRating = (id: any) => {
   const [reviewUserText, setReviewUserText] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-
-   const submitHandler = async (e: React.FormEvent) => {
+  const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const data = {
@@ -79,9 +76,16 @@ export const useProductRating = (id: any) => {
       }
     }
   };
-  
 
-
-
-  return { commentId, setCommentId, handleDeleteComments, submitHandler, errorMessage, reviewUserText, setReviewUserText, userRating, setUserRating };
+  return {
+    commentId,
+    setCommentId,
+    handleDeleteComments,
+    submitHandler,
+    errorMessage,
+    reviewUserText,
+    setReviewUserText,
+    userRating,
+    setUserRating,
+  };
 };

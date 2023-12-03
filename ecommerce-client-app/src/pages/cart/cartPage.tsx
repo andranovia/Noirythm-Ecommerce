@@ -3,9 +3,14 @@ import React from 'react';
 import Cart from '../../components/cart/Cart';
 const Navbar = dynamic(() => import('@/components/Navbar/Navbar'));
 import { useCart } from '@/components/context/cartContext';
+import { useAuth } from '@/components/hooks/useAuth';
 
 const CartPage = () => {
+  const { user } = useAuth();
   const { state } = useCart();
+
+  const userCart = state.cart[user?.id] || [];
+
   return (
     <div>
       <Navbar />
@@ -14,7 +19,7 @@ const CartPage = () => {
           <div className="grid mx-10">
             <h1 className="text-2xl font-bold mb-15">Shopping Cart</h1>
 
-            {state.cart.length === 0 ? (
+            {userCart.length === 0 ? (
               <div className="my-10 rounded-md mx-auto shadow-ShadowCard p-10 ">
                 <div>
                   <p className="font-semibold text-2xl">

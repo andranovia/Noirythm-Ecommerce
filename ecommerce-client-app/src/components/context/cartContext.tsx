@@ -8,28 +8,39 @@ interface Product {
 }
 
 interface CartState {
-  cart: Product[];
+  cart: { [userId: string]: Product[] };
 }
 
 type CartAction =
-  | { type: 'ADD_TO_CART'; payload: Product }
-  | { type: 'REMOVE_FROM_CART'; payload: string };
+  | { type: 'ADD_TO_CART'; payload: { userId: string; product: Product } }
+  | { type: 'REMOVE_FROM_CART'; payload: { userId: string; productId: string } };
 
-const CartContext = createContext<
-  { state: CartState; dispatch: React.Dispatch<CartAction> } | undefined
->(undefined);
+const CartContext = createContext<{
+  state: CartState;
+  dispatch: React.Dispatch<CartAction>;
+} | undefined>(undefined);
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case 'ADD_TO_CART':
+      const { userId, product } = action.payload;
+      const updatedUserCart = [...(state.cart[userId] || []), product];
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        cart: {
+          ...state.cart,
+          [userId]: updatedUserCart,
+        },
       };
     case 'REMOVE_FROM_CART':
+      const { userId: removeUserId, productId } = action.payload;
+      const updatedCart = (state.cart[removeUserId] || []).filter(item => item.id !== productId);
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: {
+          ...state.cart,
+          [removeUserId]: updatedCart,
+        },
       };
     default:
       return state;
@@ -41,7 +52,7 @@ interface CartProviderProps {
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { cart: [] });
+  const [state, dispatch] = useReducer(cartReducer, { cart: {} });
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>
@@ -49,7 +60,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
 
 export const useCart = () => {
   const context = useContext(CartContext);

@@ -347,7 +347,7 @@ const Navbar: React.FC = () => {
                 )}
               </button>
             </div>
-            <div className="flex justify-start items-center w-fit mr-4 relative -left-4 gap-6 ">
+            <div className="flex justify-start items-center top-1 sm:top-0 w-fit mr-4 relative left-2 sm:-left-4 gap-4 sm:gap-6 ">
               <Link href="/cart/cartPage">
                 <button className="p-1 mb-2 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                   <Image

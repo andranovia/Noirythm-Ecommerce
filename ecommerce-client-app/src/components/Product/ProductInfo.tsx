@@ -8,6 +8,7 @@ import { useCart } from '@/components/context/cartContext';
 import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
+import { useAuth } from '../hooks/useAuth';
 
 interface ProductInfoProps {
   product: {
@@ -28,6 +29,7 @@ interface Product {
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
+  const { user } = useAuth();
   const { dispatch } = useCart();
   const router = useRouter();
   const {
@@ -65,7 +67,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       price: parseFloat(product_price as string),
     };
 
-    dispatch({ type: 'ADD_TO_CART', payload: itemToAdd });
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: { userId: user?.id, product: itemToAdd },
+    });
 
     console.log(router.query);
   };
