@@ -9,7 +9,6 @@ import ButtonPrimary from '@/components/button/ButtonPrimary';
 import { useAuth } from '@/components/hooks/useAuth';
 
 function Register() {
-
   const {
     registerAction,
     name,
@@ -24,7 +23,6 @@ function Register() {
     isSubmitting,
   } = useAuth();
 
-console.log(validationErrors.name)
   return (
     <div>
       <AuthCard
@@ -54,7 +52,7 @@ console.log(validationErrors.name)
                 setName(e.target.value);
               }}
             />
-            {validationErrors.name != undefined && (
+            {validationErrors && validationErrors.name != undefined && (
               <AuthInputError
                 messages={validationErrors.name}
                 className="mt-2"
@@ -75,7 +73,7 @@ console.log(validationErrors.name)
                 setEmail(e.target.value);
               }}
             />
-            {validationErrors.email != undefined && (
+            {validationErrors && validationErrors.email != undefined && (
               <AuthInputError
                 messages={validationErrors.email}
                 className="mt-2"
@@ -94,7 +92,7 @@ console.log(validationErrors.name)
               value={password}
               onChange={(e: any) => setPassword(e.target.value)}
             />
-            {validationErrors.password != undefined && (
+            {validationErrors && validationErrors.password != undefined && (
               <AuthInputError
                 messages={validationErrors.password}
                 className="mt-2"
