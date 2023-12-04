@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductPromoController;
 
 /*
@@ -48,7 +49,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::post('cart/add', [CartController::class, 'addToCart']);
 
 Route::get('user', function () {
 

@@ -63,6 +63,7 @@ export const useAuth = () => {
         setIsSubmitting(false);
         localStorage.setItem('token', r.data.token);
         setValidationErrors(r.data.errors);
+        router.push('/auth/login')
       })
       .catch(() => {
         setIsSubmitting(false);
