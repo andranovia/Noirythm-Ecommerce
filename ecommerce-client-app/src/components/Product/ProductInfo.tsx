@@ -4,7 +4,7 @@ import NavbarComponent from '@/components/Navbar/Navbar';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
-import { useCart } from '@/components/context/cartContext';
+import { useCart } from '../hooks/useCart';
 import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
@@ -29,9 +29,10 @@ interface Product {
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const { user } = useAuth();
-  const { dispatch } = useCart();
+  const [isMobile, setIsMobile] = React.useState(false);
+  const { addToCart } = useCart();
   const router = useRouter();
+
   const {
     id,
     product_name,
@@ -43,7 +44,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const productImageSrc =
     typeof product_image === 'string' ? product_image : '';
 
-  const [isMobile, setIsMobile] = React.useState(false);
   const handleResize = () => {
     setIsMobile(window.innerWidth <= 768);
   };
@@ -56,24 +56,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  const handleAddToCart = () => {
-    const { id, product_name, product_price, product_image } = router.query;
-
-    const itemToAdd: Product = {
-      id: id as string,
-      name: product_name as string,
-      image: product_image as string,
-      price: parseFloat(product_price as string),
-    };
-
-    dispatch({
-      type: 'ADD_TO_CART',
-      payload: { userId: user?.id, product: itemToAdd },
-    });
-
-    console.log(router.query);
-  };
 
   return (
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
@@ -107,7 +89,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 <div className="flex justify-center items-center mr-5">
                   <BsChatLeftText className="w-7 h-7" />
                 </div>
-                <ButtonSecondary onClick={handleAddToCart}>
+                <ButtonSecondary onClick={addToCart(product.id)}>
                   Add to <MdAddShoppingCart />
                 </ButtonSecondary>
                 <ButtonPrimary>Buy Now</ButtonPrimary>
@@ -162,7 +144,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <div className="flex justify-center items-center mr-5">
               <BsChatLeftText className="w-7 h-7" />
             </div>
-            <ButtonSecondary onClick={handleAddToCart}>
+            <ButtonSecondary onClick={addToCart(product.id)}>
               Add to <MdAddShoppingCart />
             </ButtonSecondary>
             <ButtonPrimary>Buy Now</ButtonPrimary>

@@ -16,26 +16,20 @@ class CartController extends Controller
     {
         $userId = $request->input('userId');
         $productId = $request->input('productId');
-        $productType = $request->input('productType');
 
         $user = User::find($userId);
 
         if (!$user) {
             return response()->json(['error' => 'User not found'], 404);
         }
+
         $product = null;
-        switch ($productType) {
-            case 'cloth':
-                $product = ClothProduct::find($productId);
-                break;
-            case 'trouser':
-                $product = TrouserProduct::find($productId);
-                break;
-            case 'shoes':
-                $product = ShoesProduct::find($productId);
-                break;
-            default:
-                return response()->json(['error' => 'Invalid product type'], 400);
+        $product = ClothProduct::find($productId);
+        if (!$product) {
+            $product = TrouserProduct::find($productId);
+        }
+        if (!$product) {
+            $product = ShoesProduct::find($productId);
         }
 
         if (!$product) {
@@ -43,9 +37,8 @@ class CartController extends Controller
         }
 
         $cartItem = CartItem::where('user_id', $userId)
-                        ->where('product_id', $productId)
-                        ->where('product_type', $productType)
-                        ->first();
+            ->where('product_id', $productId)
+            ->first();
 
         if ($cartItem) {
             $cartItem->quantity += 1;
@@ -54,7 +47,6 @@ class CartController extends Controller
             $cartItem = new CartItem();
             $cartItem->user_id = $userId;
             $cartItem->product_id = $productId;
-            $cartItem->product_type = $productType;
             $cartItem->quantity = 1;
             $cartItem->save();
         }
