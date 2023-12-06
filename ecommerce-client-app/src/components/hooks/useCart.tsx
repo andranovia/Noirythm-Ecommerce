@@ -1,8 +1,28 @@
 import axiosInstance from '@/utils/api';
+import { getCart } from '../utils/cart';
 import { useAuth } from './useAuth';
+import { useEffect, useState } from 'react';
 
 export const useCart = () => {
   const { user } = useAuth();
+  const [userCart, setUserCart] = useState([]);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+
+        if (user) {
+          const userCart = await getCart(user?.id);
+          setUserCart(userCart);
+        } else {
+        }
+      } catch (error) {
+        console.error('Error fetching cart:', error);
+      }
+    };
+
+    fetchCart();
+  }, []);
 
   const addToCart = async ({ productId }: any) => {
     let payload = {
@@ -21,5 +41,6 @@ export const useCart = () => {
 
   return {
     addToCart,
+    userCart,
   };
 };

@@ -48,7 +48,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::get('cart/get', [CartController::class, 'getCart']);
 Route::post('cart/add', [CartController::class, 'addToCart']);
 
 Route::get('user', function () {

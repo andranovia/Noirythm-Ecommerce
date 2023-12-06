@@ -12,6 +12,37 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function getCart(Request $request)
+    {
+        $userId = $request->input('userId');
+
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $cartItems = CartItem::where('user_id', $userId)->pluck('product_id');
+
+        $products = [];
+
+        foreach ($cartItems as $productId) {
+            $product = ClothProduct::find($productId);
+            if (!$product) {
+                $product = TrouserProduct::find($productId);
+            }
+            if (!$product) {
+                $product = ShoesProduct::find($productId);
+            }
+
+            if ($product) {
+                $products[] = $product;
+            }
+        }
+
+        return response()->json(['cartProducts' => $products], 200);
+    }
+
     public function addToCart(Request $request)
     {
         $userId = $request->input('userId');
