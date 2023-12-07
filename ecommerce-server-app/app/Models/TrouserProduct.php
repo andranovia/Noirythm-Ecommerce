@@ -10,6 +10,6 @@ class TrouserProduct extends Model
     use HasFactory;
 
     protected $table = 'trouserProducts'; 
-  
+    public $incrementing = false; 
 
 }

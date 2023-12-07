@@ -12,5 +12,5 @@ class ClothProduct extends Model
     use HasFactory;
 
     protected $table = 'clothProducts';
-
+    public $incrementing = false; 
 }

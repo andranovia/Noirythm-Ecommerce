@@ -2,14 +2,10 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import Cart from '../../components/cart/Cart';
 const Navbar = dynamic(() => import('@/components/Navbar/Navbar'));
-import { useCart } from '@/components/context/cartContext';
-import { useAuth } from '@/components/hooks/useAuth';
+import { useCart } from '@/components/hooks/useCart';
 
 const CartPage = () => {
-  const { user } = useAuth();
-  const { state } = useCart();
-
-  const userCart = state.cart[user?.id] || [];
+  const { userCart } = useCart();
 
   return (
     <div>

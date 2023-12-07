@@ -8,7 +8,6 @@ import { useCart } from '../hooks/useCart';
 import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
-import { useAuth } from '../hooks/useAuth';
 
 interface ProductInfoProps {
   product: {
@@ -19,13 +18,6 @@ interface ProductInfoProps {
     product_description: string;
   };
   query?: Record<string, string>;
-}
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
@@ -89,9 +81,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 <div className="flex justify-center items-center mr-5">
                   <BsChatLeftText className="w-7 h-7" />
                 </div>
-                <ButtonSecondary onClick={addToCart(product.id)}>
+                <ButtonSecondary onClick={() => addToCart(id)}>
                   Add to <MdAddShoppingCart />
                 </ButtonSecondary>
+
                 <ButtonPrimary>Buy Now</ButtonPrimary>
               </div>
             )}
@@ -144,9 +137,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <div className="flex justify-center items-center mr-5">
               <BsChatLeftText className="w-7 h-7" />
             </div>
-            <ButtonSecondary onClick={addToCart(product.id)}>
+            <ButtonSecondary onClick={() => addToCart(id)}>
               Add to <MdAddShoppingCart />
             </ButtonSecondary>
+
             <ButtonPrimary>Buy Now</ButtonPrimary>
           </div>
         )}

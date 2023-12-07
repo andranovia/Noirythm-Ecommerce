@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { useCart } from '../context/cartContext';
-import { useAuth } from '../hooks/useAuth';
+import { useCart } from '../hooks/useCart';
 
 interface Product {
   id: string;
@@ -11,17 +10,14 @@ interface Product {
 }
 
 interface CartItemProps {
-    item: Product;
-  }
-  
-  const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const { user } = useAuth();
-  const { dispatch } = useCart();
+  item: Product;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ item }) => {
+  const { userCart } = useCart();
 
   const handleRemoveToCart = () => {
-    const { id } = item;
-
-    dispatch({ type: 'REMOVE_FROM_CART', payload: { userId: user?.id, productId: id } });
+    console.log(userCart);
   };
 
   return (

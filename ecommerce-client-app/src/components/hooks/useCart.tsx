@@ -10,11 +10,11 @@ export const useCart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-
         if (user) {
-          const userCart = await getCart(user?.id);
-          setUserCart(userCart);
+          const response = await getCart(user);
+          setUserCart(response);
         } else {
+          console.log('user not found')
         }
       } catch (error) {
         console.error('Error fetching cart:', error);
@@ -22,21 +22,22 @@ export const useCart = () => {
     };
 
     fetchCart();
-  }, []);
+  }, [user]);
 
-  const addToCart = async ({ productId }: any) => {
-    let payload = {
-      userId: user?.id,
-      productId: productId,
-    };
-    axiosInstance
-      .post('api/cart/add', payload)
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((r) => {
-        console.log(r);
-      });
+  const addToCart = async (productId: any) => {
+    console.log(productId);
+    try {
+      const userId = user?.id;
+      const payload = {
+        userId: userId,
+        productId: productId,
+      };
+
+      const response = await axiosInstance.post('/api/cart/add', payload);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return {

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ProductReview extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'commentId'; // Set the primary key to commentId
-    public $incrementing = true; // Make it auto-incrementing
+    protected $primaryKey = 'commentId'; 
+    public $incrementing = true; 
 
     protected $fillable = ['product_id', 'rating', 'reviewText', 'commentId'];
 }
