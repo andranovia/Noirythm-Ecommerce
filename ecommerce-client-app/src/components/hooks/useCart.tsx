@@ -1,11 +1,26 @@
 import axiosInstance from '@/utils/api';
-import { getCart } from '../utils/cart';
+import { getCart } from '../utils/getCart';
 import { useAuth } from './useAuth';
 import { useEffect, useState } from 'react';
 
+interface Product {
+  id: string;
+  product_description: string;
+  product_image: string;
+  product_name: string;
+  product_price: string;
+}
+
+interface CartData {
+  cartProducts: Product[];
+}
+
+
+
 export const useCart = () => {
   const { user } = useAuth();
-  const [userCart, setUserCart] = useState([]);
+  const [userCart, setUserCart] = useState<CartData>({ cartProducts: [] });
+ 
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -25,7 +40,6 @@ export const useCart = () => {
   }, [user]);
 
   const addToCart = async (productId: any) => {
-    console.log(productId);
     try {
       const userId = user?.id;
       const payload = {
@@ -39,9 +53,27 @@ export const useCart = () => {
       console.error(error);
     }
   };
+  const removeFromCart = async (productId: any) => {
+  
+    try {
+      const userId = user?.id;
+      const payload = {
+        data: {
+          userId: userId,
+          productId: productId,
+        }
+      };
+      
+      const response = await axiosInstance.delete('/api/cart/delete', payload);      
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return {
     addToCart,
     userCart,
+    removeFromCart,
   };
 };

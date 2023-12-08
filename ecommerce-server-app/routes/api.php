@@ -45,6 +45,7 @@ Route::get('/search', 'App\Http\Controllers\SearchController@search');
 
 Route::get('cart/get', [CartController::class, 'getCart']);
 Route::post('cart/add', [CartController::class, 'addToCart']);
+Route::delete('cart/delete', [CartController::class, 'removeFromCart']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 

@@ -14,7 +14,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       boxShadow: {
-        'ShadowCard': '0px 0px 0px 2px rgba(6, 24, 44, 0.4), 0px 4px 6px -1px rgba(6, 24, 44, 0.65), 0px 1px 0px inset rgba(255, 255, 255, 0.08)',
+        'ShadowCard': '0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 10px 0 rgba(0, 0, 0, 0.08)',
+
         'Sprightly': '0px 25px 50px -12px rgba(0, 0, 0, 0.25)',
         'Aesthetic': '0 3px 10px rgba(0, 0, 0, 0.2)',
       },

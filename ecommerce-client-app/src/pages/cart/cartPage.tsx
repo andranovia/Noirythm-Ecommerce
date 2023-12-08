@@ -10,12 +10,12 @@ const CartPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-start relative top-36">
-        <div className="">
-          <div className="grid mx-10">
+      <div className="flex justify-center relative top-36 w-full sm:justify-start ">
+        <div className="sm:ml-20">
+          <div className="grid">
             <h1 className="text-2xl font-bold mb-15">Shopping Cart</h1>
 
-            {userCart.length === 0 ? (
+            {userCart.cartProducts.length === 0 ? (
               <div className="my-10 rounded-md mx-auto shadow-ShadowCard p-10 ">
                 <div>
                   <p className="font-semibold text-2xl">
@@ -30,7 +30,9 @@ const CartPage = () => {
                 </div>
               </div>
             ) : (
+              <div className='flex justify-center'>
               <Cart />
+              </div>
             )}
           </div>
         </div>

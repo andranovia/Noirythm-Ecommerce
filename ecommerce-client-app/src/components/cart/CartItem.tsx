@@ -1,47 +1,53 @@
 import React from 'react';
 import Image from 'next/image';
 import { useCart } from '../hooks/useCart';
+import ButtonPrimary from '../button/ButtonPrimary';
 
-interface Product {
+interface Item {
   id: string;
-  name: string;
-  price: number;
-  image: string;
+  product_name: string;
+  product_price: string;
+  product_image: string;
 }
 
-interface CartItemProps {
-  item: Product;
-}
+const CartItem: React.FC<{ item: Item }> = ({ item }) => {
+  const { removeFromCart } = useCart();
 
-const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const { userCart } = useCart();
+  const maxLength = 20;
 
-  const handleRemoveToCart = () => {
-    console.log(userCart);
-  };
-
+  const truncatedName =
+  item && item.product_name
+    ? item.product_name.length > maxLength
+      ? `${item.product_name.substring(0, maxLength)}...`
+      : item.product_name
+    : 'Loading...';
+    
   return (
-    <div className="rounded-lg flex shadow-ShadowCard items-start lg:w-full">
-      <div className=" flex-shrink-0 h-[10vh] w-[20vh] lg:w-[20rem] my-6 ml-10 lg:h-[10rem]">
-        <Image
-          src={item.image}
-          alt=""
-          width={120}
-          height={120}
-          className="w-[6rem]"
-        />
-      </div>
-      <div className="relative text-start ml-3 p-3 bottom-3 right-12 ">
-        <div className=" relative bottom-5 top-2 sm:right-[10rem] sm:mt-[1rem]">
-          <h4 className="text-3xl font-semibold text-black ">{item.name}</h4>
-          <p className="text-3xl font-bold text-black">{item.price}</p>
+    <div className="rounded-lg flex justify-start gap-4 shadow-ShadowCard w-[20rem]  h-fit  items-start sm:w-[30rem]">
+      <div className="relative m-4 ">
+        <div className="w-20 h-20">
+          <Image
+            src={item.product_image}
+            alt=""
+            width={120}
+            height={120}
+            className="object-cover w-full h-full rounded-md"
+          />
         </div>
-        <button
-          className="bg-amber-800 rounded-lg relative sm:right-[10rem] sm:bottom-10 h-15 w-[10rem] mt-8 sm:mt-12  p-2 flex-col justify-center"
-          onClick={handleRemoveToCart}
-        >
-          <h2 className="font-semibold text-yellow-100">Remove from cart</h2>
-        </button>
+      </div>
+      <div className="relative text-start sm:flex justify-center flex-col ">
+        <div className="relative bottom-5 top-2 ">
+          <h4 className="text-1xl font-semibold text-black ">
+            {truncatedName}
+          </h4>
+          <p className="text-sm font-bold text-black">{item.product_price}</p>
+        </div>
+
+        <div className="my-4">
+          <ButtonPrimary onClick={() => removeFromCart(item.id)}>
+            <div className="text-sm">Remove</div>
+          </ButtonPrimary>
+        </div>
       </div>
     </div>
   );

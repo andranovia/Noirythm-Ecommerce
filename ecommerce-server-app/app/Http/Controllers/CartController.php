@@ -84,4 +84,27 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Item added to cart'], 200);
     }
+    public function removeFromCart(Request $request)
+    {
+        $userId = $request->input('userId');
+        $productId = $request->input('productId');
+
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $cartItem = CartItem::where('user_id', $userId)
+            ->where('product_id', $productId)
+            ->first();
+
+        if (!$cartItem) {
+            return response()->json(['error' => 'Cart item not found'], 404);
+        }
+
+        $cartItem->delete();
+
+        return response()->json(['message' => 'Cart item deleted successfully'], 200);
+    }
 }
