@@ -1,8 +1,8 @@
 import React from 'react';
 import CategoryCard from './CategoryCard';
-import PromoData from '../PromoCategory/PromoData';
 
-export default function CategoryCarouselContainer({ isMobile }: any) {
+
+export default function CategoryCarouselContainer() {
   const categories = [
     {
       id: 'All',
@@ -32,13 +32,11 @@ export default function CategoryCarouselContainer({ isMobile }: any) {
   ];
   return (
     <div className="w-full h-fit sm:flex sm:justify-center  bg-white rounded-md sm:w-fit p-6 mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
-      <div className="sm:grid sm:grid-cols-2 gap-20 ">
-        <div className="flex flex-col justify-center relative top-4">
+    
+        <div className="flex  justify-center relative top-4">
           <CategoryCard categories={categories} />
         </div>
-
-        <PromoData isMobile={isMobile} />
-      </div>
+   
     </div>
   );
 }

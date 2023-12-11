@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import dynamic from 'next/dynamic';
+import ProductCard from '../ProductCard';
 
-const ProductCard = dynamic(() => import('../ProductCard'));
 
 
 
@@ -11,7 +10,8 @@ interface ProductItem {
   product_image: string;
   product_price: number;
   product_description: string;
-  id: number;
+  id: string;
+  promo_text:string;
 }
 
 interface ShoesProductProps {
@@ -24,6 +24,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const ShoesProduct: React.FC<ShoesProductProps> = ({ maxItems, desc, className }) => {
   const [ProductItems, setProductItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true); 
+  
   useEffect(() => {
     const fetchProductItems = async () => {
       try {

@@ -1,9 +1,9 @@
-
 import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
+import ProductSkeletonLoading from './ProductSkeletonLoading';
 
-const ProductItemCard = dynamic(() => import('./ProductItemCard'))
+const ProductItemCard = dynamic(() => import('./ProductItemCard'));
 
 interface ProductItem {
   product_name: string;
@@ -11,7 +11,7 @@ interface ProductItem {
   product_price: number;
   product_description: string;
   id: string;
-  promo_text:string;
+  promo_text: string;
 }
 
 interface ProductCardProps {
@@ -28,31 +28,40 @@ const ProductCard: React.FC<ProductCardProps> = ({
   desc,
 }) => {
   return (
- 
     <div className="flex justify-center">
       <div className="grid auto-rows-fr gap-[3vh] grid-cols-2 md:grid-cols-4 lg:grid-cols-4 ">
-      
-          {ProductItems.map((item, index) => (
-            <Link
-              href={{
-                pathname: `/product/${item.id}`,
-                query: {
-                  product_name: item.product_name,
-                  product_price: item.product_price,
-                  product_image: item.product_image,
-                  product_description: item.product_description,
-                },
-              }}
-              key={item.id}
-            >
-              <ProductItemCard key={index} item={item} loading={loading} className={className} desc={desc}/>
-            </Link>
-          ))}
-      
+        {desc && loading ? (
+          Array.from({ length: 4 }, (_, index) => (
+            <ProductSkeletonLoading key={index}/>
+          ))
+        ) : (
+          <>
+            {ProductItems.map((item, index) => (
+              <Link
+                href={{
+                  pathname: `/product/${item.id}`,
+                  query: {
+                    product_name: item.product_name,
+                    product_price: item.product_price,
+                    product_image: item.product_image,
+                    product_description: item.product_description,
+                  },
+                }}
+                key={item.id}
+              >
+                <ProductItemCard
+                  key={index}
+                  item={item}
+                  className={className}
+                  desc={desc}
+             
+                />
+              </Link>
+            ))}
+          </>
+        )}
       </div>
     </div>
-
-
   );
 };
 

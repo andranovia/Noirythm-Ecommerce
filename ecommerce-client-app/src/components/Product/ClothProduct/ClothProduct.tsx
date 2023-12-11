@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import dynamic from 'next/dynamic';
+import ProductCard from '../ProductCard';
 
-const ProductCard = dynamic(() => import('../ProductCard'));
 
 
 

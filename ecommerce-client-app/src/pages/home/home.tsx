@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer/Footer';
 import UserCheck from '@/components/Home/UserCheck/UserCheck';
+import Product from '@/components/Product/Product';
 import { useAuth } from '@/components/hooks/useAuth';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
@@ -8,7 +9,6 @@ const CategoryContainer = dynamic(
   () => import('@/components/Home/Category/CategoryContainer')
 );
 const HomeHero = dynamic(() => import('@/components/Home/Hero/HomeHero'));
-const Product = dynamic(() => import('@/components/Product/Product'));
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);

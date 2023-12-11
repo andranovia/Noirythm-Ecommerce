@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import dynamic from 'next/dynamic';
-const ProductCard = dynamic(() => import('../ProductCard'));
+import ProductCard from '../ProductCard';
+
 
 
 
@@ -10,7 +10,8 @@ interface ProductItem {
   product_image: string;
   product_price: number;
   product_description: string;
-  id: number;
+  id: string;
+  promo_text:string;
 }
 
 interface trouserProductProps {
