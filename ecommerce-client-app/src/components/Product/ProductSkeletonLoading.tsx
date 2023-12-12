@@ -3,11 +3,11 @@ import React from 'react';
 export default function ProductSkeletonLoading() {
   return (
     <>
-      <div className="rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch bg-white shadow-md">
+      <div className="rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch ">
         <div className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
-          <div className="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96">
+          <div className="flex items-center justify-center w-[10rem] h-[8rem] sm:h-[20rem] bg-gray-300 rounded sm:w-96">
             <svg
-              className="w-10 h-10 text-gray-200 dark:text-gray-600"
+              className="w-10 h-10 text-gray-200 "
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -17,10 +17,10 @@ export default function ProductSkeletonLoading() {
             </svg>
           </div>
         </div>
-
-        <div className={`text-start mt-4 ml-3 p-3 `}>
-          <h4 className="text-lg font-light text-black"></h4>
-          <p className="text-base font-bold text-black"></p>
+        <div role="status" className="max-w-sm animate-pulse m-4 sm:hidden">
+          <div className="h-2.5 bg-gray-300 rounded-full  w-20 mb-4"></div>
+          <div className="h-2 bg-gray-300 rounded-full  max-w-[360px] mb-2.5"></div>
+          <div className="h-2 bg-gray-300 rounded-full  mb-2.5"></div>
         </div>
       </div>
     </>

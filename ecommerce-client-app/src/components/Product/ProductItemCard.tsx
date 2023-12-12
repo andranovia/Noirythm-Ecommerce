@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useRating } from '../context/ratingContext';
 import { FaStar } from 'react-icons/fa';
@@ -29,80 +29,161 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({
   const productRating = ratings[item.id] || 0;
   const roundedRating = Math.round(productRating);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
+      };
+
+      handleResize();
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
   return (
     <>
-      <motion.div
-  
-        onHoverStart={() => setIsHovering(true)}
-        onHoverEnd={() => setIsHovering(false)}
+      {!isMobile && (
+        <>
+        <motion.div
     
-      >
-        <div
-          className={
-            desc
-              ? `rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch `
-              : `shadow-none mb-0 `
-          }
+          onHoverStart={() => setIsHovering(true)}
+          onHoverEnd={() => setIsHovering(false)}
+      
         >
-          <motion.div
+          <div
             className={
-              className
-                ? `flex-shrink-0 ${className} `
-                : `h-[20vh] w-[20vh] lg:w-[40vh] `
+              desc
+                ? `rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch `
+                : `shadow-none mb-0 `
             }
-            animate={desc && isHovering? {opacity: 0.6, width:270} : {opacity: 1, width:275}}
           >
-            <Image
-              src={item.product_image}
-              alt={item.product_name}
-              width={260}
-              height={260}
+            <motion.div
               className={
-                desc
-                  ? 'w-full lg:h-[50vh] object-cover flex rounded-lg '
-                  : 'w-full h-full object-cover rounded-lg'
+                className
+                  ? `flex-shrink-0 ${className} `
+                  : `h-[20vh] w-[20vh] lg:w-[40vh] `
               }
-            />
-          </motion.div>
-
-          <motion.div
-          animate={isHovering? {opacity:1} : {opacity: 0}}
-          
-          className={desc ? `text-center mt-4 p-3 opacity-0 z-20` : `hidden`}>
-            <h4 className="text-lg font-bold text-black ">
-              {item.product_name}
-            </h4>
-            <p className="text-base font-bold text-black">
-              {item.product_price}
-            </p>
+              animate={desc && isHovering? {opacity: 0.6, width:270} : {opacity: 1, width:275}}
+            >
+              <Image
+                src={item.product_image}
+                alt={item.product_name}
+                width={260}
+                height={260}
+                className={
+                  desc
+                    ? 'w-full lg:h-[50vh] object-cover flex rounded-lg '
+                    : 'w-full h-full object-cover rounded-lg'
+                }
+              />
+            </motion.div>
+  
+            <motion.div
+            animate={isHovering? {opacity:1} : {opacity: 0}}
+            
+            className={desc ? `text-center mt-4 p-3 opacity-0 z-20` : `hidden`}>
+              <h4 className="text-lg font-bold text-black ">
+                {item.product_name}
+              </h4>
+              <p className="text-base font-bold text-black">
+                {item.product_price}
+              </p>
+              <div
+                className={
+                  item.promo_text
+                    ? `bg-gray-800 ml-20 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
+                    : ``
+                }
+              >
+                <h2 className="font-semibold text-white">{item.promo_text}</h2>
+              </div>
+              <div className="flex justify-center gap-2 mt-4">
+                {isValidArrayLength(roundedRating) && (
+                  <>
+                    {[...Array(roundedRating)].map((_, index) => (
+                      <FaStar key={index} size={15} color="yellow" />
+                    ))}
+                    {[...Array(5 - roundedRating)].map((_, index) => (
+                      <FaStar
+                        key={index + roundedRating}
+                        size={15}
+                        color="grey"
+                      />
+                    ))}
+                  </>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </>
+      )}
+      {isMobile && (
+        <>
+          <div
+            className={
+              desc
+                ? `rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch  bg-white shadow-md`
+                : `shadow-none`
+            }
+          >
             <div
               className={
-                item.promo_text
-                  ? `bg-gray-800 ml-20 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
-                  : ``
+                className
+                  ? `flex-shrink-0 ${className} `
+                  : `h-[20vh] w-[20vh] lg:w-[40vh] lg:h-[40vh]`
               }
             >
-              <h2 className="font-semibold text-white">{item.promo_text}</h2>
+              <Image
+                src={item.product_image}
+                alt={item.product_name}
+                width={260}
+                height={260}
+                className="w-full h-full object-cover flex rounded-lg "
+              />
             </div>
-            <div className="flex justify-center gap-2 mt-4">
-              {isValidArrayLength(roundedRating) && (
-                <>
-                  {[...Array(roundedRating)].map((_, index) => (
-                    <FaStar key={index} size={15} color="yellow" />
-                  ))}
-                  {[...Array(5 - roundedRating)].map((_, index) => (
-                    <FaStar
-                      key={index + roundedRating}
-                      size={15}
-                      color="grey"
-                    />
-                  ))}
-                </>
-              )}
+
+            <div className={desc ? `text-start mt-4 ml-3 p-3 ` : `hidden`}>
+              <h4 className="text-lg font-light text-black">
+                {item.product_name}
+              </h4>
+              <p className="text-base font-bold text-black">
+                {item.product_price}
+              </p>
+              <div
+                className={
+                  item.promo_text
+                    ? `bg-gray-800 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
+                    : ``
+                }
+              >
+                <h2 className="font-semibold text-white">{item.promo_text}</h2>
+              </div>
+              <div className="flex justify-start gap-2 mt-4">
+                {isValidArrayLength(roundedRating) && (
+                  <>
+                    {[...Array(roundedRating)].map((_, index) => (
+                      <FaStar key={index} size={15} color="yellow" />
+                    ))}
+                    {[...Array(5 - roundedRating)].map((_, index) => (
+                      <FaStar
+                        key={index + roundedRating}
+                        size={15}
+                        color="grey"
+                      />
+                    ))}
+                  </>
+                )}
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </motion.div>
+          </div>
+        </>
+      )}
     </>
   );
 };
