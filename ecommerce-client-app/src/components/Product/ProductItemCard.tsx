@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRating } from '../context/ratingContext';
 import { FaStar } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { useResize } from '../hooks/useResize';
 
 interface ProductItem {
   product_name: string;
@@ -25,25 +26,10 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({
 }) => {
   const { ratings } = useRating();
   const [isHovering, setIsHovering] = useState(false);
+  const { isMobile } = useResize();
 
   const productRating = ratings[item.id] || 0;
   const roundedRating = Math.round(productRating);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-      const handleResize = () => {
-        setIsMobile(window.innerWidth <= 768);
-      };
-
-      handleResize();
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
 
   return (
     <>

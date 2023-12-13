@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { useAuth } from '../hooks/useAuth';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ButtonSecondary from '../button/ButtonSecondary';
+import { useResize } from '../hooks/useResize';
 
 const NavbarDropdown = dynamic(() => import('./NavbarDropdown'));
 const NavbarSearch = dynamic(() => import('./NavbarSearch'));
@@ -16,6 +17,7 @@ const NavbarSearch = dynamic(() => import('./NavbarSearch'));
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const {isMobile} = useResize();
   const { user } = useAuth();
 
   const handleLogoDropdownToggle = () => {
@@ -30,18 +32,7 @@ const Navbar: React.FC = () => {
     right: 0,
     zIndex: 1000,
   };
-  const [isMobile, setIsMobile] = React.useState(false);
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
-  React.useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  
 
   return (
     <div

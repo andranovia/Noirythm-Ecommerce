@@ -8,22 +8,11 @@ import Navbar from '@/components/Navbar/Navbar';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import Footer from '@/components/Footer/Footer';
 import UserInfoBarContainer from '@/components/User/UserInfoBarContainer';
+import { useResize } from '@/components/hooks/useResize';
 
 const UserProfile: React.FC = () => {
   const { logoutAction, user } = useAuth();
-  const [isMobile, setIsMobile] = React.useState(false);
-  
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768);
-  };
-  React.useEffect(() => {
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const {isMobile} = useResize();
 
   return (
     <div className="max-w-screen min-h-screen">
