@@ -64,7 +64,7 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({
                 className={
                   desc
                     ? 'w-full lg:h-[50vh] object-cover flex rounded-lg '
-                    : 'w-full h-full object-cover rounded-lg'
+                    : 'w-[14rem] h-full object-cover rounded-lg'
                 }
               />
             </motion.div>

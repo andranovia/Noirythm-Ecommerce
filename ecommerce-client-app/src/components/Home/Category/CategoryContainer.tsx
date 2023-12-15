@@ -1,6 +1,6 @@
 import React from 'react';
 import CategoryCard from './CategoryCard';
-
+import PromoCategory from '../PromoCategory/PromoCategory';
 
 export default function CategoryCarouselContainer() {
   const categories = [
@@ -31,12 +31,13 @@ export default function CategoryCarouselContainer() {
     },
   ];
   return (
-    <div className="w-full h-fit sm:flex sm:justify-center  bg-white rounded-md sm:w-fit p-6 mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
-    
-        <div className="flex  justify-center relative top-4">
-          <CategoryCard categories={categories} />
-        </div>
-   
+    <div className="w-full h-fit sm:flex sm:justify-center sm:flex-col  bg-white rounded-md sm:max-w-screen-xl p-6  mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
+      <div className="flex justify-center items-center ">
+        <PromoCategory />
+      </div>
+      <div className="flex  justify-center relative sm:top-4">
+        <CategoryCard categories={categories} />
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import Product from '@/components/Product/Product';
 import { useAuth } from '@/components/hooks/useAuth';
 import { useResize } from '@/components/hooks/useResize';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+
 
 const CategoryContainer = dynamic(
   () => import('@/components/Home/Category/CategoryContainer')
