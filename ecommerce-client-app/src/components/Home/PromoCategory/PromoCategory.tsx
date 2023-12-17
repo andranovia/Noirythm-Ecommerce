@@ -5,16 +5,23 @@ import PromoProductCategory from './PromoProductCategory';
 
 const PromoCategory = () => {
   return (
-    <div className="max-w-screen-lg  h-full sm:mb-20 mb-8 ">
+    <div className="max-w-screen-lg  h-full sm:mb-20 mb-8 p-4 rounded-md shadow-md">
       <h2 className="text-2xl font-bold  m-4">Current Promo</h2>
-      <div className="flex flex-col gap-6 rounded-lg shadow-md">
-        <div>
+      <div className="flex flex-col gap-6 rounded-lg ">
+        <div className='w-fit h-fit flex justify-center  gap-10'>
         <Image
-          src={'/img/promo/promo1.webp'}
+          src={'/img/category/promoImage_2.webp'}
           alt="Promo"
           height={420}
           width={420}
-          className="rounded-md w-full sm:w-[35rem]"
+          className="rounded-md w-full sm:w-[30rem] "
+        />
+         <Image
+          src={'/img/category/promoImage_1.webp'}
+          alt="Promo"
+          height={420}
+          width={420}
+          className="rounded-md w-full sm:w-[30rem]"
         />
         </div>
         <div className='flex justify-start mx-4 w-full items-center'>

@@ -6,26 +6,26 @@ export default function CategoryCarouselContainer() {
   const categories = [
     {
       id: 'All',
-      image: 'https://img.icons8.com/material-outlined/24/show-all-views.png',
+      image: 'https://img.icons8.com/ios-filled/50/192655/show-all-views.png',
       title: 'See all',
       description: 'All the things',
     },
     {
       id: 'cloth',
-      image: 'https://img.icons8.com/ios/50/clothes.png',
+      image: 'https://img.icons8.com/ios/50/192655/clothes.png',
       title: 'Cloth',
       description: 'Get your cloth',
     },
     {
       id: 'trouser',
       image:
-        'https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png',
+        'https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/192655/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png',
       title: 'Trouser',
       description: 'Get your trouser',
     },
     {
       id: 'shoes',
-      image: 'https://img.icons8.com/ios/50/sneakers.png',
+      image: 'https://img.icons8.com/ios/50/192655/sneakers.png',
       title: 'Shoes',
       description: 'Get your shoes',
     },
