@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import dynamic from 'next/dynamic';
-
-const ProductItemCard = dynamic(() => import('../ProductCard'));
-
-
+import ProductCard from '../ProductCard';
 
 interface ProductItem {
   product_name: string;
@@ -21,6 +17,7 @@ interface PromoProductProps {
   className : string | {} | null;
   desc: boolean;
 }
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 
@@ -50,7 +47,8 @@ const PromoProduct: React.FC<PromoProductProps> = ({ maxItems, className, desc }
   const displayedItems = maxItems === Infinity ? ProductItems : ProductItems.slice(0, maxItems);
 
   return (
-  <ProductItemCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
+    
+    <ProductCard ProductItems={displayedItems} loading={loading} className={className} desc={desc}/>);
 };
 
 export default PromoProduct;

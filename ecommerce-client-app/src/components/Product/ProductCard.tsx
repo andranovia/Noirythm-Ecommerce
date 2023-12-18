@@ -19,6 +19,7 @@ interface ProductCardProps {
   loading: boolean;
   className: string | {} | null;
   desc: boolean;
+  
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -26,14 +27,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
   loading,
   className,
   desc,
+ 
 }) => {
   return (
     <div className="flex justify-center">
       <div className="grid auto-rows-fr gap-[3vh] grid-cols-2 md:grid-cols-4 lg:grid-cols-4 ">
         {desc && loading ? (
-          Array.from({ length: 4 }, (_, index) => (
-            <ProductSkeletonLoading key={index}/>
-          ))
+          <>
+            {ProductItems.map(() => (
+              <ProductSkeletonLoading />
+            ))}
+          </>
         ) : (
           <>
             {ProductItems.map((item, index) => (
@@ -54,7 +58,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
                   item={item}
                   className={className}
                   desc={desc}
-             
                 />
               </Link>
             ))}
