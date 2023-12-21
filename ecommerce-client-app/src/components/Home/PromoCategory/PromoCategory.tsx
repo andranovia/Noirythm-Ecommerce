@@ -8,7 +8,7 @@ const PromoCategory = () => {
     <div className="max-w-screen-lg  h-full sm:mb-20 mb-8 p-4 rounded-md shadow-md">
       <h2 className="text-2xl font-bold  m-4">Current Promo</h2>
       <div className="flex flex-col gap-6 rounded-lg ">
-        <div className='w-fit h-fit flex justify-center  gap-10'>
+        <div className='w-fit h-fit flex flex-col sm:flex-row justify-center  gap-10'>
         <Image
           src={'/img/category/promoImage_2.webp'}
           alt="Promo"
