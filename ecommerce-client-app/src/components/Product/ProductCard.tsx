@@ -1,9 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import ProductSkeletonLoading from './ProductSkeletonLoading';
-
-const ProductItemCard = dynamic(() => import('./ProductItemCard'));
+import ProductItemCard from './ProductItemCard';
 
 interface ProductItem {
   product_name: string;

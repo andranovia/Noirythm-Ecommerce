@@ -2,11 +2,11 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 const Navbar = dynamic(
-  () => import('@/components/Navbar/Navbar')
+  () => import('@/components/navbar/Navbar')
 );
-const ClothProduct = dynamic(() => import('@/components/Product/ClothProduct/ClothProduct'));
-const ShoesProduct = dynamic(() => import('@/components/Product/ShoesProduct/ShoesProduct'))
-const TrouserProduct = dynamic(() => import('@/components/Product/TrouserProduct/TrouserProduct'))
+const ClothProduct = dynamic(() => import('@/components/product/clothProduct/ClothProduct'));
+const ShoesProduct = dynamic(() => import('@/components/product/shoesProduct/ShoesProduct'))
+const TrouserProduct = dynamic(() => import('@/components/product/trouserProduct/TrouserProduct'))
 
 
 const AllCategory: React.FC = () => {

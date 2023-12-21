@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import AuthCard from '@/components/Auth/AuthCard';
+import AuthCard from '@/components/auth/AuthCard';
 import ApplicationLogo from '@/components/logo/AplicationLogo';
-import AuthInputError from '@/components/Auth/AuthInputError';
-import AuthLabel from '@/components/Auth/AuthLabel';
-import AuthInput from '@/components/Auth/AuthInput';
+import AuthInputError from '@/components/auth/AuthInputError';
+import AuthLabel from '@/components/auth/AuthLabel';
+import AuthInput from '@/components/auth/AuthInput';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import { useAuth } from '@/components/hooks/useAuth';
 

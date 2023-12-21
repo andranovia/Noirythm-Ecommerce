@@ -4,14 +4,14 @@ import dynamic from 'next/dynamic';
 
 
 const ClothProduct = dynamic(
-  () => import('./ClothProduct/ClothProduct')
+  () => import('./clothProduct/ClothProduct')
 );
 
 const TrouserProduct = dynamic(
-  () => import('./TrouserProduct/TrouserProduct')
+  () => import('./trouserProduct/TrouserProduct')
 );
 const ShoesProduct = dynamic(
-  () => import('./ShoesProduct/ShoesProduct')
+  () => import('./shoesProduct/ShoesProduct')
 );
 
 const Product: React.FC = () => {

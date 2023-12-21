@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
                         />
                         <h1 className="font-bold">{user.name}</h1>
                       </div>
-                      <Link href={'/profile/UserProfile'}>
+                      <Link href={'/profile/user'}>
                         <div className="flex justify-start items-center mr-2 ">
                           <Image
                             src="https://img.icons8.com/ios/50/settings--v1.png"
@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
                         </div>
                       </Link>
                     </div>
-                    <Link href={'/cart/cartPage'}>
+                    <Link href={'/cart/cart'}>
                       <div className="flex flex-col justify-center m-4">
                         <ButtonSecondary>
                           <div className="flex justify-center items-center gap-2">
@@ -339,7 +339,7 @@ const Navbar: React.FC = () => {
               </button>
             </div>
             <div className="flex justify-start items-center top-1 sm:top-0 w-fit mr-4 relative left-2 sm:-left-4 gap-4 sm:gap-6 ">
-              <Link href="/cart/cartPage">
+              <Link href="/cart/cart">
                 <button className="p-1 mb-2 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                   <Image
                     src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
@@ -350,7 +350,7 @@ const Navbar: React.FC = () => {
                 </button>
               </Link>
               {user ? (
-                <Link href="/profile/UserProfile">
+                <Link href="/profile/user">
                   <button className="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                     <Image
                       src="https://img.icons8.com/ios/50/user-male-circle--v1.png"

@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import Avatar from '@/components/User/Avatar';
+import Avatar from '@/components/user/Avatar';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import Link from 'next/link';
 import { useAuth } from '@/components/hooks/useAuth';
-import Navbar from '@/components/Navbar/Navbar';
+import Navbar from '@/components/navbar/Navbar';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
-import Footer from '@/components/Footer/Footer';
-import UserInfoBarContainer from '@/components/User/UserInfoBarContainer';
+import Footer from '@/components/footer/Footer';
+import UserInfoBarContainer from '@/components/user/UserInfoBarContainer';
 import { useResize } from '@/components/hooks/useResize';
 
 const UserProfile: React.FC = () => {

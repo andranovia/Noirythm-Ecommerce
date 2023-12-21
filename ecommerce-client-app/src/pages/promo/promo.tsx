@@ -2,9 +2,9 @@
 import dynamic from "next/dynamic";
 import React from "react";
 
-const PromoProduct = dynamic( () => import('@/components/Product/PromoProduct/PromoProduct'))
+const PromoProduct = dynamic( () => import('@/components/product/promoProduct/PromoProduct'))
 const Navbar = dynamic(
-  () => import('@/components/Navbar/Navbar')
+  () => import('@/components/navbar/Navbar')
 );
 
 

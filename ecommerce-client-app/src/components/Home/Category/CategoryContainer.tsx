@@ -1,11 +1,11 @@
 import React from 'react';
 import CategoryCard from './CategoryCard';
-import PromoCategory from '../PromoCategory/PromoCategory';
+import PromoCategory from '../promoCategory/PromoCategory';
 
 export default function CategoryCarouselContainer() {
   const categories = [
     {
-      id: 'All',
+      id: 'all',
       image: 'https://img.icons8.com/ios-filled/50/192655/show-all-views.png',
       title: 'See all',
       description: 'All the things',

@@ -1,6 +1,6 @@
 
 import dynamic from 'next/dynamic';
-const ProductInfo = dynamic(() => import('@/components/Product/ProductInfo'), {
+const ProductInfo = dynamic(() => import('@/components/product/ProductInfo'), {
   ssr: false, 
 });
 

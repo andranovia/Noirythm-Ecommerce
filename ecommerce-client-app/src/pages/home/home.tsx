@@ -1,15 +1,15 @@
-import Footer from '@/components/Footer/Footer';
-import UserCheck from '@/components/Home/UserCheck/UserCheck';
-import Product from '@/components/Product/Product';
+import Footer from '@/components/footer/Footer';
+import UserCheck from '@/components/home/userCheck/UserCheck';
+import Product from '@/components/product/Product';
 import { useAuth } from '@/components/hooks/useAuth';
 import { useResize } from '@/components/hooks/useResize';
 import dynamic from 'next/dynamic';
 
 
 const CategoryContainer = dynamic(
-  () => import('@/components/Home/Category/CategoryContainer')
+  () => import('@/components/home/category/CategoryContainer')
 );
-const HomeHero = dynamic(() => import('@/components/Home/Hero/HomeHero'));
+const HomeHero = dynamic(() => import('@/components/home/homeHero/HomeHero'));
 
 export default function Home() {
   const {isMobile} = useResize(); 

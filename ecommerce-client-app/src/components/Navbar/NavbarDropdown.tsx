@@ -32,7 +32,7 @@ export default function NavbarDropdown() {
             Home
           </Link>
           <Link
-            href="/category/All"
+            href="/category/all"
             className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
               router.pathname === '/category/All'
                 ? 'bg-gray-900 text-white'
@@ -56,7 +56,7 @@ export default function NavbarDropdown() {
             Product
           </Link>
           <Link
-            href="/about/AboutPage"
+            href="/about/about"
             className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
               router.pathname === '/about-Us/AboutPage'
                 ? 'bg-gray-900 text-white'
@@ -80,7 +80,7 @@ export default function NavbarDropdown() {
             About Us
           </Link>
           <Link
-            href="/contact/ContactPage"
+            href="/contact/contact"
             className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
               router.pathname === '/contact/ContactPage'
                 ? 'bg-gray-900 text-white'

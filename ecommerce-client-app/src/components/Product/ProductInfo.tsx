@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import NavbarComponent from '@/components/Navbar/Navbar';
+import NavbarComponent from '@/components/navbar/Navbar';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';

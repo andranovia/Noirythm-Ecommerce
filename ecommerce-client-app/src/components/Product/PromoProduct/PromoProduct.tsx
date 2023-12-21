@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
-import ProductCard from '../ProductCard';
+import ProductCard from '@/components/product/ProductCard';
+
+
+
 
 interface ProductItem {
   product_name: string;

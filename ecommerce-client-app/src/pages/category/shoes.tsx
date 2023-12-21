@@ -1,8 +1,8 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const ShoesProduct = dynamic(() => import('@/components/Product/ShoesProduct/ShoesProduct'));
-const Navbar = dynamic(() => import('@/components/Navbar/Navbar'));
+const ShoesProduct = dynamic(() => import('@/components/product/shoesProduct/ShoesProduct'));
+const Navbar = dynamic(() => import('@/components/navbar/Navbar'));
 
 
 const CategoryClothPage: React.FC = () => {
