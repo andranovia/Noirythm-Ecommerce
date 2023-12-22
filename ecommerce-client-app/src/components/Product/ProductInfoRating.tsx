@@ -11,7 +11,7 @@ import { useProductRating } from '@/components/hooks/useProductRating';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const { ratings, reviewText} = useRating();
+  const { ratings, reviewText } = useRating();
   const [commentModal, setCommentModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -19,8 +19,8 @@ export default function ProductInfoRating({ id }: any) {
     number | null
   >(null);
 
-  const { commentId, setCommentId, handleDeleteComments } = useProductRating(id);
-
+  const { commentId, setCommentId, handleDeleteComments } =
+    useProductRating(id);
 
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
@@ -35,6 +35,7 @@ export default function ProductInfoRating({ id }: any) {
 
   const productRating = ratings[id] || 0;
   const roundedRating = Math.round(productRating);
+  const ratingsValues = Object.values(ratings).map(rating => Math.floor(rating));
 
   const childData = {
     reviewText,
@@ -74,6 +75,10 @@ export default function ProductInfoRating({ id }: any) {
                       className="p-4 sm:p-2 flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-[12rem]"
                     >
                       <div className="flex justify-center gap-4">
+                        <div className='flex justify-center gap-2'>
+                          <FaStar size={20} color={'yellow'} />
+                         <p>{ratingsValues}</p>
+                        </div>
                         <p className="max-w-[10rem]">{review}</p>
                         <button
                           onClick={() => handleEditComment(commentId, index)}
@@ -109,6 +114,7 @@ export default function ProductInfoRating({ id }: any) {
                         commentId={commentId[index]}
                         review={review}
                         setIsEditing={setIsEditing}
+                        ratingsValues={ratingsValues}
                       />
                     ) : null}
                   </>
