@@ -12,9 +12,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_reviews', function (Blueprint $table) {
-            $table->id('commentId');
+            $table->id('comment_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('rating');
-            $table->text('reviewText');
+            $table->text('review_text');
             $table->string('product_id');
             $table->timestamps();
         });
