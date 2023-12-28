@@ -4,6 +4,7 @@ import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import { FaStar } from 'react-icons/fa';
 import { useProductRating } from '../hooks/useProductRating';
+import { useAuth } from '../hooks/useAuth';
 
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,6 +21,7 @@ const ProductInfoEditComment = ({
 }: ProductInfoEditCommentProps) => {
   const [editedReview, setEditedReview] = useState(review);
   const [editedRating, setEditedRating] = useState(ratingsValues);
+  const {user} = useAuth();
 
 
   const handleCancelEdit = () => {
@@ -30,7 +32,8 @@ const ProductInfoEditComment = ({
     try {
       const response = await axiosInstance.put(`/api/products/reviews/editComment/${commentId}`, {
         rating: editedRating, 
-        reviewText: editedReview,
+        review_text: editedReview,
+        userId: user?.id,
       });
 
       console.log(response.data.message);

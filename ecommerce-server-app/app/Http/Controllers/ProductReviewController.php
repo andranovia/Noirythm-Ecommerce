@@ -39,23 +39,14 @@ class ProductReviewController extends Controller
         }
     }
 
-    public function showUserComment($id, Request $request)
+    public function showUserComment($id)
     {
-        $userId = $request->input('userId');
+      
 
-        $user = User::find($userId);
-
-        if (!$user) {
-            return response()->json(['error' => 'User not found'], 404);
-        }
-
-
-        $productReviews = ProductReview::where('product_id', $id)
-            ->where('user_id', $userId)
-            ->get();
+        $productReviews = ProductReview::where('product_id', $id)->get();
 
         if ($productReviews->isEmpty()) {
-            return response()->json(['error' => 'No reviews found for this product by the user'], 404);
+            return response()->json(['error' => 'No reviews found for this product '], 404);
         }
 
         $commentId = ProductReview::where('product_id', $id)->pluck('comment_id');
@@ -65,7 +56,7 @@ class ProductReviewController extends Controller
         return response()->json([
             'comment_id' => $commentId,
             'rating' => $rating,
-            'reviewT_text' => $reviewText,
+            'review_text' => $reviewText,
         ], 200);
     }
 

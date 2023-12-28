@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '@/utils/api';
 import { useRating } from '@/components/context/ratingContext';
+import { useAuth } from './useAuth';
 
 export const useProductRating = (id: any) => {
   const { setRating, setReviewText } = useRating();
   const [commentId, setCommentId] = useState<number[]>([]);
+  const { user } = useAuth();
 
   useEffect(() => {
     axiosInstance
@@ -12,22 +14,27 @@ export const useProductRating = (id: any) => {
       .then((response) => {
         if (response.status === 200) {
           setRating(id, response.data.rating);
-          if (Array.isArray(response.data.reviewText)) {
-            setReviewText(response.data.reviewText);
+          if (Array.isArray(response.data.review_text)) {
+            setReviewText(response.data.review_text);
           } else {
-            setReviewText([response.data.reviewText]);
+            setReviewText([response.data.review_text]);
           }
-          setCommentId(response.data.commentId);
+          setCommentId(response.data.comment_id);
         }
+        console.log(response.data.review_text)
       })
       .catch((error) => {
         console.error('Error fetching average rating and reviewText', error);
       });
   }, [id]);
-
+  
   const handleDeleteComments = (commentId: number) => {
     axiosInstance
-      .delete(`api/products/reviews/DeleteUserComment/${commentId}`)
+      .delete(`api/products/reviews/DeleteUserComment/${commentId}`, {
+        params: {
+          userId: user?.id
+        }
+      })
       .then((response) => {
         console.log(response.data);
       })
@@ -35,6 +42,7 @@ export const useProductRating = (id: any) => {
         console.error('Error deleting rating and reviewText', error);
       });
   };
+  
 
   const [userRating, setUserRating] = useState(0);
   const [reviewUserText, setReviewUserText] = useState('');
@@ -45,7 +53,8 @@ export const useProductRating = (id: any) => {
 
     const data = {
       rating: userRating,
-      reviewText: reviewUserText,
+      review_text: reviewUserText,
+      userId: user?.id,
     };
 
     try {
