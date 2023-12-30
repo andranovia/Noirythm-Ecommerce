@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-const ShoesProduct = dynamic(() => import('@/components/product/shoesProduct/ShoesProduct'));
+const ShoesProduct = dynamic(() => import('@/components/product/ShoesProduct'));
 const Navbar = dynamic(() => import('@/components/navbar/Navbar'));
 
 

@@ -8,7 +8,7 @@ use App\Models\User;
 
 class ProductReviewController extends Controller
 {
-    public function store(Request $request, $id)
+    public function storeReview(Request $request, $id)
     {
 
         $validatedData = $request->validate([
@@ -25,8 +25,8 @@ class ProductReviewController extends Controller
         }
 
         $productReview = new ProductReview;
-        $productReview->rating = $validatedData['rating'];
-        $productReview->review_text = $validatedData['review_text'];
+        $productReview->ratings = $validatedData['rating'];
+        $productReview->review_texts = $validatedData['review_text'];
         $productReview->user_id = $userId;
         $productReview->product_id = $id;
 
@@ -39,7 +39,7 @@ class ProductReviewController extends Controller
         }
     }
 
-    public function showUserComment($id)
+    public function showReview($id)
     {
       
 
@@ -50,17 +50,21 @@ class ProductReviewController extends Controller
         }
 
         $commentId = ProductReview::where('product_id', $id)->pluck('comment_id');
-        $rating = ProductReview::where('product_id', $id)->avg('rating');
-        $reviewText = ProductReview::where('product_id', $id)->pluck('review_text')->toArray();
+        $averageRating = ProductReview::where('product_id', $id)->avg('ratings');
+        $rating = ProductReview::where('product_id', $id)->pluck('ratings')->toArray();
+        $product_id = ProductReview::where('product_id', $id)->pluck('product_id');
+        $reviewText = ProductReview::where('product_id', $id)->pluck('review_texts')->toArray();
 
         return response()->json([
             'comment_id' => $commentId,
-            'rating' => $rating,
-            'review_text' => $reviewText,
+            'ratings' => $rating,
+            'average_rating' => $averageRating,
+            'review_texts' => $reviewText,
+            'product_id' => $product_id,
         ], 200);
     }
 
-    public function updateComment(Request $request, $id)
+    public function updateReview(Request $request, $id)
     {
         $validatedData = $request->validate([
             'rating' => 'required|integer',
@@ -90,8 +94,8 @@ class ProductReviewController extends Controller
             return response()->json(['error' => 'No reviews found for this product by the user'], 404);
         }
 
-        $productReview->rating = $validatedData['rating'];
-        $productReview->review_text = $validatedData['review_text'];
+        $productReview->ratings = $validatedData['rating'];
+        $productReview->review_texts = $validatedData['review_text'];
 
         if ($productReview->save()) {
             return response()->json(['message' => 'Review has been updated successfully'], 200);
@@ -100,7 +104,7 @@ class ProductReviewController extends Controller
         }
     }
 
-    public function deleteComment(Request $request, $id)
+    public function deleteReview(Request $request, $id)
     {
         $productReview = ProductReview::find($id);
         $userId = $request->input('userId');

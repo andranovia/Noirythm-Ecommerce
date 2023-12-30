@@ -31,11 +31,11 @@ Route::prefix('products')->group(function () {
     Route::get('shoes/{id}', [ProductController::class, 'shoesShow']);
 
 
-    Route::delete('reviews/DeleteUserComment/{id}', [ProductReviewController::class, 'deleteComment']);
-    Route::get('reviews/UserComment/{id}', [ProductReviewController::class, 'showUserComment']);
+    Route::delete('reviews/deleteReview/{id}', [ProductReviewController::class, 'deleteReview']);
+    Route::get('reviews/userReview/{id}', [ProductReviewController::class, 'showReview']);
 
-    Route::put('reviews/editComment/{id}', [ProductReviewController::class, 'updateComment']);
-    Route::post('reviews/{id}', [ProductReviewController::class, 'store']);
+    Route::put('reviews/editReview/{id}', [ProductReviewController::class, 'updateReview']);
+    Route::post('reviews/{id}', [ProductReviewController::class, 'storeReview']);
 
     Route::get('productPromo', [ProductPromoController::class, 'ProductPromo']);
 });

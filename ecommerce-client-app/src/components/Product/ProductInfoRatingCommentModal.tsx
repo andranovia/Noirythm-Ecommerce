@@ -2,9 +2,13 @@ import ButtonPrimary from '@/components/button/ButtonPrimary';
 import React, { Dispatch, SetStateAction } from 'react';
 import ProductInfoEditComment from './ProductInfoEditComment';
 import Image from 'next/image';
+import { FaStar } from 'react-icons/fa';
+import { useProductRating } from '../hooks/useProductRating';
 
 interface ProductInfoRatingCommentModalProps {
   data: {
+    id: any,
+    ratings: any;
     reviewText: string[];
     setShowMore: Dispatch<SetStateAction<boolean>>;
     editing: {
@@ -14,19 +18,24 @@ interface ProductInfoRatingCommentModalProps {
     };
     comments: {
       commentId: number[];
-      handleEditComment: (commentId: any, index: number) => void
+      handleEditComment: (commentId: any, index: number) => void;
     };
   };
 }
 
 const ProductInfoRatingCommentModal = ({
   data: {
+    id,
+    ratings,
     reviewText,
     setShowMore,
     editing: { isEditing, setIsEditing, selectedCommentIndex },
     comments: { commentId, handleEditComment },
   },
 }: ProductInfoRatingCommentModalProps) => {
+  
+  const { handleDeleteComments } = useProductRating(id);
+
   return (
     <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-10 rounded-lg">
@@ -34,11 +43,17 @@ const ProductInfoRatingCommentModal = ({
         {reviewText.map((review, index) => (
           <React.Fragment key={index}>
             <div className="p-4 rounded-md shadow-ShadowCard mt-6 w-[15rem] flex justify-between">
+            <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-2">
+                <FaStar size={20} color={'yellow'} />
+                <p>{ratings[index]}</p>
+              </div>
               <p>{review}</p>
               <button
                 onClick={() => handleEditComment(commentId, index)}
                 className="font-semibold"
               >
+                
                 <Image
                   src={'https://img.icons8.com/ios/50/edit--v1.png'}
                   alt="edit"
@@ -46,10 +61,27 @@ const ProductInfoRatingCommentModal = ({
                   height={20}
                 />
               </button>
+              </div>
+              <div className="flex justify-center gap-2">
+                        <button
+                          onClick={() => handleDeleteComments(commentId[index])}
+                          className="font-semibold"
+                        >
+                          <Image
+                            src={
+                              'https://img.icons8.com/dotty/80/filled-trash.png'
+                            }
+                            alt="edit"
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      </div>
             </div>
 
             {isEditing && selectedCommentIndex === index && (
               <ProductInfoEditComment
+                ratingsValues={ratings[index]}
                 commentId={commentId[index]}
                 review={review}
                 setIsEditing={setIsEditing}
@@ -59,7 +91,9 @@ const ProductInfoRatingCommentModal = ({
         ))}
 
         <div className="mt-10">
-          <ButtonPrimary onClick={() => setShowMore(false)}>Close button</ButtonPrimary>
+          <ButtonPrimary onClick={() => setShowMore(false)}>
+            Close button
+          </ButtonPrimary>
         </div>
       </div>
     </div>

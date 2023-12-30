@@ -4,9 +4,9 @@ import React from 'react';
 const Navbar = dynamic(
   () => import('@/components/navbar/Navbar')
 );
-const ClothProduct = dynamic(() => import('@/components/product/clothProduct/ClothProduct'));
-const ShoesProduct = dynamic(() => import('@/components/product/shoesProduct/ShoesProduct'))
-const TrouserProduct = dynamic(() => import('@/components/product/trouserProduct/TrouserProduct'))
+const ClothProduct = dynamic(() => import('@/components/product/ClothProduct'));
+const ShoesProduct = dynamic(() => import('@/components/product/ShoesProduct'))
+const TrouserProduct = dynamic(() => import('@/components/product/TrouserProduct'))
 
 
 const AllCategory: React.FC = () => {

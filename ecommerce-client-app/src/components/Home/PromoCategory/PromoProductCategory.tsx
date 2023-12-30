@@ -1,5 +1,5 @@
 
-import PromoProduct from '@/components/product/promoProduct/PromoProduct';
+import PromoProduct from '@/components/product/PromoProduct';
 import { useResize } from '@/components/hooks/useResize';
 import React from 'react';
 

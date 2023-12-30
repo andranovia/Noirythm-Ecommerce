@@ -3,14 +3,13 @@ import axiosInstance from '@/utils/api';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import { FaStar } from 'react-icons/fa';
-import { useProductRating } from '../hooks/useProductRating';
 import { useAuth } from '../hooks/useAuth';
 
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   review: string;
   commentId: any;
-  ratingsValues: any
+  ratingsValues?: any
 }
 
 const ProductInfoEditComment = ({
@@ -30,7 +29,7 @@ const ProductInfoEditComment = ({
 
   const handleSaveEdit = async () => {
     try {
-      const response = await axiosInstance.put(`/api/products/reviews/editComment/${commentId}`, {
+      const response = await axiosInstance.put(`/api/products/reviews/editReview/${commentId}`, {
         rating: editedRating, 
         review_text: editedReview,
         userId: user?.id,

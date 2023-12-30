@@ -11,7 +11,7 @@ import { useProductRating } from '@/components/hooks/useProductRating';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const { ratings, reviewText } = useRating();
+  const { ratings, reviewText, averageRating, productId } = useRating();
   const [commentModal, setCommentModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -30,14 +30,15 @@ export default function ProductInfoRating({ id }: any) {
     setIsEditing(true);
     setCommentId(commentId);
     setSelectedCommentIndex(index);
-    console.log(commentId);
+   
   };
 
-  const productRating = ratings[id] || 0;
-  const roundedRating = Math.round(productRating);
-  const ratingsValues = Object.values(ratings).map(rating => Math.floor(rating));
+  const averageRoundedRating = Math.round(averageRating);
+ 
 
   const childData = {
+    id,
+    ratings,
     reviewText,
     setShowMore,
     editing: {
@@ -54,14 +55,14 @@ export default function ProductInfoRating({ id }: any) {
     <>
       <div className={reviewText.length > 0 ? `mb-[18rem]` : `mb-[6rem]`}>
         <div className="flex justify-start gap-2 mt-4">
-          {isValidArrayLength(roundedRating) &&
-            [...Array(roundedRating)].map((_, index) => (
+          {isValidArrayLength(averageRoundedRating) &&
+            [...Array(averageRoundedRating)].map((_, index) => (
               <FaStar key={index} size={20} color="yellow" />
             ))}
         </div>
         <div className="my-6">
           <p className="w-fit text-sm font-bold ">
-            average rating is {roundedRating} star
+            average rating is {averageRoundedRating} star
           </p>
         </div>
         <div className="bg-gray-300 w-[17rem] h-2 relative ">
@@ -77,7 +78,8 @@ export default function ProductInfoRating({ id }: any) {
                       <div className="flex justify-center gap-4">
                         <div className='flex justify-center gap-2'>
                           <FaStar size={20} color={'yellow'} />
-                         <p>{ratingsValues}</p>
+                         <p>{ratings[index]}</p>
+                       
                         </div>
                         <p className="max-w-[10rem]">{review}</p>
                         <button
@@ -114,7 +116,7 @@ export default function ProductInfoRating({ id }: any) {
                         commentId={commentId[index]}
                         review={review}
                         setIsEditing={setIsEditing}
-                        ratingsValues={ratingsValues}
+                        ratingsValues={ratings[index]}
                       />
                     ) : null}
                   </>
