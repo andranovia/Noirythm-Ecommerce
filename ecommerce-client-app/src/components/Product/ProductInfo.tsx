@@ -119,7 +119,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <div className="font-medium text-2xl ">
               <h2 className="text-gray-800">Give rating to {product_name}!</h2>
             </div>
-            <div className="mr-28 sm:flex justify-start">
+            <div className="mr-28  sm:flex justify-start">
               <ProductInfoRating id={id} />
             </div>
           </div>
