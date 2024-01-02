@@ -9,10 +9,11 @@ interface RatingContextProps {
   setCommentId: Dispatch<SetStateAction<number[]>>;
   isEditing: boolean;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
-  averageRating: number;
-  setAverageRating: Dispatch<SetStateAction<number>>;
+  averageRating: Record<string, number>;
+  setAverageRating: Dispatch<SetStateAction<Record<string, number>>>;
   productId: string;
   setProductId: Dispatch<SetStateAction<string>>;
+  updateAverageRating: (productId: string, newRating: number) => void;
 }
 
 const RatingContext = createContext<RatingContextProps | undefined>(undefined);
@@ -23,14 +24,19 @@ export const RatingProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   const [reviewText, setReviewText] = useState<string[]>([]);
   const [commentId, setCommentId] = useState<number[]>([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [averageRating, setAverageRating] = useState(0)
+  const [averageRating, setAverageRating] = useState<Record<string, number>>({});
   const [productId, setProductId] = useState('');
   
-
+  const updateAverageRating = (productId: string, newRating: number) => {
+    setAverageRating((prevRatings) => ({
+      ...prevRatings,
+      [productId]: newRating,
+    }));
+  };
 
   
   return (
-    <RatingContext.Provider value={{productId, setProductId, ratings, setRating, averageRating, setAverageRating, reviewText, setReviewText, commentId, setCommentId, isEditing, setIsEditing}}>
+    <RatingContext.Provider value={{productId, setProductId, ratings, setRating, updateAverageRating, averageRating, setAverageRating, reviewText, setReviewText, commentId, setCommentId, isEditing, setIsEditing}}>
       {children}
     </RatingContext.Provider>
   );

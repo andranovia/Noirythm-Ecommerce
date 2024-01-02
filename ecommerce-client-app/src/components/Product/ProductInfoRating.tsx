@@ -94,7 +94,7 @@ export default function ProductInfoRating({ id }: any) {
     ));
   };
 
-  const averageRoundedRating = Math.round(averageRating);
+  const averageRoundedRating = Math.round(averageRating[id]);
 
   const childData = {
     id,
@@ -122,27 +122,29 @@ export default function ProductInfoRating({ id }: any) {
                 average rating is {averageRoundedRating} star
               </p>
             </div>
-            <div className={'relative '}>
-              <ButtonPrimary onClick={() => handleModalToggle(true)}>
-                Give your opinions
-              </ButtonPrimary>
-            </div>
 
             <div className="bg-gray-300 w-[17rem] h-2 relative mt-4 mb-[14rem]">
               <div className="relative top-10 sm:top-6 sm:grid sm:gap-40 grid-cols-2">
                 {renderComments()}
               </div>
-              <div className="sm:mt-[2rem] mt-[4rem]">
+              <div className="sm:mt-[3rem] mt-[4rem]">
                 <ButtonSecondary onClick={() => setShowMore(true)}>
-                  Show more
+                  Show others 
                 </ButtonSecondary>
               </div>
             </div>
           </>
         ) : (
-          <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
-            <h1 className="">there is currently no comments</h1>
-          </div>
+          <>
+            <div className={'relative '}>
+              <ButtonPrimary onClick={() => handleModalToggle(true)}>
+                Give your opinions
+              </ButtonPrimary>
+            </div>
+            <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
+              <h1 className="">there is currently no comments</h1>
+            </div>
+          </>
         )}
         <div>
           {commentModal && (

@@ -29,7 +29,10 @@ export const useAuth = () => {
     {}
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -64,6 +67,7 @@ export const useAuth = () => {
         localStorage.setItem('token', r.data.token);
         setValidationErrors(r.data.errors);
         router.push('/auth/login')
+        localStorage.setItem('user', JSON.stringify({ name: r.data.name, email: r.data.email }));
       })
       .catch(() => {
         setIsSubmitting(false);

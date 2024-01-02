@@ -4,7 +4,7 @@
   import { useAuth } from './useAuth';
 
   export const useProductRating = (id: any) => {
-    const { setRating, setReviewText, setAverageRating, setProductId } = useRating();
+    const { setRating, setReviewText, updateAverageRating, setProductId } = useRating();
     const [commentId, setCommentId] = useState<number[]>([]);
     const { user } = useAuth();
 
@@ -14,7 +14,7 @@
         .then((response) => {
           if (response.status === 200) {
             setRating(response.data.ratings);
-            setAverageRating(response.data.average_rating)
+            updateAverageRating(id, response.data.average_rating)
             if (Array.isArray(response.data.review_texts)) {
               setReviewText(response.data.review_texts);
             } else {
