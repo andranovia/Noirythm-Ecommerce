@@ -29,10 +29,11 @@ export const useAuth = () => {
     {}
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [user, setUser] = useState<User | null>(() => {
-    const storedUser = localStorage.getItem('user');
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [user, setUser] = useState<User | null>(
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('user') || 'null')
+      : null
+  );
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -66,8 +67,11 @@ export const useAuth = () => {
         setIsSubmitting(false);
         localStorage.setItem('token', r.data.token);
         setValidationErrors(r.data.errors);
-        router.push('/auth/login')
-        localStorage.setItem('user', JSON.stringify({ name: r.data.name, email: r.data.email }));
+        router.push('/auth/login');
+        localStorage.setItem(
+          'user',
+          JSON.stringify({ name: r.data.name, email: r.data.email })
+        );
       })
       .catch(() => {
         setIsSubmitting(false);
@@ -85,8 +89,7 @@ export const useAuth = () => {
     axiosInstance
       .post('/api/login', payload)
       .then(({ data }) => {
-
-        setValidationErrors(data.errors)
+        setValidationErrors(data.errors);
         setIsSubmitting(false);
         const accessToken = data.data.token;
         localStorage.setItem('accessToken', accessToken);
@@ -98,13 +101,11 @@ export const useAuth = () => {
           })
         );
         router.push('/');
-        
       })
-
 
       .catch((Error) => {
         setIsSubmitting(false);
-        console.log(Error)
+        console.log(Error);
         if (Error.response && Error.response.status === 422) {
           setValidationErrors(Error.response.data.errors);
         } else {

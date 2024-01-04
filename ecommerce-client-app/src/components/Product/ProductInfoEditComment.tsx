@@ -34,8 +34,6 @@ const ProductInfoEditComment = ({
         review_text: editedReview,
         userId: user?.id,
       });
-
-      console.log(response.data.message);
       setIsEditing(false);
     } catch (error) {
       console.error(error);

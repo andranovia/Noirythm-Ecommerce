@@ -11,13 +11,22 @@ import { useProductRating } from '@/components/hooks/useProductRating';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const { ratings, reviewText, averageRating, productId } = useRating();
+  const {ratingData} = useRating();
   const [commentModal, setCommentModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  
   const [selectedCommentIndex, setSelectedCommentIndex] = useState<
     number | null
   >(null);
+
+  const {
+    reviewText,
+    ratings,
+    averageRating,
+    productId,
+  } = ratingData;
+
 
   const { commentId, setCommentId, handleDeleteComments } =
     useProductRating(id);
@@ -129,14 +138,14 @@ export default function ProductInfoRating({ id }: any) {
               </div>
               <div className="sm:mt-[3rem] mt-[4rem]">
                 <ButtonSecondary onClick={() => setShowMore(true)}>
-                  Show others 
+                  Show others
                 </ButtonSecondary>
               </div>
             </div>
           </>
         ) : (
           <>
-            <div className={'relative '}>
+            <div className={'relative mt-10'}>
               <ButtonPrimary onClick={() => handleModalToggle(true)}>
                 Give your opinions
               </ButtonPrimary>

@@ -24,11 +24,11 @@ const ProductItemCard: React.FC<ProductItemCardProps> = ({
   className,
   desc,
 }) => {
-  const { averageRating } = useRating();
+  const { ratingData } = useRating();
   const [isHovering, setIsHovering] = useState(false);
   const { isMobile } = useResize();
 
-  const productRating = averageRating[item.id] || 0;
+  const productRating = ratingData.averageRating[item.id] || 0;
   const roundedRating = Math.round(productRating);
 
   return (
