@@ -32,7 +32,6 @@ export default function ProductInfoRating({ id }: any) {
   };
 
   const productIdsSet = new Set(productId);
-  const userIdsSet = new Set(userId);
 
   const handleEditComment = (commentId: any, index: number) => {
     setIsEditing(true);
@@ -53,40 +52,43 @@ export default function ProductInfoRating({ id }: any) {
       <>
         <div
           key={index}
-          className="relative p-4 sm:p-2 h-full flex justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-[12rem]"
+          className="relative p-4 sm:p-2 h-full flex flex-col justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[17rem] sm:w-[12rem]"
         >
-          <div className="flex justify-center gap-4">
-            <div className="flex justify-center gap-2">
-              <FaStar size={20} color={'yellow'} />
-              <p>{ratings[index]}</p>
-
-              <p>{userId[user?.id]}</p>
-            </div>
-            <p className="max-w-[10rem]">{review}</p>
-            <button
-              onClick={() => handleEditComment(commentId, index)}
-              className="font-semibold"
-            >
-              <Image
-                src={'https://img.icons8.com/ios/50/edit--v1.png'}
-                alt="edit"
-                width={20}
-                height={20}
-              />
-            </button>
+          <div className='flex justify-start p-2'>
+          <p className='text-gray-600 font-bold'>User Id: {userId[user?.id]}</p>
           </div>
-          <div className="flex justify-center gap-2">
-            <button
-              onClick={() => handleDeleteComments(commentId[index])}
-              className="font-semibold"
-            >
-              <Image
-                src={'https://img.icons8.com/dotty/80/filled-trash.png'}
-                alt="edit"
-                width={20}
-                height={20}
-              />
-            </button>
+          <div className='flex justify-between p-2'>
+            <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-2">
+                <FaStar size={20} color={'yellow'} />
+                <p>{ratings[index]}</p>
+              </div>
+              <p className="max-w-[10rem]">{review}</p>
+              <button
+                onClick={() => handleEditComment(commentId, index)}
+                className="font-semibold"
+              >
+                <Image
+                  src={'https://img.icons8.com/ios/50/edit--v1.png'}
+                  alt="edit"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
+            <div className="flex justify-center gap-2">
+              <button
+                onClick={() => handleDeleteComments(commentId[index])}
+                className="font-semibold"
+              >
+                <Image
+                  src={'https://img.icons8.com/dotty/80/filled-trash.png'}
+                  alt="edit"
+                  width={20}
+                  height={20}
+                />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -118,6 +120,7 @@ export default function ProductInfoRating({ id }: any) {
       commentId,
       handleEditComment,
     },
+    userId
   };
   return (
     <>

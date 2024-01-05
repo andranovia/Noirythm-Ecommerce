@@ -65,11 +65,11 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             width={220}
             height={220}
             alt=""
-            className="w-[20rem] rounded mt-6"
+            className="w-full rounded mt-6"
           />
         )}
         {!isMobile && (
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 fixed">
             <Image
               src={productImageSrc}
               width={420}
@@ -94,8 +94,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         <div
           className={`w-full p-6 top-0 left-0 ${
             isMobile
-              ? 'mt-4'
-              : 'md:w-1/2 md:ml-[50%] md:fixed md:my-10 md:z-2000 '
+              ? 'mt-4 mb-[10rem]'
+              : 'md:w-1/2 md:ml-[50%] md:my-10 md:z-2000 '
           }`}
         >
           <p className="text-2xl font-bold mt-4">{`$${product_price}`}</p>
@@ -119,7 +119,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <div className="font-medium text-2xl ">
               <h2 className="text-gray-800">Give rating to {product_name}!</h2>
             </div>
-            <div className="mr-28  sm:flex justify-start">
+            <div className="mr-28   sm:flex justify-start">
               <ProductInfoRating id={id} />
             </div>
           </div>
