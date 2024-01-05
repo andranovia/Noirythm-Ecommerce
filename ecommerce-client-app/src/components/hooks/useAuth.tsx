@@ -29,11 +29,14 @@ export const useAuth = () => {
     {}
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [user, setUser] = useState<User | null>(
-    typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user') || 'null')
-      : null
-  );
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedUser = localStorage.getItem('user');
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -52,7 +55,7 @@ export const useAuth = () => {
     fetchUser();
   }, []);
 
-  const registerAction = (e: React.FormEvent) => {
+  const registerAction = React.useCallback((e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     let payload = {
@@ -76,9 +79,9 @@ export const useAuth = () => {
       .catch(() => {
         setIsSubmitting(false);
       });
-  };
+  }, [name, email, password, confirmPassword]);;
 
-  const loginAction = (e: React.FormEvent) => {
+  const loginAction = React.useCallback((e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     let payload = {
@@ -112,9 +115,9 @@ export const useAuth = () => {
           console.error('An error occurred:', Error);
         }
       });
-  };
+    }, [email, password]);
 
-  const logoutAction = () => {
+  const logoutAction = React.useCallback(() => {
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -140,22 +143,40 @@ export const useAuth = () => {
       .catch((error) => {
         console.error('Error during logout:', error);
       });
-  };
+  }, []);
 
-  return {
-    registerAction,
-    loginAction,
-    logoutAction,
-    user,
-    name,
-    setName,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    confirmPassword,
-    setConfirmPassword,
-    isSubmitting,
-    validationErrors,
-  };
+  return React.useMemo(
+    () => ({
+      registerAction,
+      loginAction,
+      logoutAction,
+      user,
+      name,
+      setName,
+      email,
+      setEmail,
+      password,
+      setPassword,
+      confirmPassword,
+      setConfirmPassword,
+      isSubmitting,
+      validationErrors,
+    }),
+    [
+      registerAction,
+      loginAction,
+      logoutAction,
+      user,
+      name,
+      setName,
+      email,
+      setEmail,
+      password,
+      setPassword,
+      confirmPassword,
+      setConfirmPassword,
+      isSubmitting,
+      validationErrors,
+    ]
+  );
 };

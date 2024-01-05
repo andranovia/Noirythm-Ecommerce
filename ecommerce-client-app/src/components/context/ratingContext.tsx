@@ -6,6 +6,7 @@ interface RatingData {
   commentId: number[];
   averageRating: Record<string, number>;
   productId: string;
+  userId: number[];
 }
 
 interface RatingContextProps {
@@ -22,6 +23,7 @@ export const RatingProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     commentId: [],
     averageRating: {},
     productId: '',
+    userId: [],
   });
 
  

@@ -8,25 +8,21 @@ import ProductInfoRatingCommentModal from './ProductInfoRatingCommentModal';
 import ProductInfoEditComment from './ProductInfoEditComment';
 import Image from 'next/image';
 import { useProductRating } from '@/components/hooks/useProductRating';
+import { useAuth } from '../hooks/useAuth';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
-  const {ratingData} = useRating();
+  const { user } = useAuth();
+  const { ratingData } = useRating();
   const [commentModal, setCommentModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const [selectedCommentIndex, setSelectedCommentIndex] = useState<
     number | null
   >(null);
 
-  const {
-    reviewText,
-    ratings,
-    averageRating,
-    productId,
-  } = ratingData;
-
+  const { reviewText, ratings, averageRating, productId, userId } = ratingData;
 
   const { commentId, setCommentId, handleDeleteComments } =
     useProductRating(id);
@@ -36,6 +32,7 @@ export default function ProductInfoRating({ id }: any) {
   };
 
   const productIdsSet = new Set(productId);
+  const userIdsSet = new Set(userId);
 
   const handleEditComment = (commentId: any, index: number) => {
     setIsEditing(true);
@@ -62,6 +59,8 @@ export default function ProductInfoRating({ id }: any) {
             <div className="flex justify-center gap-2">
               <FaStar size={20} color={'yellow'} />
               <p>{ratings[index]}</p>
+
+              <p>{userId[user?.id]}</p>
             </div>
             <p className="max-w-[10rem]">{review}</p>
             <button

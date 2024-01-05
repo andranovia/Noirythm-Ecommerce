@@ -54,6 +54,7 @@ class ProductReviewController extends Controller
         $rating = ProductReview::where('product_id', $id)->pluck('ratings')->toArray();
         $product_id = ProductReview::where('product_id', $id)->pluck('product_id');
         $reviewText = ProductReview::where('product_id', $id)->pluck('review_texts')->toArray();
+        $userId = ProductReview::where('product_id', $id)->pluck('user_id');
 
         return response()->json([
             'comment_id' => $commentId,
@@ -61,6 +62,7 @@ class ProductReviewController extends Controller
             'average_rating' => $averageRating,
             'review_texts' => $reviewText,
             'product_id' => $product_id,
+            'user_id' => $userId,
         ], 200);
     }
 

@@ -66,6 +66,7 @@ const Navbar: React.FC = () => {
             <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
               <div className="absolute top-0 right-0 -mr-14 p-1">
                 {isSidebarOpen && (
+                  <>
                   <button
                     onClick={() => setIsSidebarOpen(false)}
                     className="flex items-center justify-center h-12 w-12 rounded-full focus:outline-none focus:bg-gray-600"
@@ -85,6 +86,7 @@ const Navbar: React.FC = () => {
                       />
                     </svg>
                   </button>
+                  </>
                 )}
               </div>
 

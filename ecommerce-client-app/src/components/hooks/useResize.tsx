@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useResize = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
-    handleResize();
-
-    let timeoutId: ReturnType<typeof setTimeout>;
 
     const debouncedResize = () => {
       clearTimeout(timeoutId);
