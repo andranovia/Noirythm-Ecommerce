@@ -7,9 +7,9 @@ import { useAuth } from '../hooks/useAuth';
 
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  review: string;
+  review: any;
   commentId: any;
-  ratingsValues?: any
+  ratingsValues?: any;
 }
 
 const ProductInfoEditComment = ({
@@ -20,8 +20,7 @@ const ProductInfoEditComment = ({
 }: ProductInfoEditCommentProps) => {
   const [editedReview, setEditedReview] = useState(review);
   const [editedRating, setEditedRating] = useState(ratingsValues);
-  const {user} = useAuth();
-
+  const { user } = useAuth();
 
   const handleCancelEdit = () => {
     setIsEditing(false);
@@ -29,8 +28,8 @@ const ProductInfoEditComment = ({
 
   const handleSaveEdit = async () => {
     try {
-      const response = await axiosInstance.put(`/api/products/reviews/editReview/${commentId}`, {
-        rating: editedRating, 
+      axiosInstance.put(`/api/products/reviews/editReview/${commentId}`, {
+        rating: editedRating,
         review_text: editedReview,
         userId: user?.id,
       });
@@ -56,14 +55,12 @@ const ProductInfoEditComment = ({
                       name="rating"
                       className="relative left-6 opacity-0 sm:top-6 sm:left-1"
                       value={currentRating}
-                      checked={editedRating === currentRating} 
-                      onChange={() => setEditedRating(currentRating)} 
+                      checked={editedRating === currentRating}
+                      onChange={() => setEditedRating(currentRating)}
                     />
                     <FaStar
                       size={20}
-                      color={
-                        currentRating <= editedRating ? 'yellow' : 'grey'
-                      }
+                      color={currentRating <= editedRating ? 'yellow' : 'grey'}
                     />
                   </label>
                 </div>

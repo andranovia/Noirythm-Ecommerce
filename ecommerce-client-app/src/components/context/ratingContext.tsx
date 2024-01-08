@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode} from 'react';
 
 interface RatingData {
   ratings: Record<string, number>;

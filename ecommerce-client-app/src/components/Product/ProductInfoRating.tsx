@@ -21,7 +21,8 @@ export default function ProductInfoRating({ id }: any) {
   const [selectedCommentIndex, setSelectedCommentIndex] = useState<
     number | null
   >(null);
-
+  
+  
   const { reviewText, ratings, averageRating, productId, userId } = ratingData;
 
   const { commentId, setCommentId, handleDeleteComments } =
@@ -126,6 +127,7 @@ export default function ProductInfoRating({ id }: any) {
       handleEditComment,
     },
     userId,
+    userIdsSet,
   };
   return (
     <>
