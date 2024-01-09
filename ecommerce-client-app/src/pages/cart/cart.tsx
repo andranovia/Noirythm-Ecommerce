@@ -3,13 +3,14 @@ import React from 'react';
 import Cart from '../../components/cart/Cart';
 const Navbar = dynamic(() => import('@/components/navbar/Navbar'));
 import { useCart } from '@/components/hooks/useCart';
+import Layout from '@/components/layout/Layout';
 
 const CartPage = () => {
   const { userCart } = useCart();
 
   return (
-    <div>
-      <Navbar />
+    <>
+      <Layout>
       <div className="flex justify-center relative top-36 w-full sm:justify-start ">
         <div className="sm:ml-20">
           <div className="grid">
@@ -37,7 +38,8 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-    </div>
+      </Layout>
+    </>
   );
 };
 

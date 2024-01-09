@@ -1,9 +1,9 @@
-import Footer from '@/components/footer/Footer';
 import UserCheck from '@/components/home/userCheck/UserCheck';
 import Product from '@/components/product/Product';
 import { useAuth } from '@/components/hooks/useAuth';
 import { useResize } from '@/components/hooks/useResize';
 import dynamic from 'next/dynamic';
+import Layout from '../../components/layout/Layout';
 
 
 const CategoryContainer = dynamic(
@@ -17,6 +17,9 @@ export default function Home() {
 
   return (
     <>
+    <Layout>
+
+  
       <div className="bg-gray-100">
         <HomeHero />
         {isMobile && !user && <UserCheck />}
@@ -24,7 +27,8 @@ export default function Home() {
         <CategoryContainer />
         <Product  />
       </div>
-      <Footer />
+    
+      </Layout>
     </>
   );
 }

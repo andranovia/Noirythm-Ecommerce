@@ -4,11 +4,11 @@ import Avatar from '@/components/user/Avatar';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import Link from 'next/link';
 import { useAuth } from '@/components/hooks/useAuth';
-import Navbar from '@/components/navbar/Navbar';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
-import Footer from '@/components/footer/Footer';
+
 import UserInfoBarContainer from '@/components/user/UserInfoBarContainer';
 import { useResize } from '@/components/hooks/useResize';
+import Layout from '@/components/layout/Layout';
 
 const UserProfile: React.FC = () => {
   const { logoutAction, user } = useAuth();
@@ -16,7 +16,7 @@ const UserProfile: React.FC = () => {
 
   return (
     <div className="max-w-screen min-h-screen">
-      {!isMobile && <Navbar />}
+      {!isMobile && <Layout>
       <div className="sm:grid grid-cols-3 justify-center">
         <div className="col-span-1 ">
           <div className="sm:hidden">
@@ -145,7 +145,8 @@ const UserProfile: React.FC = () => {
           </>
         )}
       </div>
-      {!isMobile && <Footer />}
+      </Layout>}
+  
     </div>
   );
 };

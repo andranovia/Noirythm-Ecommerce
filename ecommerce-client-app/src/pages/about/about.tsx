@@ -1,21 +1,16 @@
-import Footer from '@/components/footer/Footer';
+
+import Layout from '@/components/layout/Layout';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const AboutHero = dynamic(
-  () => import('@/components/about/AboutHero')
-);
-const Navbar = dynamic(
-  () => import('@/components/navbar/Navbar')
-);
+const AboutHero = dynamic(() => import('@/components/about/AboutHero'));
 
 const AboutPage = () => {
   return (
     <>
-      <Navbar />
-      <AboutHero />
-      <Footer/>
-
+      <Layout>
+        <AboutHero />
+      </Layout>
     </>
   );
 };

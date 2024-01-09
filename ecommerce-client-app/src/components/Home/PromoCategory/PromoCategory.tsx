@@ -28,7 +28,7 @@ const PromoCategory = () => {
           
           <PromoProductCategory/>
           <div className='relative bottom-3 -left-2  m-10 '>
-          <Link href={'/promo/ProductPromo'}>
+          <Link href={'/category/promo'}>
           <Image
             src={'https://img.icons8.com/metro/26/forward.png'}
             alt=""
