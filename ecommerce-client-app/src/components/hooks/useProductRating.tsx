@@ -4,37 +4,36 @@ import { useRating } from '@/components/context/ratingContext';
 import { useAuth } from './useAuth';
 
 export const useProductRating = (id: any) => {
-  const { ratingData, setRatingData } = useRating();
-  const [commentId, setCommentId] = useState<number[]>([]);
+  const { setRatingData } = useRating();
   const { user } = useAuth();
 
-  const fetchProductReviews = useCallback(async () => {
-    try {
-      const response = await axiosInstance.get(`/api/products/reviews/userReview/${id}`);
-      if (response.status === 200) {
-        setRatingData((prevData) => ({
-          ...prevData,
-          ratings: response.data.ratings,
-          reviewText: Array.isArray(response.data.review_texts)
-            ? response.data.review_texts
-            : [response.data.review_texts],
-          commentId: response.data.comment_id,
-          averageRating: {
-            ...prevData.averageRating,
-            [id]: response.data.average_rating,
-          },
-          productId: response.data.product_id,
-          userId: response.data.user_id,
-        }));
-      }
-    } catch (error) {
-      console.error('Error fetching average rating and reviewText', error);
-    }
-  }, [id, setRatingData]);
-
   useEffect(() => {
+    const fetchProductReviews = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `/api/products/reviews/userReview/${id}`
+        );
+        if (response.status === 200) {
+          setRatingData((prevData) => ({
+            ...prevData,
+            ratings: response.data.ratings,
+            reviewText: (response.data.review_texts),
+            commentId: response.data.comment_id,
+            averageRating: {
+              ...prevData.averageRating,
+              [id]: response.data.average_rating,
+            },
+            productId: response.data.product_id,
+            userId: response.data.user_id,
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching average rating and reviewText', error);
+      }
+    };
+
     fetchProductReviews();
-  }, [fetchProductReviews]);
+  }, [id, setRatingData]);
 
   const handleDeleteComments = useCallback(
     (commentId: number) => {
@@ -66,7 +65,10 @@ export const useProductRating = (id: any) => {
       };
 
       try {
-        const response = await axiosInstance.post(`/api/products/reviews/${id}`, data);
+        const response = await axiosInstance.post(
+          `/api/products/reviews/${id}`,
+          data
+        );
 
         if (response.status === 201) {
           console.log('Review has been submitted successfully.');
@@ -79,7 +81,11 @@ export const useProductRating = (id: any) => {
         }
       } catch (error: any) {
         console.error('Error submitting review', error);
-        if (error.response && error.response.data && error.response.data.message) {
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
           setErrorMessage(error.response.data.message);
         } else {
           setErrorMessage('Error submitting review. Please try again later.');
@@ -90,8 +96,6 @@ export const useProductRating = (id: any) => {
   );
 
   return {
-    commentId,
-    setCommentId,
     handleDeleteComments,
     submitHandler,
     errorMessage,

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode} from 'react';
 
 interface RatingData {
-  ratings: Record<string, number>;
+  ratings: number[];
   reviewText: string[];
   commentId: number[];
   averageRating: Record<string, number>;
@@ -18,7 +18,7 @@ const RatingContext = createContext<RatingContextProps | undefined>(undefined);
 
 export const RatingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [ratingData, setRatingData] = useState<RatingData>({
-    ratings: {},
+    ratings: [],
     reviewText: [],
     commentId: [],
     averageRating: {},
