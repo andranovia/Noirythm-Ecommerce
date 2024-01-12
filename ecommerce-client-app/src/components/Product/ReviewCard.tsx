@@ -6,17 +6,15 @@ import { useAuth } from '../hooks/useAuth';
 
 import ProductInfoEditComment from './ProductInfoEditComment';
 
-const ReviewCard = ({ index, review, id, handleDeleteComments}: any) => {
+const ReviewCard = ({ index, review, handleDeleteComments}: any) => {
   const { ratingData } = useRating();
   const { ratings, userId, commentId } = ratingData;
   const [isEditing, setIsEditing] = useState(false);
   const { user } = useAuth();
-
-
-
   const [selectedCommentIndex, setSelectedCommentIndex] = useState<
     number | null
   >(null);
+  
 
   const userIdsSet = new Set(userId);
 
@@ -25,6 +23,7 @@ const ReviewCard = ({ index, review, id, handleDeleteComments}: any) => {
     setSelectedCommentIndex(index);
   };
 
+  
 
   return (
     <>

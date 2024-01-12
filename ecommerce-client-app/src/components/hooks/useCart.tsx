@@ -19,7 +19,9 @@ export const useCart = () => {
   const { user } = useAuth();
   const [userCart, setUserCart] = useState<CartData>({ cartProducts: [] });
 
-  const fetchCart = useCallback(async () => {
+
+  useEffect(() => {
+  const fetchCart = async () => {
     try {
       if (user) {
         const response = await getCart(user);
@@ -30,11 +32,8 @@ export const useCart = () => {
     } catch (error) {
       console.error('Error fetching cart:', error);
     }
-  }, [user]);
-
-  useEffect(() => {
-    fetchCart();
-  }, [fetchCart]);
+    
+}}, [user]);
 
   const addToCart = useCallback(
     async (productId: any) => {
