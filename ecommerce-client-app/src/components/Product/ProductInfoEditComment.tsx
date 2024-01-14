@@ -4,6 +4,8 @@ import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import { FaStar } from 'react-icons/fa';
 import { useAuth } from '../hooks/useAuth';
+import { useProductRating } from '../hooks/useProductRating';
+import { useRating } from '../context/ratingContext';
 
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,7 +23,7 @@ const ProductInfoEditComment = ({
   const [editedReview, setEditedReview] = useState(review);
   const [editedRating, setEditedRating] = useState(ratingsValues);
   const { user } = useAuth();
-
+  const { setIsChangesSaved, isChangesSaved } = useRating();
   const handleCancelEdit = () => {
     setIsEditing(false);
   };
@@ -34,11 +36,12 @@ const ProductInfoEditComment = ({
         userId: user?.id,
       });
       setIsEditing(false);
+      setIsChangesSaved(true);
     } catch (error) {
       console.error(error);
     }
   };
-
+  {console.log(isChangesSaved)}
   return (
     <div className="fixed z-20 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-10 rounded-lg">
@@ -77,6 +80,15 @@ const ProductInfoEditComment = ({
           <ButtonSecondary onClick={handleCancelEdit}>Close</ButtonSecondary>
           <ButtonPrimary onClick={handleSaveEdit}>Save</ButtonPrimary>
         </div>
+        {isChangesSaved && (
+          <>
+            <div className="fixed bg-gray-500 w-screen border-black h-40 bottom-0">
+              <div className="p-2">
+                <p>bang udah kekirim</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

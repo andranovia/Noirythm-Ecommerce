@@ -1,4 +1,12 @@
-import React, { createContext, useContext, useState, ReactNode} from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+  useMemo,
+} from 'react';
 
 interface RatingData {
   ratings: number[];
@@ -12,33 +20,46 @@ interface RatingData {
 interface RatingContextProps {
   ratingData: RatingData;
   setRatingData: React.Dispatch<React.SetStateAction<RatingData>>;
+  isChangesSaved: boolean;
+  setIsChangesSaved: Dispatch<SetStateAction<boolean>>;
 }
 
 const RatingContext = createContext<RatingContextProps | undefined>(undefined);
 
-export const RatingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [ratingData, setRatingData] = useState<RatingData>({
-    ratings: [],
-    reviewText: [],
-    commentId: [],
-    averageRating: {},
-    productId: '',
-    userId: [],
-  });
+export const RatingProvider: React.FC<{ children: ReactNode }> = React.memo(
+  ({ children }) => {
+    const [ratingData, setRatingData] = useState<RatingData>({
+      ratings: [],
+      reviewText: [],
+      commentId: [],
+      averageRating: {},
+      productId: '',
+      userId: [],
+    });
+    const [isChangesSaved, setIsChangesSaved] = useState(false);
+    const memoizedRatingData = useMemo(() => ratingData, [ratingData]);
 
- 
-  const contextValue: RatingContextProps = {
-    ratingData,
-    setRatingData,
-  };
-  
+    const contextValue: RatingContextProps = useMemo(() => {
+      return {
+        ratingData: memoizedRatingData,
+        setRatingData,
+        isChangesSaved,
+        setIsChangesSaved: (value) => {
+          setIsChangesSaved(value);
+          setTimeout(() => {
+            setIsChangesSaved(false);
+          }, 3000);
+        },
+      };
+    }, [memoizedRatingData, isChangesSaved]);
 
-  return (
-    <RatingContext.Provider value={contextValue}>
-      {children}
-    </RatingContext.Provider>
-  );
-};
+    return (
+      <RatingContext.Provider value={contextValue}>
+        {children}
+      </RatingContext.Provider>
+    );
+  }
+);
 
 export const useRating = (): RatingContextProps => {
   const context = useContext(RatingContext);

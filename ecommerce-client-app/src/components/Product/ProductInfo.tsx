@@ -8,6 +8,7 @@ import { useCart } from '../hooks/useCart';
 import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
+import { useRating } from '../context/ratingContext';
 
 interface ProductInfoProps {
   product: {
@@ -25,6 +26,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { addToCart } = useCart();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const router = useRouter();
+  const {isChangesSaved} = useRating();
+
 
   const {
     id,
@@ -124,6 +127,15 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </div>
           </div>
         </div>
+        {isChangesSaved && (
+          <>
+            <div className="fixed bg-emerald-600 w-[16rem] h-14 rounded-md bottom-14 mb-10">
+              <div className="p-4 flex justify-center items-center">
+                <p className='text-md font-bold text-white'>Changes Saved </p>
+              </div>
+            </div>
+          </>
+        )}
         {isMobile && (
           <div
             className="mt-6 flex justify-center items-center bg-white p-5 font-medium"

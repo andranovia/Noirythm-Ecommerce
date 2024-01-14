@@ -4,8 +4,9 @@ import { useRating } from '@/components/context/ratingContext';
 import { useAuth } from './useAuth';
 
 export const useProductRating = (id: any) => {
-  const { setRatingData } = useRating();
+  const { setRatingData, setIsChangesSaved } = useRating();
   const { user } = useAuth();
+
 
   useEffect(() => {
     const fetchProductReviews = async () => {
@@ -17,7 +18,7 @@ export const useProductRating = (id: any) => {
           setRatingData((prevData) => ({
             ...prevData,
             ratings: response.data.ratings,
-            reviewText: (response.data.review_texts),
+            reviewText: response.data.review_texts,
             commentId: response.data.comment_id,
             averageRating: {
               ...prevData.averageRating,
@@ -43,11 +44,14 @@ export const useProductRating = (id: any) => {
             userId: user?.id,
           },
         })
+        .then(() => {
+          setIsChangesSaved(true);
+        })
         .catch((error) => {
           console.error('Error deleting rating and review text', error);
         });
     },
-    [user?.id]
+    [user?.id, setIsChangesSaved]
   );
 
   const [userRating, setUserRating] = useState(0);
@@ -75,6 +79,7 @@ export const useProductRating = (id: any) => {
           setUserRating(0);
           setReviewUserText('');
           setErrorMessage('');
+          setIsChangesSaved(true);
         } else {
           console.log('Review submission was not successful.');
           setErrorMessage('Review submission was not successful.');
