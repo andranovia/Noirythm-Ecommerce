@@ -1,18 +1,32 @@
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useRating } from '../context/ratingContext';
 import ProductInfoRatingInput from './ProductInfoRatingInput';
 import ReviewCard from './ReviewCard';
 import { useProductRating } from '../hooks/useProductRating';
 import { useAuth } from '../hooks/useAuth';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function ProductInfoRating({ id }: any) {
   const [rateColor] = useState(null);
   const { user } = useAuth();
   const { ratingData } = useRating();
   const [commentModal, setCommentModal] = useState(false);
+  const searchParams = useSearchParams();
+
+  const queryToString = useCallback(
+    (id: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(id, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const { handleDeleteComments } = useProductRating(id);
 
   const averageRoundedRating = Math.round(ratingData.averageRating[id]);
@@ -23,7 +37,7 @@ export default function ProductInfoRating({ id }: any) {
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
   };
-
+  
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < averageRoundedRating; i++) {
@@ -59,7 +73,9 @@ export default function ProductInfoRating({ id }: any) {
             {renderRating()}
           </div>
           <div className="sm:mt-[3rem] mt-[4rem]">
-            <ButtonSecondary>Show others</ButtonSecondary>
+            <Link href={'/review' + '/others' + '?' + queryToString('id', id)}>
+              <ButtonSecondary>Show others</ButtonSecondary>
+            </Link>
           </div>
         </div>
       </>

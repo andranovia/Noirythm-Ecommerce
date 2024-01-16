@@ -40,7 +40,7 @@ const UserProfile: React.FC = () => {
           <div className="m-10 mt-16  sm:mt-24 sm:mx-32 sm:shadow-md sm:p-4 rounded-md flex flex-col justify-between">
             <div className=" mb-10 sm:mb-4 justify-center flex flex-col sm:flex-row sm:justify-start gap-2 items-center sm:w-fit ">
               <div className="sm:w-10 w-20">
-                <Avatar imgSrc="https://img.icons8.com/ios-filled/50/4D4D4D/user-male-circle.png" />
+                <Avatar imgSrc="https://img.icons8.com/ios-filled/50/4D4D4D/user-male-circle.png" height={120} width={120} />
               </div>
               {!isMobile && <h2 className="font-semibold">{user?.name}</h2>}
 

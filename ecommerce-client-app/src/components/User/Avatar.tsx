@@ -3,17 +3,19 @@ import React from 'react';
 
 type AvatarType = {
     imgSrc: string
+    width? : any,
+    height? : any,
 }
 
 
-const Avatar = ({imgSrc}: AvatarType) => {
+const Avatar = ({imgSrc, width, height,}: AvatarType) => {
   return (
     <div className="flex justify-center rounded-full">
       <Image
         src={imgSrc}
         alt="user-profile"
-        height={120}
-        width={120}
+        height={width}
+        width={height}
         className="w-20"
       />
     </div>

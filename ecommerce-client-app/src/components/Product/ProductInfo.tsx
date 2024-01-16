@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import NavbarComponent from '@/components/navbar/Navbar';
 import { MdAddShoppingCart } from 'react-icons/md';
@@ -24,7 +24,6 @@ interface ProductInfoProps {
 export default function ProductInfo({ product }: ProductInfoProps) {
   const [isMobile, setIsMobile] = React.useState(false);
   const { addToCart } = useCart();
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const router = useRouter();
   const {isChangesSaved} = useRating();
 
@@ -153,7 +152,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <ButtonSecondary
               onClick={() => {
                 addToCart(id);
-                setIsAddedToCart(true);
               }}
             >
               Add to <MdAddShoppingCart />
