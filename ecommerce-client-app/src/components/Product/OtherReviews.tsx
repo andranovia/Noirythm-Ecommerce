@@ -14,8 +14,8 @@ function OtherReviews() {
   const averageRoundedRating = Math.round(ratingData.averageRating[id]);
 
   return (
-    <div className="w-full h-full ">
-      <div className="flex flex-col justify-center items-center gap-2 ">
+    <div className="w-full h-full sm:flex flex-col gap-20">
+      <div className="flex flex-col  justify-center items-center gap-2 ">
         <div className="flex justify-center items-center gap-2 my-2">
           <FaStar size={24} color={'yellow'} />
           <p className="font-bold text-5xl">

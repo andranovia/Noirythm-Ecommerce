@@ -74,7 +74,30 @@ const ReviewCard = ({ index, review, handleDeleteComments }: any) => {
       ) : null}
       {isShowMenu && (
         <>
-
+          <div className="fixed z-20 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex flex-col justify-end items-center">
+            <div className="bg-white w-screen h-fit p-4 absolute  ">
+              <Image
+                src={'https://img.icons8.com/ios/50/multiply.png'}
+                alt="cancel"
+                height={34}
+                width={34}
+                className='opacity-70'
+             />
+              <div className="flex flex-col m-2 mt-4 gap-2 font-bold text-md text-gray-800 ">
+              {userIdsSet.has(user?.id) ? (
+              <>
+                <button onClick={() => handleDeleteComments(commentId[index])} >
+                  <p className=' text-start'>Delete Review</p>
+                  
+                </button>
+                <button onClick={() => handleEditComment(index)}>
+                  <p className=' text-start'>Edit Review</p>
+                </button>
+                </>
+            ) : null}
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>

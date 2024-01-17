@@ -80,7 +80,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               className="relative w-full h-[50rem] object-cover z-1  md:mb-0"
             />
             {!isMobile && (
-              <div className="flex justify-start items-center fixed bottom-10 left-40  bg-white rounded-md p-5 font-medium ">
+              <div className="flex justify-start z-2 items-center fixed bottom-10 left-40  bg-white rounded-md p-5 font-medium ">
                 <div className="flex justify-center items-center mr-5">
                   <BsChatLeftText className="w-7 h-7" />
                 </div>
@@ -97,7 +97,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           className={`w-full p-6 top-0 left-0 ${
             isMobile
               ? 'mt-4 mb-[10rem]'
-              : 'md:w-1/2 md:ml-[50%] md:my-10 md:z-2000 '
+              : 'md:w-1/2 md:ml-[50%] md:my-10  '
           }`}
         >
           <p className="text-2xl font-bold mt-4">{`$${product_price}`}</p>
@@ -143,7 +143,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               bottom: 0,
               left: 0,
               right: 0,
-              zIndex: 1000,
+              zIndex: 10,
             }}
           >
             <div className="flex justify-center items-center mr-5">
