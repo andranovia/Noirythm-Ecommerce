@@ -28,7 +28,7 @@ const DashboardSidebar = () => {
         <div className="mt-10 text-gray-600">
           <h2 className="font-bold text-md  px-2">Pages</h2>
 
-          <div className="flex justify-start gap-4 my-4 rounded-full bg-white p-2">
+          <div className="flex justify-start gap-4 my-4 rounded-full bg-blue-200 p-2">
             <Image
               src={'https://img.icons8.com/ios/50/dashboard.png'}
               alt="icon"

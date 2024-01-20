@@ -8,7 +8,7 @@ interface DashboardLayoutProps {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
     <>
-      <div className="flex justify-start h-screen w-screen bg-blue-100">
+      <div className="flex justify-start h-screen w-screen ">
         <div className="w-1/5">
           <DashboardSidebar />
         </div>

@@ -1,16 +1,16 @@
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import React from 'react';
 
-const admin = () => {
+const Admin = () => {
   return (
     <>
       <DashboardLayout>
         <div className='bg-white w-full h-full'>
          
-          </div>
+        </div>
       </DashboardLayout>
     </>
   );
 };
 
-export default admin;
+export default Admin;

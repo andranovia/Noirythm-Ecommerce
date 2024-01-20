@@ -33,6 +33,7 @@ export const useCart = () => {
       console.error('Error fetching cart:', error);
     }
     
+    fetchCart();
 }}, [user]);
 
   const addToCart = useCallback(

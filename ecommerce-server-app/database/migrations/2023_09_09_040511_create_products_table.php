@@ -11,7 +11,7 @@ class CreateProductsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('clothProducts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('product_name'); 
             $table->text('product_description');
@@ -20,24 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('promo_text')->nullable(); 
             $table->timestamps();
         });
-         Schema::create('trouserProducts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('product_name'); 
-            $table->text('product_description');
-            $table->decimal('product_price', 8, 2);
-            $table->string('product_image');
-            $table->string('promo_text')->nullable(); 
-            $table->timestamps();
-        });
-        Schema::create('shoesProducts', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('product_name'); 
-            $table->text('product_description');
-            $table->decimal('product_price', 8, 2);
-            $table->string('product_image');
-            $table->string('promo_text')->nullable(); 
-            $table->timestamps();
-        });
+        
     }
 
     /**
@@ -45,8 +28,6 @@ class CreateProductsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clothProducts');
-        Schema::dropIfExists('trouserProducts');
-        Schema::dropIfExists('shoesProducts');
+        Schema::dropIfExists('products');
     }
 }
