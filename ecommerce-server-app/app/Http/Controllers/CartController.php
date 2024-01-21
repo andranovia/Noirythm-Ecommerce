@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\CartItem;
-use App\Models\ClothProduct;
-use App\Models\ShoesProduct;
-use App\Models\TrouserProduct;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,13 +25,8 @@ class CartController extends Controller
         $products = [];
 
         foreach ($cartItems as $productId) {
-            $product = ClothProduct::find($productId);
-            if (!$product) {
-                $product = TrouserProduct::find($productId);
-            }
-            if (!$product) {
-                $product = ShoesProduct::find($productId);
-            }
+            $product = Product::find($productId);
+           
 
             if ($product) {
                 $products[] = $product;
@@ -55,14 +48,8 @@ class CartController extends Controller
         }
 
         $product = null;
-        $product = ClothProduct::find($productId);
-        if (!$product) {
-            $product = TrouserProduct::find($productId);
-        }
-        if (!$product) {
-            $product = ShoesProduct::find($productId);
-        }
-
+        $product = Product::find($productId);
+       
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
         }

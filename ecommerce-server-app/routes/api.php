@@ -19,16 +19,8 @@ use App\Http\Controllers\ProductPromoController;
 */
 
 Route::prefix('products')->group(function () {
-    Route::get('cloth', [ProductController::class, 'clothIndex']);
-    Route::get('cloth/{id}', [ProductController::class, 'clothShow']);
-
-
-    Route::get('trouser', [ProductController::class, 'trouserIndex']);
-    Route::get('trouser/{id}', [ProductController::class, 'trouserShow']);
-
-
-    Route::get('shoes', [ProductController::class, 'shoesIndex']);
-    Route::get('shoes/{id}', [ProductController::class, 'shoesShow']);
+    Route::get('product', [ProductController::class, 'index']);
+    Route::get('product/{id}', [ProductController::class, 'productShow']);
 
 
     Route::delete('reviews/deleteReview/{id}', [ProductReviewController::class, 'deleteReview']);
