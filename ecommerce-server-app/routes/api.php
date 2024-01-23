@@ -25,7 +25,6 @@ Route::prefix('products')->group(function () {
 
     Route::delete('reviews/deleteReview/{id}', [ProductReviewController::class, 'deleteReview']);
     Route::get('reviews/userReview/{id}', [ProductReviewController::class, 'showReview']);
-
     Route::put('reviews/editReview/{id}', [ProductReviewController::class, 'updateReview']);
     Route::post('reviews/{id}', [ProductReviewController::class, 'storeReview']);
 

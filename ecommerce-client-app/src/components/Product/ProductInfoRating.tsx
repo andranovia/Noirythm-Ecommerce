@@ -37,7 +37,7 @@ export default function ProductInfoRating({ id }: any) {
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
   };
-  
+
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < averageRoundedRating; i++) {
@@ -58,39 +58,33 @@ export default function ProductInfoRating({ id }: any) {
     ));
   };
 
-  const reviewContent =
-    productIdsSet.has(id) && userIdsSet.has(user?.id) ? (
-      <>
-        <div className="flex justify-start gap-2 mt-4">{renderStars()}</div>
-        <div className="my-6">
-          <p className="w-fit text-sm font-bold ">
-            average rating is {averageRoundedRating} star
-          </p>
-        </div>
+  const reviewContent = productIdsSet.has(id) ? (
+    <>
+      <div className="flex justify-start gap-2 mt-4">{renderStars()}</div>
+      <div className="my-6">
+        <p className="w-fit text-sm font-bold ">
+          average rating is {averageRoundedRating} star
+        </p>
+      </div>
 
-        <div className="bg-gray-300 w-[17rem] h-2 relative mt-4 mb-[4rem]">
-          <div className="relative top-10 sm:top-6 sm:grid sm:gap-40 grid-cols-2">
-            {renderRating()}
-          </div>
-          <div className="sm:mt-[3rem] mt-[4rem]">
-            <Link href={'/review' + '/others' + '?' + queryToString('id', id)}>
-              <ButtonSecondary>Show others</ButtonSecondary>
-            </Link>
-          </div>
+      <div className="bg-gray-300 w-[17rem] h-2 relative mt-4 mb-[4rem]">
+        <div className="relative top-10 sm:top-6 sm:grid sm:gap-40 grid-cols-2">
+          {renderRating()}
         </div>
-      </>
-    ) : (
-      <>
-        <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
-          <h1 className="">there is currently no comments</h1>
+        <div className="sm:mt-[3rem] mt-[4rem]">
+          <Link href={'/review' + '/others' + '?' + queryToString('id', id)}>
+            <ButtonSecondary>Show others</ButtonSecondary>
+          </Link>
         </div>
-        <div className={'relative mt-10'}>
-          <ButtonPrimary onClick={() => handleModalToggle(true)}>
-            Give your opinions
-          </ButtonPrimary>
-        </div>
-      </>
-    );
+      </div>
+    </>
+  ) : (
+    <>
+      <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
+        <h1 className="">there is currently no comments</h1>
+      </div>
+    </>
+  );
 
   return (
     <>
@@ -108,6 +102,19 @@ export default function ProductInfoRating({ id }: any) {
             </>
           )}
         </div>
+        {userIdsSet.has(user?.id) ? (
+          <div className={'relative mt-10'}>
+            <ButtonPrimary onClick={() => handleModalToggle(true)}>
+              Give your opinions
+            </ButtonPrimary>
+          </div>
+        ) : (
+          <div className={'relative mt-10'}>
+            <Link href={'/auth/login'}>
+              <ButtonPrimary>Login</ButtonPrimary>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
