@@ -2,11 +2,8 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 
-const ClothProduct = dynamic(() => import('@/components/product/ClothProduct'));
-const ShoesProduct = dynamic(() => import('@/components/product/ShoesProduct'));
-const TrouserProduct = dynamic(
-  () => import('@/components/product/TrouserProduct')
-);
+const ProductData = dynamic(() => import('@/components/product/ProductData'));
+
 
 const AllCategory: React.FC = () => {
   
@@ -20,9 +17,7 @@ const AllCategory: React.FC = () => {
             Selected Category:{' '}
             <span className="text-blue-500">All Category</span>
           </p>
-          <ClothProduct className={''} desc={true} />
-          <ShoesProduct className={''} desc={true} />
-          <TrouserProduct className={''} desc={true} />
+          <ProductData className={''} desc={true} />
         </div>
    
     </div>

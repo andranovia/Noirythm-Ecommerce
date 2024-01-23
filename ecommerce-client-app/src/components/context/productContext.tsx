@@ -1,4 +1,13 @@
-import React, { createContext, useState, useContext, ReactNode, Dispatch, SetStateAction } from 'react';
+import axiosInstance from '@/utils/api';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+} from 'react';
 
 interface ProductItem {
   product_name: string;
@@ -7,6 +16,7 @@ interface ProductItem {
   product_description: string;
   id: string;
   promo_text: string;
+  product_type: string;
 }
 
 interface ProductContextProps {
@@ -16,18 +26,44 @@ interface ProductContextProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-const ProductContext = createContext<ProductContextProps | undefined>(undefined);
+const ProductContext = createContext<ProductContextProps | undefined>(
+  undefined
+);
 
-export const ProductProvider: React.FC<{ children: ReactNode }> = React.memo(({ children }) => {
-  const [productItems, setProductItems] = useState<ProductItem[]>([]);
-  const [loading, setLoading] = useState(true); 
+export const ProductProvider: React.FC<{ children: ReactNode }> = React.memo(
+  ({ children }) => {
+    const [productItems, setProductItems] = useState<ProductItem[]>([]);
+    const [loading, setLoading] = useState(true);
 
-  return (
-    <ProductContext.Provider value={{ productItems, setProductItems, loading, setLoading }}>
-      {children}
-    </ProductContext.Provider>
-  );
-});
+    const sleep = (ms: number) =>
+      new Promise((resolve) => setTimeout(resolve, ms));
+
+    useEffect(() => {
+      const fetchProductItems = async () => {
+        try {
+          setLoading(true);
+          const response = await axiosInstance.get('/api/products/product');
+          setProductItems(response.data);
+        } catch (error) {
+          console.error('Error fetching clothing items:', error);
+        } finally {
+          await sleep(1000);
+          setLoading(false);
+        }
+      };
+
+      fetchProductItems();
+    }, []);
+
+    return (
+      <ProductContext.Provider
+        value={{ productItems, setProductItems, loading, setLoading }}
+      >
+        {children}
+      </ProductContext.Provider>
+    );
+  }
+);
 
 export const useProductContext = (): ProductContextProps => {
   const context = useContext(ProductContext);

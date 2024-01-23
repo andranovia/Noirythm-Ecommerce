@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import Layout from '@/components/layout/Layout';
 
-const ShoesProduct = dynamic(() => import('@/components/product/ShoesProduct'));
+const ProductData = dynamic(() => import('@/components/product/ProductData'));
 
 const CategoryClothPage: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const CategoryClothPage: React.FC = () => {
           <p className="text-lg">
             Selected Category: <span className="text-blue-500">Shoes</span>
           </p>
-          <ShoesProduct className={''} desc={true} />
+          <ProductData className={''} desc={true} productTypeFilter='shoe'/>
         </div>
   
     </div>
