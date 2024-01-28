@@ -2,7 +2,7 @@ import axiosInstance from '@/utils/api';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { getUser } from '../utils/auth';
+import { getUser } from '../components/utils/auth';
 
 interface ValidationErrors {
   name?: string[];

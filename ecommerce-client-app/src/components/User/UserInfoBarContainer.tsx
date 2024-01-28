@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import AvatarInfoBar from './AvatarInfoBar';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 const UserInfoBarContainer = () => {
   const { user } = useAuth();

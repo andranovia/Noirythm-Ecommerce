@@ -6,6 +6,11 @@ import ApplicationLogo from '../logo/AplicationLogo';
 const navbarData = [
 
   {
+    id: 'Dashboard',
+    name: 'Dashboard',
+    icon: 'https://img.icons8.com/ios/50/dashboard.png',
+  },
+  {
     id: 'E-Commerce',
     name: 'E-Commerce',
     icon: 'https://img.icons8.com/ios/50/shop.png',
@@ -20,30 +25,18 @@ const navbarData = [
 const DashboardSidebar = () => {
   return (
     <>
-      <div className="flex justify-center flex-col m-6">
-        <div className="flex  justify-start items-center ">
+      <div className="flex justify-center flex-col m-6 ">
+        <div className="flex  justify-start items-center mx-6 mt-4  ">
           <ApplicationLogo className="h-10 w-12" />
           <h2 className="font-bold text-2xl text-black px-4">Noirythm</h2>
         </div>
-        <div className="mt-10 text-gray-600">
-          <h2 className="font-bold text-md  px-2">Pages</h2>
-
-          <div className="flex justify-start gap-4 my-4 rounded-full bg-blue-200 p-2">
-            <Image
-              src={'https://img.icons8.com/ios/50/dashboard.png'}
-              alt="icon"
-              height={20}
-              width={30}
-            />
-            <p className="text-lg font-bold text-black">{'Dashboard'}</p>
-          </div>
-
+        <div className="mt-10 text-gray-500">
           {navbarData.map((data, index) => (
             <React.Fragment key={index}>
               <Link href={data.id}>
-                <div className="flex justify-start gap-4 my-4 p-2">
-                  <Image src={data.icon} alt="icon" height={20} width={30} />
-                  <p className="text-lg font-medium ">{data.name}</p>
+                <div className="flex justify-start items-center gap-4 my-4 p-2">
+                  <Image src={data.icon} alt="icon" height={14} width={24} className='w-6 h-6'/>
+                  <p className="text-[1rem] font-medium ">{data.name}</p>
                 </div>
               </Link>
             </React.Fragment>

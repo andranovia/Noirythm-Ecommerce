@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { useResize } from '@/components/hooks/useResize';
+import { useResize } from '@/hooks/useResize';
 
 interface Category {
   title: string;

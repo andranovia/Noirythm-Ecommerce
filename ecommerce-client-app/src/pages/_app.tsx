@@ -1,7 +1,7 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { RatingProvider } from '@/components/context/ratingContext';
-import { ProductProvider } from '@/components/context/productContext';
+import { RatingProvider } from '@/contexts/ratingContext';
+import { ProductProvider } from '@/contexts/productContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useRating } from '../context/ratingContext';
-import { useProductRating } from '../hooks/useProductRating';
+import { useRating } from '../../contexts/ratingContext';
+import { useProductRating } from '../../hooks/useProductRating';
 import ReviewCard from './ReviewCard';
 import { FaStar } from 'react-icons/fa';
 

@@ -6,10 +6,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ButtonSecondary from '../button/ButtonSecondary';
-import { useResize } from '../hooks/useResize';
+import { useResize } from '../../hooks/useResize';
 
 const NavbarDropdown = dynamic(() => import('./NavbarDropdown'));
 const NavbarSearch = dynamic(() => import('./NavbarSearch'));

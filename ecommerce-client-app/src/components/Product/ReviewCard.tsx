@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { useRating } from '../context/ratingContext';
-import { useAuth } from '../hooks/useAuth';
+import { useRating } from '../../contexts/ratingContext';
+import { useAuth } from '../../hooks/useAuth';
 
 import ProductInfoEditComment from './ProductInfoEditComment';
 import Avatar from '../user/Avatar';

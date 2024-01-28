@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../../hooks/useCart';
 import ButtonPrimary from '../button/ButtonPrimary';
 
 interface Item {

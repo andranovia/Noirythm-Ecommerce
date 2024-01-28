@@ -1,6 +1,6 @@
 
 import PromoProduct from '@/components/product/PromoProduct';
-import { useResize } from '@/components/hooks/useResize';
+import { useResize } from '@/hooks/useResize';
 import React from 'react';
 
 const PromoProductCategory = () => {

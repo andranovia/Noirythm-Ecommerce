@@ -6,7 +6,7 @@ import AuthLabel from '@/components/auth/AuthLabel';
 import AuthInput from '@/components/auth/AuthInput';
 import AuthInputError from '@/components/auth/AuthInputError';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
-import { useAuth } from '@/components/hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth';
 
 function Register() {
   const {

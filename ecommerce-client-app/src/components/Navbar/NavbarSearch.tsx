@@ -26,12 +26,10 @@ const NavbarSearch = () => {
       const response = await axiosInstance.get(
         `/api/search?query=${searchQuery}`
       );
-      const { clothProducts, shoesProducts, trousersProducts } = response.data;
+      const { products } = response.data;
 
       const allProducts = [
-        ...clothProducts,
-        ...shoesProducts,
-        ...trousersProducts,
+        ...products
       ];
 
       if (Array.isArray(allProducts)) {

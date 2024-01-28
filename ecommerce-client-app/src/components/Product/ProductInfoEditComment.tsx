@@ -3,8 +3,8 @@ import axiosInstance from '@/utils/api';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import { FaStar } from 'react-icons/fa';
-import { useAuth } from '../hooks/useAuth';
-import { useRating } from '../context/ratingContext';
+import { useAuth } from '../../hooks/useAuth';
+import { useRating } from '../../contexts/ratingContext';
 
 interface ProductInfoEditCommentProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;

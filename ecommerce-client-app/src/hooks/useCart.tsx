@@ -1,5 +1,5 @@
 import axiosInstance from '@/utils/api';
-import { getCart } from '../utils/getCart';
+import { getCart } from '../components/utils/getCart';
 import { useAuth } from './useAuth';
 import { useEffect, useState, useCallback } from 'react';
 

@@ -1,9 +1,9 @@
 import React, {useState } from 'react';
 import Image from 'next/image';
-import { useRating } from '../context/ratingContext';
+import { useRating } from '../../contexts/ratingContext';
 import { FaStar } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { useResize } from '../hooks/useResize';
+import { useResize } from '../../hooks/useResize';
 
 interface ProductItem {
   product_name: string;

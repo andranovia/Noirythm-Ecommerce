@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import axiosInstance from '@/utils/api';
-import { useRating } from '@/components/context/ratingContext';
+import { useRating } from '@/contexts/ratingContext';
 import { useAuth } from './useAuth';
 
 export const useProductRating = (id: any) => {

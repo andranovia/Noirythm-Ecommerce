@@ -1,10 +1,9 @@
 import UserCheck from '@/components/home/userCheck/UserCheck';
 import Product from '@/components/product/Product';
-import { useAuth } from '@/components/hooks/useAuth';
-import { useResize } from '@/components/hooks/useResize';
+import { useAuth } from '@/hooks/useAuth';
+import { useResize } from '@/hooks/useResize';
 import dynamic from 'next/dynamic';
 import Layout from '../../components/layout/Layout';
-
 
 const CategoryContainer = dynamic(
   () => import('@/components/home/category/CategoryContainer')
@@ -12,22 +11,19 @@ const CategoryContainer = dynamic(
 const HomeHero = dynamic(() => import('@/components/home/homeHero/HomeHero'));
 
 export default function Home() {
-  const {isMobile} = useResize(); 
+  const { isMobile } = useResize();
   const { user } = useAuth();
 
   return (
     <>
-    <Layout>
+      <Layout>
+        <div className="bg-gray-100">
+          <HomeHero />
+          {isMobile && !user && <UserCheck />}
 
-  
-      <div className="bg-gray-100">
-        <HomeHero />
-        {isMobile && !user && <UserCheck />}
-
-        <CategoryContainer />
-        <Product  />
-      </div>
-    
+          <CategoryContainer />
+          <Product />
+        </div>
       </Layout>
     </>
   );

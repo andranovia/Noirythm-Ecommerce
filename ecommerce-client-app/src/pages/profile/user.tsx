@@ -3,11 +3,11 @@ import Image from 'next/image';
 import Avatar from '@/components/user/Avatar';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import Link from 'next/link';
-import { useAuth } from '@/components/hooks/useAuth';
+import { useAuth } from '@/hooks/useAuth';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 
 import UserInfoBarContainer from '@/components/user/UserInfoBarContainer';
-import { useResize } from '@/components/hooks/useResize';
+import { useResize } from '@/hooks/useResize';
 import Layout from '@/components/layout/Layout';
 
 const UserProfile: React.FC = () => {

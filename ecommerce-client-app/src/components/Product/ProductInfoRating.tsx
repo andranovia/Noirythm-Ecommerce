@@ -2,11 +2,11 @@ import ButtonPrimary from '@/components/button/ButtonPrimary';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import React, { useCallback, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { useRating } from '../context/ratingContext';
+import { useRating } from '../../contexts/ratingContext';
 import ProductInfoRatingInput from './ProductInfoRatingInput';
 import ReviewCard from './ReviewCard';
-import { useProductRating } from '../hooks/useProductRating';
-import { useAuth } from '../hooks/useAuth';
+import { useProductRating } from '../../hooks/useProductRating';
+import { useAuth } from '../../hooks/useAuth';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 

@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Home/Hero/HeroCarousel", "src/components/hooks/useResize"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Home/Hero/HeroCarousel", "src/hooks/useResize"],
   "exclude": ["node_modules"]
 }

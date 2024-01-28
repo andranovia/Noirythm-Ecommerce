@@ -4,11 +4,11 @@ import NavbarComponent from '@/components/navbar/Navbar';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../../hooks/useCart';
 import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
-import { useRating } from '../context/ratingContext';
+import { useRating } from '../../contexts/ratingContext';
 
 interface ProductInfoProps {
   product: {

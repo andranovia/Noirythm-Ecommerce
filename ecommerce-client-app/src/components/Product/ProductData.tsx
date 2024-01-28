@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from '@/components/product/ProductCard';
-import { useProductContext } from '../context/productContext';
+import { useProductContext } from '../../contexts/productContext';
 
 interface ClothProductProps {
   maxItems?: number;
