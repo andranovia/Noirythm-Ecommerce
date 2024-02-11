@@ -2,6 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import axiosInstance from '@/utils/api';
 import { useRating } from '@/contexts/ratingContext';
 import { useAuth } from './useAuth';
+import axios from 'axios';
+
+
+
+
 
 export const useProductRating = (id: any) => {
   const { setRatingData, setIsChangesSaved } = useRating();
@@ -27,14 +32,23 @@ export const useProductRating = (id: any) => {
             productId: response.data.product_id,
             userId: response.data.user_id,
           }));
+        } else if (response.status === 404) {
+          console.log('No reviews found for the specified user and products.');
         }
       } catch (error) {
-        console.error('Error fetching average rating and reviewText', error);
+        if (axios.isAxiosError(error) && error.response && error.response.status === 404) {
+
+          console.log('No reviews found for the specified user and produc.');
+        } else {
+ 
+          console.error('Error fetching average rating and reviewText', error);
+        }
       }
     };
-
+  
     fetchProductReviews();
   }, [id, setRatingData]);
+  
 
   const handleDeleteComments = useCallback(
     (commentId: number) => {

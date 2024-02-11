@@ -1,6 +1,5 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import NavbarComponent from '@/components/navbar/Navbar';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
@@ -9,6 +8,7 @@ import ProductInfoRating from './ProductInfoRating';
 import ButtonSecondary from '@/components/button/ButtonSecondary';
 import ButtonPrimary from '@/components/button/ButtonPrimary';
 import { useRating } from '../../contexts/ratingContext';
+import LayoutDefault from '../layout/LayoutDefault';
 
 interface ProductInfoProps {
   product: {
@@ -53,8 +53,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   }, []);
 
   return (
+    <LayoutDefault>
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
-      <NavbarComponent />
+ 
       <pre>{JSON.stringify(product, null, 2)}</pre>
       <div
         className={`flex flex-col ${
@@ -161,6 +162,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </div>
         )}
       </div>
+
     </div>
+    </LayoutDefault>
   );
 }

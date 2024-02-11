@@ -1,5 +1,5 @@
 
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/layout/LayoutDefault';
 import dynamic from 'next/dynamic';
 import React from 'react';
 

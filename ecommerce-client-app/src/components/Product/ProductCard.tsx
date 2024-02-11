@@ -29,11 +29,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   return (
     <div className="flex justify-center">
-      <div className="grid auto-rows-fr gap-[3vh] grid-cols-2 md:grid-cols-4 lg:grid-cols-4 ">
+      <div className="grid auto-rows-fr gap-[3vh]  grid-cols-2 gap-y-14 md:grid-cols-4  lg:grid-cols-4 ">
         {desc && loading ? (
           <>
-            {ProductItems.map(() => (
+            {ProductItems.map((item, index) => (
+              <React.Fragment key={index}>
               <ProductSkeletonLoading />
+              </React.Fragment>
             ))}
           </>
         ) : (
@@ -49,10 +51,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     product_description: item.product_description,
                   },
                 }}
-                key={item.id}
+                key={index}
               >
                 <ProductItemCard
-                  key={index}
+               
                   item={item}
                   className={className}
                   desc={desc}

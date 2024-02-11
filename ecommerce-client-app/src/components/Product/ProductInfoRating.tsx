@@ -46,17 +46,16 @@ export default function ProductInfoRating({ id }: any) {
     return stars;
   };
 
-  const renderRating = () => {
-    return ratingData.reviewText.slice(0, 2).map((review, index) => (
-      <React.Fragment key={index}>
-        <ReviewCard
-          index={index}
-          review={review}
-          handleDeleteComments={handleDeleteComments}
-        />
-      </React.Fragment>
-    ));
-  };
+  const renderRating = () => ratingData.reviewText.slice(0, 2).map((review, index) => (
+    <React.Fragment key={index}>
+      <ReviewCard
+        index={index}
+        review={review}
+        handleDeleteComments={handleDeleteComments}
+      />
+    </React.Fragment>
+  ));
+  
 
   const reviewContent = productIdsSet.has(id) ? (
     <>
@@ -83,6 +82,22 @@ export default function ProductInfoRating({ id }: any) {
       <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
         <h1 className="">there is currently no comments</h1>
       </div>
+
+      {!user?.id && (
+        <div className={!user?.id ? `relative mt-10` : 'hidden'}>
+          <Link href={'/auth/login'}>
+            <ButtonPrimary>Login</ButtonPrimary>
+          </Link>
+        </div>
+      )}
+
+      {userIdsSet.has(user?.id) && (
+        <div className={'relative mt-10 z-2'}>
+          <ButtonPrimary onClick={() => handleModalToggle(true)}>
+            Give your opinions
+          </ButtonPrimary>
+        </div>
+      )}
     </>
   );
 
@@ -90,7 +105,7 @@ export default function ProductInfoRating({ id }: any) {
     <>
       <div className={`h-auto `}>
         {reviewContent}
-        <div>
+        <div className="relative z-20">
           {commentModal && (
             <>
               <ProductInfoRatingInput rateColor={rateColor} id={id}>
@@ -102,19 +117,6 @@ export default function ProductInfoRating({ id }: any) {
             </>
           )}
         </div>
-        {userIdsSet.has(user?.id) ? (
-          <div className={'relative mt-10'}>
-            <ButtonPrimary onClick={() => handleModalToggle(true)}>
-              Give your opinions
-            </ButtonPrimary>
-          </div>
-        ) : (
-          <div className={'relative mt-10'}>
-            <Link href={'/auth/login'}>
-              <ButtonPrimary>Login</ButtonPrimary>
-            </Link>
-          </div>
-        )}
       </div>
     </>
   );

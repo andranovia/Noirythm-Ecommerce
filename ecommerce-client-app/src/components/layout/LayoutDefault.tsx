@@ -1,15 +1,16 @@
 import React from 'react';
-import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer';
+import Footer from '../Footer/Footer';
+import NavbarSection from '../Navbar/NavbarSection';
+
 
 export interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const LayoutDefault = ({ children }: LayoutProps) => {
   return (
     <>
-      <Navbar />
+      <NavbarSection />
       <div className='my-20'>
       <main>{children}</main>
       </div>
@@ -18,4 +19,4 @@ const Layout = ({ children }: LayoutProps) => {
   );
 };
 
-export default Layout;
+export default LayoutDefault;

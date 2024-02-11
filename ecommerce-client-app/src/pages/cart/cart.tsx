@@ -1,9 +1,9 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 import Cart from '../../components/cart/Cart';
-const Navbar = dynamic(() => import('@/components/navbar/Navbar'));
+const Navbar = dynamic(() => import('@/components/Navbar/NavbarSection'));
 import { useCart } from '@/hooks/useCart';
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/layout/LayoutDefault';
 
 const CartPage = () => {
   const { userCart } = useCart();

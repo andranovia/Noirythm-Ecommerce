@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/layout/LayoutDefault';
 import OtherReviews from '@/components/product/OtherReviews';
 import React from 'react';
 

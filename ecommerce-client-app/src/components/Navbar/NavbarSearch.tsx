@@ -26,17 +26,14 @@ const NavbarSearch = () => {
       const response = await axiosInstance.get(
         `/api/search?query=${searchQuery}`
       );
-      const { products } = response.data;
 
-      const allProducts = [
-        ...products
-      ];
+  
 
-      if (Array.isArray(allProducts)) {
-        setSearchResults(allProducts.slice(0, maxResultsToShow));
+      if (Array.isArray(response.data)) {
+        setSearchResults(response.data.slice(0, maxResultsToShow));
         setSearchResultsVisible(true);
       } else {
-        console.error('Combined product data is not an array:', allProducts);
+        console.error('Combined product data is not an array:', response.data)
         setSearchResults([]);
         setSearchResultsVisible(false);
       }

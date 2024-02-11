@@ -1,10 +1,10 @@
-import Home from './home/home';
-import Navbar from '@/components/navbar/Navbar';
+import HomeSection from './home/homeSection';
+
 
 export default function Index() {
   return (
     <>
-      <Home />
+      <HomeSection/>
     </>
   );
 }

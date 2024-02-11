@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Transition from './transition/transition';
+import Transition from './transition/NavbarTransition';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -10,11 +10,12 @@ import { useAuth } from '../../hooks/useAuth';
 import ButtonPrimary from '../button/ButtonPrimary';
 import ButtonSecondary from '../button/ButtonSecondary';
 import { useResize } from '../../hooks/useResize';
+import NavbarTransition from './transition/NavbarTransition';
 
 const NavbarDropdown = dynamic(() => import('./NavbarDropdown'));
 const NavbarSearch = dynamic(() => import('./NavbarSearch'));
 
-const Navbar: React.FC = () => {
+const NavbarSection: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const {isMobile} = useResize();
@@ -41,7 +42,7 @@ const Navbar: React.FC = () => {
     >
       <Transition show={isSidebarOpen} appear={true}>
         <div className="fixed inset-0 flex z-40">
-          <Transition
+          <NavbarTransition
             show={isSidebarOpen}
             enter="transition-opacity ease-linear duration-300"
             enterFrom="opacity-0"
@@ -52,7 +53,7 @@ const Navbar: React.FC = () => {
             <div className="fixed inset-0">
               <div className="absolute inset-0 bg-gray-600 opacity-75" />
             </div>
-          </Transition>
+          </NavbarTransition>
 
           <Transition
             show={isSidebarOpen}
@@ -275,6 +276,7 @@ const Navbar: React.FC = () => {
           )}
 
           {!isMobile && (
+            <>
             <Link href="/">
               <div
                 className="relative"
@@ -294,9 +296,11 @@ const Navbar: React.FC = () => {
                     Noirythm
                   </h2>
                 </div>
-                {isDropdownOpen && <NavbarDropdown />}
+            
               </div>
             </Link>
+                {isDropdownOpen && <NavbarDropdown />}
+                </>
           )}
 
           <div className="flex-1 px-4 flex justify-between items-center">
@@ -348,6 +352,7 @@ const Navbar: React.FC = () => {
                     width={25}
                     height={20}
                     alt=""
+                    className='w-6 h-6'
                   />
                 </button>
               </Link>
@@ -359,6 +364,7 @@ const Navbar: React.FC = () => {
                       width={25}
                       height={20}
                       alt=""
+                      className='w-6 h-6'
                     />
                   </button>
                 </Link>
@@ -379,4 +385,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default NavbarSection;

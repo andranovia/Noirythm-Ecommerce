@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 const ProductData = dynamic(() => import('@/components/product/ProductData'));
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/layout/LayoutDefault';
 
 
 const CategoryClothPage: React.FC = () => {
