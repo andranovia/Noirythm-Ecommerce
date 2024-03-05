@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 
 const ProductData = dynamic(() => import('@/components/product/ProductData'));
 

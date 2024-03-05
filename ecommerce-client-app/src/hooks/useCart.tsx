@@ -1,5 +1,5 @@
 import axiosInstance from '@/utils/api';
-import { getCart } from '../components/utils/getCart';
+import { getCart } from '../components/Utils/getCart';
 import { useAuth } from './useAuth';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -19,22 +19,24 @@ export const useCart = () => {
   const { user } = useAuth();
   const [userCart, setUserCart] = useState<CartData>({ cartProducts: [] });
 
-
   useEffect(() => {
-  const fetchCart = async () => {
-    try {
-      if (user) {
-        const response = await getCart(user);
-        setUserCart(response);
-      } else {
-        console.log('User not found');
+    const fetchCart = async () => {
+      try {
+        if (user) {
+          const response = await getCart(user.id);
+          setUserCart(response)
+   
+        } else {
+          console.log('User not found');
+        }
+      } catch (error) {
+        console.error('Error fetching cart:', error);
       }
-    } catch (error) {
-      console.error('Error fetching cart:', error);
-    }
+
+    };
     
     fetchCart();
-}}, [user]);
+  }, [user]);
 
   const addToCart = useCallback(
     async (productId: any) => {
@@ -65,7 +67,10 @@ export const useCart = () => {
           },
         };
 
-        const response = await axiosInstance.delete('/api/cart/delete', payload);
+        const response = await axiosInstance.delete(
+          '/api/cart/delete',
+          payload
+        );
         console.log(response.data);
       } catch (error) {
         console.error(error);

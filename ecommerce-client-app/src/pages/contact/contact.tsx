@@ -1,8 +1,8 @@
-import ContactCardData from '@/components/contact/contactCard/ContactCardData';
-import ContactHero from '@/components/contact/contactHero/ContactHero';
-import ContactMap from '@/components/contact/contactMap/ContactMap';
+import ContactCardData from '@/components/Contact/ContactCardData';
+import ContactHero from '@/components/Contact/ContactHero';
+import ContactMap from '@/components/Contact/ContactMap';
 
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 
 import React from 'react';
 

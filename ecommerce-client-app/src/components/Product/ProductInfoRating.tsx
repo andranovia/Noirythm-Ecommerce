@@ -1,5 +1,5 @@
-import ButtonPrimary from '@/components/button/ButtonPrimary';
-import ButtonSecondary from '@/components/button/ButtonSecondary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import ButtonSecondary from '@/components/Button/ButtonSecondary';
 import React, { useCallback, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useRating } from '../../contexts/ratingContext';
@@ -46,16 +46,16 @@ export default function ProductInfoRating({ id }: any) {
     return stars;
   };
 
-  const renderRating = () => ratingData.reviewText.slice(0, 2).map((review, index) => (
-    <React.Fragment key={index}>
-      <ReviewCard
-        index={index}
-        review={review}
-        handleDeleteComments={handleDeleteComments}
-      />
-    </React.Fragment>
-  ));
-  
+  const renderRating = () =>
+    ratingData.reviewText.slice(0, 2).map((review, index) => (
+      <React.Fragment key={index}>
+        <ReviewCard
+          index={index}
+          review={review}
+          handleDeleteComments={handleDeleteComments}
+        />
+      </React.Fragment>
+    ));
 
   const reviewContent = productIdsSet.has(id) ? (
     <>
@@ -80,22 +80,22 @@ export default function ProductInfoRating({ id }: any) {
   ) : (
     <>
       <div className="w-[17rem] p-4 rounded-md shadow-ShadowCard mt-10">
-        <h1 className="">there is currently no comments</h1>
+        <h1 className="">there is currently no comment</h1>
       </div>
 
-      {!user?.id && (
-        <div className={!user?.id ? `relative mt-10` : 'hidden'}>
-          <Link href={'/auth/login'}>
-            <ButtonPrimary>Login</ButtonPrimary>
-          </Link>
-        </div>
-      )}
-
-      {userIdsSet.has(user?.id) && (
+      {userIdsSet.has(user?.id) ? null : (
         <div className={'relative mt-10 z-2'}>
-          <ButtonPrimary onClick={() => handleModalToggle(true)}>
-            Give your opinions
-          </ButtonPrimary>
+          {!user?.id ? (
+            <div className={!user?.id ? `relative mt-10` : 'hidden'}>
+              <Link href={'/auth/login'}>
+                <ButtonPrimary>Login</ButtonPrimary>
+              </Link>
+            </div>
+          ) : (
+            <ButtonPrimary onClick={() => handleModalToggle(true)}>
+              Give your opinions
+            </ButtonPrimary>
+          )}
         </div>
       )}
     </>
@@ -103,7 +103,7 @@ export default function ProductInfoRating({ id }: any) {
 
   return (
     <>
-      <div className={`h-auto `}>
+      <div className={`h-auto`}>
         {reviewContent}
         <div className="relative z-20">
           {commentModal && (

@@ -1,17 +1,15 @@
-import dynamic from 'next/dynamic';
+
 import React from 'react';
-import Cart from '../../components/cart/Cart';
-const Navbar = dynamic(() => import('@/components/Navbar/NavbarSection'));
+import Cart from '@/components/Cart/Cart';
 import { useCart } from '@/hooks/useCart';
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 
 const CartPage = () => {
   const { userCart } = useCart();
-
   return (
     <>
       <Layout>
-      <div className="flex justify-center relative top-36 w-full sm:justify-start ">
+      <div className="flex justify-center relative top-10 w-full sm:justify-start ">
         <div className="sm:ml-20">
           <div className="grid">
             <h1 className="text-2xl font-bold mb-15">Shopping Cart</h1>
@@ -32,7 +30,7 @@ const CartPage = () => {
               </div>
             ) : (
               <div className='flex justify-center'>
-              <Cart />
+              <Cart userCart={userCart.cartProducts}/>
               </div>
             )}
           </div>

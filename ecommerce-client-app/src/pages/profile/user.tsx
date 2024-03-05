@@ -1,14 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
 import Avatar from '@/components/user/Avatar';
-import ButtonPrimary from '@/components/button/ButtonPrimary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
-import ButtonSecondary from '@/components/button/ButtonSecondary';
+import ButtonSecondary from '@/components/Button/ButtonSecondary';
 
 import UserInfoBarContainer from '@/components/user/UserInfoBarContainer';
 import { useResize } from '@/hooks/useResize';
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 
 const UserProfile: React.FC = () => {
   const { logoutAction, user } = useAuth();

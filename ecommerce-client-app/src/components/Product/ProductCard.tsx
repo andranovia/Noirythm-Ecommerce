@@ -3,8 +3,10 @@ import Link from 'next/link';
 import ProductSkeletonLoading from './ProductSkeletonLoading';
 import ProductItemCard from './ProductItemCard';
 
+
 interface ProductItem {
   product_name: string;
+  
   product_image: string;
   product_price: number;
   product_description: string;

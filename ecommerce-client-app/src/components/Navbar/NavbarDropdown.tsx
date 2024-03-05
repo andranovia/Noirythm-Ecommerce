@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Link from 'next/link';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
-export default function NavbarDropdown() {
+type NavbarDropdownProps = {
+  setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+};
+export default function NavbarDropdown({
+  setIsDropdownOpen,
+}: NavbarDropdownProps) {
+  const router = useRouter();
+
+  const handleDropdownEnter = () => {
+    setIsDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    setIsDropdownOpen(false);
+  };
+
+
   return (
-    <div className="fixed top-14 left-10 bg-white border border-gray-300 rounded-lg p-4">
+    <div className="fixed top-14 left-10 bg-white border border-gray-300 rounded-lg p-4" onMouseEnter={handleDropdownEnter} onMouseLeave={handleDropdownLeave}>
       <div className="h-full overflow-y-auto">
         <nav className="px-2 ">
           <Link

@@ -1,8 +1,8 @@
 import React from 'react';
 import CountdownTimer from './CountdownTimer';
 import dynamic from 'next/dynamic';
+import ProductData from '@/components/Product/ProductData';
 
-const ProductData = dynamic(() => import('@/components/product/ProductData'));
 
 const Product: React.FC = () => {
   const maxItemsToShow = 20;

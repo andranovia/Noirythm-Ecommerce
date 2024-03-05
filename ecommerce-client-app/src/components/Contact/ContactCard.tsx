@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactCardItem from './ContactCardItem';
+import ContactCardItem from './ContactCard/ContactCardItem';
 
 
 

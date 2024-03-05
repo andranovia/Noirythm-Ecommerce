@@ -1,4 +1,4 @@
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 import dynamic from 'next/dynamic';
 import React from 'react';
 

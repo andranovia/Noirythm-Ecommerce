@@ -5,10 +5,11 @@ import { BsChatLeftText } from 'react-icons/bs';
 import Image from 'next/image';
 import { useCart } from '../../hooks/useCart';
 import ProductInfoRating from './ProductInfoRating';
-import ButtonSecondary from '@/components/button/ButtonSecondary';
-import ButtonPrimary from '@/components/button/ButtonPrimary';
+import ButtonSecondary from '@/components/Button/ButtonSecondary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import { useRating } from '../../contexts/ratingContext';
-import LayoutDefault from '../layout/LayoutDefault';
+import NavbarSection from '../Navbar/NavbarSection';
+
 
 interface ProductInfoProps {
   product: {
@@ -53,7 +54,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   }, []);
 
   return (
-    <LayoutDefault>
+    <> <NavbarSection />
     <div className="bg-white rounded-lg mb-20 md:my-0  ">
  
       <pre>{JSON.stringify(product, null, 2)}</pre>
@@ -98,7 +99,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           className={`w-full p-6 top-0 left-0 ${
             isMobile
               ? 'mt-4 mb-[10rem]'
-              : 'md:w-1/2 md:ml-[50%] md:my-10  '
+              : 'md:w-1/2 lg:ml-[50%] md:my-10  '
           }`}
         >
           <p className="text-2xl font-bold mt-4">{`$${product_price}`}</p>
@@ -122,17 +123,19 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <div className="font-medium text-2xl ">
               <h2 className="text-gray-800">Give rating to {product_name}!</h2>
             </div>
-            <div className="mr-28   sm:flex justify-start">
+            <div className="mr-28 lg:mb-32  sm:flex justify-start">
               <ProductInfoRating id={id} />
             </div>
           </div>
         </div>
         {isChangesSaved && (
           <>
-            <div className="fixed bg-emerald-600 w-[16rem] h-14 rounded-md bottom-14 mb-10">
+          <div className='w-full fixed flex justify-center items-center'>
+            <div className=" bg-emerald-600 w-[16rem] h-14 rounded-md bottom-14 mb-10">
               <div className="p-4 flex justify-center items-center">
                 <p className='text-md font-bold text-white'>Changes Saved </p>
               </div>
+            </div>
             </div>
           </>
         )}
@@ -164,6 +167,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
     </div>
-    </LayoutDefault>
+    </>
+ 
   );
 }

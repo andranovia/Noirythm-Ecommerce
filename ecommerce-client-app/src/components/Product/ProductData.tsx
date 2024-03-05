@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductCard from '@/components/product/ProductCard';
+import ProductCard from './ProductCard';
 import { useProductContext } from '../../contexts/productContext';
 
 interface ClothProductProps {

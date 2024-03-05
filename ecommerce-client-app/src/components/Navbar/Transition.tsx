@@ -21,7 +21,7 @@ const TransitionContext = React.createContext<TransitionContextProps>({
   shouldTransition: true,
 });
 
-const NavbarTransition: FC<TransitionProps> = ({
+const Transition: FC<TransitionProps> = ({
   show,
   enter = '',
   enterFrom = '',
@@ -83,4 +83,4 @@ const NavbarTransition: FC<TransitionProps> = ({
   );
 };
 
-export default NavbarTransition;
+export default Transition;

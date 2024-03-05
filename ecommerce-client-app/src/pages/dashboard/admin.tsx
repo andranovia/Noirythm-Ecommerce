@@ -1,5 +1,5 @@
-import DashboardProducts from '@/components/dashboard/DashboardProducts';
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import DashboardProducts from '@/components/Dashboard/DashboardProducts';
+import DashboardLayout from '@/components/Layout/DashboardLayout';
 import React from 'react';
 
 const Admin = () => {

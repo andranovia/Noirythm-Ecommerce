@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axiosInstance from '@/utils/api';
-import ButtonPrimary from '@/components/button/ButtonPrimary';
-import ButtonSecondary from '@/components/button/ButtonSecondary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
+import ButtonSecondary from '@/components/Button/ButtonSecondary';
 import { FaStar } from 'react-icons/fa';
 import { useAuth } from '../../hooks/useAuth';
 import { useRating } from '../../contexts/ratingContext';

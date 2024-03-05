@@ -1,4 +1,4 @@
-import ButtonPrimary from '@/components/button/ButtonPrimary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import Link from 'next/link';
 import React from 'react';
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import AuthCard from '@/components/auth/AuthCard';
-import ApplicationLogo from '@/components/logo/AplicationLogo';
+import ApplicationLogo from '@/components/Logo/AplicationLogo';
 import Link from 'next/link';
 import AuthLabel from '@/components/auth/AuthLabel';
 import AuthInput from '@/components/auth/AuthInput';
 import AuthInputError from '@/components/auth/AuthInputError';
-import ButtonPrimary from '@/components/button/ButtonPrimary';
+import ButtonPrimary from '@/components/Button/ButtonPrimary';
 import { useAuth } from '@/hooks/useAuth';
 
 function Register() {

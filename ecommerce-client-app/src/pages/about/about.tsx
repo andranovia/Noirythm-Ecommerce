@@ -1,9 +1,9 @@
 
-import Layout from '@/components/layout/LayoutDefault';
+import Layout from '@/components/Layout/LayoutDefault';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const AboutHero = dynamic(() => import('@/components/about/AboutHero'));
+const AboutHero = dynamic(() => import('@/components/About/AboutHero'));
 
 const AboutPage = () => {
   return (

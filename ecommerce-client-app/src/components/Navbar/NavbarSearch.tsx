@@ -1,52 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import axiosInstance from '@/utils/api';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import useSearch from '@/hooks/useSearch';
 
-const NavbarResult = dynamic(() => import('./NavbarResult'))
-interface ProductItem {
-  product_name: string;
-  product_image: string;
-  product_price: number;
-  product_description: string;
-  id: number;
-  promo_text: string;
-}
+const NavbarResult = dynamic(() => import('./NavbarResult'));
+
 
 const NavbarSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<(ProductItem | never)[]>([]); 
-  const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
+
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const maxResultsToShow = 4;
+  const {
+    handleSearch,
+    setSearchResultsVisible,
+    searchResults,
+    isSearchResultsVisible,
+  } = useSearch();
 
-  const handleSearch = async () => {
-    try {
-      const response = await axiosInstance.get(
-        `/api/search?query=${searchQuery}`
-      );
-
-  
-
-      if (Array.isArray(response.data)) {
-        setSearchResults(response.data.slice(0, maxResultsToShow));
-        setSearchResultsVisible(true);
-      } else {
-        console.error('Combined product data is not an array:', response.data)
-        setSearchResults([]);
-        setSearchResultsVisible(false);
-      }
-    } catch (error) {
-      console.error('Error fetching search results:', error);
-      setSearchResults([]);
+  useEffect(() => {
+    if (searchQuery) {
+      handleSearch(searchQuery);
+    } else {
       setSearchResultsVisible(false);
     }
-  };
+  }, [searchQuery]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
         setSearchResultsVisible(false);
       }
     };
@@ -58,15 +43,6 @@ const NavbarSearch = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (searchQuery) {
-      handleSearch();
-    } else {
-      setSearchResults([]);
-      setSearchResultsVisible(false);
-    }
-  }, [searchQuery]);
-
   return (
     <div className="">
       <div ref={inputRef} className="flex justify-center mx-auto mt-2  ">
@@ -76,7 +52,7 @@ const NavbarSearch = () => {
             width={20}
             height={10}
             alt=""
-            className='w-6 h-6 relative top-4'
+            className="w-6 h-6 relative top-4"
           />
         </div>
         <input
