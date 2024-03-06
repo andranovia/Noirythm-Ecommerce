@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { useCart } from '../../hooks/useCart';
-import ButtonPrimary from '../Button/ButtonPrimary';
+import ButtonPrimary from '../button/ButtonPrimary';
 
 interface Item {
   id: string;
@@ -16,12 +16,12 @@ const CartItem: React.FC<{ item: Item }> = ({ item }) => {
   const maxLength = 20;
 
   const truncatedName =
-  item && item.product_name
-    ? item.product_name.length > maxLength
-      ? `${item.product_name.substring(0, maxLength)}...`
-      : item.product_name
-    : 'Loading...';
-    
+    item && item.product_name
+      ? item.product_name.length > maxLength
+        ? `${item.product_name.substring(0, maxLength)}...`
+        : item.product_name
+      : 'Loading...';
+
   return (
     <div className="rounded-lg flex justify-start gap-4 shadow-ShadowCard w-[20rem]  h-fit  items-start sm:w-[30rem]">
       <div className="relative m-4 ">

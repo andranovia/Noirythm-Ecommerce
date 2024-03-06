@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import ApplicationLogo from '../Logo/AplicationLogo';
+import ApplicationLogo from '../logo/AplicationLogo';
 
 const navbarData = [
-
   {
     id: 'Dashboard',
     name: 'Dashboard',
@@ -35,7 +34,13 @@ const DashboardSidebar = () => {
             <React.Fragment key={index}>
               <Link href={data.id}>
                 <div className="flex justify-start items-center gap-4 my-4 p-2">
-                  <Image src={data.icon} alt="icon" height={14} width={24} className='w-6 h-6'/>
+                  <Image
+                    src={data.icon}
+                    alt="icon"
+                    height={14}
+                    width={24}
+                    className="w-6 h-6"
+                  />
                   <p className="text-[1rem] font-medium ">{data.name}</p>
                 </div>
               </Link>

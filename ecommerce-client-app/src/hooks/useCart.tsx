@@ -1,5 +1,5 @@
 import axiosInstance from '@/utils/api';
-import { getCart } from '../components/Utils/getCart';
+import { getCart } from '../components/utils/getCart';
 import { useAuth } from './useAuth';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -24,17 +24,15 @@ export const useCart = () => {
       try {
         if (user) {
           const response = await getCart(user.id);
-          setUserCart(response)
-   
+          setUserCart(response);
         } else {
           console.log('User not found');
         }
       } catch (error) {
         console.error('Error fetching cart:', error);
       }
-
     };
-    
+
     fetchCart();
   }, [user]);
 

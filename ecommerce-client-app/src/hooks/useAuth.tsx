@@ -2,7 +2,7 @@ import axiosInstance from '@/utils/api';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { getUser } from '../components/Utils/auth';
+import { getUser } from '../components/utils/auth';
 
 interface ValidationErrors {
   name?: string[];
@@ -55,67 +55,73 @@ export const useAuth = () => {
     fetchUser();
   }, []);
 
-  const registerAction = React.useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    let payload = {
-      name: name,
-      email: email,
-      password: password,
-      confirm_password: confirmPassword,
-    };
-    axiosInstance
-      .post('/api/register', payload)
-      .then((r) => {
-        setIsSubmitting(false);
-        localStorage.setItem('token', r.data.token);
-        setValidationErrors(r.data.errors);
-        router.push('/auth/login');
-        localStorage.setItem(
-          'user',
-          JSON.stringify({ name: r.data.name, email: r.data.email })
-        );
-      })
-      .catch(() => {
-        setIsSubmitting(false);
-      });
-  }, [name, email, password, confirmPassword]);;
+  const registerAction = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      let payload = {
+        name: name,
+        email: email,
+        password: password,
+        confirm_password: confirmPassword,
+      };
+      axiosInstance
+        .post('/api/register', payload)
+        .then((r) => {
+          setIsSubmitting(false);
+          localStorage.setItem('token', r.data.token);
+          setValidationErrors(r.data.errors);
+          router.push('/auth/login');
+          localStorage.setItem(
+            'user',
+            JSON.stringify({ name: r.data.name, email: r.data.email })
+          );
+        })
+        .catch(() => {
+          setIsSubmitting(false);
+        });
+    },
+    [name, email, password, confirmPassword]
+  );
 
-  const loginAction = React.useCallback((e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    let payload = {
-      email: email,
-      password: password,
-    };
+  const loginAction = React.useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      let payload = {
+        email: email,
+        password: password,
+      };
 
-    axiosInstance
-      .post('/api/login', payload)
-      .then(({ data }) => {
-        setValidationErrors(data.errors);
-        setIsSubmitting(false);
-        const accessToken = data.data.token;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            name: data.data.name,
-            email: data['email'],
-          })
-        );
-        router.push('/');
-      })
+      axiosInstance
+        .post('/api/login', payload)
+        .then(({ data }) => {
+          setValidationErrors(data.errors);
+          setIsSubmitting(false);
+          const accessToken = data.data.token;
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem(
+            'user',
+            JSON.stringify({
+              name: data.data.name,
+              email: data['email'],
+            })
+          );
+          router.push('/');
+        })
 
-      .catch((Error) => {
-        setIsSubmitting(false);
-        console.log(Error);
-        if (Error.response && Error.response.status === 422) {
-          setValidationErrors(Error.response.data.errors);
-        } else {
-          console.error('An error occurred:', Error);
-        }
-      });
-    }, [email, password]);
+        .catch((Error) => {
+          setIsSubmitting(false);
+          console.log(Error);
+          if (Error.response && Error.response.status === 422) {
+            setValidationErrors(Error.response.data.errors);
+          } else {
+            console.error('An error occurred:', Error);
+          }
+        });
+    },
+    [email, password]
+  );
 
   const logoutAction = React.useCallback(() => {
     const accessToken = localStorage.getItem('accessToken');

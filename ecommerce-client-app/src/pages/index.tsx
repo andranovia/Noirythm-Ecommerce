@@ -1,10 +1,9 @@
-import HomeSection from './home/homeSection';
-
+import HomeSection from './home/page';
 
 export default function Index() {
   return (
     <>
-      <HomeSection/>
+      <HomeSection />
     </>
   );
 }

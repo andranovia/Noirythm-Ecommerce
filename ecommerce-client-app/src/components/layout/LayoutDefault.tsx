@@ -1,20 +1,19 @@
 import React from 'react';
-import Footer from '../Footer/Footer';
-import NavbarSection from '../Navbar/NavbarSection';
-
+import Footer from '../footer/Footer';
+import Navbar from '../navbar/Navbar';
 
 type LayoutProps = {
   children: React.ReactNode;
-}
+};
 
 const LayoutDefault = ({ children }: LayoutProps) => {
   return (
     <>
-      <NavbarSection />
-      <div className='my-20'>
-      <main>{children}</main>
+      <Navbar />
+      <div className="my-20">
+        <main>{children}</main>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

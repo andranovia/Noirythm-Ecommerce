@@ -1,5 +1,5 @@
-import Layout from '@/components/Layout/LayoutDefault';
-import OtherReviews from '@/components/product/OtherReviews';
+import Layout from '@/components/layout/LayoutDefault';
+import OtherReviews from '@/components/product/productReviews/OtherReviews';
 import React from 'react';
 
 function ReviewPage() {

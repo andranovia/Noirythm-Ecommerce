@@ -1,8 +1,7 @@
-
 import dynamic from 'next/dynamic';
-const ProductInfo = dynamic(() => import('@/components/Product/ProductInfo'));
-
-
+const ProductInfo = dynamic(
+  () => import('@/components/product/productInfo/ProductInfo')
+);
 
 interface ProductPageProps {
   product: {
@@ -17,10 +16,6 @@ interface ProductPageProps {
   };
 }
 
-
 export default function ProductPage({ product }: ProductPageProps) {
-
-
-
   return <ProductInfo product={product} />;
 }

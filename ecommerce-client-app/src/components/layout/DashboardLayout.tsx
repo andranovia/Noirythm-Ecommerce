@@ -1,9 +1,9 @@
 import React from 'react';
-import DashboardSidebar from '../Dashboard/DashboardSidebar';
+import DashboardSidebar from '../dashboard/DashboardSidebar';
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
-}
+};
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   return (
@@ -12,11 +12,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <div className="w-1/5 fixed ">
           <DashboardSidebar />
         </div>
-        <main className='w-4/5 ml-[24rem]'>{children}</main>
+        <main className="w-4/5 ml-[24rem]">{children}</main>
       </div>
     </>
   );
 };
 
 export default DashboardLayout;
-    

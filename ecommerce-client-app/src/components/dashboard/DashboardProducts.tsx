@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonPrimary from '../Button/ButtonPrimary';
+import ButtonPrimary from '../button/ButtonPrimary';
 
 function DashboardProducts() {
   return (
@@ -49,8 +49,6 @@ function DashboardProducts() {
               <ButtonPrimary type="submit">Search</ButtonPrimary>
             </div>
           </form>
-
-          
         </div>
       </div>
     </div>

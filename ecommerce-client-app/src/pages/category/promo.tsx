@@ -1,9 +1,8 @@
-import Layout from '@/components/Layout/LayoutDefault';
+import Layout from '@/components/layout/LayoutDefault';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
 const PromoProduct = dynamic(() => import('@/components/product/PromoProduct'));
-
 
 const promo = () => {
   return (
