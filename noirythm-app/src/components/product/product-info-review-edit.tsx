@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import React, { useState } from 'react';
-import axiosInstance from '@/utils/axiosInstance';
-import ButtonPrimary from '../button/button-primary';
-import ButtonSecondary from '../button/button-secondary';
-import { FaStar } from 'react-icons/fa';
-import { useAuth } from '@/hooks/useAuth';
-import { useRating } from '@/context/ratingContext';
+import React, { useState } from "react";
+import axiosInstance from "@/utils/axiosInstance";
+import ButtonPrimary from "../button/button-primary";
+import ButtonSecondary from "../button/button-secondary";
+import { FaStar } from "react-icons/fa";
+import { useAuth } from "@/hooks/useAuth";
+import { useRating } from "@/context/ratingContext";
 
 interface ProductInfoReviewEdit {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  review: any;
-  commentId: any;
-  ratingsValues?: any;
+  commentId: number;
+  rating: number;
+  reviewText: string;
 }
 
 const ProductInfoReviewEdit = ({
   setIsEditing,
-  review,
-  ratingsValues,
+  reviewText,
   commentId,
+  rating,
 }: ProductInfoReviewEdit) => {
-  const [editedReview, setEditedReview] = useState(review);
-  const [editedRating, setEditedRating] = useState(ratingsValues);
+  const [editedReview, setEditedReview] = useState(reviewText);
+  const [editedRating, setEditedRating] = useState(rating);
   const { user } = useAuth();
   const { setIsChangesSaved } = useRating();
   const handleCancelEdit = () => {
@@ -64,7 +64,7 @@ const ProductInfoReviewEdit = ({
                     />
                     <FaStar
                       size={20}
-                      color={currentRating <= editedRating ? 'yellow' : 'grey'}
+                      color={currentRating <= editedRating ? "yellow" : "grey"}
                     />
                   </label>
                 </div>

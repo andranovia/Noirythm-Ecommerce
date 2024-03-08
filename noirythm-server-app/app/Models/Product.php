@@ -9,6 +9,16 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'Products'; 
-    public $incrementing = false; 
+    protected $table = 'Products';
+    public $incrementing = false;
+
+    public function productReview()
+    {
+        return $this->hasMany(ProductReview::class, 'product_id', 'id');
+    }
+
+    public function averageRating()
+    {
+        return $this->productReview->avg('ratings');
+    }
 }

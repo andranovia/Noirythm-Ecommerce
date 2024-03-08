@@ -39,32 +39,7 @@ class ProductReviewController extends Controller
         }
     }
 
-    public function showReview($id)
-    {
-      
 
-        $productReviews = ProductReview::where('product_id', $id)->get();
-
-        if ($productReviews->isEmpty()) {
-            return response()->json(['error' => 'No reviews found for this product '], 404);
-        }
-
-        $commentId = ProductReview::where('product_id', $id)->pluck('comment_id');
-        $averageRating = ProductReview::where('product_id', $id)->avg('ratings');
-        $rating = ProductReview::where('product_id', $id)->pluck('ratings')->toArray();
-        $product_id = ProductReview::where('product_id', $id)->pluck('product_id');
-        $reviewText = ProductReview::where('product_id', $id)->pluck('review_texts')->toArray();
-        $userId = ProductReview::where('product_id', $id)->pluck('user_id');
-
-        return response()->json([
-            'comment_id' => $commentId,
-            'ratings' => $rating,
-            'average_rating' => $averageRating,
-            'review_texts' => $reviewText,
-            'product_id' => $product_id,
-            'user_id' => $userId,
-        ], 200);
-    }
 
     public function updateReview(Request $request, $id)
     {

@@ -4,14 +4,14 @@
 // ProductController.php
 namespace App\Http\Controllers;
 
-
+use App\Http\Resources\ProductInfoResource;
 use App\Models\Product;
 
 class ProductController extends Controller
 {
 
 
-    
+
     public function index()
     {
         $products = Product::all();
@@ -27,6 +27,8 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         }
 
-        return response()->json($product);
+        return response()->json(
+            new ProductInfoResource($product)
+        );
     }
 }

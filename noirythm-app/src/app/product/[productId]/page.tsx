@@ -1,6 +1,7 @@
 "use client";
 
 import ProductInfo from "@/components/product/product-info";
+import { getProductReviews } from "@/utils/getProductReviews";
 import { getProductsInfo } from "@/utils/getProducts";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -15,8 +16,11 @@ const ProductPage = ({ params }: ProductPageProps) => {
     queryFn: () => getProductsInfo(params.productId),
   });
 
-
-  return <div><ProductInfo product={productsInfo}/></div>;
+  return (
+    <div>
+      <ProductInfo product={productsInfo} />
+    </div>
+  );
 };
 
 export default ProductPage;

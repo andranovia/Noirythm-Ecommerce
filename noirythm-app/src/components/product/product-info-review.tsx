@@ -1,34 +1,39 @@
-'use client'
+"use client";
 
 import ButtonPrimary from "../button/button-primary";
 import ButtonSecondary from "../button/button-secondary";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { useRating } from "@/context/ratingContext";
 import ProductInfoReviewInput from "./product-info-review-input";
 import ProductReviewCard from "./product-review-card";
-import { useProductRating } from "@/hooks/useProductRating";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 
-type ProductReviewsProps = {
-  id: any;
-};
+interface ProductInfoReviewProps {
+  productReviews: {
+    ratings: number;
+    review_texts: string;
+    comment_id: number;
+    product_Id: string;
+    user_id: number;
+  }[];
+  averageRating: number;
+  productId: string;
+}
 
-export default function ProductInfoReviews({ id }: ProductReviewsProps) {
+export default function ProductInfoReviews({
+  productReviews,
+  averageRating,
+  productId,
+}: ProductInfoReviewProps) {
   const [rateColor] = useState(null);
-  const { user } = useAuth();
-  const { ratingData } = useRating();
   const [commentModal, setCommentModal] = useState(false);
+  const { user } = useAuth();
 
-
-
-  const { handleDeleteComments } = useProductRating(id);
-
-  const averageRoundedRating = Math.round(ratingData.averageRating[id]);
-  const userIdsSet = new Set(ratingData.userId);
-
-  const productIdsSet = new Set(ratingData.productId);
+  const hasCurrentUserReview = productReviews?.some(
+    (review) => review.user_id === user?.id
+  );
+  const averageRoundedRating = Math.round(averageRating);
 
   const handleModalToggle = (open: boolean) => {
     setCommentModal(open);
@@ -43,17 +48,16 @@ export default function ProductInfoReviews({ id }: ProductReviewsProps) {
   };
 
   const renderRating = () =>
-    ratingData.reviewText.slice(0, 2).map((review, index) => (
+    productReviews?.slice(0, 2).map((review, index) => (
       <React.Fragment key={index}>
         <ProductReviewCard
-          index={index}
           review={review}
-          handleDeleteComments={handleDeleteComments}
+          hasCurrentUserReview={hasCurrentUserReview}
         />
       </React.Fragment>
     ));
 
-  const reviewContent = productIdsSet.has(id) ? (
+  const reviewContent = hasCurrentUserReview ? (
     <>
       <div className="flex justify-start gap-2 mt-4">{renderStars()}</div>
       <div className="my-6">
@@ -67,9 +71,7 @@ export default function ProductInfoReviews({ id }: ProductReviewsProps) {
           {renderRating()}
         </div>
         <div className="sm:mt-[3rem] mt-[4rem]">
-
-            <ButtonSecondary>Show others</ButtonSecondary>
-
+          <ButtonSecondary>Show others</ButtonSecondary>
         </div>
       </div>
     </>
@@ -79,7 +81,7 @@ export default function ProductInfoReviews({ id }: ProductReviewsProps) {
         <h1 className="">there is currently no comment</h1>
       </div>
 
-      {userIdsSet.has(user?.id) ? null : (
+      {hasCurrentUserReview ? null : (
         <div className={"relative mt-10 z-2"}>
           {!user?.id ? (
             <div className={!user?.id ? `relative mt-10` : "hidden"}>
@@ -104,7 +106,7 @@ export default function ProductInfoReviews({ id }: ProductReviewsProps) {
         <div className="relative z-20">
           {commentModal && (
             <>
-              <ProductInfoReviewInput rateColor={rateColor} id={id}>
+              <ProductInfoReviewInput rateColor={rateColor} id={productId}>
                 <ButtonSecondary onClick={() => handleModalToggle(false)}>
                   Close
                 </ButtonSecondary>

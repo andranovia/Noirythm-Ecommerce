@@ -16,8 +16,15 @@ interface ProductInfoProps {
     product_image: string;
     product_price: number;
     product_description: string;
+    product_reviews: {
+      ratings: number;
+      review_texts: string;
+      comment_id: number;
+      product_Id: string;
+      user_id: number;
+    }[];
+    average_rating: number;
   };
-
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
@@ -25,11 +32,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { isChangesSaved } = useRating();
   const { isMobile } = useResize();
 
-
   return (
     <>
       <div className="bg-white rounded-lg mb-20 md:my-0  ">
-      
         <div
           className={`flex flex-col ${
             isMobile ? "items-center" : "items-start"
@@ -87,7 +92,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
             <div className="mt-4">
               <h2 className="font-medium text-2xl">Product description</h2>
-              <p className=" text-gray-600 text-1xl ">{product?.product_description}</p>
+              <p className=" text-gray-600 text-1xl ">
+                {product?.product_description}
+              </p>
             </div>
             <div className="mt-10">
               <div className="font-medium text-2xl ">
@@ -96,7 +103,11 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 </h2>
               </div>
               <div className="mr-28 lg:mb-32  sm:flex justify-start">
-                <ProductInfoReviews id={product?.id} />
+                <ProductInfoReviews
+                  productReviews={product?.product_reviews}
+                  averageRating={product?.average_rating}
+                  productId={product?.id}
+                />
               </div>
             </div>
           </div>

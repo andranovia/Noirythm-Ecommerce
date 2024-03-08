@@ -1,36 +1,41 @@
-'use client'
+"use client";
 
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { FaStar } from 'react-icons/fa';
-import { useRating } from '@/context/ratingContext';
-import { useAuth } from '@/hooks/useAuth';
-import ProductInfoReviewEdit from './product-info-review-edit';
-import Avatar from '../user/avatar';
+import Image from "next/image";
+import React, { useState } from "react";
+import { FaStar } from "react-icons/fa";
+import { useRating } from "@/context/ratingContext";
+import { useAuth } from "@/hooks/useAuth";
+import ProductInfoReviewEdit from "./product-info-review-edit";
+import Avatar from "../user/avatar";
+import { useProductRating } from "@/hooks/useProductRating";
 
-const ProductReviewCard = ({ index, review, handleDeleteComments }: any) => {
-  const { ratingData } = useRating();
-  const { ratings, userId, commentId } = ratingData;
+interface ProductReviewCardProps {
+  review: {
+    ratings: number;
+    review_texts: string;
+    comment_id: number;
+    product_Id: string;
+    user_id: number;
+  };
+  hasCurrentUserReview: boolean;
+}
+
+const ProductReviewCard = ({
+  review,
+  hasCurrentUserReview,
+}: ProductReviewCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
-  const { user } = useAuth();
-  const [selectedCommentIndex, setSelectedCommentIndex] = useState<
-    number | null
-  >(null);
 
-  const userIdsSet = new Set(userId);
+  const { handleDeleteComments } = useProductRating(review.product_Id);
 
-  const handleEditComment = (index: number) => {
+  const handleEditComment = () => {
     setIsEditing(true);
-    setSelectedCommentIndex(index);
   };
 
   return (
     <>
-      <div
-        key={index}
-        className="relative p-4 sm:p-2 h-full flex flex-col justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[22rem] sm:w-[12rem]"
-      >
+      <div className="relative p-4 sm:p-2 h-full flex flex-col justify-between rounded-md shadow-ShadowCard mt-6 sm:mt-0 w-[22rem] sm:w-[12rem]">
         <div className="flex justify-between m-2 items-center mb-8">
           <div className="flex items-center justify-center gap-4 ">
             <div className="w-6">
@@ -40,12 +45,14 @@ const ProductReviewCard = ({ index, review, handleDeleteComments }: any) => {
                 width={20}
               />
             </div>
-            <p className="text-gray-600 font-bold">User Id: {userId[index]}</p>
+            <p className="text-gray-600 font-bold">
+              User Id: {review?.user_id}
+            </p>
           </div>
           <div className="">
             <button onClick={() => setIsShowMenu(true)}>
               <Image
-                src={'https://img.icons8.com/material-two-tone/24/menu-2.png'}
+                src={"https://img.icons8.com/material-two-tone/24/menu-2.png"}
                 alt=""
                 width={20}
                 height={20}
@@ -57,20 +64,20 @@ const ProductReviewCard = ({ index, review, handleDeleteComments }: any) => {
         <div className="flex justify-between p-2">
           <div className="flex justify-center gap-4">
             <div className="flex justify-center gap-2">
-              <FaStar size={20} color={'yellow'} />
-              <p>{ratings[index]}</p>
+              <FaStar size={20} color={"yellow"} />
+              <p>{review.ratings}</p>
             </div>
-            <p className="max-w-[10rem]">{review}</p>
+            <p className="max-w-[10rem]">{review.review_texts}</p>
           </div>
         </div>
       </div>
 
-      {isEditing && selectedCommentIndex === index ? (
+      {isEditing ? (
         <ProductInfoReviewEdit
-          commentId={commentId[index]}
-          review={review}
+          commentId={review.comment_id}
+          reviewText={review.review_texts}
           setIsEditing={setIsEditing}
-          ratingsValues={ratings[index]}
+          rating={review.ratings}
         />
       ) : null}
       {isShowMenu && (
@@ -79,7 +86,7 @@ const ProductReviewCard = ({ index, review, handleDeleteComments }: any) => {
             <div className="bg-white w-screen h-fit p-4 absolute  ">
               <button onClick={() => setIsShowMenu(false)}>
                 <Image
-                  src={'https://img.icons8.com/ios/50/multiply.png'}
+                  src={"https://img.icons8.com/ios/50/multiply.png"}
                   alt="cancel"
                   height={34}
                   width={34}
@@ -87,14 +94,14 @@ const ProductReviewCard = ({ index, review, handleDeleteComments }: any) => {
                 />
               </button>
               <div className="flex flex-col m-2 mt-4 gap-2 font-bold text-md text-gray-800 ">
-                {userIdsSet.has(user?.id) ? (
+                {hasCurrentUserReview ? (
                   <>
                     <button
-                      onClick={() => handleDeleteComments(commentId[index])}
+                      onClick={() => handleDeleteComments(review.comment_id)}
                     >
                       <p className=" text-start">Delete Review</p>
                     </button>
-                    <button onClick={() => handleEditComment(index)}>
+                    <button onClick={() => handleEditComment()}>
                       <p className=" text-start">Edit Review</p>
                     </button>
                   </>

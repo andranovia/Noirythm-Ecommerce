@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('comment_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('ratings');
-            $table->integer('average_rating')->nullable();
             $table->text('review_texts');
             $table->string('product_id');
             $table->timestamps();
