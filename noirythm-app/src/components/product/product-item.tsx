@@ -1,12 +1,11 @@
-'use client'
+"use client";
 
-
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { useRating } from '@/context/ratingContext';
-import { FaStar } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-import { useResize } from '@/hooks/useResize';
+import React, { useState } from "react";
+import Image from "next/image";
+import { useRating } from "@/context/ChangesContext";
+import { FaStar } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { useResize } from "@/hooks/useResize";
 
 interface ProductItem {
   product_name: string;
@@ -68,8 +67,8 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
                   height={260}
                   className={
                     desc
-                      ? 'w-full lg:h-[50vh] object-cover flex rounded-lg '
-                      : 'w-[14rem] h-full object-cover rounded-lg'
+                      ? "w-full lg:h-[50vh] object-cover flex rounded-lg "
+                      : "w-[14rem] h-full object-cover rounded-lg"
                   }
                 />
               </motion.div>

@@ -1,91 +1,52 @@
-import { useState, useEffect, useCallback } from "react";
-import axiosInstance from "@/utils/axiosInstance";
-import { useRating } from "@/context/ratingContext";
 import { useAuth } from "./useAuth";
-import { useQuery } from "@tanstack/react-query";
-import { getProductReviews } from "@/utils/getProductReviews";
+import { useMutation } from "@tanstack/react-query";
+import { deleteReview, postReview, updateReview } from "@/utils/mutateReview";
 
-export const useProductRating = (id: string) => {
-  const { setIsChangesSaved } = useRating();
-  const { user } = useAuth();
+interface useProductRatingProps {
+  addData?: {
+    reviewRating: number;
+    reviewText: string;
+  };
+  id?: string;
+  reviewId?: number;
+  editedData?: {
+    editedRating: number;
+    editedReviewText: string;
+  };
+}
 
-  // const { data: ratingData } = useQuery({
-  //   queryKey: ["productReviews"],
-  //   queryFn: () => axiosInstance.get(`/api/products/reviews/userReview/${id}`),
-  // });
+export const useProductRating = ({
+  addData,
+  id,
+  reviewId,
+  editedData,
+}: useProductRatingProps) => {
+  const { user } = useAuth({});
 
-  const handleDeleteComments = useCallback(
-    (commentId: number) => {
-      axiosInstance
-        .delete(`api/products/reviews/deleteReview/${commentId}`, {
-          params: {
-            userId: user?.id,
-          },
-        })
-        .then(() => {
-          setIsChangesSaved(true);
-        })
-        .catch((error) => {
-          console.error("Error deleting rating and review text", error);
-        });
-    },
-    [user?.id, setIsChangesSaved]
-  );
+  const { mutateAsync: deleteReviewMutation } = useMutation({
+    mutationFn: () =>
+      deleteReview({
+        deleteReviewData: { userId: user.id, reviewId: reviewId },
+      }),
+  });
 
-  const [userRating, setUserRating] = useState(0);
-  const [reviewUserText, setReviewUserText] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const { mutateAsync: addReviewMutation } = useMutation({
+    mutationFn: () =>
+      postReview({ id: id, postReviewData: addData, userId: user?.id }),
+  });
 
-  const submitHandler = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-
-      const data = {
-        rating: userRating,
-        review_text: reviewUserText,
+  const { mutateAsync: updateReviewMutation } = useMutation({
+    mutationFn: () =>
+      updateReview({
+        updateReviewData: editedData,
         userId: user?.id,
-      };
-
-      try {
-        const response = await axiosInstance.post(
-          `/api/products/reviews/${id}`,
-          data
-        );
-
-        if (response.status === 201) {
-          console.log("Review has been submitted successfully.");
-          setUserRating(0);
-          setReviewUserText("");
-          setErrorMessage("");
-          setIsChangesSaved(true);
-        } else {
-          console.log("Review submission was not successful.");
-          setErrorMessage("Review submission was not successful.");
-        }
-      } catch (error: any) {
-        console.error("Error submitting review", error);
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          setErrorMessage(error.response.data.message);
-        } else {
-          setErrorMessage("Error submitting review. Please try again later.");
-        }
-      }
-    },
-    [id, reviewUserText, user?.id, userRating, setIsChangesSaved]
-  );
+        reviewId: reviewId,
+      }),
+  });
 
   return {
-    // ratingData,
-    handleDeleteComments,
-    submitHandler,
-    errorMessage,
-    reviewUserText,
-    setReviewUserText,
-    userRating,
-    setUserRating,
+    addReviewMutation,
+    updateReviewMutation,
+    deleteReviewMutation,
   };
 };

@@ -1,47 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import useSearch from '@/hooks/useSearch';
+import React, { useState, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+import { useProduct } from "@/hooks/useProduct";
 
-const NavbarResult = dynamic(() => import('./navbar-result'));
+const NavbarResult = dynamic(() => import("./navbar-result"));
 
+type ProductItem = {
+  product_name: string;
+  product_image: string;
+  product_price: number;
+  product_description: string;
+  id: number;
+  promo_text: string;
+};
 
 const NavbarSearch = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const {
-    handleSearch,
-    setSearchResultsVisible,
-    searchResults,
-    isSearchResultsVisible,
-  } = useSearch();
-
-  useEffect(() => {
-    if (searchQuery) {
-      handleSearch(searchQuery);
-    } else {
-      setSearchResultsVisible(false);
-    }
-  }, [searchQuery, handleSearch, setSearchResultsVisible]);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setSearchResultsVisible(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
+  const { productsSearch, isSearchResultsVisible } = useProduct(searchQuery);
 
   return (
     <div className="">
@@ -66,11 +44,10 @@ const NavbarSearch = () => {
 
       {isSearchResultsVisible && (
         <div className="fixed bg-white w-full h-[32rem] left-0 right-0 sm:w-[50rem] rounded-md sm:left-[18%] sm:h-fit ">
-          {searchResults.map((result) => (
+          {productsSearch?.map((result: ProductItem) => (
             <Link
               href={{
                 pathname: `/product/${result.id}`,
-                
               }}
               key={result.id}
             >

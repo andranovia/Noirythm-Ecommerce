@@ -3,8 +3,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { useRating } from "@/context/ratingContext";
-import { useAuth } from "@/hooks/useAuth";
 import ProductInfoReviewEdit from "./product-info-review-edit";
 import Avatar from "../user/avatar";
 import { useProductRating } from "@/hooks/useProductRating";
@@ -27,11 +25,9 @@ const ProductReviewCard = ({
   const [isEditing, setIsEditing] = useState(false);
   const [isShowMenu, setIsShowMenu] = useState(false);
 
-  const { handleDeleteComments } = useProductRating(review.product_Id);
-
-  const handleEditComment = () => {
-    setIsEditing(true);
-  };
+  const { deleteReviewMutation } = useProductRating({
+    reviewId: review.comment_id,
+  });
 
   return (
     <>
@@ -96,12 +92,10 @@ const ProductReviewCard = ({
               <div className="flex flex-col m-2 mt-4 gap-2 font-bold text-md text-gray-800 ">
                 {hasCurrentUserReview ? (
                   <>
-                    <button
-                      onClick={() => handleDeleteComments(review.comment_id)}
-                    >
+                    <button onClick={() => deleteReviewMutation()}>
                       <p className=" text-start">Delete Review</p>
                     </button>
-                    <button onClick={() => handleEditComment()}>
+                    <button onClick={() => setIsEditing(true)}>
                       <p className=" text-start">Edit Review</p>
                     </button>
                   </>

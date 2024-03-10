@@ -1,6 +1,10 @@
-import { getProducts, getProductsPromo } from "@/utils/getProducts";
+import {
+  getProducts,
+  getProductsPromo,
+  getProductsSearch,
+} from "@/utils/getProducts";
 import { useQuery } from "@tanstack/react-query";
-
+import { useState } from "react";
 
 interface ProductItem {
   id: string;
@@ -12,18 +16,29 @@ interface ProductItem {
   promo_text: string;
 }
 
-export function useProduct() {
+export function useProduct(searchQuery: string | never) {
+  const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
+
   const { data: products, isLoading } = useQuery<ProductItem[]>({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
-  
 
   const { data: productsPromo } = useQuery({
     queryKey: ["productsPromo"],
     queryFn: () => getProductsPromo(),
   });
 
+  const { data: productsSearch } = useQuery({
+    queryKey: ["productsSearch", searchQuery],
+    queryFn: () => getProductsSearch(searchQuery, setSearchResultsVisible),
+  });
 
-  return { products, isLoading, productsPromo };
+  return {
+    products,
+    isLoading,
+    productsPromo,
+    productsSearch,
+    isSearchResultsVisible,
+  };
 }

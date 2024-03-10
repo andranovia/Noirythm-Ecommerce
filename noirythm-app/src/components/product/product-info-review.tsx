@@ -35,10 +35,6 @@ export default function ProductInfoReviews({
   );
   const averageRoundedRating = Math.round(averageRating);
 
-  const handleModalToggle = (open: boolean) => {
-    setCommentModal(open);
-  };
-
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < averageRoundedRating; i++) {
@@ -90,7 +86,7 @@ export default function ProductInfoReviews({
               </Link>
             </div>
           ) : (
-            <ButtonPrimary onClick={() => handleModalToggle(true)}>
+            <ButtonPrimary onClick={() => setCommentModal(true)}>
               Give your opinions
             </ButtonPrimary>
           )}
@@ -106,12 +102,11 @@ export default function ProductInfoReviews({
         <div className="relative z-20">
           {commentModal && (
             <>
-              <ProductInfoReviewInput rateColor={rateColor} id={productId}>
-                <ButtonSecondary onClick={() => handleModalToggle(false)}>
-                  Close
-                </ButtonSecondary>
-                <ButtonPrimary type={"submit"}>Send</ButtonPrimary>
-              </ProductInfoReviewInput>
+              <ProductInfoReviewInput
+                rateColor={rateColor}
+                id={productId}
+                setCommentModal={setCommentModal}
+              />
             </>
           )}
         </div>

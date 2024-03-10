@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useCart } from "@/hooks/useCart";
 import ButtonSecondary from "../button/button-secondary";
 import ButtonPrimary from "../button/button-primary";
-import { useRating } from "@/context/ratingContext";
+import { useChanges } from "@/context/ChangesContext";
 import ProductInfoReviews from "./product-info-review";
 import { useResize } from "@/hooks/useResize";
 
@@ -28,8 +28,8 @@ interface ProductInfoProps {
 }
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const { addToCart } = useCart();
-  const { isChangesSaved } = useRating();
+  const { addToCart } = useCart(product.id);
+  const { isChangesSaved } = useChanges();
   const { isMobile } = useResize();
 
   return (
@@ -63,7 +63,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                   <div className="flex justify-center items-center mr-5">
                     <BsChatLeftText className="w-7 h-7" />
                   </div>
-                  <ButtonSecondary onClick={() => addToCart(product?.id)}>
+                  <ButtonSecondary onClick={() => addToCart()}>
                     Add to <MdAddShoppingCart />
                   </ButtonSecondary>
 
@@ -140,7 +140,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               </div>
               <ButtonSecondary
                 onClick={() => {
-                  addToCart(product?.id);
+                  addToCart();
                 }}
               >
                 Add to <MdAddShoppingCart />

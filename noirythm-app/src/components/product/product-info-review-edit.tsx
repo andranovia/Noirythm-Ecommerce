@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import axiosInstance from "@/utils/axiosInstance";
 import ButtonPrimary from "../button/button-primary";
 import ButtonSecondary from "../button/button-secondary";
 import { FaStar } from "react-icons/fa";
-import { useAuth } from "@/hooks/useAuth";
-import { useRating } from "@/context/ratingContext";
+import { useProductRating } from "@/hooks/useProductRating";
 
 interface ProductInfoReviewEdit {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,27 +19,16 @@ const ProductInfoReviewEdit = ({
   commentId,
   rating,
 }: ProductInfoReviewEdit) => {
-  const [editedReview, setEditedReview] = useState(reviewText);
+  const [editedReviewText, setEditedReviewText] = useState(reviewText);
   const [editedRating, setEditedRating] = useState(rating);
-  const { user } = useAuth();
-  const { setIsChangesSaved } = useRating();
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-  };
 
-  const handleSaveEdit = async () => {
-    try {
-      axiosInstance.put(`/api/products/reviews/editReview/${commentId}`, {
-        rating: editedRating,
-        review_text: editedReview,
-        userId: user?.id,
-      });
-      setIsEditing(false);
-      setIsChangesSaved(true);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { updateReviewMutation } = useProductRating({
+    editedData: {
+      editedRating: editedRating,
+      editedReviewText: editedReviewText,
+    },
+    reviewId: commentId,
+  });
 
   return (
     <div className="fixed z-30 top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
@@ -73,13 +60,17 @@ const ProductInfoReviewEdit = ({
           </div>
           <input
             type="text"
-            value={editedReview}
-            onChange={(e) => setEditedReview(e.target.value)}
+            value={editedReviewText}
+            onChange={(e) => setEditedReviewText(e.target.value)}
           />
         </div>
         <div className="mt-10 flex justify-center z-20">
-          <ButtonSecondary onClick={handleCancelEdit}>Close</ButtonSecondary>
-          <ButtonPrimary onClick={handleSaveEdit}>Save</ButtonPrimary>
+          <ButtonSecondary onClick={() => setIsEditing(false)}>
+            Close
+          </ButtonSecondary>
+          <ButtonPrimary onClick={() => updateReviewMutation()}>
+            Save
+          </ButtonPrimary>
         </div>
       </div>
     </div>

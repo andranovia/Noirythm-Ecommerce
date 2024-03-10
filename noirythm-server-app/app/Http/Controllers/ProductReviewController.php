@@ -16,7 +16,7 @@ class ProductReviewController extends Controller
             'review_text' => 'required|string',
         ]);
 
-        $userId = $request->input('userId');
+        $userId = $request->input('user_id');
 
         $user = User::find($userId);
 

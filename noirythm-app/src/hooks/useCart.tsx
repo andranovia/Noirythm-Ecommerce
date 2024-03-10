@@ -1,60 +1,29 @@
-import axiosInstance from '@/utils/axiosInstance';
-import { getCart } from '@/utils/getCart';
-import { useAuth } from './useAuth';
-import { useEffect, useState, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { getCart } from "@/utils/getCart";
+import { useAuth } from "./useAuth";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { deleteCartItem, postCartItem } from "@/utils/mutateCart";
 
-
-
-export const useCart = () => {
+export const useCart = (productId: string) => {
   const { user } = useAuth();
 
   const { data: userCart } = useQuery({
     queryKey: ["userCart"],
     queryFn: () => getCart(user.id),
   });
- 
 
-  const addToCart = useCallback(
-    async (productId: any) => {
-      try {
-        const userId = user?.id;
-        const payload = {
-          userId: userId,
-          productId: productId,
-        };
+  const { mutateAsync: addToCart } = useMutation({
+    mutationFn: () =>
+      postCartItem({
+        postCartItemData: { productId: productId, userId: user?.id },
+      }),
+  });
 
-        const response = await axiosInstance.post('/api/cart/add', payload);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [user]
-  );
-
-  const removeFromCart = useCallback(
-    async (productId: any) => {
-      try {
-        const userId = user?.id;
-        const payload = {
-          data: {
-            userId: userId,
-            productId: productId,
-          },
-        };
-
-        const response = await axiosInstance.delete(
-          '/api/cart/delete',
-          payload
-        );
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    [user]
-  );
+  const { mutateAsync: removeFromCart } = useMutation({
+    mutationFn: () =>
+      deleteCartItem({
+        deleteCartItemData: { productId: productId, userId: user?.id },
+      }),
+  });
 
   return {
     addToCart,

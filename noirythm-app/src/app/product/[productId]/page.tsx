@@ -1,7 +1,7 @@
 "use client";
 
 import ProductInfo from "@/components/product/product-info";
-import { getProductReviews } from "@/utils/getProductReviews";
+import { getProductReviews } from "@/utils/mutateReview";
 import { getProductsInfo } from "@/utils/getProducts";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
