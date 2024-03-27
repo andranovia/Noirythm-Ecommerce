@@ -15,6 +15,11 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+
+        foreach ($products as $product) {
+            $product['average_rating'] = $product->averageRating();
+        }
+
         return response()->json($products);
     }
 

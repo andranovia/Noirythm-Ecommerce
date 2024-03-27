@@ -14,9 +14,10 @@ interface ProductItem {
   product_description: string;
   product_type: string;
   promo_text: string;
+  average_rating: number;
 }
 
-export function useProduct(searchQuery: string | never) {
+export function useProduct(searchQuery?: string) {
   const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
 
   const { data: products, isLoading } = useQuery<ProductItem[]>({
@@ -30,7 +31,7 @@ export function useProduct(searchQuery: string | never) {
   });
 
   const { data: productsSearch } = useQuery({
-    queryKey: ["productsSearch", searchQuery],
+    queryKey: ["productsSearch", searchQuery || ""],
     queryFn: () => getProductsSearch(searchQuery, setSearchResultsVisible),
   });
 

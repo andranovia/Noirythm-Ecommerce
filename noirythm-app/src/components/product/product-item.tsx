@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useRating } from "@/context/ChangesContext";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useResize } from "@/hooks/useResize";
@@ -13,6 +12,7 @@ interface ProductItem {
   product_price: number;
   promo_text?: string;
   id: string;
+  average_rating: number;
 }
 
 interface ProductItemCardProps {
@@ -26,12 +26,9 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
   className,
   desc,
 }) => {
-  const { ratingData } = useRating();
   const [isHovering, setIsHovering] = useState(false);
   const { isMobile } = useResize();
-
-  const productRating = ratingData.averageRating[item.id] || 0;
-  const roundedRating = Math.round(productRating);
+  const roundedRating = Math.round(item.average_rating);
 
   return (
     <>

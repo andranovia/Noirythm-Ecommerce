@@ -1,4 +1,3 @@
-
 import React from "react";
 import dynamic from "next/dynamic";
 import { useProduct } from "@/hooks/useProduct";
@@ -13,15 +12,16 @@ interface ProductProps {
   productPromo?: boolean;
 }
 
-  interface ProductItem {
-    id: string;
-    product_name: string;
-    product_image: string;
-    product_price: number;
-    product_description: string;
-    product_type: string;
-    promo_text: string;
-  }
+interface ProductItem {
+  id: string;
+  product_name: string;
+  product_image: string;
+  product_price: number;
+  product_description: string;
+  product_type: string;
+  promo_text: string;
+  average_rating: number;
+}
 
 const ProductData: React.FC<ProductProps> = ({
   maxItems,
@@ -39,8 +39,9 @@ const ProductData: React.FC<ProductProps> = ({
       )
     : selectedProduct;
 
-  const displayedItems =
-    maxItems ? filteredItems?.slice(0, maxItems) : filteredItems 
+  const displayedItems = maxItems
+    ? filteredItems?.slice(0, maxItems)
+    : filteredItems;
 
   return (
     <ProductCard

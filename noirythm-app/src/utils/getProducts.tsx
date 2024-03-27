@@ -35,7 +35,7 @@ export const getProductsPromo = async () => {
 };
 
 export const getProductsSearch = async (
-  searchQuery: string,
+  searchQuery: string | undefined,
   setSearchResultsVisible: Dispatch<SetStateAction<boolean>>
 ) => {
   try {

@@ -12,6 +12,7 @@ interface ProductItem {
   product_description: string;
   id: string;
   promo_text: string;
+  average_rating: number;
 }
 
 interface ProductCardProps {
