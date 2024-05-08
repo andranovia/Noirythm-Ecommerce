@@ -16,6 +16,10 @@ export const useCart = (productId: string) => {
       postCartItem({
         postCartItemData: { productId: productId, userId: user?.id },
       }),
+
+    // onSuccess: () => {
+
+    // }
   });
 
   const { mutateAsync: removeFromCart } = useMutation({

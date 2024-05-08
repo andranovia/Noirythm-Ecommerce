@@ -14,7 +14,7 @@ interface registerData {
   name: string;
   email: string;
   password: string;
-  confirmPassword: string;
+  password_confirmation: string;
 }
 
 function Register() {
@@ -22,10 +22,11 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    password_confirmation: "",
   });
-
-  const { registerAction } = useAuth({ registerData: registerData });
+  const { registerAction, validationErrors } = useAuth({
+    registerData: registerData,
+  });
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,7 +50,7 @@ function Register() {
       >
         <h5 className="text-2xl font-bold text-gray-800 mb-8">Register</h5>
 
-        <form onSubmit={() => registerAction()}>
+        <div>
           <div className="mb-3">
             <AuthLabel htmlFor="name" className="form-label">
               Name
@@ -64,12 +65,12 @@ function Register() {
                 handleOnChange(e);
               }}
             />
-            {/* {validationErrors && validationErrors.name != undefined && (
+            {validationErrors && validationErrors.name != undefined && (
               <AuthInputError
                 messages={validationErrors.name}
-                className="mt-2"
+                
               />
-            )} */}
+            )}
           </div>
           <div className="mb-3">
             <AuthLabel htmlFor="email" className="form-label">
@@ -85,6 +86,12 @@ function Register() {
                 handleOnChange(e);
               }}
             />
+            {validationErrors && validationErrors.email != undefined && (
+              <AuthInputError
+                messages={validationErrors.email}
+                
+              />
+            )}
           </div>
           <div className="mb-3">
             <AuthLabel htmlFor="password" className="form-label">
@@ -100,6 +107,12 @@ function Register() {
                 handleOnChange(e);
               }}
             />
+             {validationErrors && validationErrors.password != undefined && (
+              <AuthInputError
+                messages={validationErrors.password}
+                
+              />
+            )}
           </div>
           <div className="mb-3">
             <AuthLabel htmlFor="confirm_password" className="form-label">
@@ -108,16 +121,16 @@ function Register() {
             <AuthInput
               type="password"
               className="form-control"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={registerData.confirmPassword}
+              id="password_confirmation"
+              name="password_confirmation"
+              value={registerData.password_confirmation}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
                 handleOnChange(e);
               }}
             />
           </div>
-          <div className="d-grid gap-2">
-            <ButtonPrimary type="submit" className="btn btn-primary btn-block">
+          <div>
+            <ButtonPrimary onClick={() => registerAction()}>
               Register Now
             </ButtonPrimary>
             <p className="text-center mt-8">
@@ -127,7 +140,7 @@ function Register() {
               </Link>
             </p>
           </div>
-        </form>
+        </div>
       </AuthCard>
     </div>
   );

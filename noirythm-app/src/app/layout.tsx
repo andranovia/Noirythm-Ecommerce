@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ReactQueryProvider } from "@/utils/ReactQueryProvider";
+import { ChangesProvider } from "@/context/ChangesContext";
 
 export const metadata: Metadata = {
   title: "Noirythm Ecommerce",
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider><ChangesProvider>{children}</ChangesProvider></ReactQueryProvider>
       </body>
     </html>
   );

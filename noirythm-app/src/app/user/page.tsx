@@ -60,7 +60,7 @@ const UserProfile: React.FC = () => {
                 <div className="flex justify-start">
                   <div className="flex flex-col ">
                     <UserInfo />
-                    <ButtonPrimary onClick={logoutAction}>
+                    <ButtonPrimary onClick={() => logoutAction()}>
                       Log out
                     </ButtonPrimary>
                   </div>
@@ -103,7 +103,7 @@ const UserProfile: React.FC = () => {
                         </button>
                       </div>
                     </div>
-                    <ButtonPrimary>Logout</ButtonPrimary>
+                    <ButtonPrimary onClick={() => logoutAction()}>Logout</ButtonPrimary>
                   </div>
                 </>
               )}

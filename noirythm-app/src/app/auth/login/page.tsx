@@ -1,25 +1,32 @@
-'use client'
+"use client";
 
-import React from 'react';
-import Link from 'next/link';
-import AuthCard from '@/components/auth/AuthCard';
-import ApplicationLogo from '@/components/logo/ApplicationLogo';
-import AuthInputError from '@/components/auth/AuthInputError';
-import AuthLabel from '@/components/auth/AuthLabel';
-import AuthInput from '@/components/auth/AuthInput';
-import ButtonPrimary from '@/components/button/button-primary';
-import { useAuth } from '@/hooks/useAuth';
+import React, { ChangeEvent, useState } from "react";
+import Link from "next/link";
+import AuthCard from "@/components/auth/AuthCard";
+import ApplicationLogo from "@/components/logo/ApplicationLogo";
+import AuthInputError from "@/components/auth/AuthInputError";
+import AuthLabel from "@/components/auth/AuthLabel";
+import AuthInput from "@/components/auth/AuthInput";
+import ButtonPrimary from "@/components/button/button-primary";
+import { useAuth } from "@/hooks/useAuth";
 
 function Login() {
-  const {
-    loginAction,
-    validationErrors,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    isSubmitting,
-  } = useAuth();
+  const [userLoginData, setUserLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { loginAction, validationErrors } = useAuth({
+    loginData: userLoginData,
+  });
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserLoginData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   return (
     <div>
@@ -34,14 +41,10 @@ function Login() {
         }
       >
         <h5 className="text-2xl font-bold text-gray-800 mb-8">Sign in</h5>
-        <form
-          onSubmit={(e) => {
-            loginAction(e);
-          }}
+        <div
+         
         >
-          {validationErrors && Object.keys(validationErrors).length !== 0 && (
-            <AuthInputError messages={validationErrors} className="mt-2" />
-          )}
+           
 
           <div className="mb-3">
             <AuthLabel htmlFor="email" className="form-label">
@@ -52,18 +55,18 @@ function Login() {
               className="form-control"
               id="email"
               name="email"
-              value={email}
-              onChange={(e: any) => {
-                setEmail(e.target.value);
+              value={userLoginData.email}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                handleOnChange(e);
               }}
             />
+             {validationErrors && validationErrors.email != undefined && (
+              <AuthInputError
+                messages={validationErrors.email}
+                className="mt-2"
+              />
+            )}
           </div>
-          {validationErrors && validationErrors.email != undefined && (
-            <AuthInputError
-              messages={validationErrors.email}
-              className="mt-2"
-            />
-          )}
           <div className="mb-3">
             <AuthLabel htmlFor="password" className="form-label">
               Password
@@ -73,9 +76,9 @@ function Login() {
               className="form-control"
               id="password"
               name="password"
-              value={password}
-              onChange={(e: any) => {
-                setPassword(e.target.value);
+              value={userLoginData.password}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                handleOnChange(e);
               }}
             />
             {validationErrors && validationErrors.password != undefined && (
@@ -85,22 +88,20 @@ function Login() {
               />
             )}
           </div>
-          <div className="d-grid gap-2">
+          <div>
             <ButtonPrimary
-              disabled={isSubmitting}
-              type="submit"
-              className="btn btn-primary btn-block"
+              onClick={() => loginAction()}
             >
               Login
             </ButtonPrimary>
             <p className="text-center mt-8">
-              Dont have account?{' '}
+              Dont have account?{" "}
               <Link className="text-green-500" href="/auth/register">
                 Register here
               </Link>
             </p>
           </div>
-        </form>
+        </div>
       </AuthCard>
     </div>
   );

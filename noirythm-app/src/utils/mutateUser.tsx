@@ -1,15 +1,19 @@
+import { Dispatch, SetStateAction } from "react";
 import axiosInstance from "./axiosInstance";
+import { ValidationErrors } from "@/hooks/useAuth";
 
 interface postUserRegisterProps {
+  setValidationErrors: Dispatch<SetStateAction<ValidationErrors>>;
   postUserRegisterData?: {
     name: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    password_confirmation: string;
   };
 }
 
 interface postUserLoginProps {
+  setValidationErrors: Dispatch<SetStateAction<ValidationErrors>>;
   postUserLoginData?: {
     email: string;
     password: string;
@@ -18,51 +22,86 @@ interface postUserLoginProps {
 
 export const postUserRegister = async ({
   postUserRegisterData,
+  setValidationErrors,
 }: postUserRegisterProps) => {
-  const payload = {
-    name: postUserRegisterData?.name,
-    email: postUserRegisterData?.email,
-    password: postUserRegisterData?.password,
-    confirm_password: postUserRegisterData?.confirmPassword,
-  };
   try {
-    axiosInstance.post("/api/register", payload).then((r) => {
-      localStorage.setItem("token", r.data.token);
+    const payload = {
+      name: postUserRegisterData?.name,
+      email: postUserRegisterData?.email,
+      password: postUserRegisterData?.password,
+      password_confirmation: postUserRegisterData?.password_confirmation,
+    };
+
+    const response = await axiosInstance.post("/api/register", payload);
+    setValidationErrors(response.data.errors);
+
+    if (response.data.errors === undefined) {
+      localStorage.setItem("token", response.data.token);
       localStorage.setItem(
         "user",
-        JSON.stringify({ name: r.data.name, email: r.data.email })
+        JSON.stringify({ name: response.data.name, email: response.data.email })
       );
-    });
-  } catch (error) {
-    console.log(error);
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error: any) {
+    if (error.response) {
+      const { data, status } = error.response;
+      console.error(`Server responded with ${status}.`, data);
+      if (data.errors) {
+        setValidationErrors(data.errors);
+      }
+    } else if (error.request) {
+      console.error("Request made but no response received");
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
+    return false;
   }
 };
 
 export const postUserLogin = async ({
   postUserLoginData,
+  setValidationErrors,
 }: postUserLoginProps) => {
   const payload = {
     email: postUserLoginData?.email,
     password: postUserLoginData?.password,
   };
+  try {
+    const response = await axiosInstance.post("/api/login", payload);
 
-  axiosInstance
-    .post("/api/login", payload)
-    .then(({ data }) => {
-      const accessToken = data.data.token;
-      localStorage.setItem("accessToken", accessToken);
+    setValidationErrors(response.data.errors);
+    if (response.data.errors === undefined) {
+      const accessToken = response.data.data.token;
+      accessToken && localStorage.setItem("accessToken", accessToken);
       localStorage.setItem(
         "user",
         JSON.stringify({
-          name: data.data.name,
-          email: data["email"],
+          name: response.data.data.name,
+          email: response.data.data["email"],
         })
       );
-    })
 
-    .catch((Error) => {
-      console.log(Error);
-    });
+      return true;
+    }
+
+    return false;
+  } catch (error: any) {
+    if (error.response) {
+      const { data, status } = error.response;
+      console.error(`Server responded with ${status}.`, data);
+      if (data.errors) {
+        setValidationErrors(data.errors);
+      }
+    } else if (error.request) {
+      console.error("Request made but no response received");
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
+    return false;
+  }
 };
 
 export const postUserlogout = async () => {
@@ -70,24 +109,25 @@ export const postUserlogout = async () => {
 
   if (!accessToken) {
     console.error("Access token not found");
-    return;
+    return false;
   }
 
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
-
-  axiosInstance
-    .post("/api/logout", null, { headers })
-    .then((response) => {
-      if (response.data.success) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("user");
-      } else {
-        console.error("Logout failed");
-      }
-    })
-    .catch((error) => {
-      console.error("Error during logout:", error);
-    });
+  try {
+    const response = await axiosInstance.post("/api/logout", null, { headers });
+    if (response.data.success) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("user");
+      return true;
+    } else {
+      console.error("Logout failed");
+      return false;
+    }
+    
+  } catch (error) {
+    console.error("Error during logout:", error);
+    return false;
+  }
 };

@@ -10,7 +10,7 @@ import {
   postUserlogout,
 } from "@/utils/mutateUser";
 
-interface ValidationErrors {
+export interface ValidationErrors {
   name?: string[];
   email?: string[];
   password?: string[];
@@ -22,7 +22,7 @@ interface useAuthProps {
     name: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    password_confirmation: string;
   };
   loginData?: {
     email: string;
@@ -31,10 +31,10 @@ interface useAuthProps {
 }
 
 export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
-  const router = useRouter();
   const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
     {}
   );
+  const router = useRouter();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -45,15 +45,42 @@ export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
   });
 
   const { mutateAsync: registerAction } = useMutation({
-    mutationFn: () => postUserRegister({ postUserRegisterData: registerData }),
+    mutationFn: () => postUserRegister({ postUserRegisterData: registerData, setValidationErrors }),
+    onSuccess: (success: boolean) => {
+      if (success) {
+        router.push("/auth/login"); 
+        
+      } else {
+  
+        console.log('Registration failed');
+      }
+    },
   });
 
   const { mutateAsync: loginAction } = useMutation({
-    mutationFn: () => postUserLogin({ postUserLoginData: loginData }),
+    mutationFn: () => postUserLogin({ postUserLoginData: loginData, setValidationErrors }),
+    onSuccess: (success: boolean) => {
+      if (success) {
+        router.push("/"); 
+        
+      } else {
+  
+        console.log('Login failed');
+      }
+    },
   });
 
   const { mutateAsync: logoutAction } = useMutation({
     mutationFn: () => postUserlogout(),
+    onSuccess: (success: boolean) => {
+      if (success) {
+        router.push("/auth/login"); 
+        
+      } else {
+  
+        console.log('Logout failed');
+      }
+    },
   });
 
   return {
