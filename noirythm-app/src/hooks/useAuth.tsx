@@ -1,6 +1,5 @@
-import axiosInstance from "../utils/axiosInstance";
+
 import { useRouter } from "next/navigation";
-import React from "react";
 import { useState } from "react";
 import { getUser } from "../utils/getUser";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -36,12 +35,13 @@ export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
   );
   const router = useRouter();
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const accessToken = localStorage.getItem("accessToken");
+
   const { data: user } = useQuery({
     queryKey: ["user"],
-    queryFn: () => getUser(accessToken),
+    queryFn: () =>  getUser(accessToken),
   });
 
   const { mutateAsync: registerAction } = useMutation({
@@ -88,7 +88,6 @@ export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
     loginAction,
     logoutAction,
     user,
-    isSubmitting,
     validationErrors,
   };
 };

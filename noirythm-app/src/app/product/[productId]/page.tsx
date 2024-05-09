@@ -10,14 +10,19 @@ interface ProductPageProps {
 }
 
 const ProductPage = ({ params }: ProductPageProps) => {
-  const { data: productsInfo } = useQuery({
+
+  
+  const { data: productInfo, isLoading: productInfoLoading, isRefetching: productInfoRefetch } = useQuery({
     queryKey: ["productInfo"],
     queryFn: () => getProductsInfo(params.productId),
   });
+  
+  const loadingState = productInfoLoading || productInfoRefetch
+
 
   return (
     <div>
-      <ProductInfo product={productsInfo} />
+      <ProductInfo product={productInfo} isLoading={loadingState}/>
     </div>
   );
 };

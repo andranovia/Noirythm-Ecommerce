@@ -36,6 +36,7 @@ class ProductInfoResource extends JsonResource
             'product_image' => $this->product_image,
             'promo_text' => $this->promo_text,
             'product_type' => $this->product_type,
+            'product_price' => $this->product_price,
             'product_reviews' => $this->productReview,
             'average_rating' => $this->calculateAverageRating()
         ];

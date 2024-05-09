@@ -9,7 +9,6 @@ export default function NavbarDropdown({
   setIsDropdownOpen,
 }: NavbarDropdownProps) {
   const pathname = usePathname()
-console.log(pathname)
   const handleDropdownEnter = () => {
     setIsDropdownOpen(true);
   };
