@@ -1,9 +1,11 @@
+'use client'
+
 import { getCart } from "@/utils/getCart";
 import { useAuth } from "./useAuth";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { deleteCartItem, postCartItem } from "@/utils/mutateCart";
 
-export const useCart = (productId: string) => {
+export const useCart = (productId?: string ) => {
   const { user } = useAuth();
 
   const { data: userCart } = useQuery({
@@ -11,15 +13,13 @@ export const useCart = (productId: string) => {
     queryFn: () => getCart(user.id),
   });
 
-  const { mutateAsync: addToCart } = useMutation({
+  
+  const { mutateAsync: addToCart } =  useMutation({
     mutationFn: () =>
       postCartItem({
         postCartItemData: { productId: productId, userId: user?.id },
       }),
-
-    // onSuccess: () => {
-
-    // }
+    // onSuccess: () => {}
   });
 
   const { mutateAsync: removeFromCart } = useMutation({
@@ -27,6 +27,7 @@ export const useCart = (productId: string) => {
       deleteCartItem({
         deleteCartItemData: { productId: productId, userId: user?.id },
       }),
+    // onSuccess: () => {}
   });
 
   return {

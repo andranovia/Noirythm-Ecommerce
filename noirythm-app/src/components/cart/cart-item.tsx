@@ -11,7 +11,7 @@ interface Item {
 }
 
 const CartItem: React.FC<{ item: Item }> = ({ item }) => {
-  const { removeFromCart } = useCart();
+  const { removeFromCart } = useCart(item.id);
 
   const maxLength = 20;
 
@@ -23,7 +23,7 @@ const CartItem: React.FC<{ item: Item }> = ({ item }) => {
       : 'Loading...';
 
   return (
-    <div className="rounded-lg flex justify-start gap-4 shadow-ShadowCard w-[20rem]  h-fit  items-start sm:w-[30rem]">
+    <div className="rounded-lg flex justify-start gap-4  w-[20rem]  h-fit  items-start sm:w-[30rem]">
       <div className="relative m-4 ">
         <div className="w-20 h-20">
           <Image
@@ -44,7 +44,7 @@ const CartItem: React.FC<{ item: Item }> = ({ item }) => {
         </div>
 
         <div className="my-4">
-          <ButtonPrimary onClick={() => removeFromCart(item.id)}>
+          <ButtonPrimary onClick={() => removeFromCart()}>
             <div className="text-sm">Remove</div>
           </ButtonPrimary>
         </div>

@@ -44,6 +44,5 @@ Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logou
 
 
 Route::get('user', function () {
-
     return auth()->user();
 })->middleware('auth:sanctum');

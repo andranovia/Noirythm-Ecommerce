@@ -32,12 +32,12 @@ const ProductData: React.FC<ProductProps> = ({
 }) => {
   const { productsPromo, products, isLoading } = useProduct();
   const selectedProduct = productPromo ? productsPromo : products;
-
-  const filteredItems = productTypeFilter
+  const filteredItems = productTypeFilter && productTypeFilter !== 'all'
     ? selectedProduct?.filter(
         (item: ProductItem) => item?.product_type === productTypeFilter
       )
     : selectedProduct;
+  
 
   const displayedItems = maxItems
     ? filteredItems?.slice(0, maxItems)

@@ -25,8 +25,8 @@ const Cart = ({userCart}: CartProps) => {
  
 
   return (
-    <div className='flex justify-center flex-col gap-4 my-10'>
-      {userCart.map((item: Product, index: number) => (
+    <div className='lg:grid grid-cols-2  items-center gap-4 my-10'>
+      {userCart?.map((item: Product, index: number) => (
         <CartItem key={item.id || index} item={item} />
       ))}
     </div>

@@ -2,14 +2,14 @@ import axiosInstance from "./axiosInstance";
 
 interface postCartItemProps {
   postCartItemData: {
-    productId: string;
+    productId?: string;
     userId: number;
   };
 }
 
 interface deleteCartItemProps {
   deleteCartItemData: {
-    productId: string;
+    productId?: string;
     userId: number;
   };
 }
