@@ -44,22 +44,32 @@ export const postReview = async ({
 
     if (response.status === 201) {
       console.log("Review has been submitted successfully.");
+      return true;
     }
   } catch (error: any) {
     console.error("Error submitting review", error);
+    return false;
   }
 };
 
 export const deleteReview = async ({ deleteReviewData }: deleteReviewProps) => {
-  axiosInstance
-    .delete(`api/products/reviews/deleteReview/${deleteReviewData.reviewId}`, {
-      params: {
-        userId: deleteReviewData.userId,
-      },
-    })
-    .catch((error) => {
-      console.error("Error deleting rating and review text", error);
-    });
+  try {
+    const response = await axiosInstance.delete(
+      `api/products/reviews/deleteReview/${deleteReviewData.reviewId}`,
+      {
+        params: {
+          userId: deleteReviewData.userId,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      return true;
+    }
+  } catch (error) {
+    console.error("Error deleting review", error);
+    return false;
+  }
 };
 
 export const updateReview = async ({
@@ -68,12 +78,17 @@ export const updateReview = async ({
   userId,
 }: updateReviewProps) => {
   try {
-    axiosInstance.put(`/api/products/reviews/editReview/${reviewId}`, {
+    const response = await axiosInstance.put(`/api/products/reviews/editReview/${reviewId}`, {
       rating: updateReviewData?.editedRating,
       review_text: updateReviewData?.editedReviewText,
       userId: userId,
     });
+    
+    if (response.status === 200) {
+      return true;
+    }
   } catch (error) {
-    console.error(error);
+    console.error("Error editing review", error);
+    return false
   }
 };

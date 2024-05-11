@@ -22,9 +22,12 @@ export const postCartItem = async ({ postCartItemData }: postCartItemProps) => {
     };
 
     const response = await axiosInstance.post("/api/cart/add", payload);
-    console.log(response.data);
+    if(response.status === 200){
+      return true
+    }
   } catch (error) {
-    console.error(error);
+    console.error('cart item cannot added to cart', error);
+    return false
   }
 };
 
@@ -41,8 +44,11 @@ export const deleteCartItem = async ({
     };
 
     const response = await axiosInstance.delete("/api/cart/delete", payload);
-    console.log(response.data);
+    if(response.status === 200){
+      return true
+    }
   } catch (error) {
-    console.error(error);
+    console.error('cart item cannot removed from cart', error);
+    return false
   }
 };

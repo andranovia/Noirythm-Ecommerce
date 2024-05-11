@@ -1,4 +1,5 @@
 
+import { useChanges } from "@/context/ChangesContext";
 import CartItem from "./cart-item";
 
 interface Product {
@@ -22,13 +23,26 @@ type CartProps = {
 }
 
 const Cart = ({userCart}: CartProps) => {
- 
+  const { isChangesSaved } = useChanges();
 
   return (
     <div className='lg:grid grid-cols-2  items-center gap-4 my-10'>
       {userCart?.map((item: Product, index: number) => (
         <CartItem key={item.id || index} item={item} />
       ))}
+      {isChangesSaved && (
+            <>
+              <div className="w-full fixed flex bottom-0 justify-center items-center z-40">
+                <div className=" bg-emerald-600 w-[16rem] h-14 rounded-md bottom-14 mb-10">
+                  <div className="p-4 flex justify-center items-center">
+                    <p className="text-md font-bold text-white">
+                      Changes have been saved
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
     </div>
   );
 };

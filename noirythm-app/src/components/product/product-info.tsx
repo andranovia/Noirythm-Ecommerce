@@ -31,6 +31,7 @@ interface ProductInfoProps {
 export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
   const { addToCart } = useCart(product?.id);
   const { isChangesSaved } = useChanges();
+
   const { isMobile } = useResize();
 
   return (
@@ -190,11 +191,11 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
           </div>
           {isChangesSaved && (
             <>
-              <div className="w-full fixed flex justify-center items-center">
+              <div className="w-full fixed flex bottom-0 justify-center items-center z-40">
                 <div className=" bg-emerald-600 w-[16rem] h-14 rounded-md bottom-14 mb-10">
                   <div className="p-4 flex justify-center items-center">
                     <p className="text-md font-bold text-white">
-                      Changes Saved
+                      Changes have been saved
                     </p>
                   </div>
                 </div>
