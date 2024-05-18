@@ -8,6 +8,8 @@ import ButtonPrimary from "../button/button-primary";
 import { useChanges } from "@/context/ChangesContext";
 import ProductInfoReviews from "./product-info-review";
 import { useResize } from "@/hooks/useResize";
+import usePayment from "@/hooks/usePayment";
+import { usePathname } from "next/navigation";
 
 interface ProductInfoProps {
   product: {
@@ -30,6 +32,14 @@ interface ProductInfoProps {
 
 export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
   const { addToCart } = useCart(product?.id);
+  const pathname = usePathname()
+  const { makePayment } = usePayment({
+    paymentData: {
+      product_name: product?.product_name,
+      unit_amount: product?.product_price,
+      current_url: pathname
+    },
+  });
   const { isChangesSaved } = useChanges();
 
   const { isMobile } = useResize();
@@ -104,7 +114,9 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
                     Add to <MdAddShoppingCart />
                   </ButtonSecondary>
 
-                  <ButtonPrimary>Buy Now</ButtonPrimary>
+                  <ButtonPrimary onClick={() => makePayment()}>
+                    Buy Now
+                  </ButtonPrimary>
                 </div>
               )}
             </div>

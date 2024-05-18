@@ -26,7 +26,7 @@ const Cart = ({userCart}: CartProps) => {
   const { isChangesSaved } = useChanges();
 
   return (
-    <div className='lg:grid grid-cols-2  items-center gap-4 my-10'>
+    <div className='lg:grid grid-cols-1  items-center gap-4 my-10 lg:mt-0'>
       {userCart?.map((item: Product, index: number) => (
         <CartItem key={item.id || index} item={item} />
       ))}

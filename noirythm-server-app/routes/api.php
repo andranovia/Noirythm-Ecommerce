@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductPromoController;
 
 /*
@@ -41,7 +42,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout'])->name('logout');
-
+Route::post('payment', [PaymentController::class, 'makePayment']);
 
 Route::get('user', function () {
     return auth()->user();
