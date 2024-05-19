@@ -34,8 +34,9 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
   const { addToCart } = useCart(product?.id);
   const pathname = usePathname()
   const { makePayment } = usePayment({
+
     paymentData: {
-      product_name: product?.product_name,
+      purchased_products: [{id: product?.id, name: product?.product_name}],
       unit_amount: product?.product_price,
       current_url: pathname
     },

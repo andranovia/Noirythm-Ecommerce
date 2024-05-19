@@ -22,7 +22,7 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_name' => 'required',
+            'purchased_products' => 'required',
             'unit_amount' => 'required',
             'current_url' => 'required'
         ];

@@ -7,7 +7,7 @@ export async function intentPayment({paymentData} : PaymentProps) {
 
     try {
         const response = await axiosInstance.post('/api/payment', {
-            'product_name': paymentData.product_name,
+            'purchased_products': paymentData.purchased_products,
             'unit_amount': integerAmount,
             'current_url': paymentData.current_url
         });

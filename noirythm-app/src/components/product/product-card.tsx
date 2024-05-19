@@ -29,8 +29,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   isLoading,
 }) => {
   return (
-    <div className="flex justify-center">
-      <div className="grid auto-rows-fr gap-[3vh]  grid-cols-2 gap-y-14 md:grid-cols-4  lg:grid-cols-4 ">
+    <div className="flex justify-center ">
+      <div className="grid lg:auto-rows-fr lg:gap-[3vh] gap-4 justify-center grid-cols-2 gap-y-14 md:grid-cols-4  lg:grid-cols-4 ">
         {desc && isLoading ? (
           <>
             {Array.from({ length: 8 }).map((_, index) => (

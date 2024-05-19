@@ -119,7 +119,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
           <div
             className={
               desc
-                ? `rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch  bg-white shadow-md`
+                ? `rounded-lg flex flex-col lg:w-full mb-4 h-full items-stretch  bg-white shadow-md`
                 : `shadow-none`
             }
           >
@@ -127,7 +127,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
               className={
                 className
                   ? `flex-shrink-0 ${className} `
-                  : `h-[20vh] w-[20vh] lg:w-[40vh] lg:h-[40vh]`
+                  : `h-[20vh] w-full lg:w-[40vh] lg:h-[40vh]`
               }
             >
               <Image

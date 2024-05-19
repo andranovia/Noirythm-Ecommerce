@@ -1,8 +1,11 @@
+
+
+
 import React from 'react';
-
-
 import dynamic from 'next/dynamic';
 import ProductCountdown from './product-countdown';
+
+
 const ProductData = dynamic(() => import('@/components/product/product-data'));
 
 
@@ -11,8 +14,8 @@ const Product: React.FC = () => {
   const maxItemsToShow = 20;
 
   return (
-    <div className="min-h-screen  overflow-hidden mb-32">
-      <div className="container max-w-8xl mx-auto sm:max-w-7xl  ">
+    <div className="min-h-screen w-full overflow-hidden flex justify-center items-center mb-32">
+      <div className="container  ">
         <div className="bg-white pb-10   relative ">
           <div className="p-4">
             <section>

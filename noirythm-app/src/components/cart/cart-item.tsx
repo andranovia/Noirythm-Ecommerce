@@ -23,7 +23,7 @@ const CartItem: React.FC<{ item: Item }> = ({ item }) => {
       : 'Loading...';
 
   return (
-    <div className="rounded-lg flex justify-start gap-4  w-[20rem]  h-fit bg-white items-start lg:w-[40rem]">
+    <div className="rounded-lg flex justify-start gap-4   w-full  h-fit  items-start ">
       <div className="relative m-4 ">
         <div className="w-20 h-20">
           <Image

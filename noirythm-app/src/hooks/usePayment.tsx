@@ -5,11 +5,19 @@ import { useRouter } from "next/navigation";
 
 export type PaymentProps = {
   paymentData: {
-    product_name: string;
+    purchased_products: purchased_product[] | string;
     unit_amount: number;
     current_url: string
   };
 };
+
+export type purchased_product = {
+  id: string
+  name: string
+}
+
+
+
 
 const usePayment = ({ paymentData }: PaymentProps) => {
   const router = useRouter()
