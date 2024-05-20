@@ -16,7 +16,7 @@ const NavbarResult: React.FC<NavbarSearchResultComponentProps> = ({
   result,
 }) => {
   return (
-    <div className="rounded-lg flex h-[12vh] w-full mt-6 relative left-10 items-start lg:w-fit bg-white sm:my-10 ">
+    <div className="rounded-lg flex h-[12vh] w-full mt-6 relative left-10 items-start lg:w-fit bg-white lg:mb-10 ">
       <div className=" flex-shrink-0 h-[10vh] w-[10vh] lg:w-[15vh] lg:h-[15vh] ">
         <Image
           src={result.product_image}

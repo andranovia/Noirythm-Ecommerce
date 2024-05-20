@@ -6,7 +6,8 @@ import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
 import ButtonPrimary from "@/components/button/button-primary";
 import usePayment from "@/hooks/usePayment";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/useAuth";
 
 export type CheckedProduct = {
   id: string;
@@ -18,7 +19,16 @@ const CartPage = () => {
   const { userCart } = useCart();
   const [checkedProducts, setCheckedProducts] = useState<CheckedProduct[]>([]);
   const pathname = usePathname()
-  
+  const { user } = useAuth();
+  const router = useRouter()
+
+
+  if(!user){
+    router.push('/'); 
+    return null
+  }
+
+
   const { makePayment } = usePayment({
     paymentData: {
       purchased_products: checkedProducts,
@@ -31,6 +41,8 @@ const CartPage = () => {
     <>
       <div className="flex min-h-screen  relative top-10 w-full  bg-gray-100">
         <div className="sm:ml-20 flex flex-col w-full justify-center h-full pt-16 lg:pt-24">
+          
+          
           <div className="grid px-6 lg:p-0 w-full">
             <h1 className="text-2xl font-bold lg:mb-10  ">
               Shopping Cart

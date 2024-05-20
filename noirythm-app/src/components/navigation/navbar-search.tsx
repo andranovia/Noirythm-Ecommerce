@@ -23,7 +23,7 @@ const NavbarSearch = () => {
 
   return (
     <div className="">
-      <div ref={inputRef} className="flex justify-center mx-auto mt-2  ">
+      <div ref={inputRef} className="flex justify-center  mt-2 lg:w-[54rem]">
         <div className="absolute inset-y-0 left-2 flex results-center pointer-events-none">
           <Image
             src="https://img.icons8.com/ios/50/search--v1.png"
@@ -43,8 +43,8 @@ const NavbarSearch = () => {
       </div>
 
       {isSearchResultsVisible && (
-        <div className="fixed bg-white w-full h-[32rem] left-0 right-0 sm:w-[50rem] rounded-md sm:left-[18%] sm:h-fit ">
-          {productsSearch?.map((result: ProductItem) => (
+        <div className="fixed bg-white w-full h-[32rem] left-0 lg:top-16 right-0 lg:w-[56rem] rounded-md sm:left-[18%] sm:h-fit ">
+          {productsSearch?.slice(0, 4).map((result: ProductItem) => (
             <Link
               href={{
                 pathname: `/product/${result.id}`,

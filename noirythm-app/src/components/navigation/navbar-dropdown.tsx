@@ -4,10 +4,13 @@ import { usePathname } from 'next/navigation';
 
 type NavbarDropdownProps = {
   setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+  isDropdownOpen: boolean;
 };
 export default function NavbarDropdown({
   setIsDropdownOpen,
+  isDropdownOpen,
 }: NavbarDropdownProps) {
+
   const pathname = usePathname()
   const handleDropdownEnter = () => {
     setIsDropdownOpen(true);
@@ -19,7 +22,7 @@ export default function NavbarDropdown({
 
   return (
     <div
-      className="fixed top-14 left-10 bg-white border border-gray-300 rounded-lg p-4"
+      className={`fixed transition-all ${isDropdownOpen ? 'translate-y-0 pointer-events-auto opacity-100' : 'translate-y-10 pointer-events-none opacity-0'} top-14 left-10 bg-white  rounded-lg p-4`}
       onMouseEnter={handleDropdownEnter}
       onMouseLeave={handleDropdownLeave}
     >
@@ -52,7 +55,7 @@ export default function NavbarDropdown({
           <Link
             href="/category/all"
             className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-            pathname === '/category/All'
+            pathname === '/category/all'
                 ? 'bg-gray-900 text-white'
                 : 'text-gray-300 hover:text-white hover:bg-gray-700'
             }`}

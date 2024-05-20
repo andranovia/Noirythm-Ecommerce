@@ -1,15 +1,11 @@
-
-
 import type { Metadata } from "next";
 import Navbar from "@/components/navigation/navbar";
-
-
 export const metadata: Metadata = {
-  title: "User Cart",
-  description: "See your planning",
+  title: "User Profile",
+  description: "See your profile detail",
 };
 
-export default function CartLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -20,8 +16,7 @@ export default function CartLayout({
         <Navbar />
       </header>
       {children}
-    
+     
     </>
   );
 }
-

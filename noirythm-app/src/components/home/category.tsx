@@ -7,21 +7,21 @@ export default function Category() {
     {
       id: 'all',
       image: 'https://img.icons8.com/ios-filled/50/192655/show-all-views.png',
-      title: 'See all',
+      title: 'See Alls',
       description: 'All the things',
     },
     {
       id: 'cloth',
       image: 'https://img.icons8.com/ios/50/192655/clothes.png',
-      title: 'Cloth',
-      description: 'Get your cloth',
+      title: 'Cloths',
+      description: 'Get your cloths',
     },
     {
       id: 'trouser',
       image:
         'https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/192655/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png',
-      title: 'Trouser',
-      description: 'Get your trouser',
+      title: 'Trousers',
+      description: 'Get your trousers',
     },
     {
       id: 'shoe',

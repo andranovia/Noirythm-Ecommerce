@@ -1,9 +1,7 @@
 import { useChanges } from "@/context/ChangesContext";
 import CartItem from "./cart-item";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Product from "../product/product";
-import usePayment from "@/hooks/usePayment";
-import { usePathname } from "next/navigation";
 import { CheckedProduct } from "@/app/cart/page";
 
 interface Product {
@@ -38,15 +36,16 @@ const Cart = ({
   const handleProductChecked = (product: Product, isChecked: boolean) => {
     const productPrice = parseFloat(product.product_price);
     if (isChecked) {
-      setTotalPrice((prevData) => prevData + productPrice);
+      setTotalPrice((prevData) => +(prevData + productPrice).toFixed(2));
       setCheckedProducts((prev) => [
         ...prev,
         { id: product.id, name: product.product_name },
       ]);
     } else {
-      setTotalPrice((prevData) => prevData - productPrice);
+      setTotalPrice((prevData) => +(prevData - productPrice).toFixed(2));
       setCheckedProducts((prev) => prev.filter((p) => p.id !== product.id));
     }
+    
   };
 
   return (

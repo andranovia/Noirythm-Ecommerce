@@ -41,7 +41,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
             <div
               className={
                 desc
-                  ? `rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch `
+                  ? `rounded-lg flex  flex-col lg:w-full mb-14 h-full items-stretch `
                   : `shadow-none mb-0 `
               }
             >

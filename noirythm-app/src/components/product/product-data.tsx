@@ -11,7 +11,7 @@ interface ProductProps {
   className: string | {} | null;
   desc: boolean;
   productTypeFilter?: string;
-  productPromo?: boolean;
+
 }
 
 interface ProductItem {
@@ -30,11 +30,15 @@ const ProductData: React.FC<ProductProps> = ({
   className,
   desc,
   productTypeFilter,
-  productPromo,
+
 }) => {
   const { productsPromo, products, isLoading } = useProduct();
-  const selectedProduct = productPromo ? productsPromo : products;
-  const filteredItems = productTypeFilter && productTypeFilter !== 'all'
+
+  
+  const selectedProduct = productTypeFilter === 'promo' ? productsPromo : products;
+
+ 
+  const filteredItems = productTypeFilter && productTypeFilter !== 'all' && productTypeFilter !== 'promo' 
     ? selectedProduct?.filter(
         (item: ProductItem) => item?.product_type === productTypeFilter
       )
