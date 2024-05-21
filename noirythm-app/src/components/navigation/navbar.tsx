@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
               <button
                 onMouseEnter={() => setIsCategoryDropdownOpen(true)}
                 onMouseLeave={() => setIsCategoryDropdownOpen(false)}
-                className="pl-3 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 flex justify-center sm:mr-10"
+                className="pl-3 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 relative z-40 flex justify-center sm:mr-10"
               >
                 {!isMobile && (
                   <>

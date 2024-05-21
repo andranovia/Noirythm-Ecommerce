@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cart from "@/components/cart/cart";
 import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
 import ButtonPrimary from "@/components/button/button-primary";
-import usePayment from "@/hooks/usePayment";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import useCheckout from "@/hooks/useCheckout";
 
 export type CheckedProduct = {
   id: string;
@@ -22,15 +22,15 @@ const CartPage = () => {
   const { user } = useAuth();
   const router = useRouter()
 
+  useEffect(() => {
+    if (!user) {
+      router.push('/');
+    }
+  }, [user, router]);
 
-  if(!user){
-    router.push('/'); 
-    return null
-  }
 
-
-  const { makePayment } = usePayment({
-    paymentData: {
+  const { makeCheckout } = useCheckout({
+    checkoutData: {
       purchased_products: checkedProducts,
       unit_amount: totalPrice,
       current_url: pathname,
@@ -93,7 +93,7 @@ const CartPage = () => {
                       <h3>Total: {totalPrice ? totalPrice : '-'}</h3>
                     </div>
 
-                    <ButtonPrimary className="w-full " onClick={() => makePayment()}>
+                    <ButtonPrimary className="w-full " onClick={() => makeCheckout()}>
                       <span className="font-semibold text-md">Purchase</span>
                     </ButtonPrimary>
                   </div>

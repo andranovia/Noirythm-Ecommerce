@@ -20,9 +20,9 @@ const ProductPage = ({ params }: ProductPageProps) => {
 
 
   return (
-    <div>
+    <>
       <ProductInfo product={productInfo} isLoading={productInfoLoading}/>
-    </div>
+    </>
   );
 };
 
