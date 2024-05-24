@@ -67,10 +67,10 @@ const CartPage = () => {
             ) : (
               <div className="flex w-full lg:w-3/4">
                 <div className="flex flex-col  w-full lg:w-2/3 ">
-                  <div className="container h-2/3 ">
+                  <div className="container h-full lg:w-[40rem] ">
                     <Cart userCart={userCart?.cartProducts} setTotalPrice={settotalPrice} setCheckedProducts={setCheckedProducts} checkedProduct={checkedProducts}/>
                   </div>
-                  <div className="bg-white container lg:my-0 my-10 lg:w-[40rem]  rounded-lg lg:border-0  border-2  border-gray-800  p-4">
+                  <div className="bg-white container lg:mt-0 my-10 lg:w-[40rem]  rounded-lg lg:border-0  border-2  border-gray-800  p-4">
                     <p className="font-semibold text-lg ">
                       Seems like you find your taste, want to find something
                       else?

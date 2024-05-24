@@ -10,7 +10,7 @@ export const useCart = (productId?: string ) => {
   const { user } = useAuth();
   const { setIsChangesSaved } = useChanges()
 
-  const { data: userCart } = useQuery({
+  const { data: userCart, isLoading: userCartLoading } = useQuery({
     queryKey: ["userCart"],
     queryFn: () => getCart(user.id),
   });
@@ -50,5 +50,6 @@ export const useCart = (productId?: string ) => {
     addToCart,
     userCart,
     removeFromCart,
+    userCartLoading
   };
 };
