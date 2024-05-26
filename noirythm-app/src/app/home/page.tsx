@@ -6,7 +6,7 @@ import Product from "@/components/product/product";
 
 const Home = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center bg-gray-100 justify-between pt-10">
+    <div className="flex min-h-screen w-full flex-col items-center bg-gray-100 md:gap-10   pt-10">
       <Hero />
       <Category />
       <Product />

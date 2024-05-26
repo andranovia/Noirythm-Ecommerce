@@ -33,16 +33,16 @@ const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
   }, [nextSlide]);
 
   return (
-    <div className="relative ">
-      <div className="-mt-0 sm:mt-0  w-[23rem] sm:w-full  rounded-2xl   relative   sm:h-full overflow-hidden">
+    <div className="relative w-full flex justify-center">
+      <div className="-mt-0 h-full lg:mt-0 w-full flex justify-center md:px-4 px-2 lg:px-4 rounded-2xl   relative lg:h-full overflow-hidden">
         <div
           style={{
             backgroundImage: `url(${slides[currentIndex].url})`,
             backgroundSize: 'cover',
           }}
-          className="sm:w-[90rem] sm:h-[30rem] max-w-screen-sm sm:max-w-none sm:max-h-none  w-[28rem] max-h-60 h-[10rem] rounded-2xl bg-center bg-cover duration-500 flex flex-col justify-end  "
+          className="w-full md:h-[20rem]   lg:h-[30rem] md:max-w-none max-w-screen-sm lg:max-w-none lg:max-h-none   max-h-60 h-[10rem] rounded-2xl bg-center bg-cover duration-500 flex flex-col justify-end  "
         >
-          <div className="flex relative justify-center sm:bottom-4 right-12 py-2">
+          <div className="flex relative justify-center lg:bottom-4 right-12 py-2">
             {slides.map((_, slideIndex) => (
               <div
                 key={slideIndex}

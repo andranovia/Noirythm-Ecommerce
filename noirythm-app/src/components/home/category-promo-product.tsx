@@ -10,14 +10,14 @@ const CategoryPromoProduct = () => {
   const maxItemsToShow = isMobile ? 2 : 4;
 
   return (
-    <div className="">
+    <>
       <ProductData
-        productPromo={true}
+        productTypeFilter={"promo"}
         maxItems={maxItemsToShow}
-        className={"h-[11vh] w-[11vh] sm:w-20  mb-5 flex"}
+        className={"h-[11vh] w-[11vh]  lg:w-[40vh]  mb-5 flex"}
         desc={false}
       />
-    </div>
+    </>
   );
 };
 

@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
                   onMouseLeave={() => setIsDropdownOpen(false)}
                   style={{ zIndex: 50 }}
                 >
-                  <div className="flex-shrink-0 flex items-center px-4 py-3 mx-5">
+                  <div className="flex-shrink-0 flex items-center md:pr-0 px-4 py-3  lg:mx-5">
                     <Image
                       className="h-10 w-auto cursor-pointer"
                       src="/img/logo-brand.png"

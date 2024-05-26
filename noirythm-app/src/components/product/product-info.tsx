@@ -48,11 +48,11 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
 
   return (
     <>
-      <div className="bg-white rounded-lg mb-20 md:my-0  ">
+      <div className="bg-white rounded-lg mb-20 ">
         <div
           className={`flex flex-col ${
             isMobile ? "items-center" : "items-start"
-          } md:flex-row`}
+          } md:flex-col lg:flex-row`}
         >
           {isMobile && (
             <>
@@ -76,13 +76,13 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
                   width={220}
                   height={220}
                   alt="product-image"
-                  className="w-full rounded mt-6 h-[20rem] object-cover"
+                  className="w-full rounded mt-6  lg:h-[20rem] object-cover"
                 />
               )}
             </>
           )}
           {!isMobile && (
-            <div className="w-full md:w-1/2 fixed">
+            <div className="w-full md:w-full lg:w-1/2 md:relative  lg:fixed">
               {isLoading ? (
                 <div className="relative w-full h-[50rem] object-cover z-1  md:mb-0  shadow-sm  animate-pulse">
                   <div className="flex justify-center items-center flex-col w-full h-full bg-gray-400">
@@ -108,7 +108,7 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
               )}
 
               {!isMobile && (
-                <div className="flex justify-start z-2 items-center fixed bottom-10 left-40  bg-white rounded-md p-5 font-medium ">
+                <div className="flex justify-start shadow-md z-2 items-center fixed bottom-10 md:left-1/2 lg:left-40  bg-white rounded-md p-5 font-medium ">
                   <div className="flex justify-center items-center mr-5">
                     <BsChatLeftText className="w-7 h-7" />
                   </div>

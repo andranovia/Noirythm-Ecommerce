@@ -41,7 +41,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
             <div
               className={
                 desc
-                  ? `rounded-lg flex  flex-col lg:w-full mb-14 h-full items-stretch `
+                  ? `rounded-lg flex  flex-col lg:w-full md:mb-0 mb-14 h-full lg:items-stretch `
                   : `shadow-none mb-0 `
               }
             >
@@ -49,12 +49,12 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
                 className={
                   className
                     ? `flex-shrink-0 ${className} `
-                    : `h-[20vh] w-[20vh] lg:w-[40vh] `
+                    : `h-[20vh] w-[20vh] md:w-full lg:w-full `
                 }
                 animate={
                   desc && isHovering
-                    ? { opacity: 0.6, width: 270 }
-                    : { opacity: 1, width: 275 }
+                    ? { opacity: 0.6, scale: 0.95 }
+                    : { opacity: 1, scale: 1  }
                 }
               >
                 <Image
@@ -64,7 +64,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
                   height={260}
                   className={
                     desc
-                      ? "w-full lg:h-[50vh] object-cover flex rounded-lg "
+                      ? "w-full md:h-full lg:h-[50vh] object-cover flex rounded-lg "
                       : "w-[14rem] h-full object-cover rounded-lg"
                   }
                 />
@@ -73,7 +73,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
               <motion.div
                 animate={isHovering ? { opacity: 1 } : { opacity: 0 }}
                 className={
-                  desc ? `text-center mt-4 p-3 opacity-0 z-20` : `hidden`
+                  desc ? `text-center mt-4 p-3 opacity-0 z-20 md:hidden lg:block` : `hidden`
                 }
               >
                 <h4 className="text-lg font-bold text-black ">

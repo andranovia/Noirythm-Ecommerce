@@ -40,7 +40,7 @@ const CartPage = () => {
   return (
     <>
       <div className="flex min-h-screen  relative top-10 w-full  bg-gray-100">
-        <div className="sm:ml-20 flex flex-col w-full justify-center h-full pt-16 lg:pt-24">
+        <div className="md:ml-0 lg:ml-20 flex flex-col w-full justify-center h-full pt-16 lg:pt-24">
           
           
           <div className="grid px-6 lg:p-0 w-full">

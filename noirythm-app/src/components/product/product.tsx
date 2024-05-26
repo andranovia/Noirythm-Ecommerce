@@ -1,46 +1,51 @@
+import React from "react";
+import dynamic from "next/dynamic";
+import ProductCountdown from "./product-countdown";
+import Link from "next/link";
 
-
-
-import React from 'react';
-import dynamic from 'next/dynamic';
-import ProductCountdown from './product-countdown';
-
-
-const ProductData = dynamic(() => import('@/components/product/product-data'));
-
-
+const ProductData = dynamic(() => import("@/components/product/product-data"));
 
 const Product: React.FC = () => {
   const maxItemsToShow = 20;
 
-  return (
-    <div className="min-h-screen w-full overflow-hidden flex justify-center items-center mb-32">
-      <div className="container  ">
-        <div className="bg-white pb-10   relative ">
-          <div className="p-4">
-            <section>
-              <div className="relative right-auto ">
-                <h1 className="text-2xl font-bold ml-7 z-20">Our Products!</h1>
-                <div className=" rounded-lg p-4 flex  w-[25rem]  items-center justify-start z-0 sm:w-full ">
-                  <h1 className="text-1xl font-semibold ml-[16rem] absolute z-20 sm:text-1xl text-gray-900  ">
-                    See more
-                  </h1>
+  const productsType = ["cloth", "trouser", "shoe"];
 
-                  <div className="bg-gray-800 rounded-lg flex h-7 w-[15rem] my-2 p-2 flex-col justify-center ">
-                    <ProductCountdown/>
+  return (
+    <div className="min-h-screen w-full overflow-hidden flex flex-col gap-10 justify-center items-center mb-20">
+      {productsType.map((type, index) => {
+        const productType = type[0].toUpperCase() + type.substring(1);;
+
+        return (
+          <React.Fragment key={index}>
+            <div className="container">
+              <div className="bg-white pb-10   relative ">
+                <div className="lg:px-10 p-4  lg:py-6 flex flex-col gap-10">
+                  <div className="relative flex  gap-6 items-end lg:justify-start justify-between  ">
+                    <h1 className="text-2xl font-bold text-gray-600  z-20">
+                      {productType}s Shopping
+                    </h1>
+
+                    <Link href={"/category/" + productType}>
+                      <h1 className="text-md font-semibold  z-20 sm:text-1xl text-white bg-gray-900 p-2 rounded-lg cursor-pointer  ">
+                        See More
+                      </h1>
+                    </Link>
                   </div>
+
+                  <ProductData
+                    maxItems={maxItemsToShow}
+                    productTypeFilter={type}
+                    className={null}
+                    desc={true}
+                  />
                 </div>
               </div>
+            </div>
+          </React.Fragment>
+        );
+      })}
 
-              <ProductData
-                maxItems={maxItemsToShow}
-                className={''}
-                desc={true}
-              />
-            </section>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

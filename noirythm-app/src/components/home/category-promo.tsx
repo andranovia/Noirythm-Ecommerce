@@ -5,7 +5,7 @@ import CategoryPromoProduct from './category-promo-product';
 
 const CategoryPromo = () => {
   return (
-    <div className="max-w-screen-lg  h-full sm:mb-20 mb-8 p-4 rounded-md shadow-md">
+    <div className="max-w-screen-lg  h-full   mb-8 p-4 rounded-md ">
       <h2 className="text-2xl font-bold  m-4">Current Promo</h2>
       <div className="flex flex-col gap-6 rounded-lg ">
         <div className="w-fit h-fit flex flex-col sm:flex-row justify-center  gap-10">
@@ -14,14 +14,14 @@ const CategoryPromo = () => {
             alt="Promo2"
             height={420}
             width={420}
-            className="rounded-md w-full sm:w-[30rem] "
+            className="rounded-md w-full md:w-1/2 lg:w-[30rem] "
           />
           <Image
             src={'/img/category/promoImage_1.webp'}
             alt="Promo"
             height={420}
             width={420}
-            className="rounded-md w-full sm:w-[30rem]"
+            className="rounded-md w-full md:w-1/2 lg:w-[30rem]"
           />
         </div>
         <div className="flex justify-start mx-4 w-full items-center">

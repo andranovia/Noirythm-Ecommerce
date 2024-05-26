@@ -31,11 +31,11 @@ export default function Category() {
     },
   ];
   return (
-    <div className="w-full h-fit sm:flex sm:justify-center sm:flex-col  bg-white rounded-md sm:max-w-screen-xl p-6  mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
+    <div className=" h-fit sm:flex sm:justify-center sm:flex-col  bg-white rounded-md sm:max-w-screen-xl p-6 lg:p-6 md:p-4  mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
       <div className="flex justify-center items-center ">
         <CategoryPromo />
       </div>
-      <div className="flex  justify-center relative sm:top-4">
+      <div className="flex  justify-center ">
         <CategoryCard categories={categories} />
       </div>
     </div>

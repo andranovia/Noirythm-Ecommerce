@@ -16,7 +16,7 @@ const slider = [
 
 function Hero() {
   return (
-    <div className="flex justify-center mt-14 sm:mb-20 ">
+    <div className="flex justify-center mt-14 md:mb-0 lg:mb-10 w-full">
      <Carousel slides={slider}/>
     </div>
   );

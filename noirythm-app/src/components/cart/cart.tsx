@@ -60,7 +60,7 @@ const Cart = ({
         </>
       ) : (
         <>
-          {/* {userCart?.map((item: Product, index: number) => {
+          {userCart?.map((item: Product, index: number) => {
             return (
               <div
                 key={item.id || index}
@@ -77,10 +77,8 @@ const Cart = ({
                 <CartItem item={item} />
               </div>
             );
-          })} */}
-            {Array.from({ length: 3 }).map((_, index) => (
-            <CartItemLoading key={index}/>
-          ))}
+          })}
+            
         </>
       )}
 
