@@ -36,13 +36,9 @@ export const useAuth = ({ registerData, loginData }: useAuthProps = {}) => {
   );
   const router = useRouter();
 
-
-
-  const accessToken = localStorage.getItem("accessToken");
-
   const { data: user } = useQuery({
     queryKey: ["user"],
-    queryFn: () =>  getUser(accessToken),
+    queryFn: () =>  getUser(),
   });
 
   const { mutateAsync: registerAction } = useMutation({

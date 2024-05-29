@@ -36,7 +36,9 @@ export const postUserRegister = async ({
     setValidationErrors(response.data.errors);
 
     if (response.data.errors === undefined) {
-      localStorage.setItem("token", response.data.token);
+      const { token, refresh_token } = response.data.data;
+      window.localStorage.setItem('access_token', token);
+      window.localStorage.setItem('refresh_token', refresh_token);
       localStorage.setItem(
         "user",
         JSON.stringify({ name: response.data.name, email: response.data.email })
@@ -74,8 +76,9 @@ export const postUserLogin = async ({
 
     setValidationErrors(response.data.errors);
     if (response.data.errors === undefined) {
-      const accessToken = response.data.data.token;
-      accessToken && localStorage.setItem("accessToken", accessToken);
+      const { token, refresh_token } = response.data.data;
+      window.localStorage.setItem('access_token', token);
+      window.localStorage.setItem('refresh_token', refresh_token);
       localStorage.setItem(
         "user",
         JSON.stringify({
@@ -105,20 +108,10 @@ export const postUserLogin = async ({
 };
 
 export const postUserlogout = async () => {
-  const accessToken = localStorage.getItem("accessToken");
 
-  if (!accessToken) {
-    console.error("Access token not found");
-    return false;
-  }
-
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
   try {
-    const response = await axiosInstance.post("/api/logout", null, { headers });
+    const response = await axiosInstance.post("/api/logout", null);
     if (response.data.success) {
-      localStorage.removeItem("accessToken");
       localStorage.removeItem("user");
       return true;
     } else {

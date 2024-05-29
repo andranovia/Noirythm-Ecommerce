@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -24,22 +25,27 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'message' => 'problem found',
+                'message' => 'Check email and password again',
                 'errors' => $validator->errors(),
             ]);
         }
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-
-        $success['token'] = $user->createToken('auth_token')->plainTextToken;
-        $succes['name'] = $user->name;
+        $refreshToken = base64_encode(random_bytes(40));
+        $user->refresh_token = $refreshToken;
+        $user->save();
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $success['name'] = $user->name;
+        $success['email'] = $user->email;
+        $success['token'] = $token;
+        $success['refresh_token'] = $refreshToken;
 
         return response()->json([
             'success' => true,
-            'message' => 'success register',
-            'data' => $success,
-        ]);
+            'message' => 'register success',
+            'data' =>  $success,
+        ], 200);
     }
 
     public function login(Request $request)
@@ -50,34 +56,62 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $auth = Auth::user();
-            $success['token'] = $auth->createToken('auth_token')->plainTextToken;
-            $success['name'] = $auth->name;
-            $success['email'] = $auth->email;
+            /** @var \App\Models\User $user **/
+            $user = Auth::user();
+            $refreshToken = base64_encode(random_bytes(40));
+            $user->refresh_token = $refreshToken;
+            $user->save();
+            $token = $user->createToken('auth_token')->plainTextToken;
+            $success['name'] = $user->name;
+            $success['email'] = $user->email;
+            $success['token'] = $token;
+            $success['refresh_token'] = $refreshToken;
 
             return response()->json([
                 'success' => true,
-                'message' => 'Login sukses',
+                'message' => 'Login success',
                 'data' => $success,
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Cek email dan password lagi',
-               'errors' => $validator->errors(),
-            ]);
+                'message' => 'Check email and password again',
+                'errors' => $validator->errors(),
+            ], 403);
         }
     }
 
-    
+
+
+
     public function logout(Request $request)
     {
         $user = $request->user();
         $user->currentAccessToken()->delete();
         $response = [
             'success'   => true,
-            'message'   => 'Berhasil Logout'
+            'message'   => 'Logout Success '
         ];
         return response($response, 200);
+    }
+
+    public function refreshToken(Request $request)
+    {
+        $refreshToken = $request->input('refresh_token');
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        if ($user->refresh_token === $refreshToken) {
+            $newRefreshToken = base64_encode(random_bytes(40));
+            $user->refresh_token =   $newRefreshToken;
+            $user->save();
+            $newToken = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'access_token' => $newToken,
+                'refresh_token' => $newRefreshToken,
+            ]);
+        }
+        return response()->json(['error' => 'Invalid refresh token'], 401);
     }
 }

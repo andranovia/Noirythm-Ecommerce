@@ -72,7 +72,7 @@ export type purchased_product = {
 const useCheckout = ({ checkoutData, successId }: CheckoutProps) => {
   const router = useRouter();
 
-  const { data: checkoutDetail } = useQuery<Checkout | undefined>({
+  const { data: checkoutDetail } = useQuery<Checkout | null>({
     queryKey: ["checkoutDetail"],
     queryFn: () => retrieveCheckout(successId),
   });

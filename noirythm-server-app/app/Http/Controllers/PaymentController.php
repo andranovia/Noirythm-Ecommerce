@@ -16,31 +16,33 @@ class PaymentController extends Controller
 
         try{
             $session = Session::retrieve($sessionId);
+            if($session){
+                $paymentIntent = PaymentIntent::retrieve($session->payment_intent);
 
-            $paymentIntent = PaymentIntent::retrieve($session->payment_intent);
-
-            $paymentMethod = PaymentMethod::retrieve($paymentIntent->payment_method);
-
-            $cardInfo = $paymentMethod->card;
-            $lineItems = Session::allLineItems($sessionId);
-            $purchasedProducts = [];
-
-            foreach ($lineItems->data as $item) {
-                $purchasedProducts[] = [
-                    'name' => $item->description,
-                    'amount' => $item->amount_total,
-                    'currency' => $item->currency,
-                    'quantity' => $item->quantity,
-                ];
+                $paymentMethod = PaymentMethod::retrieve($paymentIntent->payment_method);
+    
+                $cardInfo = $paymentMethod->card;
+                $lineItems = Session::allLineItems($sessionId);
+                $purchasedProducts = [];
+    
+                foreach ($lineItems->data as $item) {
+                    $purchasedProducts[] = [
+                        'name' => $item->description,
+                        'amount' => $item->amount_total,
+                        'currency' => $item->currency,
+                        'quantity' => $item->quantity,
+                    ];
+                }
+    
+    
+                return response()->json([
+                    'sessionId' => $session->id,
+                    'customer_details' => $session->customer_details,
+                    'cardInfo' => $cardInfo,
+                    'purchasedProducts' =>  $purchasedProducts,
+                ], 200);
             }
-
-
-            return response()->json([
-                'sessionId' => $session->id,
-                'customer_details' => $session->customer_details,
-                'cardInfo' => $cardInfo,
-                'purchasedProducts' =>  $purchasedProducts,
-            ]);
+            
             
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

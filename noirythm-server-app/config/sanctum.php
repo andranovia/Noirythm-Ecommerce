@@ -21,6 +21,15 @@ return [
         Sanctum::currentApplicationUrlWithPort()
     ))),
 
+    'cookie' => [
+        'name' => 'token',
+        'path' => '/',
+        'domain' => env('SESSION_DOMAIN', null),
+        'secure' => env('COOKIE_SECURE', false),
+        'http_only' => true,
+        'same_site' => 'none',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Sanctum Guards

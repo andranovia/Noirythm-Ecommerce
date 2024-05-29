@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductPromoController;
 |
 */
 
+
 Route::prefix('products')->group(function () {
     Route::get('product', [ProductController::class, 'index']);
     Route::get('product/{id}', [ProductController::class, 'productInfo']);
@@ -38,13 +39,16 @@ Route::get('/search', 'App\Http\Controllers\SearchController@search');
 Route::get('cart/get', [CartController::class, 'getCart']);
 Route::post('cart/add', [CartController::class, 'addToCart']);
 Route::delete('cart/delete', [CartController::class, 'removeFromCart']);
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+
 
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('intent-checkout', [PaymentController::class, 'postCheckout']);
 Route::get('retrieve-checkout/{sessionId}', [PaymentController::class, 'getCheckout']);
 
+
+Route::post('refresh-token', [AuthController::class, 'refreshToken'])->middleware('auth:sanctum');;
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 Route::get('user', function () {
     return auth()->user();
 })->middleware('auth:sanctum');

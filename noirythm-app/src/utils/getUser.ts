@@ -1,20 +1,23 @@
 import axiosInstance from "./axiosInstance";
+import useRefreshToken from "./refreshToken";
 
+export const getUser = async () => {
+  const token = window.localStorage.getItem('access_token');
+  const { refreshToken } = useRefreshToken();
 
-export const getUser = async (accessToken: string | null) => {
+  if (!token) {
+    await refreshToken();
+  }
   try {
-    if(accessToken !== null){
-      const response = await axiosInstance.get(`/api/user`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      });
-      return response.data;
-    }
-    return null
+    const response = await axiosInstance.get(`/api/user`, {
+      headers: {
+        Authorization: `Bearer ${ token}`,
+      },
+    });
+
+    return response.data;
   } catch (error) {
-    console.error('Error fetching user:', error);
+    console.error("Error fetching user:", error);
     throw error;
   }
 };
