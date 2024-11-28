@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProductInfoResource;
 use App\Models\Product;
+use App\Models\ProductHighlight;
 
 class ProductController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
+        $products = Product::all()->merge(ProductHighlight::all());
 
         foreach ($products as $product) {
             $product['average_rating'] = $product->averageRating();
@@ -35,5 +36,16 @@ class ProductController extends Controller
         return response()->json(
             new ProductInfoResource($product)
         );
+    }
+
+    public function productHighlight()
+    {
+        $products = ProductHighlight::all();
+
+        foreach ($products as $product) {
+            $product['average_rating'] = $product->averageRating();
+        }
+
+        return response()->json($products);
     }
 }

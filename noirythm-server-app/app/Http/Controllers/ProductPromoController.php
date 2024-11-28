@@ -13,8 +13,6 @@ class ProductPromoController extends Controller
     {
         $promoProducts = Product::whereNotNull('promo_text')->get();
 
-
-
         return response()->json($promoProducts);
     }
 }

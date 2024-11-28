@@ -23,7 +23,7 @@ use App\Http\Controllers\ProductPromoController;
 Route::prefix('products')->group(function () {
     Route::get('product', [ProductController::class, 'index']);
     Route::get('product/{id}', [ProductController::class, 'productInfo']);
-
+    Route::get('highlight', [ProductController::class, 'productHighlight']);
 
     Route::delete('reviews/deleteReview/{id}', [ProductReviewController::class, 'deleteReview']);
     Route::get('reviews/userReview/{id}', [ProductReviewController::class, 'showReview']);
