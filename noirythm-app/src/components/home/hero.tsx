@@ -1,23 +1,25 @@
-import React from 'react';  
-import Carousel from './carousel';
+import React from "react";
+import Carousel from "./carousel";
 
 const slider = [
   {
-    url: '/img/slider/slide1.webp',    
+    url: "/img/slider/hero-img-1.png",
   },
   {
-    url: '/img/slider/slide2.webp', 
+    url: "/img/slider/hero-img-2.png",
   },
   {
-    url: '/img/slider/slide3.webp',    
+    url: "/img/slider/hero-img-3.png",
   },
-
+  {
+    url: "/img/slider/hero-img-4.png",
+  },
 ];
 
 function Hero() {
   return (
-    <div className="flex justify-center mt-14 md:mb-0 lg:mb-10 w-full">
-     <Carousel slides={slider}/>
+    <div className="flex justify-center  w-full">
+      <Carousel slides={slider} />
     </div>
   );
 }

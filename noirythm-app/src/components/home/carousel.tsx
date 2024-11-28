@@ -1,7 +1,13 @@
-'use client'
+"use client";
 
-import React, { useState, useCallback, useEffect } from 'react';
-import { RxDotFilled } from 'react-icons/rx';
+import React, { MutableRefObject } from "react";
+import { RxDotFilled } from "react-icons/rx";
+import {
+  useKeenSlider,
+  KeenSliderPlugin,
+  KeenSliderInstance,
+} from "keen-slider/react";
+import "keen-slider/keen-slider.min.css";
 
 interface Slide {
   url: string;
@@ -11,50 +17,83 @@ interface CarouselSlidesAppProps {
   slides: Slide[];
 }
 
-const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+function ThumbnailPlugin(
+  mainRef: MutableRefObject<KeenSliderInstance | null>
+): KeenSliderPlugin {
+  return (slider) => {
+    function removeActive() {
+      slider.slides.forEach((slide) => {
+        slide.classList.remove("active");
+      });
+    }
+    function addActive(idx: number) {
+      slider.slides[idx].classList.add("active");
+    }
 
-  const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === slides.length - 1 ? 0 : prevIndex + 1
-    );
-  }, [slides.length]);
+    function addClickEvents() {
+      slider.slides.forEach((slide, idx) => {
+        slide.addEventListener("click", () => {
+          if (mainRef.current) mainRef.current.moveToIdx(idx);
+        });
+      });
+    }
 
-  const gotoSlide = (slideIndex: number) => {
-    setCurrentIndex(slideIndex);
+    slider.on("created", () => {
+      if (!mainRef.current) return;
+      addActive(slider.track.details.rel);
+      addClickEvents();
+      mainRef.current.on("animationStarted", (main) => {
+        removeActive();
+        const next = main.animator.targetIdx || 0;
+        addActive(main.track.absToRel(next));
+        slider.moveToIdx(Math.min(slider.track.details.maxIdx, next));
+      });
+    });
   };
+}
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
+  const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+    initial: 0,
+  });
+  const [thumbnailRef] = useKeenSlider<HTMLDivElement>(
+    {
+      initial: 0,
+      slides: {
+        perView: 4,
+        spacing: 10,
+      },
+    },
+    [ThumbnailPlugin(instanceRef)]
+  );
 
   return (
-    <div className="relative w-full flex justify-center">
-      <div className="-mt-0 h-full lg:mt-0 w-full flex justify-center md:px-4 px-2 lg:px-4 rounded-2xl   relative lg:h-full overflow-hidden">
-        <div
-          style={{
-            backgroundImage: `url(${slides[currentIndex].url})`,
-            backgroundSize: 'cover',
-          }}
-          className="w-full md:h-[20rem]   lg:h-[30rem] md:max-w-none max-w-screen-sm lg:max-w-none lg:max-h-none   max-h-60 h-[10rem] rounded-2xl bg-center bg-cover duration-500 flex flex-col justify-end  "
-        >
-          <div className="flex relative justify-center lg:bottom-4 right-12 py-2">
-            {slides.map((_, slideIndex) => (
-              <div
-                key={slideIndex}
-                onClick={() => gotoSlide(slideIndex)}
-                className={`text-2xl cursor-pointer ${
-                  currentIndex === slideIndex ? 'text-black  ' : 'text-gray-300'
-                }`}
-              >
-                <RxDotFilled />
-              </div>
-            ))}
-          </div>
+    <div className="relative w-full flex justify-center ">
+      <div className="-mt-0 h-full lg:mt-0 w-full flex justify-center gap-4  flex-col relative lg:h-full overflow-hidden">
+        <div ref={sliderRef} className="keen-slider">
+          {slides.map((slide, slideIndex) => (
+            <div
+              className="keen-slider__slide h-[54rem]"
+              key={slideIndex}
+              style={{
+                backgroundImage: `url(${slide.url})`,
+                backgroundSize: "cover",
+              }}
+            ></div>
+          ))}
+        </div>
+
+        <div ref={thumbnailRef} className="keen-slider">
+          {slides.map((slide, slideIndex) => (
+            <div
+              className="keen-slider__slide"
+              key={slideIndex}
+              style={{
+                backgroundImage: `url(${slide.url})`,
+                backgroundSize: "cover",
+              }}
+            ></div>
+          ))}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@ import CartItem from "./cart-item";
 import { Dispatch, SetStateAction } from "react";
 import Product from "../product/product";
 import { CheckedProduct } from "@/app/cart/page";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/service/hooks/useCart";
 import CartItemLoading from "./cart-item-loading";
 
 interface Product {
@@ -55,7 +55,7 @@ const Cart = ({
       {userCartLoading ? (
         <>
           {Array.from({ length: 3 }).map((_, index) => (
-            <CartItemLoading key={index}/>
+            <CartItemLoading key={index} />
           ))}
         </>
       ) : (
@@ -78,7 +78,6 @@ const Cart = ({
               </div>
             );
           })}
-            
         </>
       )}
 

@@ -8,7 +8,7 @@ import AuthLabel from "@/components/auth/AuthLabel";
 import AuthInput from "@/components/auth/AuthInput";
 import AuthInputError from "@/components/auth/AuthInputError";
 import ButtonPrimary from "@/components/button/button-primary";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/service/hooks/useAuth";
 
 interface registerData {
   name: string;
@@ -66,10 +66,7 @@ function Register() {
               }}
             />
             {validationErrors && validationErrors.name != undefined && (
-              <AuthInputError
-                messages={validationErrors.name}
-                
-              />
+              <AuthInputError messages={validationErrors.name} />
             )}
           </div>
           <div className="mb-3">
@@ -87,10 +84,7 @@ function Register() {
               }}
             />
             {validationErrors && validationErrors.email != undefined && (
-              <AuthInputError
-                messages={validationErrors.email}
-                
-              />
+              <AuthInputError messages={validationErrors.email} />
             )}
           </div>
           <div className="mb-3">
@@ -107,11 +101,8 @@ function Register() {
                 handleOnChange(e);
               }}
             />
-             {validationErrors && validationErrors.password != undefined && (
-              <AuthInputError
-                messages={validationErrors.password}
-                
-              />
+            {validationErrors && validationErrors.password != undefined && (
+              <AuthInputError messages={validationErrors.password} />
             )}
           </div>
           <div className="mb-3">

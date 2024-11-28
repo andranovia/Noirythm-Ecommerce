@@ -1,42 +1,42 @@
-import React from 'react';
-import CategoryCard from './category-card';
-import CategoryPromo from './category-promo';
+import React from "react";
+import CategoryCard from "./category-card";
 
 export default function Category() {
   const categories = [
     {
-      id: 'all',
-      image: 'https://img.icons8.com/ios-filled/50/192655/show-all-views.png',
-      title: 'See Alls',
-      description: 'All the things',
+      id: "cloth",
+      image: "/img/category/background/clothes.jpg",
+      title: "Cloths",
+      icon: "https://img.icons8.com/ios/50/FFFFFF/clothes.png",
     },
     {
-      id: 'cloth',
-      image: 'https://img.icons8.com/ios/50/192655/clothes.png',
-      title: 'Cloths',
-      description: 'Get your cloths',
+      id: "trouser",
+      image: "/img/category/background/trousers.jpg",
+      title: "Trousers",
+      icon: "https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/FFFFFF/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png",
     },
     {
-      id: 'trouser',
-      image:
-        'https://img.icons8.com/external-bartama-outline-64-bartama-graphic/64/192655/external-clothes-clothes-accessories-outline-bartama-outline-64-bartama-graphic-2.png',
-      title: 'Trousers',
-      description: 'Get your trousers',
+      id: "shoe",
+      image: "/img/category/background/shoes.jpg",
+      title: "Shoes",
+      icon: "https://img.icons8.com/ios/50/FFFFFF/sneakers.png",
     },
     {
-      id: 'shoe',
-      image: 'https://img.icons8.com/ios/50/192655/sneakers.png',
-      title: 'Shoes',
-      description: 'Get your shoes',
+      id: "accessories",
+      image: "/img/category/background/accessories.jpg",
+      title: "accessories",
+      icon: "https://img.icons8.com/ios-glyphs/30/FFFFFF/bracelet.png",
     },
   ];
   return (
-    <div className=" h-fit sm:flex sm:justify-center sm:flex-col  bg-white rounded-md sm:max-w-screen-xl p-6 lg:p-6 md:p-4  mx-auto -mt-4 sm:-mt-10 mb-8  overflow-hidden ">
-      <div className="flex justify-center items-center ">
-        <CategoryPromo />
-      </div>
-      <div className="flex  justify-center ">
-        <CategoryCard categories={categories} />
+    <div className=" h-fit sm:flex sm:justify-center sm:flex-col py-16 bg-white w-full mx-auto overflow-hidden ">
+      <div className="flex justify-center flex-col items-center rounded-b-md w-full gap-16 bg-white ">
+        <h1 className="text-2xl font-light uppercase text-gray-700 sm:text-4xl">
+          Shop On Category
+        </h1>
+        <div className="flex w-full items-center  justify-center ">
+          <CategoryCard categories={categories} />
+        </div>
       </div>
     </div>
   );

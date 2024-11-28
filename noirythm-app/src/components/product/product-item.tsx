@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useResize } from "@/hooks/useResize";
+import { useResize } from "@/utils/useResize";
 
 interface ProductItem {
   product_name: string;
@@ -54,7 +54,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
                 animate={
                   desc && isHovering
                     ? { opacity: 0.6, scale: 0.95 }
-                    : { opacity: 1, scale: 1  }
+                    : { opacity: 1, scale: 1 }
                 }
               >
                 <Image
@@ -73,7 +73,9 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
               <motion.div
                 animate={isHovering ? { opacity: 1 } : { opacity: 0 }}
                 className={
-                  desc ? `text-center mt-4 p-3 opacity-0 z-20 md:hidden lg:block` : `hidden`
+                  desc
+                    ? `text-center mt-4 p-3 opacity-0 z-20 md:hidden lg:block`
+                    : `hidden`
                 }
               >
                 <h4 className="text-lg font-bold text-black ">

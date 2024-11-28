@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import ButtonPrimary from "../button/button-primary";
 import ButtonSecondary from "../button/button-secondary";
 import { FaStar } from "react-icons/fa";
-import { useProductRating } from "@/hooks/useProductRating";
+import { useProductRating } from "@/service/hooks/useProductRating";
 
 interface ProductInfoReviewEdit {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;

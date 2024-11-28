@@ -1,7 +1,7 @@
-import React from 'react';
-import Image from 'next/image';
-import { useCart } from '../../hooks/useCart';
-import ButtonPrimary from '../button/button-primary';
+import React from "react";
+import Image from "next/image";
+import { useCart } from "../../service/hooks/useCart";
+import ButtonPrimary from "../button/button-primary";
 
 interface Item {
   id: string;
@@ -20,7 +20,7 @@ const CartItem: React.FC<{ item: Item }> = ({ item }) => {
       ? item.product_name.length > maxLength
         ? `${item.product_name.substring(0, maxLength)}...`
         : item.product_name
-      : 'Loading...';
+      : "Loading...";
 
   return (
     <div className="rounded-lg flex justify-start gap-4   w-full  h-fit  items-start ">

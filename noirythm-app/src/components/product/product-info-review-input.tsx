@@ -1,6 +1,6 @@
 "use client";
 
-import { useProductRating } from "@/hooks/useProductRating";
+import { useProductRating } from "@/service/hooks/useProductRating";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import ButtonSecondary from "../button/button-secondary";

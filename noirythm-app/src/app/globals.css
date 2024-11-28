@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.keen-slider__slide {
+  min-width: 22rem;
+  min-height: 28rem !important;
+}

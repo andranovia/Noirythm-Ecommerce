@@ -8,7 +8,7 @@ const Contact = () => {
     <div className="w-full overflow-hidden">
       <ContactHero />
       <ContactCard />
-      <ContactMap />
+      {/* <ContactMap /> */}
     </div>
   );
 };

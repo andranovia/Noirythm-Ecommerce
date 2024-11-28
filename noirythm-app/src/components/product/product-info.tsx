@@ -2,15 +2,15 @@ import React from "react";
 import { MdAddShoppingCart } from "react-icons/md";
 import { BsChatLeftText } from "react-icons/bs";
 import Image from "next/image";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/service/hooks/useCart";
 import ButtonSecondary from "../button/button-secondary";
 import ButtonPrimary from "../button/button-primary";
 import { useChanges } from "@/context/ChangesContext";
 import ProductInfoReviews from "./product-info-review";
-import { useResize } from "@/hooks/useResize";
+import { useResize } from "@/utils/useResize";
 
 import { usePathname } from "next/navigation";
-import useCheckout from "@/hooks/useCheckout";
+import useCheckout from "@/service/hooks/useCheckout";
 
 interface ProductInfoProps {
   product: {
@@ -33,13 +33,12 @@ interface ProductInfoProps {
 
 export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
   const { addToCart } = useCart(product?.id);
-  const pathname = usePathname()
+  const pathname = usePathname();
   const { makeCheckout } = useCheckout({
-
     checkoutData: {
-      purchased_products: [{id: product?.id, name: product?.product_name}],
+      purchased_products: [{ id: product?.id, name: product?.product_name }],
       unit_amount: product?.product_price,
-      current_url: pathname
+      current_url: pathname,
     },
   });
   const { isChangesSaved } = useChanges();

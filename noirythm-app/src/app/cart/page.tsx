@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import Cart from "@/components/cart/cart";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/service/hooks/useCart";
 import Link from "next/link";
 import ButtonPrimary from "@/components/button/button-primary";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/useAuth";
-import useCheckout from "@/hooks/useCheckout";
+import { useAuth } from "@/service/hooks/useAuth";
+import useCheckout from "@/service/hooks/useCheckout";
 
 export type CheckedProduct = {
   id: string;
@@ -15,19 +15,18 @@ export type CheckedProduct = {
 };
 
 const CartPage = () => {
-  const [totalPrice, settotalPrice] = useState(0)
+  const [totalPrice, settotalPrice] = useState(0);
   const { userCart } = useCart();
   const [checkedProducts, setCheckedProducts] = useState<CheckedProduct[]>([]);
-  const pathname = usePathname()
+  const pathname = usePathname();
   const { user } = useAuth();
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     if (!user) {
-      router.push('/');
+      router.push("/");
     }
   }, [user, router]);
-
 
   const { makeCheckout } = useCheckout({
     checkoutData: {
@@ -41,12 +40,8 @@ const CartPage = () => {
     <>
       <div className="flex min-h-screen  relative top-10 w-full  bg-gray-100">
         <div className="md:ml-0 lg:ml-20 flex flex-col w-full justify-center h-full pt-16 lg:pt-24">
-          
-          
           <div className="grid px-6 lg:p-0 w-full">
-            <h1 className="text-2xl font-bold lg:mb-10  ">
-              Shopping Cart
-            </h1>
+            <h1 className="text-2xl font-bold lg:mb-10  ">Shopping Cart</h1>
 
             {userCart?.cartProducts?.length === 0 ? (
               <div className="my-10 rounded-md mx-auto shadow-ShadowCard p-10 ">
@@ -68,7 +63,12 @@ const CartPage = () => {
               <div className="flex w-full lg:w-3/4">
                 <div className="flex flex-col  w-full lg:w-2/3 ">
                   <div className="container h-full lg:w-[40rem] ">
-                    <Cart userCart={userCart?.cartProducts} setTotalPrice={settotalPrice} setCheckedProducts={setCheckedProducts} checkedProduct={checkedProducts}/>
+                    <Cart
+                      userCart={userCart?.cartProducts}
+                      setTotalPrice={settotalPrice}
+                      setCheckedProducts={setCheckedProducts}
+                      checkedProduct={checkedProducts}
+                    />
                   </div>
                   <div className="bg-white container lg:mt-0 my-10 lg:w-[40rem]  rounded-lg lg:border-0  border-2  border-gray-800  p-4">
                     <p className="font-semibold text-lg ">
@@ -90,10 +90,13 @@ const CartPage = () => {
                       <h1 className="font-semibold text-lg">
                         Shopping summary
                       </h1>
-                      <h3>Total: {totalPrice ? totalPrice : '-'}</h3>
+                      <h3>Total: {totalPrice ? totalPrice : "-"}</h3>
                     </div>
 
-                    <ButtonPrimary className="w-full " onClick={() => makeCheckout()}>
+                    <ButtonPrimary
+                      className="w-full "
+                      onClick={() => makeCheckout()}
+                    >
                       <span className="font-semibold text-md">Purchase</span>
                     </ButtonPrimary>
                   </div>

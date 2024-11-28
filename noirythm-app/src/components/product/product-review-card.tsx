@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import ProductInfoReviewEdit from "./product-info-review-edit";
 import Avatar from "../user/avatar";
-import { useProductRating } from "@/hooks/useProductRating";
+import { useProductRating } from "@/service/hooks/useProductRating";
 
 interface ProductReviewCardProps {
   review: {

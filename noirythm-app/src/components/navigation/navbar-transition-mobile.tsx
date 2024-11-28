@@ -1,11 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import Transition from './transition';
-import Image from 'next/image';
-import Link from 'next/link';
-import ButtonSecondary from '../button/button-secondary';
-import ButtonPrimary from '../button/button-primary';
-import { useAuth } from '@/hooks/useAuth';
-import { usePathname } from 'next/navigation';
+import React, { Dispatch, SetStateAction } from "react";
+import Transition from "./transition";
+import Image from "next/image";
+import Link from "next/link";
+import ButtonSecondary from "../button/button-secondary";
+import ButtonPrimary from "../button/button-primary";
+import { useAuth } from "@/service/hooks/useAuth";
+import { usePathname } from "next/navigation";
 
 type navbarTransitionProps = {
   isSidebarOpen: boolean;
@@ -95,7 +95,7 @@ const NavbarTransitionMobile = ({
                       />
                       <h1 className="font-bold">{user.name}</h1>
                     </div>
-                    <Link href={'/user/'}>
+                    <Link href={"/user/"}>
                       <div className="flex justify-start items-center mr-2 ">
                         <Image
                           src="https://img.icons8.com/ios/50/settings--v1.png"
@@ -106,7 +106,7 @@ const NavbarTransitionMobile = ({
                       </div>
                     </Link>
                   </div>
-                  <Link href={'/cart'}>
+                  <Link href={"/cart"}>
                     <div className="flex flex-col justify-center m-4">
                       <ButtonSecondary>
                         <div className="flex justify-center items-center gap-2">
@@ -138,9 +138,9 @@ const NavbarTransitionMobile = ({
                 <Link
                   href="/"
                   className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-                    pathname === '/'
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    pathname === "/"
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
                   <svg
@@ -162,9 +162,9 @@ const NavbarTransitionMobile = ({
                 <Link
                   href="/category/All"
                   className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-                    pathname  === '/category/All'
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    pathname === "/category/All"
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
                   <svg
@@ -186,9 +186,9 @@ const NavbarTransitionMobile = ({
                 <Link
                   href="/about"
                   className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-                    pathname === '/about'
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    pathname === "/about"
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
                   <svg
@@ -210,9 +210,9 @@ const NavbarTransitionMobile = ({
                 <Link
                   href="/contact"
                   className={`group flex items-center px-2 py-2 text-base leading-6 font-medium rounded-md transition ease-in-out duration-150 ${
-                    pathname  === '/contact'
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    pathname === "/contact"
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-gray-700"
                   }`}
                 >
                   <svg

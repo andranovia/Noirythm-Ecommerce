@@ -2,34 +2,35 @@
 
 import React from "react";
 import Image from "next/image";
-import { useResize } from "@/hooks/useResize";
 
 interface Category {
   title: string;
-  description: string;
   image: string;
+  icon: string;
 }
 
 interface CategoryItemProps {
   category: Category;
+  index: number;
 }
 
-const CategoryCardItem: React.FC<CategoryItemProps> = ({ category }) => {
+const CategoryCardItem: React.FC<CategoryItemProps> = ({ category, index }) => {
   return (
-    <div>
-      <div className="border-gray-800 border-2 justify-center bg-white rounded-lg  p-2 w-[4rem] flex h-15 md:w-[11rem] lg:w-[15rem]  overflow-hidden hover:sm:opacity-75">
-        <div className="lg:flex lg:flex-col lg:justify-center md:flex md:items-center md:m-0 md:pr-0 lg:mx-2 lg:pr-4 sm:w-12">
-          <Image src={category.image} alt="" width={30} height={30} />
-        </div>
-        <div className="flex flex-col justify-center text-start">
-          <h2
-            className={`hidden lg:block md:block text-1xl font-normal mb-2 max-h-40`}
-          >
+    <div
+      className={`overflow-hidden  flex justify-center items-end w-full h-full min-h-[24rem] relative`}
+    >
+      <div className={`flex justify-center items-end w-full h-full px-5`}>
+        <Image
+          src={category.image}
+          alt=""
+          width={500}
+          height={500}
+          className={`absolute w-full h-full object-cover  `}
+        />
+        <div className="flex justify-between items-center relative z-10 w-full -top-5">
+          <span className="text-white font-medium text-sm capitalize">
             {category.title}
-          </h2>
-          <div className={`hidden lg:block md:hidden`}>
-            <p className="text-gray-700">{category.description}</p>
-          </div>
+          </span>
         </div>
       </div>
     </div>

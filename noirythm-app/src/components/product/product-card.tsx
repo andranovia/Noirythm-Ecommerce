@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import ProductLoading from "./product-loading";
+import ProductItem from "./product-item";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode } from "swiper/modules";
 
-const ProductItem = dynamic(() => import("@/components/product/product-item"));
-
-interface ProductItem {
+interface ProductItemData {
   product_name: string;
   product_image: string;
   product_price: number;
@@ -16,21 +16,29 @@ interface ProductItem {
 }
 
 interface ProductCardProps {
-  ProductItems: ProductItem[];
+  ProductItems: ProductItemData[];
   className: string | {} | null;
+  slider: boolean;
   desc: boolean;
   isLoading: boolean;
+  inView: boolean;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
   ProductItems,
   className,
   desc,
+  slider,
   isLoading,
+  inView,
 }) => {
   return (
     <div className="flex justify-center h-full ">
-      <div className="grid w-full lg:auto-rows-fr h-full md:gap-4  gap-4 justify-center grid-cols-2 gap-y-14 lg:gap-y-20 md:grid-cols-4  lg:grid-cols-4 ">
+      <div
+        className={` ${
+          slider ? "flex justify-center " : "grid lg:grid-cols-4 "
+        }  md:gap-4  gap-8 grid-cols-2 overflow-hidden`}
+      >
         {desc && isLoading ? (
           <>
             {Array.from({ length: 8 }).map((_, index) => (
@@ -40,18 +48,33 @@ const ProductCard: React.FC<ProductCardProps> = ({
             ))}
           </>
         ) : (
-          <>
-            {ProductItems?.map((item, index) => (
+          <Swiper
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            onSlideChange={() => console.log("slide change")}
+            onSwiper={(swiper) => console.log(swiper)}
+            modules={[Autoplay, FreeMode]}
+            className="flex justify-center items-center  w-full min-h-[24rem]"
+          >
+            {ProductItems?.map((item, _) => (
               <Link
                 href={{
                   pathname: `/product/${item.id}`,
                 }}
-                key={index}
+                key={item.id}
               >
-                <ProductItem item={item} className={className} desc={desc} />
+                <SwiperSlide>
+                  <ProductItem item={item} className={className} desc={desc} />
+                </SwiperSlide>
               </Link>
             ))}
-          </>
+          </Swiper>
         )}
       </div>
     </div>

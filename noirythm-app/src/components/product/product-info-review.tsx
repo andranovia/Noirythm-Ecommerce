@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import ProductInfoReviewInput from "./product-info-review-input";
 import ProductReviewCard from "./product-review-card";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/service/hooks/useAuth";
 import Link from "next/link";
 
 interface ProductInfoReviewProps {

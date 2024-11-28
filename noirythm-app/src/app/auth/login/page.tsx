@@ -8,7 +8,7 @@ import AuthInputError from "@/components/auth/AuthInputError";
 import AuthLabel from "@/components/auth/AuthLabel";
 import AuthInput from "@/components/auth/AuthInput";
 import ButtonPrimary from "@/components/button/button-primary";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/service/hooks/useAuth";
 
 function Login() {
   const [userLoginData, setUserLoginData] = useState({
@@ -41,11 +41,7 @@ function Login() {
         }
       >
         <h5 className="text-2xl font-bold text-gray-800 mb-8">Sign in</h5>
-        <div
-         
-        >
-           
-
+        <div>
           <div className="mb-3">
             <AuthLabel htmlFor="email" className="form-label">
               Email address
@@ -60,7 +56,7 @@ function Login() {
                 handleOnChange(e);
               }}
             />
-             {validationErrors && validationErrors.email != undefined && (
+            {validationErrors && validationErrors.email != undefined && (
               <AuthInputError
                 messages={validationErrors.email}
                 className="mt-2"
@@ -89,11 +85,7 @@ function Login() {
             )}
           </div>
           <div>
-            <ButtonPrimary
-              onClick={() => loginAction()}
-            >
-              Login
-            </ButtonPrimary>
+            <ButtonPrimary onClick={() => loginAction()}>Login</ButtonPrimary>
             <p className="text-center mt-8">
               Dont have account?{" "}
               <Link className="text-green-500" href="/auth/register">

@@ -1,12 +1,11 @@
-import useCheckout from "@/hooks/useCheckout";
+import useCheckout from "@/service/hooks/useCheckout";
 import React from "react";
 
-const CheckoutDetail = ({successId}: {successId: string}) => {
-
-    const { checkoutDetail } = useCheckout({ successId: successId });
-    const firstPurchasedItem = checkoutDetail?.purchasedProducts[0];
-    const { postal_code, line1, city, state, country } =
-      checkoutDetail?.customer_details.address ?? {};
+const CheckoutDetail = ({ successId }: { successId: string }) => {
+  const { checkoutDetail } = useCheckout({ successId: successId });
+  const firstPurchasedItem = checkoutDetail?.purchasedProducts[0];
+  const { postal_code, line1, city, state, country } =
+    checkoutDetail?.customer_details.address ?? {};
 
   return (
     <div className="flex justify-center flex-col items-center lg:w-3/4">
@@ -91,7 +90,7 @@ const CheckoutDetail = ({successId}: {successId: string}) => {
                 <div className="flex justify-between items-center gap-8 mb-4">
                   <span className="text-gray-600">Expiry Date</span>
                   <span className="font-medium text-gray-900">
-                    {checkoutDetail?.cardInfo.exp_month}//
+                    {checkoutDetail?.cardInfo.exp_month}
                     {checkoutDetail?.cardInfo.exp_year}
                   </span>
                 </div>
