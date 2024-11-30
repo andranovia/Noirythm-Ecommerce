@@ -57,8 +57,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
               delay: 2500,
               disableOnInteraction: false,
             }}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
             modules={[Autoplay, FreeMode]}
             className="flex justify-center items-center  w-full min-h-[24rem]"
           >

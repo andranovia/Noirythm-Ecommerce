@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
   return (
     <div className="fixed z-40 top-0 left-0 right-0 flex overflow-hidden   ">
       <div className="w-full overflow-hidden bg-white flex justify-center items-center shadow">
-        <div className="relative z-10 flex justify-between items-center h-16 bg-white max-w-2xl w-full">
+        <div className="relative z-10 flex justify-between items-center h-16 bg-white max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl w-full">
           <NavbarSearch />
           {isMobile && (
             <button

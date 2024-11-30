@@ -8,7 +8,7 @@ const Product: React.FC = () => {
   const productsType = ["cloth", "trouser", "shoe", "accessory"];
 
   return (
-    <div className="bg-white min-h-screen w-full overflow-hidden py-16 flex flex-col justify-center items-center mb-2">
+    <div className="bg-white min-h-screen w-full overflow-hidden py-8 sm:py-12 2xl:py-16 flex flex-col justify-center items-center mb-2">
       {productsType.map((type, _) => {
         const productType = type[0].toUpperCase() + type.substring(1);
 

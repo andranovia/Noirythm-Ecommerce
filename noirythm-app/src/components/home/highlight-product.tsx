@@ -4,14 +4,18 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProductsHighlight } from "@/service/methods/getProducts";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import ProductItem from "../product/product-item";
+import { useResize } from "@/utils/useResize";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const HighlightProduct = () => {
   const { data: productHighlight } = useQuery<ProductItem[]>({
     queryKey: ["productHighlight"],
     queryFn: () => getProductsHighlight(),
   });
+
+  const { isTablet } = useResize();
 
   useEffect(() => {
     setCards(productHighlight || []);
@@ -65,9 +69,9 @@ const HighlightProduct = () => {
   ];
 
   return (
-    <div className="w-full h-full flex justify-center items-center py-16 bg-white overflow-hidden">
-      <div className="flex justify-start gap-28 w-full items-center max-w-2xl relative">
-        <div className="w-[40rem] h-[60rem] rounded-md overflow-hidden relative">
+    <div className="w-full h-full flex justify-center items-center py-8 sm:py-12 2xl:py-16 bg-white overflow-hidden">
+      <div className="flex flex-col xl:flex-row justify-start gap-4 xl:gap-28 w-full items-center max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl relative">
+        <div className="w-full h-[45rem] 1xl:w-[40rem] 1xl:h-[60rem] rounded-md overflow-hidden relative">
           <Image
             src="https://images.unsplash.com/photo-1619042823674-4f4ad8484b08?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
@@ -117,82 +121,118 @@ const HighlightProduct = () => {
             );
           })}
         </div>
-        <div className="w-[24rem] h-[60rem] relative ">
-          <div className="w-full h-full ml-8">
-            {cards?.map((item, index) => {
-              return (
-                <motion.div
-                  key={item.id}
-                  className={`w-[20rem] h-[24rem] top-[20rem] rounded-md overflow-hidden 
-                    absolute`}
-                  initial={false}
-                  style={{ transformOrigin: "top center" }}
-                  animate={cardMotionStyles(index)}
-                  transition={cardTransitionSettings}
-                >
-                  <Image
-                    src={item.product_image}
-                    alt=""
-                    width={420}
-                    height={420}
-                    className="w-full h-full object-cover"
-                  />
-                </motion.div>
-              );
-            })}
-            {productHighlight ? (
-              <div className="flex flex-col w-full px-4 absolute h-full gap-1  top-[82%] left-4 ">
-                <p className="text-xs  text-[#2e2e2e]">
-                  {productHighlight
-                    .find((card) => card.id === activeId)
-                    ?.id?.slice(0, 8)}
-                </p>
-                <h2 className="text-base font-thin text-[#2e2e2e]">
-                  {
-                    productHighlight.find((card) => card.id === activeId)
-                      ?.product_name
-                  }
-                </h2>
-                <p className="text-base font-medium text-[#2e2e2e]">
-                  ${" "}
-                  {
-                    productHighlight.find((card) => card.id === activeId)
-                      ?.product_price
-                  }
-                </p>
-              </div>
-            ) : (
-              <div className="flex flex-col w-full px-4 absolute h-full gap-1  top-[82%] left-4 animate-pulse">
-                <div className="h-3 w-1/3 bg-gray-100 rounded"></div>
-                <div className="h-5 w-4/5 bg-gray-100 rounded"></div>
-                <div className="h-4 w-1/4 bg-gray-100 rounded"></div>
-              </div>
-            )}
-            <div className="w-full h-full flex gap-2 relative top-[78%]">
-              {productHighlight?.map((item, index) => {
+        {isTablet ? (
+          <div className="relative flex justify-center w-full h-[10rem]">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              loop={true}
+              className="flex justify-center items-center w-full h-full"
+            >
+              {cards?.map((item, _) => {
                 return (
-                  <React.Fragment key={index}>
-                    <motion.div
-                      onClick={() => {
-                        setActiveId(item.id);
-                        handleFocusedHighlight(item.id);
-                      }}
-                      initial={{
-                        width: activeId === item.id ? 64 : 48,
-                        opacity: activeId === item.id ? 1 : 0.5,
-                      }}
-                      animate={{
-                        width: activeId === item.id ? 64 : 48,
-                        opacity: activeId === item.id ? 1 : 0.5,
-                      }}
-                      className="bg-[#2e2e2e] w-8 h-1 rounded-md"
-                    ></motion.div>
-                  </React.Fragment>
+                  <SwiperSlide key={item.id}>
+                    <div
+                      className={`w-full h-full flex items-center gap-12 pr-4 `}
+                    >
+                      <Image
+                        src={item.product_image}
+                        alt=""
+                        width={420}
+                        height={420}
+                        className="w-3/4  h-full object-cover rounded-md"
+                      />
+                      <div className="flex flex-col gap-2 w-1/4">
+                        <span className="font-light w-3/4">
+                          {item.product_name}
+                        </span>
+                        <span className="text-2xl">${item.product_price}</span>
+                      </div>
+                    </div>
+                  </SwiperSlide>
                 );
               })}
+            </Swiper>
+          </div>
+        ) : (
+          <div className="w-[24rem] h-[60rem] relative ">
+            <div className="w-full h-full 2xl:ml-8">
+              {cards?.map((item, index) => {
+                return (
+                  <motion.div
+                    key={item.id}
+                    className={`w-[20rem] h-[24rem] top-[14rem] 1xl:top-[20rem] rounded-md overflow-hidden 
+                    absolute`}
+                    initial={false}
+                    style={{ transformOrigin: "top center" }}
+                    animate={cardMotionStyles(index)}
+                    transition={cardTransitionSettings}
+                  >
+                    <Image
+                      src={item.product_image}
+                      alt=""
+                      width={420}
+                      height={420}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                );
+              })}
+              {productHighlight ? (
+                <div className="flex flex-col w-full 2xl:px-4 absolute h-full gap-1 xl:top-[72%] 1xl:top-[82%] 2xl:left-4 ">
+                  <p className="text-xs  text-[#2e2e2e]">
+                    {productHighlight
+                      .find((card) => card.id === activeId)
+                      ?.id?.slice(0, 8)}
+                  </p>
+                  <h2 className="text-base font-thin text-[#2e2e2e]">
+                    {
+                      productHighlight.find((card) => card.id === activeId)
+                        ?.product_name
+                    }
+                  </h2>
+                  <p className="text-base font-medium text-[#2e2e2e]">
+                    ${" "}
+                    {
+                      productHighlight.find((card) => card.id === activeId)
+                        ?.product_price
+                    }
+                  </p>
+                </div>
+              ) : (
+                <div className="flex flex-col w-full px-4 absolute h-full gap-1  xl:top-[70%] 1xl:top-[82%] left-4 animate-pulse">
+                  <div className="h-3 w-1/3 bg-gray-100 rounded"></div>
+                  <div className="h-5 w-4/5 bg-gray-100 rounded"></div>
+                  <div className="h-4 w-1/4 bg-gray-100 rounded"></div>
+                </div>
+              )}
+
+              <div className="w-full h-full flex gap-2 relative xl:top-[68%] 1xl:top-[78%]">
+                {productHighlight?.map((item, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <motion.div
+                        onClick={() => {
+                          setActiveId(item.id);
+                          handleFocusedHighlight(item.id);
+                        }}
+                        initial={{
+                          width: activeId === item.id ? 64 : 48,
+                          opacity: activeId === item.id ? 1 : 0.5,
+                        }}
+                        animate={{
+                          width: activeId === item.id ? 64 : 48,
+                          opacity: activeId === item.id ? 1 : 0.5,
+                        }}
+                        className="bg-[#2e2e2e] w-8 h-1 rounded-md"
+                      ></motion.div>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

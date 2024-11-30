@@ -8,6 +8,8 @@ import {
   KeenSliderInstance,
 } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
+import { useResize } from "@/utils/useResize";
+import { cn } from "@/utils/cn";
 
 interface Slide {
   url: string;
@@ -56,12 +58,14 @@ const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   });
+  const { isMobile } = useResize();
+
   const [thumbnailRef] = useKeenSlider<HTMLDivElement>(
     {
       initial: 0,
       slides: {
-        perView: 4,
-        spacing: 10,
+        perView: isMobile ? 2 : 4,
+        spacing: 4,
       },
     },
     [ThumbnailPlugin(instanceRef)]
@@ -69,11 +73,11 @@ const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
 
   return (
     <div className="relative w-full flex justify-center ">
-      <div className="-mt-0 h-full lg:mt-0 w-full flex justify-center gap-4  flex-col relative lg:h-full overflow-hidden">
+      <div className="-mt-0 h-full lg:mt-0 w-full flex justify-center gap-2 1xl:gap-4 p-2 1xl:p-0 flex-col relative lg:h-full overflow-hidden">
         <div ref={sliderRef} className="keen-slider">
           {slides.map((slide, slideIndex) => (
             <div
-              className="keen-slider__slide h-[54rem]"
+              className="keen-slider__slide h-[11rem] xs:h-[13rem] sm:h-[15rem] md:h-[20rem] lg:h-[28rem] xl:h-[36rem] xl:min-h-[36rem] xl:max-h-[36rem] 1xl:h-[52rem] 1xl:min-h-[52rem]  1xl:max-h-[52rem] "
               key={slideIndex}
               style={{
                 backgroundImage: `url(${slide.url})`,
@@ -83,10 +87,10 @@ const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
           ))}
         </div>
 
-        <div ref={thumbnailRef} className="keen-slider">
+        <div ref={thumbnailRef} className="keen-slider xl:!grid grid-cols-4 ">
           {slides.map((slide, slideIndex) => (
             <div
-              className="keen-slider__slide"
+              className={cn(`keen-slider__slide`)}
               key={slideIndex}
               style={{
                 backgroundImage: `url(${slide.url})`,

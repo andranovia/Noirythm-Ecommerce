@@ -12,14 +12,14 @@ const NewProductsCardItem: React.FC<ProductItemProps> = ({ Product }) => {
   return (
     <div className={` flex justify-center items-end w-full h-full  relative`}>
       <div
-        className={`flex flex-col gap-2 justify-center items-end w-full h-full px-5`}
+        className={`flex flex-col gap-2 justify-center items-end w-full h-full`}
       >
         <Image
           src={Product.product_image}
           alt=""
           width={500}
           height={500}
-          className={`relative min-h-[24rem] max-h-[24rem] w-full h-full object-cover  `}
+          className={`relative min-h-[18rem] max-h-[18rem] md:min-h-[24rem] md:max-h-[24rem] w-full h-full object-cover  `}
         />
         <div className="flex flex-col gap-2 items-start relative z-10 w-full ">
           <span className=" font-normal text-sm capitalize">

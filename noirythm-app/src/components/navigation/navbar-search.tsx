@@ -34,10 +34,7 @@ const NavbarSearch = () => {
 
   return (
     <>
-      <div
-        ref={inputRef}
-        className="flex justify-center  mt-2  relative h-[2.5rem]"
-      >
+      <div ref={inputRef} className="flex justify-center  relative h-[2.5rem]">
         <div
           onClick={() => handleOpenSearchBar()}
           className="absolute  z-50 inset-y-0 left-3 flex w-[40px]"

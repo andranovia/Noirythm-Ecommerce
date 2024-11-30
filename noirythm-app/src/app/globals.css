@@ -4,5 +4,28 @@
 
 .keen-slider__slide {
   min-width: 22rem;
-  min-height: 28rem !important;
+  min-height: 24rem !important;
+}
+
+@media only screen and (max-width: 1280px) {
+  .keen-slider__slide {
+    min-height: 16rem !important;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .keen-slider__slide {
+    min-height: 10rem !important;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .keen-slider__slide {
+    min-height: 10rem !important;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .keen-slider__slide {
+    min-height: 6rem !important;
+  }
 }
