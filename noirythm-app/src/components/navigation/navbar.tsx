@@ -4,13 +4,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../service/hooks/useAuth";
-import { useResize } from "../../utils/useResize";
+import useWindowSize from "../../utils/useWindowSize";
 import NavbarTransitionMobile from "./navbar-transition-mobile";
 import NavbarSearch from "./navbar-search";
 
 const Navbar: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
   const { user } = useAuth();
 
   return (
@@ -18,7 +19,7 @@ const Navbar: React.FC = () => {
       <div className="w-full overflow-hidden bg-white flex justify-center items-center shadow">
         <div className="relative z-10 flex justify-between items-center h-16 bg-white max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl w-full">
           <NavbarSearch />
-          {isMobile && (
+          {wWidth < 768 && (
             <button
               onClick={() => setIsSidebarOpen(true)}
               className="border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 "
@@ -37,7 +38,7 @@ const Navbar: React.FC = () => {
             setIsSidebarOpen={setIsSidebarOpen}
           />
 
-          {!isMobile && (
+          {wWidth > 768 && (
             <>
               <Link href="/">
                 <div className="relative" style={{ zIndex: 30 }}>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 
 interface ProductItem {
   product_name: string;
@@ -27,12 +27,13 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
   desc,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
   const roundedRating = Math.round(item.average_rating);
 
   return (
     <>
-      {!isMobile && (
+      {wWidth > 768 && (
         <>
           <motion.div
             onHoverStart={() => setIsHovering(true)}
@@ -116,7 +117,7 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
           </motion.div>
         </>
       )}
-      {isMobile && (
+      {wWidth < 768 && (
         <>
           <div
             className={

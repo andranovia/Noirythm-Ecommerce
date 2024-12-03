@@ -7,7 +7,7 @@ import ButtonSecondary from "../button/button-secondary";
 import ButtonPrimary from "../button/button-primary";
 import { useChanges } from "@/context/ChangesContext";
 import ProductInfoReviews from "./product-info-review";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 
 import { usePathname } from "next/navigation";
 import useCheckout from "@/service/hooks/useCheckout";
@@ -43,17 +43,18 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
   });
   const { isChangesSaved } = useChanges();
 
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   return (
     <>
       <div className="bg-white rounded-lg mb-20 ">
         <div
           className={`flex flex-col ${
-            isMobile ? "items-center" : "items-start"
+            wWidth < 768 ? "items-center" : "items-start"
           } md:flex-col lg:flex-row`}
         >
-          {isMobile && (
+          {wWidth < 768 && (
             <>
               {isLoading ? (
                 <div className="relative w-full  h-[20rem] rounded mt-6 bg-gray-700 shadow-sm  animate-pulse">
@@ -80,7 +81,7 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
               )}
             </>
           )}
-          {!isMobile && (
+          {wWidth > 768 && (
             <div className="w-full md:w-full lg:w-1/2 md:relative  lg:fixed">
               {isLoading ? (
                 <div className="relative w-full h-[50rem] object-cover z-1  md:mb-0  shadow-sm  animate-pulse">
@@ -106,7 +107,7 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
                 />
               )}
 
-              {!isMobile && (
+              {wWidth > 768 && (
                 <div className="flex justify-start shadow-md z-2 items-center fixed bottom-10 md:left-1/2 lg:left-40  bg-white rounded-md p-5 font-medium ">
                   <div className="flex justify-center items-center mr-5">
                     <BsChatLeftText className="w-7 h-7" />
@@ -124,7 +125,9 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
           )}
           <div
             className={`w-full p-6 top-0 left-0 ${
-              isMobile ? "mt-4 mb-[10rem]" : "md:w-1/2 lg:ml-[50%] md:my-10  "
+              wWidth < 768
+                ? "mt-4 mb-[10rem]"
+                : "md:w-1/2 lg:ml-[50%] md:my-10  "
             }`}
           >
             {isLoading ? (
@@ -215,7 +218,7 @@ export default function ProductInfo({ product, isLoading }: ProductInfoProps) {
               </div>
             </>
           )}
-          {isMobile && (
+          {wWidth < 768 && (
             <div
               className="mt-6 flex justify-center items-center bg-white p-5 font-medium"
               style={{

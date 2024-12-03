@@ -6,20 +6,21 @@ import ProductItem from "../product/product-item";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 
 interface NewProductsCardProps {
   newProducts: ProductItem[] | undefined;
 }
 
 const NewProductsCard: React.FC<NewProductsCardProps> = ({ newProducts }) => {
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   return (
     <div className="flex flex-col justify-center w-full max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl overflow-hidden">
       <Swiper
         spaceBetween={16}
-        slidesPerView={isMobile ? "auto" : 3}
+        slidesPerView={wWidth < 768 ? "auto" : 3}
         onSlideChange={() => console.log("slide change")}
         freeMode={true}
         modules={[FreeMode]}

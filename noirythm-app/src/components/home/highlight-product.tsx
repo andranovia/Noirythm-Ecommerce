@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductsHighlight } from "@/service/methods/getProducts";
 import { motion } from "framer-motion";
 import ProductItem from "../product/product-item";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const HighlightProduct = () => {
@@ -15,7 +15,8 @@ const HighlightProduct = () => {
     queryFn: () => getProductsHighlight(),
   });
 
-  const { isTablet } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   useEffect(() => {
     setCards(productHighlight || []);
@@ -92,7 +93,7 @@ const HighlightProduct = () => {
                         : "opacity-0"
                     }  bg-white rounded-lg shadow-sm tooltip -top-20 `}
                   >
-                    <p className="text-xs font-light opacity-80 min-h-8">
+                    <p className="text-xs font-light opacity-80 min-h-8 ">
                       {item.product_name}
                     </p>
                     <span className="text-xs font-light">
@@ -121,7 +122,8 @@ const HighlightProduct = () => {
             );
           })}
         </div>
-        {isTablet ? (
+
+        {wWidth < 1024 ? (
           <div className="relative flex justify-center w-full h-[10rem]">
             <Swiper
               spaceBetween={10}
@@ -143,7 +145,7 @@ const HighlightProduct = () => {
                         className="w-3/4  h-full object-cover rounded-md"
                       />
                       <div className="flex flex-col gap-2 w-1/4">
-                        <span className="font-light w-3/4">
+                        <span className="font-light w-3/4 line-clamp-3">
                           {item.product_name}
                         </span>
                         <span className="text-2xl">${item.product_price}</span>

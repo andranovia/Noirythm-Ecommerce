@@ -8,11 +8,12 @@ import Link from "next/link";
 import { useAuth } from "@/service/hooks/useAuth";
 import ButtonSecondary from "@/components/button/button-secondary";
 import UserInfo from "@/components/user/user-info";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 
 const UserProfile: React.FC = () => {
   const { logoutAction, user } = useAuth();
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   return (
     <div className="max-w-screen min-h-screen">
@@ -45,7 +46,7 @@ const UserProfile: React.FC = () => {
                   width={120}
                 />
               </div>
-              {!isMobile && <h2 className="font-semibold">{user?.name}</h2>}
+              {wWidth > 768 && <h2 className="font-semibold">{user?.name}</h2>}
 
               <div className="flex justify-center  mt-4 sm:hidden">
                 <h2 className="font-bold text-sm text-gray-900">
@@ -54,7 +55,7 @@ const UserProfile: React.FC = () => {
               </div>
             </div>
 
-            {isMobile ? (
+            {wWidth < 768 ? (
               <div className="flex justify-start">
                 <div className="flex flex-col ">
                   <UserInfo />
@@ -109,7 +110,7 @@ const UserProfile: React.FC = () => {
             )}
           </div>
         </div>
-        {!isMobile && (
+        {wWidth > 768 && (
           <>
             <div className="col-span-2 sm:mt-24  relative -left-24 flex flex-col justify-start gap-4">
               <div className="flex justify-start items-center gap-2">

@@ -8,7 +8,7 @@ import {
   KeenSliderInstance,
 } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
-import { useResize } from "@/utils/useResize";
+import useWindowSize from "@/utils/useWindowSize";
 import { cn } from "@/utils/cn";
 
 interface Slide {
@@ -58,13 +58,14 @@ const Carousel: React.FC<CarouselSlidesAppProps> = ({ slides }) => {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     initial: 0,
   });
-  const { isMobile } = useResize();
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   const [thumbnailRef] = useKeenSlider<HTMLDivElement>(
     {
       initial: 0,
       slides: {
-        perView: isMobile ? 2 : 4,
+        perView: wWidth < 768 ? 2 : 4,
         spacing: 4,
       },
     },
