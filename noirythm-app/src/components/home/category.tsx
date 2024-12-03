@@ -31,7 +31,7 @@ export default function Category() {
   return (
     <div className=" h-fit sm:flex sm:justify-center sm:flex-col py-8 sm:py-12 2xl:py-16 bg-white w-full mx-auto overflow-hidden ">
       <div className="flex justify-center flex-col items-center rounded-b-md w-full gap-8 sm:gap-12 2xl:gap-16 bg-white ">
-        <h1 className="text-2xl font-light uppercase text-gray-700 sm:text-4xl">
+        <h1 className="text-2xl sm:text-3xl font-light uppercase text-gray-700 md:text-4xl">
           Shop On Category
         </h1>
         <div className="flex w-full items-center  justify-center ">

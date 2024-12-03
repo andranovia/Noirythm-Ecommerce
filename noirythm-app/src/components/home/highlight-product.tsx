@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import ProductItem from "../product/product-item";
 import useWindowSize from "@/utils/useWindowSize";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperType } from "swiper";
 
 const HighlightProduct = () => {
   const { data: productHighlight } = useQuery<ProductItem[]>({
@@ -69,10 +70,16 @@ const HighlightProduct = () => {
     },
   ];
 
+  const handleSlideChange = (swiper: SwiperType) => {
+    const activeIndex = swiper.realIndex;
+    const activeItem = cards[activeIndex];
+    setActiveId(activeItem?.id);
+  };
+
   return (
     <div className="w-full h-full flex justify-center items-center py-8 sm:py-12 2xl:py-16 bg-white overflow-hidden">
       <div className="flex flex-col xl:flex-row justify-start gap-4 xl:gap-28 w-full items-center max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl relative">
-        <div className="w-full h-[45rem] 1xl:w-[40rem] 1xl:h-[60rem] rounded-md overflow-hidden relative">
+        <div className="w-full h-[26rem] xs:h-[28rem] sm:h-[32rem] md:h-[45rem] xl:w-[40rem] 1xl:h-[60rem] rounded-md overflow-hidden relative">
           <Image
             src="https://images.unsplash.com/photo-1619042823674-4f4ad8484b08?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
@@ -87,13 +94,13 @@ const HighlightProduct = () => {
                   <div
                     id="tooltip-default"
                     role="tooltip"
-                    className={`absolute z-10 w-[10rem] inline-block px-3 py-2   transition-opacity duration-300 ${
+                    className={`absolute z-10 w-[6rem] xs:w-[8rem] md:w-[10rem] inline-block px-3 py-2   transition-opacity duration-300 ${
                       activeId === highlightData[index].id
                         ? "opacity-100"
                         : "opacity-0"
                     }  bg-white rounded-lg shadow-sm tooltip -top-20 `}
                   >
-                    <p className="text-xs font-light opacity-80 min-h-8 ">
+                    <p className="text-xs font-light opacity-80 min-h-8 line-clamp-2 ">
                       {item.product_name}
                     </p>
                     <span className="text-xs font-light">
@@ -124,31 +131,40 @@ const HighlightProduct = () => {
         </div>
 
         {wWidth < 1024 ? (
-          <div className="relative flex justify-center w-full h-[10rem]">
+          <div className="relative flex justify-center w-full h-[10rem] md:h-[10rem]">
             <Swiper
-              spaceBetween={10}
+              spaceBetween={16}
               slidesPerView={1}
               loop={true}
+              onSlideChange={handleSlideChange}
               className="flex justify-center items-center w-full h-full"
             >
               {cards?.map((item, _) => {
                 return (
                   <SwiperSlide key={item.id}>
                     <div
-                      className={`w-full h-full flex items-center gap-12 pr-4 `}
+                      className={`w-full h-full flex items-center gap-4 md:gap-6 md:pr-4 `}
                     >
                       <Image
                         src={item.product_image}
                         alt=""
                         width={420}
                         height={420}
-                        className="w-3/4  h-full object-cover rounded-md"
+                        className="w-28 min-w-28 xs:w-[134px] sm:w-36 md:w-3/4 xs:min-w-[134px]  sm:min-w-36 h-full object-cover "
                       />
-                      <div className="flex flex-col gap-2 w-1/4">
-                        <span className="font-light w-3/4 line-clamp-3">
-                          {item.product_name}
-                        </span>
-                        <span className="text-2xl">${item.product_price}</span>
+                      <div className="flex flex-col w-full justify-between h-full md:w-1/4 py-2">
+                        <div className="flex flex-col w-full gap-2 ">
+                          <span className="font-light w-3/4 line-clamp-2">
+                            {item.product_name}
+                          </span>
+                          <span className="text-2xl">
+                            ${item.product_price}
+                          </span>
+                        </div>
+
+                        <div className="w-full flex justify-center items-center p-2 bg-black text-white">
+                          See More
+                        </div>
                       </div>
                     </div>
                   </SwiperSlide>
@@ -163,7 +179,7 @@ const HighlightProduct = () => {
                 return (
                   <motion.div
                     key={item.id}
-                    className={`w-[20rem] h-[24rem] top-[14rem] 1xl:top-[20rem] rounded-md overflow-hidden 
+                    className={`w-[16rem] h-[20rem] 1xl:w-[20rem] 1xl:h-[24rem] top-[14rem] 1xl:top-[20rem] rounded-md overflow-hidden 
                     absolute`}
                     initial={false}
                     style={{ transformOrigin: "top center" }}
@@ -181,7 +197,7 @@ const HighlightProduct = () => {
                 );
               })}
               {productHighlight ? (
-                <div className="flex flex-col w-full 2xl:px-4 absolute h-full gap-1 xl:top-[72%] 1xl:top-[82%] 2xl:left-4 ">
+                <div className="flex flex-col w-full 2xl:px-4 absolute h-full gap-1 xl:top-[66%] 1xl:top-[82%] 2xl:left-4 ">
                   <p className="text-xs  text-[#2e2e2e]">
                     {productHighlight
                       .find((card) => card.id === activeId)
@@ -202,14 +218,14 @@ const HighlightProduct = () => {
                   </p>
                 </div>
               ) : (
-                <div className="flex flex-col w-full px-4 absolute h-full gap-1  xl:top-[70%] 1xl:top-[82%] left-4 animate-pulse">
+                <div className="flex flex-col w-full px-4 absolute h-full gap-1  xl:top-[66%] 1xl:top-[82%] left-4 animate-pulse">
                   <div className="h-3 w-1/3 bg-gray-100 rounded"></div>
                   <div className="h-5 w-4/5 bg-gray-100 rounded"></div>
                   <div className="h-4 w-1/4 bg-gray-100 rounded"></div>
                 </div>
               )}
 
-              <div className="w-full h-full flex gap-2 relative xl:top-[68%] 1xl:top-[78%]">
+              <div className="w-full h-full flex gap-2 relative xl:top-[62%] 1xl:top-[78%]">
                 {productHighlight?.map((item, index) => {
                   return (
                     <React.Fragment key={index}>

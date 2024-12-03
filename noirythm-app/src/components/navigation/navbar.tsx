@@ -18,21 +18,23 @@ const Navbar: React.FC = () => {
     <div className="fixed z-40 top-0 left-0 right-0 flex overflow-hidden   ">
       <div className="w-full overflow-hidden bg-white flex justify-center items-center shadow">
         <div className="relative z-10 flex justify-between items-center h-16 bg-white max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl w-full">
-          <NavbarSearch />
-          {wWidth < 768 && (
-            <button
-              onClick={() => setIsSidebarOpen(true)}
-              className="border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 "
-              aria-label="Open sidebar"
-            >
-              <Image
-                src="https://img.icons8.com/ios-filled/50/menu--v6.png"
-                width={20}
-                height={20}
-                alt=""
-              />
-            </button>
-          )}
+          <div className="flex gap-2 items-center ">
+            {wWidth < 768 && (
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                aria-label="Open sidebar"
+              >
+                <Image
+                  src="https://img.icons8.com/fluency-systems-regular/50/menu.png"
+                  width={20}
+                  height={20}
+                  alt=""
+                />
+              </button>
+            )}
+
+            <NavbarSearch />
+          </div>
           <NavbarTransitionMobile
             isSidebarOpen={isSidebarOpen}
             setIsSidebarOpen={setIsSidebarOpen}
@@ -52,26 +54,26 @@ const Navbar: React.FC = () => {
             </>
           )}
 
-          <div className="flex justify-start items-center w-fit  relative gap-4">
+          <div className="flex justify-start items-center w-fit  relative gap-2 md:gap-4">
             <Link href={user ? "/user/" : "/auth/login"}>
               <button className=" text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                 <Image
-                  src="https://img.icons8.com/windows/32/administrator-male--v1.png"
+                  src="https://img.icons8.com/fluency-systems-regular/50/guest-male.png"
                   width={40}
                   height={40}
                   alt=""
-                  className="w-6 h-6"
+                  className="w-6 h-6 p-0.5"
                 />
               </button>
             </Link>
             <Link href={user ? "/cart" : "/auth/login"}>
               <button className=" text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500">
                 <Image
-                  src="https://img.icons8.com/windows/32/shopping-cart.png"
+                  src="https://img.icons8.com/fluency-systems-regular/50/shopping-cart--v1.png"
                   width={40}
                   height={40}
                   alt=""
-                  className="w-6 h-6"
+                  className="w-6 h-6 p-0.5"
                 />
               </button>
             </Link>

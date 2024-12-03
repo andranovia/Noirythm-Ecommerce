@@ -6,12 +6,15 @@ import { useProduct } from "@/service/hooks/useProduct";
 import { motion } from "framer-motion";
 import { defaultTransition } from "@/utils/transitionMotion";
 import ProductItem from "../product/product-item";
+import useWindowSize from "@/utils/useWindowSize";
 
 const NavbarResult = dynamic(() => import("./navbar-result"));
 
 const NavbarSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [openSearchBar, setOpenSearchBar] = useState(false);
+  const windowSize = useWindowSize();
+  const wWidth = windowSize.width ?? 0;
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { productsSearch, isSearchResultsVisible } = useProduct(searchQuery);
@@ -104,7 +107,19 @@ const NavbarSearch = () => {
           initial={{ opacity: 0 }}
           animate={{
             opacity: openSearchBar ? 1 : 0,
-            width: openSearchBar ? "54rem" : "10rem",
+            width: !openSearchBar
+              ? "10rem"
+              : wWidth > 1024
+              ? "54rem"
+              : wWidth > 768
+              ? "34rem"
+              : wWidth > 576
+              ? "24rem"
+              : wWidth > 425
+              ? "17rem"
+              : wWidth > 375
+              ? "15rem"
+              : "11.5rem",
           }}
           transition={defaultTransition}
           className="flex justify-center z-40  left-0 absolute h-[2.5rem]"
@@ -122,9 +137,9 @@ const NavbarSearch = () => {
       <motion.div
         initial={false}
         animate={{ height: isSearchResultsVisible ? "85vh" : "0" }}
-        className="fixed bg-white w-full   flex justify-center items-center  left-0 lg:top-16 right-0"
+        className="fixed bg-white w-full   flex justify-center items-center  left-0 top-16 right-0"
       >
-        <div className="w-full  max-w-2xl grid grid-cols-2 max-h-[60vh] overflow-y-scroll">
+        <div className="w-full  max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl grid grid-cols-1 lg:grid-cols-2 max-h-[60vh] overflow-y-scroll">
           {showResults &&
             (productsSearch as ProductItem[])
               ?.slice(0, 8)

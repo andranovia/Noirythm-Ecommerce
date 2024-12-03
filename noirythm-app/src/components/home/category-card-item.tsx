@@ -17,7 +17,7 @@ interface CategoryItemProps {
 const CategoryCardItem: React.FC<CategoryItemProps> = ({ category, index }) => {
   return (
     <div
-      className={`overflow-hidden  flex justify-center items-end w-full h-full min-h-[24rem] relative`}
+      className={`overflow-hidden  flex justify-center items-end w-full h-full min-h-[18rem] md:min-h-[20rem] lg:min-h-[24rem] relative`}
     >
       <div className={`flex justify-center items-end w-full h-full px-5`}>
         <Image

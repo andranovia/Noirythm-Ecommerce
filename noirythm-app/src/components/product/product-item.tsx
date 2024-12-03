@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import useWindowSize from "@/utils/useWindowSize";
+import { defaultTransition } from "@/utils/transitionMotion";
 
 interface ProductItem {
   product_name: string;
@@ -33,104 +34,28 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
 
   return (
     <>
-      {wWidth > 768 && (
-        <>
-          <motion.div
-            onHoverStart={() => setIsHovering(true)}
-            onHoverEnd={() => setIsHovering(false)}
-          >
-            <div
-              className={
-                desc
-                  ? `rounded-lg flex  flex-col lg:w-full md:mb-0 mb-14 h-full lg:items-stretch `
-                  : `shadow-none mb-0 `
-              }
-            >
-              <motion.div
-                className={
-                  className
-                    ? `flex-shrink-0 ${className} `
-                    : `h-[20vh] w-[20vh] md:w-full lg:w-full `
-                }
-                animate={
-                  desc && isHovering
-                    ? { opacity: 0.6, scale: 0.95 }
-                    : { opacity: 1, scale: 1 }
-                }
-              >
-                <Image
-                  src={item.product_image}
-                  alt={item.product_name}
-                  width={260}
-                  height={260}
-                  className={
-                    desc
-                      ? "w-full md:h-full lg:h-[50vh] object-cover flex rounded-lg "
-                      : "w-[14rem] h-full object-cover rounded-lg"
-                  }
-                />
-              </motion.div>
-
-              <motion.div
-                animate={isHovering ? { opacity: 1 } : { opacity: 0 }}
-                className={
-                  desc
-                    ? `text-center mt-4 p-3 opacity-0 z-20 md:hidden lg:block`
-                    : `hidden`
-                }
-              >
-                <h4 className="text-lg font-bold text-black ">
-                  {item.product_name}
-                </h4>
-                <p className="text-base font-bold text-black">
-                  {item.product_price}
-                </p>
-                <div
-                  className={
-                    item.promo_text
-                      ? `bg-gray-800 ml-20 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
-                      : ``
-                  }
-                >
-                  <h2 className="font-semibold text-white">
-                    {item.promo_text}
-                  </h2>
-                </div>
-                <div className="flex justify-center gap-2 mt-4">
-                  {isValidArrayLength(roundedRating) && (
-                    <>
-                      {[...Array(roundedRating)].map((_, index) => (
-                        <FaStar key={index} size={15} color="yellow" />
-                      ))}
-                      {[...Array(5 - roundedRating)].map((_, index) => (
-                        <FaStar
-                          key={index + roundedRating}
-                          size={15}
-                          color="grey"
-                        />
-                      ))}
-                    </>
-                  )}
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </>
-      )}
-      {wWidth < 768 && (
-        <>
+      <>
+        <motion.div
+          onHoverStart={() => setIsHovering(true)}
+          onHoverEnd={() => setIsHovering(false)}
+        >
           <div
             className={
               desc
-                ? `rounded-lg flex flex-col lg:w-full mb-4 h-full items-stretch  bg-white shadow-md`
-                : `shadow-none`
+                ? `rounded-lg flex  flex-col  items-center !w-[16rem] !h-[23rem] border border-[#e2e2e2] xl:border-none  xl:!w-[24rem] xl:!h-[24rem] overflow-hidden`
+                : `shadow-none mb-0 `
             }
           >
-            <div
+            <motion.div
               className={
                 className
                   ? `flex-shrink-0 ${className} `
-                  : `h-[20vh] w-full lg:w-[40vh] lg:h-[40vh]`
+                  : `!w-[20rem] !h-[16rem] min-h-[16rem] xl:!w-[24rem] xl:!h-[24rem] xl:absolute overflow-hidden`
+              }
+              animate={
+                desc && isHovering
+                  ? { opacity: 0.6, scale: 0.95 }
+                  : { opacity: 1, scale: 1 }
               }
             >
               <Image
@@ -138,46 +63,62 @@ const ProductItem: React.FC<ProductItemCardProps> = ({
                 alt={item.product_name}
                 width={260}
                 height={260}
-                className="w-full h-full object-cover flex rounded-lg "
+                className={"w-full h-full object-cover flex rounded-lg"}
               />
-            </div>
+            </motion.div>
 
-            <div className={desc ? `text-start mt-4 ml-3 p-3 ` : `hidden`}>
-              <h4 className="text-lg font-light text-black">
-                {item.product_name}
-              </h4>
-              <p className="text-base font-bold text-black">
-                {item.product_price}
+            <motion.div
+              animate={isHovering || wWidth < 1024 ? { y: 0 } : { y: 100 }}
+              transition={defaultTransition}
+              className={
+                desc
+                  ? ` z-20 flex flex-col xl:justify-center pt-3  w-full px-4 xl:px-8 xl:py-4  bg-white h-24 relative xl:top-[calc(100%-6rem)] gap-2 xl:gap-0`
+                  : `hidden`
+              }
+            >
+              <div className="w-full flex flex-col xl:flex-row justify-between xl:items-center gap-2 xl:gap-0 ">
+                <h4 className="text-lg font-light text-black line-clamp-1 ">
+                  {item.product_name}
+                </h4>
+                <div className="flex items-center gap-1">
+                  <div className="flex xl:justify-center gap-1 xl:gap-2">
+                    {isValidArrayLength(roundedRating) && (
+                      <>
+                        {[...Array(roundedRating)].map((_, index) => (
+                          <FaStar key={index} size={15} color="yellow" />
+                        ))}
+                        {[...Array(5 - roundedRating)].map((_, index) => (
+                          <FaStar
+                            key={index + roundedRating}
+                            size={wWidth < 1024 ? 10 : 15}
+                            color="grey"
+                          />
+                        ))}
+                      </>
+                    )}
+                  </div>
+                  <span className="text-xs font-medium text-gray-700">
+                    ({item.average_rating ? item.average_rating : 0})
+                  </span>
+                </div>
+              </div>
+              <p className="text-base font-medium text-black">
+                $ {item.product_price}
               </p>
-              <div
+
+              {/* <div
                 className={
                   item.promo_text
-                    ? `bg-gray-800 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
+                    ? `bg-gray-800 ml-20 rounded-lg flex h-7 w-[6rem] my-2 p-2 flex-col justify-center`
                     : ``
                 }
               >
                 <h2 className="font-semibold text-white">{item.promo_text}</h2>
-              </div>
-              <div className="flex justify-start gap-2 mt-4">
-                {isValidArrayLength(roundedRating) && (
-                  <>
-                    {[...Array(roundedRating)].map((_, index) => (
-                      <FaStar key={index} size={15} color="yellow" />
-                    ))}
-                    {[...Array(5 - roundedRating)].map((_, index) => (
-                      <FaStar
-                        key={index + roundedRating}
-                        size={15}
-                        color="grey"
-                      />
-                    ))}
-                  </>
-                )}
-              </div>
-            </div>
+              </div> */}
+            </motion.div>
           </div>
-        </>
-      )}
+        </motion.div>
+      </>
     </>
   );
 };

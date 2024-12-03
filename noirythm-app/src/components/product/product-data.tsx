@@ -62,8 +62,8 @@ const ProductData: React.FC<ProductProps> = ({
       <div ref={sectionRef} className="bg-white relative ">
         <div className=" py-4 flex flex-col gap-10 ">
           {productType !== "Promo" ? (
-            <div className="relative flex  gap-6  justify-between items-end  mx-10">
-              <h1 className="text-2xl font-bold text-gray-600  z-20 ">
+            <div className="relative flex  gap-6  justify-between items-end mx-4 md:mx-10">
+              <h1 className="text-xl md:text-2xl font-bold text-gray-600  z-20 ">
                 {productType}s Shopping
               </h1>
 
@@ -87,7 +87,7 @@ const ProductData: React.FC<ProductProps> = ({
                   </span>
                 </motion.div>
                 <div
-                  className={`hidden md:flex justify-center items-center p-1 rounded-full overflow-hidden transition-transform ${
+                  className={`flex justify-center items-center p-1 rounded-full overflow-hidden transition-transform ${
                     hover ? "-rotate-45 scale-125" : "rotate-0 scale-100"
                   }`}
                 >

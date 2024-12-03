@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   inView,
 }) => {
   return (
-    <div className="flex justify-center h-full ">
+    <div className="flex justify-center h-[23rem] xl:h-[28rem]">
       <div
         className={` ${
           slider ? "flex justify-center " : "grid lg:grid-cols-4 "
@@ -50,15 +50,15 @@ const ProductCard: React.FC<ProductCardProps> = ({
         ) : (
           <Swiper
             spaceBetween={10}
-            slidesPerView={4}
+            slidesPerView={"auto"}
             freeMode={true}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
+            // loop={true}
+            // autoplay={{
+            //   delay: 2500,
+            //   disableOnInteraction: false,
+            // }}
             modules={[Autoplay, FreeMode]}
-            className="flex justify-center items-center  w-full min-h-[24rem]"
+            className="flex justify-center items-center  w-full xl:min-h-[24rem]"
           >
             {ProductItems?.map((item, _) => (
               <Link
@@ -67,7 +67,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                 }}
                 key={item.id}
               >
-                <SwiperSlide>
+                <SwiperSlide className="!w-[16rem] !h-[23rem] xl:!w-[24rem] xl:!h-[24rem]">
                   <ProductItem item={item} className={className} desc={desc} />
                 </SwiperSlide>
               </Link>
