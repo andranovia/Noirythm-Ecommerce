@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white text-black py-12 overflow-hidden">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20 ml-4  relative sm:left-10 ">
+    <footer className="bg-white text-black py-12 overflow-hidden flex items-center flex-col w-full">
+      <div className="max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mb-8 xl:mb-20 gap-8  relative w-full ">
         <div className="space-y-4  ">
           <h2 className="text-2xl font-semibold">About Us</h2>
           <p className="text-sm">
@@ -61,9 +61,10 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className="mr-20 text-end text-sm">
-        &copy; 2023 Noirythm. All rights reserved.
+      <div className="max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl w-full ">
+        <div className="self-end text-sm">
+          &copy; 2023 Noirythm. All rights reserved.
+        </div>
       </div>
     </footer>
   );

@@ -7,7 +7,7 @@ import NewProducts from "@/components/home/new-products";
 
 const Home = () => {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center bg-gray-100 gap-[3px]  pt-[4rem]">
+    <div className="flex min-h-screen w-full flex-col items-center bg-gray-100 gap-[3px]  lg:pt-[4rem]">
       <Hero />
       <NewProducts />
       <HighlightProduct />

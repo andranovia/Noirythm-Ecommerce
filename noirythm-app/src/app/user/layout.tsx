@@ -16,7 +16,6 @@ export default function ProfileLayout({
         <Navbar />
       </header>
       {children}
-     
     </>
   );
 }

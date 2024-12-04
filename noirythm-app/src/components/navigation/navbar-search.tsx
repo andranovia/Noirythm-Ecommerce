@@ -136,23 +136,32 @@ const NavbarSearch = () => {
 
       <motion.div
         initial={false}
-        animate={{ height: isSearchResultsVisible ? "85vh" : "0" }}
-        className="fixed bg-white w-full   flex justify-center items-center  left-0 top-16 right-0"
+        animate={{
+          height: isSearchResultsVisible ? "85vh" : "0",
+          top: isSearchResultsVisible ? "4rem" : "0px",
+        }}
+        className="fixed bg-white w-full   flex justify-center md:items-center py-4 md:py-0 left-0 right-0"
       >
-        <div className="w-full  max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 1xl:max-w-1xl 2xl:max-w-2xl grid grid-cols-1 lg:grid-cols-2 max-h-[60vh] overflow-y-scroll">
-          {showResults &&
-            (productsSearch as ProductItem[])
-              ?.slice(0, 8)
-              .map((result: ProductItem) => (
-                <Link
-                  href={{
-                    pathname: `/product/${result.id}`,
-                  }}
-                  key={result.id}
-                >
-                  <NavbarResult key={result.id} result={result} />
-                </Link>
-              ))}
+        <div className="w-full  max-w-[292px] xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl flex flex-col 1xl:max-w-1xl 2xl:max-w-2xl   md:max-h-[60vh] overflow-y-scroll">
+          {showResults && (
+            <>
+              <span className="text-sm">Products</span>
+              <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2">
+                {(productsSearch as ProductItem[])
+                  ?.slice(0, 8)
+                  .map((result: ProductItem) => (
+                    <Link
+                      href={{
+                        pathname: `/product/${result.id}`,
+                      }}
+                      key={result.id}
+                    >
+                      <NavbarResult key={result.id} result={result} />
+                    </Link>
+                  ))}
+              </div>
+            </>
+          )}
         </div>
       </motion.div>
     </>

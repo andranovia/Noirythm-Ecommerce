@@ -23,6 +23,7 @@ const Navbar: React.FC = () => {
               <button
                 onClick={() => setIsSidebarOpen(true)}
                 aria-label="Open sidebar"
+                className="relative z-50"
               >
                 <Image
                   src="https://img.icons8.com/fluency-systems-regular/50/menu.png"
@@ -40,19 +41,15 @@ const Navbar: React.FC = () => {
             setIsSidebarOpen={setIsSidebarOpen}
           />
 
-          {wWidth > 768 && (
-            <>
-              <Link href="/">
-                <div className="relative" style={{ zIndex: 30 }}>
-                  <div className="justify-center flex items-center ">
-                    <h2 className="font-normal text-2xl text-black px-4">
-                      NOIRYTHM
-                    </h2>
-                  </div>
-                </div>
-              </Link>
-            </>
-          )}
+          <Link href="/">
+            <div className="relative left-4" style={{ zIndex: 30 }}>
+              <div className="justify-center flex items-center ">
+                <h2 className="font-normal text-xl md:text-2xl text-black">
+                  NOIRYTHM
+                </h2>
+              </div>
+            </div>
+          </Link>
 
           <div className="flex justify-start items-center w-fit  relative gap-2 md:gap-4">
             <Link href={user ? "/user/" : "/auth/login"}>
