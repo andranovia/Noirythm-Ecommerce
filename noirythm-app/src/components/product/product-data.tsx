@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useProduct } from "@/service/hooks/useProduct";
 import ProductCard from "./product-card";
 import Link from "next/link";
@@ -37,8 +37,7 @@ const ProductData: React.FC<ProductProps> = ({
   productTypeFilter,
 }) => {
   const sectionRef = React.useRef(null);
-  const inViewport = useInView(sectionRef);
-  const { productsPromo, products, isLoading } = useProduct();
+  const { productsPromo, products, isProductsLoading } = useProduct();
   const [hover, setHover] = React.useState(false);
 
   const selectedProduct =
@@ -99,11 +98,10 @@ const ProductData: React.FC<ProductProps> = ({
 
           <ProductCard
             slider={slider}
-            isLoading={isLoading}
+            isLoading={isProductsLoading}
             ProductItems={displayedItems}
             className={className}
             desc={desc}
-            inView={inViewport}
           />
         </div>
       </div>

@@ -21,7 +21,6 @@ interface ProductCardProps {
   slider: boolean;
   desc: boolean;
   isLoading: boolean;
-  inView: boolean;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -30,15 +29,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   desc,
   slider,
   isLoading,
-  inView,
 }) => {
   return (
     <div className="flex justify-center h-[23rem] xl:h-[28rem]">
-      <div
-        className={` ${
-          slider ? "flex justify-center " : "grid lg:grid-cols-4 "
-        }  md:gap-4  gap-8 grid-cols-2 overflow-hidden`}
-      >
+      <div className={`flex justify-center gap-4  overflow-hidden`}>
         {desc && isLoading ? (
           <>
             {Array.from({ length: 8 }).map((_, index) => (

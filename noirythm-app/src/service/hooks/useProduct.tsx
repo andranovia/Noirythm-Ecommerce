@@ -20,7 +20,7 @@ interface ProductItem {
 export function useProduct(searchQuery?: string) {
   const [isSearchResultsVisible, setSearchResultsVisible] = useState(false);
 
-  const { data: products, isLoading } = useQuery<ProductItem[]>({
+  const { data: products, isLoading: isProductsLoading } = useQuery<ProductItem[]>({
     queryKey: ["products"],
     queryFn: () => getProducts(),
   });
@@ -37,7 +37,7 @@ export function useProduct(searchQuery?: string) {
 
   return {
     products,
-    isLoading,
+    isProductsLoading,
     productsPromo,
     productsSearch,
     isSearchResultsVisible,

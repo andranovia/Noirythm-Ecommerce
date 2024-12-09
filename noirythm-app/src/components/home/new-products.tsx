@@ -4,7 +4,7 @@ import NewProductsCard from "./new-products-card";
 import { useProduct } from "@/service/hooks/useProduct";
 
 const NewProducts = () => {
-  const { products } = useProduct();
+  const { products, isProductsLoading } = useProduct();
 
   return (
     <div className=" h-fit sm:flex sm:justify-center sm:flex-col py-8 sm:py-12 2xl:py-16 bg-white w-full mx-auto overflow-hidden ">
@@ -13,7 +13,10 @@ const NewProducts = () => {
           New Arrival
         </h1>
         <div className="flex w-full items-center  justify-center ">
-          <NewProductsCard newProducts={products?.slice(0, 8)} />
+          <NewProductsCard
+            newProducts={products?.slice(0, 8)}
+            isProductsLoading={isProductsLoading}
+          />
         </div>
       </div>
     </div>

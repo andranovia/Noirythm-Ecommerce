@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
 export default function ProductLoading(desc: any) {
   return (
     <>
-      <div className="rounded-lg flex flex-col lg:w-full mb-10 h-full items-stretch ">
-        <div className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center">
+      <div className="rounded-lg flex flex-col  mb-10 h-full items-stretch w-[24rem] ">
+        <div className=" animate-pulse space-y-0 space-x-8 rtl:space-x-reverse flex items-center">
           <div
             className={
               desc
-                ? 'flex items-center justify-center w-[10rem] h-[8rem] sm:h-[20rem] bg-gray-300 rounded sm:w-96 '
-                : 'w-20 h-10 flex justify-center'
+                ? "flex items-center justify-center w-[16rem] !h-[20rem] xl:!w-[24rem] xl:!h-[24rem] bg-gray-300 rounded "
+                : "w-20 h-10 flex justify-center"
             }
           >
             <svg
@@ -23,13 +23,6 @@ export default function ProductLoading(desc: any) {
             </svg>
           </div>
         </div>
-        {desc && (
-          <div role="status" className="max-w-sm animate-pulse m-4 sm:hidden">
-            <div className="h-2.5 bg-gray-300 rounded-full  w-20 mb-4"></div>
-            <div className="h-2 bg-gray-300 rounded-full  max-w-[360px] mb-2.5"></div>
-            <div className="h-2 bg-gray-300 rounded-full  mb-2.5"></div>
-          </div>
-        )}
       </div>
     </>
   );
